@@ -1,0 +1,417 @@
+{
+  "schemaVersion": "0.2.1",
+  "lastUpdatedAt": "2026-07-01",
+  "notes": [
+    "Plan-level model access profiles used to estimate high-intelligence coverage.",
+    "S means frontier/top-tier for the capability; A means advanced but not the top frontier; B/C/D are progressively weaker for high-intelligence demand.",
+    "quotaMTokens is an estimated monthly workload-equivalent capacity for that model pool inside the plan, not an official quota."
+  ],
+  "profiles": [
+    {
+      "planId": "chatgpt_plus",
+      "models": [
+        {
+          "modelId": "gpt-5.5-plus",
+          "label": "GPT 5.5 class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Treat Plus as a frontier general-purpose model pool, bounded by observed workload quota."
+    },
+    {
+      "planId": "chatgpt_pro_5x",
+      "models": [
+        {
+          "modelId": "gpt-5.5-pro",
+          "label": "GPT 5.5 Pro class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "models": [
+        {
+          "modelId": "gpt-5.5-pro",
+          "label": "GPT 5.5 Pro class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "claude_pro",
+      "models": [
+        {
+          "modelId": "opus-4.7-pro",
+          "label": "Opus 4.7 class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "claude_max_5x",
+      "models": [
+        {
+          "modelId": "opus-4.8-max",
+          "label": "Opus 4.8 class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "claude_max_20x",
+      "models": [
+        {
+          "modelId": "opus-4.8-max",
+          "label": "Opus 4.8 class",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "cursor_pro",
+      "models": [
+        {
+          "modelId": "gpt-opus-cursor-pool",
+          "label": "GPT / Opus premium pool",
+          "quotaMTokens": 160,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "notes": "Represents limited premium model usage inside the Cursor Pro value pool."
+        },
+        {
+          "modelId": "composer-2.5",
+          "label": "Composer 2.5",
+          "quotaShare": 0.78,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "models": [
+        {
+          "modelId": "gpt-opus-cursor-pool",
+          "label": "GPT / Opus premium pool",
+          "quotaMTokens": 480,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        },
+        {
+          "modelId": "composer-2.5",
+          "label": "Composer 2.5",
+          "quotaShare": 0.78,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "cursor_ultra",
+      "models": [
+        {
+          "modelId": "gpt-opus-cursor-pool",
+          "label": "GPT / Opus premium pool",
+          "quotaMTokens": 1600,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        },
+        {
+          "modelId": "composer-2.5",
+          "label": "Composer 2.5",
+          "quotaShare": 0.85,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "kimi_moderato_cn",
+      "models": [
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi 2.6",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "models": [
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi 2.7 Code",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "A"
+          },
+          "notes": "Strong coding/agent value, but not counted as top frontier high-intelligence coverage."
+        }
+      ]
+    },
+    {
+      "planId": "opencode_go_regular",
+      "models": [
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM 5.2",
+          "quotaMTokens": 227.3,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi 2.7 Code",
+          "quotaMTokens": 518.6,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "A"
+          }
+        },
+        {
+          "modelId": "mimo-v2.5-pro",
+          "label": "MiMo v2.5 Pro",
+          "quotaMTokens": 1419.6,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "deepseek-v4-pro",
+          "label": "DeepSeek v4 Pro",
+          "quotaMTokens": 700,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ],
+      "notes": "Uses official OpenCode Go model-specific workload profiles where available."
+    },
+    {
+      "planId": "glm_coding_pro_cn",
+      "models": [
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM 5.2",
+          "quotaShare": 0.65,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "glm-5.1",
+          "label": "GLM 5.1",
+          "quotaShare": 0.35,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "glm_coding_max_cn",
+      "models": [
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM 5.2",
+          "quotaShare": 0.7,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "glm-5.1",
+          "label": "GLM 5.1",
+          "quotaShare": 0.3,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "glm_5_2_api_cn",
+      "models": [
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM 5.2 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "kimi_k27_code_api_cn",
+      "models": [
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "deepseek_v4_pro_api_cn",
+      "models": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "label": "DeepSeek v4 Pro API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ]
+    },
+    {
+      "planId": "deepseek_v4_flash_api_cn",
+      "models": [
+        {
+          "modelId": "deepseek-v4-flash",
+          "label": "DeepSeek v4 Flash API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ]
+    }
+  ]
+}

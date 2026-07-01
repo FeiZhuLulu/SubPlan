@@ -1,4 +1,10 @@
-import { getAllPlans, getPlanRelations, getCapabilityScore, getModelTier } from "./data";
+import {
+  getAllPlans,
+  getPlanRelations,
+  getCapabilityScore,
+  getModelTier,
+  getModelAccessProfile,
+} from "./data";
 import { buildNeedWeights } from "./normalize";
 import { getMonthlyPriceCny, classifyBudgetStatus } from "./budget";
 import { getEffectiveTextQuota, classifyCoverage } from "./quota";
@@ -12,6 +18,7 @@ import {
   type AllocationDetail,
   type NeedWeights,
   type IntelligenceTier,
+  type HighIntelligenceRatioPreset,
 } from "./types";
 
 const MAX_COMBO_ITEMS = 3;
@@ -44,12 +51,46 @@ const CORE_HIGH_INTELLIGENCE_CAPS = new Set<CapabilityKey>([
   "research",
 ]);
 
-const HIGH_INTELLIGENCE_QUOTA_FACTOR: Record<IntelligenceTier, number> = {
-  S: 1,
-  A: 0.85,
-  B: 0.45,
-  C: 0.15,
+const FALLBACK_HIGH_INTELLIGENCE_QUOTA_FACTOR: Record<IntelligenceTier, number> = {
+  S: 0.8,
+  A: 0.25,
+  B: 0,
+  C: 0,
   D: 0,
+};
+
+const MODEL_TIER_HIGH_INTELLIGENCE_FACTOR: Record<
+  HighIntelligenceRatioPreset,
+  Record<IntelligenceTier, number>
+> = {
+  low: {
+    S: 1,
+    A: 0.75,
+    B: 0.35,
+    C: 0.1,
+    D: 0,
+  },
+  medium: {
+    S: 1,
+    A: 0.35,
+    B: 0,
+    C: 0,
+    D: 0,
+  },
+  high: {
+    S: 1,
+    A: 0.2,
+    B: 0,
+    C: 0,
+    D: 0,
+  },
+  extreme: {
+    S: 1,
+    A: 0.05,
+    B: 0,
+    C: 0,
+    D: 0,
+  },
 };
 
 type DemandLayer = "high" | "general";
@@ -176,14 +217,7 @@ function planWithRuntime(plan: Plan, input: UserInput): PlanInCombo {
   const priceCny = getMonthlyPriceCny(plan);
   const textQuota = getEffectiveTextQuota(plan);
   const modelTier = getModelTier(plan.id);
-  const highIntelligenceQuotaByCapability = {} as Record<CapabilityKey, number>;
-
-  for (const capability of ALL_CAPABILITY_KEYS) {
-    const defaultTier: IntelligenceTier = CORE_HIGH_INTELLIGENCE_CAPS.has(capability) ? "C" : "B";
-    const tier = modelTier?.tierByCapability?.[capability] ?? defaultTier;
-    highIntelligenceQuotaByCapability[capability] =
-      textQuota * (HIGH_INTELLIGENCE_QUOTA_FACTOR[tier] ?? HIGH_INTELLIGENCE_QUOTA_FACTOR.C);
-  }
+  const modelAccessProfile = getModelAccessProfile(plan.id);
 
   return {
     ...plan,
@@ -193,7 +227,7 @@ function planWithRuntime(plan: Plan, input: UserInput): PlanInCombo {
     textQuota,
     isExisting: isExistingPlan(plan, input),
     modelTier,
-    highIntelligenceQuotaByCapability,
+    modelAccessProfile,
   };
 }
 
@@ -317,8 +351,14 @@ function buildCombo(selectedPlans: PlanInCombo[], input: UserInput): Combo | nul
     .filter((plan) => plan.pricingModel !== "metered")
     .reduce((sum, plan) => sum + plan.textQuota, 0);
 
+  const plansWithRuntimeQuota = selectedPlans.map((plan) => ({ ...plan }));
+
   for (const apiPlan of meteredPlans) {
     const apiQuota = estimateApiQuota(apiPlan, budgetPerApi);
+    const runtimeApiPlan = plansWithRuntimeQuota.find((plan) => plan.id === apiPlan.id);
+    if (runtimeApiPlan) {
+      runtimeApiPlan.textQuota = apiQuota;
+    }
     totalTextQuota += apiQuota;
     totalPriceCny += budgetPerApi;
     if (!apiPlan.isExisting) {
@@ -327,7 +367,7 @@ function buildCombo(selectedPlans: PlanInCombo[], input: UserInput): Combo | nul
   }
 
   return {
-    plans: selectedPlans,
+    plans: plansWithRuntimeQuota,
     totalPriceCny,
     newPriceCny,
     totalTextQuota,
@@ -380,12 +420,85 @@ function addAllocationDetail(
   allocationDetails.push(detail);
 }
 
+function getTierFactor(tier: IntelligenceTier, preset?: HighIntelligenceRatioPreset): number {
+  const normalizedPreset = preset ?? "medium";
+  return MODEL_TIER_HIGH_INTELLIGENCE_FACTOR[normalizedPreset][tier] ?? 0;
+}
+
+function getModelPoolQuota(plan: PlanInCombo, quotaMTokens?: number, quotaShare?: number): number {
+  if (typeof quotaMTokens === "number") {
+    return Math.min(plan.textQuota, Math.max(0, quotaMTokens));
+  }
+  if (typeof quotaShare === "number") {
+    return Math.max(0, plan.textQuota * quotaShare);
+  }
+  return plan.textQuota;
+}
+
+function estimateHighIntelligenceQuota(
+  plan: PlanInCombo,
+  capability: CapabilityKey,
+  preset?: HighIntelligenceRatioPreset
+): number {
+  if (!CORE_HIGH_INTELLIGENCE_CAPS.has(capability) || plan.textQuota <= 0) {
+    return 0;
+  }
+
+  const profile = plan.modelAccessProfile;
+  if (profile?.models.length) {
+    const estimatedQuota = profile.models.reduce((sum, model) => {
+      const tier = model.tierByCapability[capability];
+      if (!tier) return sum;
+      const modelQuota = getModelPoolQuota(plan, model.quotaMTokens, model.quotaShare);
+      return sum + modelQuota * getTierFactor(tier, preset);
+    }, 0);
+    return Math.min(plan.textQuota, estimatedQuota);
+  }
+
+  const defaultTier: IntelligenceTier = plan.modelTier?.tierByCapability?.[capability] ?? "C";
+  const fallbackFactor =
+    FALLBACK_HIGH_INTELLIGENCE_QUOTA_FACTOR[defaultTier] ??
+    FALLBACK_HIGH_INTELLIGENCE_QUOTA_FACTOR.C;
+  return plan.textQuota * fallbackFactor;
+}
+
+function getHighIntelligenceOwnerLabels(combo: Combo, weights: NeedWeights): string[] {
+  const owners = new Set<string>();
+  const activeHighCapabilities = new Set(
+    Array.from(CORE_HIGH_INTELLIGENCE_CAPS).filter(
+      (capability) => (weights[capability] ?? 0) > 0
+    )
+  );
+  for (const plan of combo.plans) {
+    const topModels = plan.modelAccessProfile?.models.filter((model) =>
+      [...activeHighCapabilities].some((capability) => {
+        const tier = model.tierByCapability[capability];
+        return tier === "S" || tier === "A";
+      })
+    );
+    if (topModels?.length) {
+      owners.add(`${plan.name}（${topModels.slice(0, 2).map((model) => model.label).join(" / ")}）`);
+    } else if (
+      !plan.modelAccessProfile &&
+      plan.modelTier?.tierByCapability &&
+      [...activeHighCapabilities].some((capability) => {
+        const tier = plan.modelTier?.tierByCapability?.[capability];
+        return tier === "S" || tier === "A";
+      })
+    ) {
+      owners.add(plan.name);
+    }
+  }
+  return [...owners];
+}
+
 function allocateDemandLayer(
   combo: Combo,
   capDemand: CapabilityDemand,
   layer: DemandLayer,
   remainingPhysical: Map<string, number>,
-  allocationDetails: AllocationDetail[]
+  allocationDetails: AllocationDetail[],
+  highPreset?: HighIntelligenceRatioPreset
 ): { allocatedTotal: number; qualityPoints: number } {
   const demand = layer === "high" ? capDemand.highDemand : capDemand.generalDemand;
   let remainingDemand = demand;
@@ -408,7 +521,7 @@ function allocateDemandLayer(
     const physical = remainingPhysical.get(plan.id) ?? 0;
     const highQuota =
       layer === "high"
-        ? plan.highIntelligenceQuotaByCapability?.[capDemand.capability] ?? 0
+        ? estimateHighIntelligenceQuota(plan, capDemand.capability, highPreset)
         : Number.POSITIVE_INFINITY;
     const maxAllocatable = Math.min(physical, highQuota);
 
@@ -442,7 +555,8 @@ function allocateDemand(
   combo: Combo,
   weights: NeedWeights,
   totalDemand: number,
-  highRatio: number
+  highRatio: number,
+  highPreset?: HighIntelligenceRatioPreset
 ): DemandAllocationResult {
   const allocationDetails: AllocationDetail[] = [];
   const capabilityBreakdown: ScoredCombo["capabilityBreakdown"] = {};
@@ -462,7 +576,8 @@ function allocateDemand(
       capDemand,
       "high",
       remainingPhysical,
-      allocationDetails
+      allocationDetails,
+      highPreset
     );
     capDemand.allocatedHigh = highAllocation.allocatedTotal;
     totalQuality += highAllocation.qualityPoints;
@@ -475,7 +590,8 @@ function allocateDemand(
       capDemand,
       "general",
       remainingPhysical,
-      allocationDetails
+      allocationDetails,
+      highPreset
     );
     capDemand.allocatedGeneral = generalAllocation.allocatedTotal;
     totalQuality += generalAllocation.qualityPoints;
@@ -566,6 +682,20 @@ function computeComboAdjustment(combo: Combo): number {
   return Math.max(-COMBO_ADJUSTMENT_RANGE, Math.min(COMBO_ADJUSTMENT_RANGE, adjustment));
 }
 
+function computeBudgetUtilizationAdjustment(combo: Combo, input: UserInput): number {
+  if (input.budgetCny <= 0) return 0;
+  const utilization = combo.totalPriceCny / input.budgetCny;
+  if (utilization >= 0.7 && utilization <= 1.15) return 1.5;
+  if (utilization < 0.7) return -Math.min(3, (0.7 - utilization) * 8);
+  return 0;
+}
+
+function computeHighCoverageAdjustment(combo: Combo): number {
+  const coverage = combo.highIntelligenceCoverage ?? 1;
+  if (coverage >= 1) return 3;
+  return -Math.min(5, (1 - coverage) * 10);
+}
+
 function generateReasons(combo: Combo, weights: NeedWeights, adjustment: number): string[] {
   const reasons: string[] = [];
   const topCapability = (Object.entries(weights).sort((a, b) => b[1] - a[1])[0]?.[0] ??
@@ -584,14 +714,9 @@ function generateReasons(combo: Combo, weights: NeedWeights, adjustment: number)
   const totalDemand = (combo.highIntelligenceDemand ?? 0) + (combo.generalDemand ?? 0);
   const percent =
     totalDemand > 0 ? Math.round(((combo.highIntelligenceDemand ?? 0) / totalDemand) * 100) : 0;
-  const highCapabilityOwners = combo.plans
-    .filter((plan) => {
-      const tier = plan.modelTier?.tierByCapability;
-      return tier && Object.values(tier).some((value) => value === "S" || value === "A");
-    })
-    .map((plan) => plan.name);
+  const highCapabilityOwners = getHighIntelligenceOwnerLabels(combo, weights);
   const plansStr =
-    highCapabilityOwners.length > 0 ? highCapabilityOwners.join(" / ") : "高分档订阅";
+    highCapabilityOwners.length > 0 ? highCapabilityOwners.join(" / ") : "高级模型来源";
 
   if ((combo.highIntelligenceDemand ?? 0) > 0) {
     reasons.push(
@@ -669,7 +794,13 @@ export function recommend(input: UserInput): ScoredCombo[] {
     const combo = buildCombo(comboPlans, input);
     if (!combo) continue;
 
-    const allocation = allocateDemand(combo, weights, input.monthlyDemandMTokens, highRatio);
+    const allocation = allocateDemand(
+      combo,
+      weights,
+      input.monthlyDemandMTokens,
+      highRatio,
+      input.highIntelligenceRatioPreset
+    );
     applyAllocationToCombo(combo, allocation);
 
     const budgetStatus = classifyBudgetStatus(
@@ -724,7 +855,11 @@ export function recommend(input: UserInput): ScoredCombo[] {
     const capabilityScore =
       input.monthlyDemandMTokens > 0 ? allocation.totalQuality / input.monthlyDemandMTokens : 0;
     const adjustment = computeComboAdjustment(combo);
-    const finalScore = capabilityScore + adjustment;
+    const finalScore =
+      capabilityScore +
+      adjustment +
+      computeHighCoverageAdjustment(combo) +
+      computeBudgetUtilizationAdjustment(combo, input);
 
     candidates.push({
       combo,

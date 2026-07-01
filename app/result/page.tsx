@@ -82,6 +82,22 @@ function existingPriceCny(result: ScoredCombo) {
   return result.combo.totalPriceCny - result.combo.newPriceCny;
 }
 
+function budgetUtilizationScore(result: ScoredCombo, budgetCny: number) {
+  if (budgetCny <= 0) return 0;
+  const utilization = result.combo.totalPriceCny / budgetCny;
+  if (utilization >= 0.7 && utilization <= 1.15) return 1;
+  if (utilization < 0.7) return Math.max(0, utilization / 0.7);
+  return Math.max(0, 1 - (utilization - 1.15));
+}
+
+function highQuotaCandidateScore(result: ScoredCombo, budgetCny: number) {
+  const coverageScore = Math.min(result.combo.usageCoverage, 2) * 35;
+  const highCoverageScore = Math.min(result.combo.highIntelligenceCoverage ?? 1, 1) * 30;
+  const capabilityScore = result.capabilityScore * 0.25;
+  const budgetScore = budgetUtilizationScore(result, budgetCny) * 18;
+  return coverageScore + highCoverageScore + capabilityScore + budgetScore;
+}
+
 function ComboCard({
   r,
   rank,
@@ -303,9 +319,11 @@ export default async function ResultPage({
     .filter((r) => r.budgetStatus === "within" || r.budgetStatus === "slightlyOver")
     .filter((r) => r !== top)
     .sort((a, b) => {
-      const coverageDelta = b.combo.usageCoverage - a.combo.usageCoverage;
-      if (Math.abs(coverageDelta) > 0.05) return coverageDelta;
-      return b.capabilityScore - a.capabilityScore;
+      const scoreDelta =
+        highQuotaCandidateScore(b, input.budgetCny) -
+        highQuotaCandidateScore(a, input.budgetCny);
+      if (Math.abs(scoreDelta) > 0.1) return scoreDelta;
+      return b.combo.totalPriceCny - a.combo.totalPriceCny;
     })[0];
 
   const performancePick = results
