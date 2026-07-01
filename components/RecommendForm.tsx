@@ -4,24 +4,28 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { getAllPlans, presets } from "@/lib/data";
 import type { CapabilityKey } from "@/lib/types";
+import { dict, getCapabilityLabel, getUseCaseLabel, type Locale } from "@/lib/locales";
 
-const ADD_ONS: { id: CapabilityKey | string; label: string; icon: string }[] = [
-  { id: "agentCoding", label: "Agent 自动编程", icon: "🤖" },
-  { id: "chineseWriting", label: "中文内容写作", icon: "✍️" },
-  { id: "englishWriting", label: "英文文档撰写", icon: "🌐" },
-  { id: "imageGeneration", label: "AI 图像生成", icon: "🎨" },
-  { id: "multimodal", label: "多模态理解", icon: "👁️" },
-  { id: "research", label: "深度文献研究", icon: "🔍" },
-  { id: "mobileExperience", label: "移动端适配体验", icon: "📱" },
-  { id: "ideIntegration", label: "IDE 编辑器集成", icon: "💻" },
+const ADD_ONS: { id: CapabilityKey | string; icon: string }[] = [
+  { id: "agentCoding", icon: "🤖" },
+  { id: "chineseWriting", icon: "✍️" },
+  { id: "englishWriting", icon: "🌐" },
+  { id: "imageGeneration", icon: "🎨" },
+  { id: "multimodal", icon: "👁️" },
+  { id: "research", icon: "🔍" },
+  { id: "mobileExperience", icon: "📱" },
+  { id: "ideIntegration", icon: "💻" },
 ];
 
-export default function RecommendForm() {
+export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
   const router = useRouter();
+  const t = dict[lang];
+
   const existingPlanOptions = getAllPlans()
     .filter((plan) => plan.enabledForRecommendation && plan.recommendationRole === "primary_subscription")
     .slice()
     .sort((a, b) => `${a.provider} ${a.name}`.localeCompare(`${b.provider} ${b.name}`));
+
   const [budget, setBudget] = useState<string>("200");
   const [budgetTolerance, setBudgetTolerance] = useState<string>("normal");
   const [usage, setUsage] = useState<string>("500");
@@ -104,14 +108,39 @@ export default function RecommendForm() {
     if (existingPlanIds.length > 0) {
       params.set("existing", existingPlanIds.join(","));
     }
+    if (lang === "en") {
+      params.set("lang", "en");
+    }
     router.push(`/result?${params.toString()}`);
   };
+
+  const highIntelOptions = [
+    { id: "low", label: t.intelLow, desc: t.intelLowDesc },
+    { id: "medium", label: t.intelMedium, desc: t.intelMediumDesc },
+    { id: "high", label: t.intelHigh, desc: t.intelHighDesc },
+    { id: "extreme", label: t.intelExtreme, desc: t.intelExtremeDesc },
+  ];
+
+  const codingTimeOptions = [
+    { id: "0", label: lang === "en" ? "None" : "无" },
+    { id: "<1", label: lang === "en" ? "<1 hr" : "<1小时" },
+    { id: "1-3", label: lang === "en" ? "1-3 hrs" : "1-3小时" },
+    { id: "3-5", label: lang === "en" ? "3-5 hrs" : "3-5小时" },
+    { id: "5+", label: lang === "en" ? "5+ hrs" : "5小时+" },
+  ];
+
+  const conversationOptions = [
+    { id: "<5", label: lang === "en" ? "<5 turns" : "<5轮" },
+    { id: "5-15", label: lang === "en" ? "5-15 turns" : "5-15轮" },
+    { id: "15-30", label: lang === "en" ? "15-30 turns" : "15-30轮" },
+    { id: "30+", label: lang === "en" ? "30+ turns" : "30轮+" },
+  ];
 
   return (
     <>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl rounded-3xl bg-white/80 p-6 shadow-xl ring-1 ring-zinc-200/50 backdrop-blur-md sm:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5"
+        className="w-full max-w-2xl rounded-3xl bg-white/85 p-6 shadow-xl ring-1 ring-zinc-200/50 backdrop-blur-md sm:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5"
       >
         {/* Glow effect */}
         <div className="absolute -right-32 -top-32 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -122,7 +151,7 @@ export default function RecommendForm() {
           {/* Budget input */}
           <div className="sm:col-span-2 group">
             <label className="block text-sm font-semibold text-zinc-700 group-hover:text-blue-600 transition-colors">
-              月预算（人民币 / 元）
+              {t.budget}
             </label>
             <div className="mt-2 relative rounded-xl shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
@@ -142,15 +171,15 @@ export default function RecommendForm() {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-zinc-700">预算宽松度</label>
+            <label className="block text-sm font-semibold text-zinc-700">{t.budgetTolerance}</label>
             <select
               value={budgetTolerance}
               onChange={(e) => setBudgetTolerance(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
             >
-              <option value="strict">严格不超预算</option>
-              <option value="normal">默认略超预算（15%）</option>
-              <option value="flexible">明显更好可超一点（25%）</option>
+              <option value="strict">{t.toleranceStrict}</option>
+              <option value="normal">{t.toleranceNormal}</option>
+              <option value="flexible">{t.toleranceFlexible}</option>
             </select>
           </div>
 
@@ -158,14 +187,14 @@ export default function RecommendForm() {
           <div className="sm:col-span-2">
             <div className="flex justify-between items-center">
               <label className="block text-sm font-semibold text-zinc-700">
-                月度用量需求（MTokens 等效额度/月）
+                {t.monthlyUsage}
               </label>
               <button
                 type="button"
                 onClick={() => setShowEstimator(true)}
-                className="text-xs font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1 rounded-md transition-colors"
+                className="text-xs font-semibold text-blue-600 hover:text-blue-750 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer"
               >
-                📊 不知道用量？点击估算
+                {t.dontKnowUsage}
               </button>
             </div>
             <input
@@ -178,31 +207,26 @@ export default function RecommendForm() {
               placeholder="500"
               required
             />
-            <p className="mt-2 text-xs text-zinc-400">
-              用量估算默认按 95% 缓存命中率计算。推荐引擎会在额度分配中智能匹配。
+            <p className="mt-2 text-xs text-zinc-400 leading-normal">
+              {t.usageHint}
             </p>
           </div>
 
           {/* High Intelligence Ratio Segmented Selector */}
           <div className="sm:col-span-2">
             <label className="block text-sm font-semibold text-zinc-700">
-              高智能模型需求比例 (核心复杂任务)
+              {t.highIntelRatio}
             </label>
             <div className="mt-2 grid grid-cols-4 gap-2 p-1 bg-zinc-100/50 border border-zinc-200/50 rounded-2xl">
-              {[
-                { id: "low", label: "低 (20%)", desc: "轻度智能/润色" },
-                { id: "medium", label: "中 (50%)", desc: "代码/问答混合" },
-                { id: "high", label: "高 (80%)", desc: "复杂推理/开发" },
-                { id: "extreme", label: "极高 (95%)", desc: "深度智能依赖" },
-              ].map((item) => (
+              {highIntelOptions.map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => setHighIntelRatio(item.id)}
-                  className={`py-2 px-1 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 ${
+                  className={`py-2 px-1 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer ${
                     highIntelRatio === item.id
                       ? "bg-blue-600 text-white shadow-md shadow-blue-600/10"
-                      : "text-zinc-600 hover:text-zinc-950 hover:bg-zinc-50/50"
+                      : "text-zinc-650 hover:text-zinc-950 hover:bg-zinc-50/50"
                   }`}
                 >
                   <span>{item.label}</span>
@@ -216,15 +240,15 @@ export default function RecommendForm() {
 
           {/* Primary Use Case */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">主要用途</label>
+            <label className="block text-sm font-semibold text-zinc-700">{t.primaryUse}</label>
             <select
               value={primary}
               onChange={(e) => setPrimary(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
             >
               {presets.primaryUseCases.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.label}
+                  {getUseCaseLabel(c.id, lang)}
                 </option>
               ))}
             </select>
@@ -232,15 +256,15 @@ export default function RecommendForm() {
 
           {/* Secondary Use Case */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">次要用途</label>
+            <label className="block text-sm font-semibold text-zinc-700">{t.secondaryUse}</label>
             <select
               value={secondary}
               onChange={(e) => setSecondary(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
             >
               {presets.secondaryUseCases.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.label}
+                  {getUseCaseLabel(c.id, lang)}
                 </option>
               ))}
             </select>
@@ -248,38 +272,38 @@ export default function RecommendForm() {
 
           {/* Region */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">所在地区</label>
+            <label className="block text-sm font-semibold text-zinc-700">{t.region}</label>
             <select
               value={region}
               onChange={(e) => setRegion(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
             >
-              <option value="CN">🇨🇳 中国 (CN)</option>
-              <option value="US">🇺🇸 美国 (US)</option>
-              <option value="JP">🇯🇵 日本 (JP)</option>
-              <option value="GLOBAL">🌐 全球 (GLOBAL)</option>
+              <option value="CN">{t.regionCN}</option>
+              <option value="US">{t.regionUS}</option>
+              <option value="JP">{t.regionJP}</option>
+              <option value="GLOBAL">{t.regionGlobal}</option>
             </select>
           </div>
 
           {/* Checklist options */}
           <div className="flex flex-col justify-center gap-3 bg-zinc-50/50 border border-zinc-100 rounded-xl p-4 mt-2">
-            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-700 cursor-pointer select-none">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-650 hover:text-zinc-800 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={acceptsApi}
                 onChange={(e) => setAcceptsApi(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
               />
-              接受 API 计费计价方式
+              {t.acceptApi}
             </label>
-            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-700 cursor-pointer select-none">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-650 hover:text-zinc-800 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={hasForeignCard}
                 onChange={(e) => setHasForeignCard(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
               />
-              持有支持境外支付的外币卡
+              {t.foreignCard}
             </label>
           </div>
         </div>
@@ -287,14 +311,22 @@ export default function RecommendForm() {
         <div id="existing-subscriptions" className="mt-8 relative z-10 scroll-mt-6">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <span className="block text-sm font-semibold text-zinc-700">已有订阅</span>
-              <p className="mt-1 text-xs text-zinc-400">
-                选择你已经在付费或稳定使用的计划，推荐结果会标记“已拥有/建议新增”。
+              <span className="block text-sm font-semibold text-zinc-700">{t.existingSubs}</span>
+              <p className="mt-1 text-xs text-zinc-400 leading-normal">
+                {t.existingSubsHint}
               </p>
             </div>
             {existingPlanIds.length > 0 && (
-              <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">
-                已选 {existingPlanIds.length}
+              <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 flex items-center gap-1">
+                {t.selectedCount.replace("{count}", existingPlanIds.length.toString())}
+                <button
+                  type="button"
+                  onClick={() => setExistingPlanIds([])}
+                  className="hover:text-red-650 ml-1 font-bold cursor-pointer"
+                  title={lang === "en" ? "Clear all" : "清除全部"}
+                >
+                  ×
+                </button>
               </span>
             )}
           </div>
@@ -308,16 +340,19 @@ export default function RecommendForm() {
                     type="button"
                     aria-pressed={active}
                     onClick={() => toggleExistingPlan(plan.id)}
-                    className={`rounded-xl border px-3 py-2 text-left text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                    className={`rounded-xl border px-3 py-2.5 text-left text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer flex items-center justify-between ${
                       active
-                        ? "border-emerald-500 bg-emerald-50 text-emerald-800"
-                        : "border-zinc-200 bg-white/60 text-zinc-600 hover:border-zinc-300 hover:bg-white"
+                        ? "border-emerald-500 bg-emerald-50 text-emerald-850 shadow-sm"
+                        : "border-zinc-200 bg-white/60 text-zinc-600 hover:border-zinc-350 hover:bg-white"
                     }`}
                   >
-                    <span className="block truncate">{plan.name}</span>
-                    <span className="block truncate text-[10px] font-medium opacity-70">
-                      {plan.provider}
-                    </span>
+                    <div className="truncate flex-1 pr-2">
+                      <span className="block truncate">{plan.name}</span>
+                      <span className="block truncate text-[10px] font-medium opacity-70 mt-0.5">
+                        {plan.provider}
+                      </span>
+                    </div>
+                    {active && <span className="text-emerald-600 font-black text-sm shrink-0">✓</span>}
                   </button>
                 );
               })}
@@ -327,7 +362,7 @@ export default function RecommendForm() {
 
         {/* Add ons */}
         <div className="mt-8 relative z-10">
-          <span className="block text-sm font-semibold text-zinc-700">附加能力需求</span>
+          <span className="block text-sm font-semibold text-zinc-700">{t.addons}</span>
           <div className="mt-3 flex flex-wrap gap-2.5">
             {ADD_ONS.map((addOn) => {
               const active = selectedAddOns.includes(addOn.id);
@@ -337,14 +372,14 @@ export default function RecommendForm() {
                   type="button"
                   aria-pressed={active}
                   onClick={() => toggleAddOn(addOn.id)}
-                  className={`rounded-xl border px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  className={`rounded-xl border px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer ${
                     active
                       ? "border-blue-500 bg-blue-50 text-blue-700 shadow-sm"
-                      : "border-zinc-200/80 bg-zinc-50/30 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50"
+                      : "border-zinc-200/80 bg-zinc-50/30 text-zinc-650 hover:border-zinc-305 hover:bg-zinc-50"
                   }`}
                 >
                   <span>{addOn.icon}</span>
-                  <span>{addOn.label}</span>
+                  <span>{getCapabilityLabel(addOn.id, lang)}</span>
                 </button>
               );
             })}
@@ -355,9 +390,9 @@ export default function RecommendForm() {
         <div className="mt-8 relative z-10">
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 px-5 py-4 text-base font-bold text-white shadow-lg shadow-blue-500/20 transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-550 hover:to-indigo-550 px-5 py-4 text-base font-bold text-white shadow-lg shadow-blue-500/20 transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 cursor-pointer"
           >
-            📊 分析并生成订阅推荐组合
+            {t.submitBtn}
           </button>
         </div>
       </form>
@@ -368,12 +403,12 @@ export default function RecommendForm() {
           <div className="bg-white border border-zinc-100 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="px-6 py-4 bg-zinc-50 border-b border-zinc-100 flex items-center justify-between">
               <h3 className="font-bold text-zinc-900 flex items-center gap-1.5">
-                <span>📊</span> AI 用量估算模型
+                <span>📊</span> {t.estTitle}
               </h3>
               <button
                 type="button"
                 onClick={() => setShowEstimator(false)}
-                className="text-zinc-400 hover:text-zinc-600 font-semibold p-1"
+                className="text-zinc-400 hover:text-zinc-600 font-semibold p-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -382,20 +417,14 @@ export default function RecommendForm() {
             <div className="p-6 space-y-4">
               {/* Question 1 */}
               <div>
-                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">1. 每日使用 AI 辅助开发时长</label>
+                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">{t.estDevTime}</label>
                 <div className="mt-2 grid grid-cols-5 gap-1.5">
-                  {[
-                    { id: "0", label: "无" },
-                    { id: "<1", label: "<1小时" },
-                    { id: "1-3", label: "1-3小时" },
-                    { id: "3-5", label: "3-5小时" },
-                    { id: "5+", label: "5小时+" },
-                  ].map((x) => (
+                  {codingTimeOptions.map((x) => (
                     <button
                       key={x.id}
                       type="button"
                       onClick={() => setEstCodingTime(x.id)}
-                      className={`py-2 rounded-lg text-xs font-semibold border transition-all ${
+                      className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estCodingTime === x.id
                           ? "border-blue-500 bg-blue-50/50 text-blue-700"
                           : "border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -409,19 +438,14 @@ export default function RecommendForm() {
 
               {/* Question 2 */}
               <div>
-                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">2. 每日对话与问答频次</label>
+                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">{t.estTurns}</label>
                 <div className="mt-2 grid grid-cols-4 gap-1.5">
-                  {[
-                    { id: "<5", label: "<5轮" },
-                    { id: "5-15", label: "5-15轮" },
-                    { id: "15-30", label: "15-30轮" },
-                    { id: "30+", label: "30轮+" },
-                  ].map((x) => (
+                  {conversationOptions.map((x) => (
                     <button
                       key={x.id}
                       type="button"
                       onClick={() => setEstConversations(x.id)}
-                      className={`py-2 rounded-lg text-xs font-semibold border transition-all ${
+                      className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estConversations === x.id
                           ? "border-blue-500 bg-blue-50/50 text-blue-700"
                           : "border-zinc-200 text-zinc-600 hover:bg-zinc-50"
@@ -435,42 +459,42 @@ export default function RecommendForm() {
 
               {/* Switches */}
               <div className="border border-zinc-100 bg-zinc-50/40 p-4 rounded-2xl space-y-3">
-                <span className="block text-xs font-bold text-zinc-400 uppercase tracking-wider">加成调节因子</span>
+                <span className="block text-xs font-bold text-zinc-450 uppercase tracking-wider">{t.estMultipliers}</span>
                 <div className="flex flex-col gap-3">
-                  <label className="flex items-center justify-between text-sm text-zinc-700 font-semibold cursor-pointer">
-                    <span className="flex flex-col">
-                      <span>使用 Multi-file Agent 自动改项目</span>
-                      <span className="text-[10px] text-zinc-400 font-normal">多文件分析与大规模修改 (x1.8)</span>
+                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer">
+                    <span className="flex flex-col pr-3">
+                      <span>{t.estMultiFile}</span>
+                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estMultiFileDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estAgent}
                       onChange={(e) => setEstAgent(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-zinc-700 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
-                    <span className="flex flex-col">
-                      <span>经常上传大文件 / 长代码库</span>
-                      <span className="text-[10px] text-zinc-400 font-normal">经常引入大量上下文进行推理 (x1.5)</span>
+                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
+                    <span className="flex flex-col pr-3">
+                      <span>{t.estLargeContext}</span>
+                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estLargeContextDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estLongFiles}
                       onChange={(e) => setEstLongFiles(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-zinc-700 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
-                    <span className="flex flex-col">
-                      <span>多轮交互排错与复杂排查</span>
-                      <span className="text-[10px] text-zinc-400 font-normal">高频次且长反馈的连续排错工作流 (x1.3)</span>
+                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
+                    <span className="flex flex-col pr-3">
+                      <span>{t.estDebug}</span>
+                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estDebugDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estDebugging}
                       onChange={(e) => setEstDebugging(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
+                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
                     />
                   </label>
                 </div>
@@ -479,12 +503,12 @@ export default function RecommendForm() {
               {/* Estimate results */}
               <div className="bg-blue-600 border border-blue-500 text-white p-5 rounded-2xl flex items-center justify-between shadow-lg shadow-blue-600/10">
                 <div>
-                  <span className="text-xs font-semibold opacity-90 block">预计等效用量需求</span>
-                  <span className="text-2xl font-black">{getEstimatedValue()} MTokens</span>
-                  <span className="text-xs opacity-75 font-medium">/月</span>
+                  <span className="text-xs font-semibold opacity-90 block">{t.estResultLabel}</span>
+                  <span className="text-2xl font-black">{getEstimatedValue()}</span>
+                  <span className="text-sm font-semibold opacity-90">{t.estResultUnit}</span>
                 </div>
                 <span className="text-xs border border-white/20 bg-white/10 px-3 py-1.5 rounded-lg text-center backdrop-blur-sm">
-                  按 95% 缓存计算
+                  {t.estCacheAssumption}
                 </span>
               </div>
             </div>
@@ -493,16 +517,16 @@ export default function RecommendForm() {
               <button
                 type="button"
                 onClick={() => setShowEstimator(false)}
-                className="rounded-xl bg-zinc-200 hover:bg-zinc-300 text-zinc-700 px-4 py-2.5 text-sm font-semibold transition-all"
+                className="rounded-xl bg-zinc-200 hover:bg-zinc-300 text-zinc-700 px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer"
               >
-                取消
+                {t.cancel}
               </button>
               <button
                 type="button"
                 onClick={applyEstimation}
-                className="rounded-xl bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 text-sm font-semibold transition-all shadow-md shadow-blue-600/10"
+                className="rounded-xl bg-blue-600 hover:bg-blue-550 text-white px-5 py-2.5 text-sm font-semibold transition-all shadow-md shadow-blue-600/10 cursor-pointer"
               >
-                应用估算用量
+                {t.apply}
               </button>
             </div>
           </div>
