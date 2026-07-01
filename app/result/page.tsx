@@ -166,9 +166,9 @@ function ComboCard({
 
   return (
     <div className={cardStyles}>
-      {/* Top Border light effect with rounded top-t corners */}
+      {/* Top Border light effect. Sharp corners for flow neon strip, rounded corners for others */}
       {isHighPerf ? (
-        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-none">
           <div className="flowing-neon-strip absolute inset-0" />
         </div>
       ) : isHighQuota ? (
@@ -262,7 +262,7 @@ function ComboCard({
         <div className="space-y-1">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsCapability}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-neutral-800">{r.capabilityScore.toFixed(1)}</span>
+            <span className="text-lg font-black text-neutral-805">{r.capabilityScore.toFixed(1)}</span>
             <div className="w-16 bg-stone-100 rounded-full h-1.5 overflow-hidden hidden sm:block">
               <div
                 className="bg-neutral-850 h-full rounded-full"
@@ -282,7 +282,7 @@ function ComboCard({
         <div className="space-y-1 border-l border-stone-100 pl-4">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsQuotaCoverage}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-neutral-805">
+            <span className="text-lg font-black text-neutral-800">
               {(r.combo.usageCoverage * 100).toFixed(0)}%
             </span>
             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
@@ -315,7 +315,7 @@ function ComboCard({
 
       {/* Allocation breakdown */}
       <div className="space-y-3.5 relative z-10">
-        <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">{t.allocHeader}</h3>
+        <h3 className="text-xs font-bold text-stone-505 uppercase tracking-wider">{t.allocHeader}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {Object.entries(r.capabilityBreakdown)
             .sort((a, b) => b[1].allocated - a[1].allocated)
@@ -341,7 +341,7 @@ function ComboCard({
 
       {/* Reasons and recommendations */}
       {r.reasons.length > 0 && (
-        <div className="mt-5 border-t border-stone-150 pt-4 relative z-10">
+        <div className="mt-5 border-t border-stone-155 pt-4 relative z-10">
           <h3 className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{t.logicHeader}</h3>
           <ul className="space-y-1.5 text-sm text-stone-700">
             {r.reasons.map((reason, i) => (
@@ -529,7 +529,7 @@ export default async function ResultPage({
             </div>
             <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
               <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramPayment}</span>
-              <span className="text-[11px] text-neutral-300 font-semibold leading-tight block mt-0.5">
+              <span className="text-[11px] text-neutral-350 font-semibold leading-tight block mt-0.5">
                 {input.acceptsApiBilling ? t.paramApiOk : t.paramApiNo}
                 <br />
                 {input.hasForeignCard ? t.paramCardOk : t.paramCardNo}
@@ -545,9 +545,9 @@ export default async function ResultPage({
                 .map(([k, v]) => (
                   <span
                     key={k}
-                    className="inline-flex items-center rounded-lg bg-neutral-850 border border-neutral-800 px-2.5 py-1 text-xs font-semibold text-neutral-350"
+                    className="inline-flex items-center rounded-lg bg-neutral-850 border border-neutral-800 px-2.5 py-1 text-xs font-semibold text-neutral-355"
                   >
-                    {getCapabilityLabel(k, lang)} {(v * 100).toFixed(0)}%
+                    {getCapabilityLabel(k, lang)} {(v * 105).toFixed(0)}%
                   </span>
                 ))}
             </div>
