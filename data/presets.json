@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-06-30",
+  "capabilityKeys": [
+    "frontend",
+    "backend",
+    "agentCoding",
+    "debugging",
+    "codeReview",
+    "chineseWriting",
+    "englishWriting",
+    "research",
+    "chat",
+    "imageGeneration",
+    "multimodal",
+    "ecosystem"
+  ],
+  "capabilityLabels": {
+    "frontend": "前端开发",
+    "backend": "后端开发",
+    "agentCoding": "Agent 编程",
+    "debugging": "Debug 排错",
+    "codeReview": "代码审查",
+    "chineseWriting": "中文写作",
+    "englishWriting": "英文写作",
+    "research": "深度研究",
+    "chat": "通用聊天",
+    "imageGeneration": "生图",
+    "multimodal": "多模态",
+    "ecosystem": "生态/插件"
+  },
+  "primaryUseCases": [
+    {
+      "id": "backend_main_frontend_light",
+      "label": "后端开发为主",
+      "weights": {
+        "backend": 0.7,
+        "frontend": 0.3
+      }
+    },
+    {
+      "id": "frontend_main_backend_light",
+      "label": "前端开发为主",
+      "weights": {
+        "frontend": 0.7,
+        "backend": 0.3
+      }
+    },
+    {
+      "id": "fullstack_backend_focus",
+      "label": "全栈开发（后端偏重）",
+      "weights": {
+        "backend": 0.45,
+        "frontend": 0.3,
+        "debugging": 0.15,
+        "chineseWriting": 0.1
+      }
+    },
+    {
+      "id": "agent_coding",
+      "label": "Agent 编程",
+      "weights": {
+        "agentCoding": 0.45,
+        "backend": 0.25,
+        "debugging": 0.2,
+        "frontend": 0.1
+      }
+    },
+    {
+      "id": "ai_beginner_general",
+      "label": "日常通用/AI 入门",
+      "weights": {
+        "chat": 0.35,
+        "research": 0.25,
+        "multimodal": 0.15,
+        "chineseWriting": 0.15,
+        "frontend": 0.05,
+        "backend": 0.05
+      }
+    },
+    {
+      "id": "research_writing",
+      "label": "研究与写作",
+      "weights": {
+        "research": 0.35,
+        "chat": 0.2,
+        "chineseWriting": 0.25,
+        "englishWriting": 0.1,
+        "multimodal": 0.1
+      }
+    }
+  ],
+  "secondaryUseCases": [
+    {
+      "id": "none",
+      "label": "无",
+      "weights": {}
+    },
+    {
+      "id": "frontend",
+      "label": "前端开发",
+      "weights": {
+        "frontend": 1.0
+      }
+    },
+    {
+      "id": "backend",
+      "label": "后端开发",
+      "weights": {
+        "backend": 1.0
+      }
+    },
+    {
+      "id": "debugging",
+      "label": "Debug 排错",
+      "weights": {
+        "debugging": 1.0
+      }
+    },
+    {
+      "id": "chineseWriting",
+      "label": "中文写作",
+      "weights": {
+        "chineseWriting": 1.0
+      }
+    },
+    {
+      "id": "englishWriting",
+      "label": "英文写作",
+      "weights": {
+        "englishWriting": 1.0
+      }
+    },
+    {
+      "id": "research",
+      "label": "深度研究",
+      "weights": {
+        "research": 1.0
+      }
+    },
+    {
+      "id": "imageGeneration",
+      "label": "生图",
+      "weights": {
+        "imageGeneration": 1.0
+      }
+    },
+    {
+      "id": "agentCoding",
+      "label": "Agent 编程",
+      "weights": {
+        "agentCoding": 1.0
+      }
+    }
+  ],
+  "addOnWeights": {
+    "agentCoding": 0.12,
+    "chineseWriting": 0.08,
+    "englishWriting": 0.08,
+    "imageGeneration": 0.1,
+    "multimodal": 0.08,
+    "research": 0.08,
+    "mobileExperience": 0.05,
+    "ideIntegration": 0.1,
+    "ecosystem": 0.05
+  }
+}

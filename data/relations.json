@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-06-30",
+  "planRelations": [
+    {
+      "planA": "chatgpt_plus",
+      "planB": "cursor_pro",
+      "overlapScore": 35,
+      "complementScore": 85,
+      "explanation": "ChatGPT Plus 偏通用模型入口、多模态和生态；Cursor Pro 偏 IDE 内编程执行，互补性较高。"
+    },
+    {
+      "planA": "chatgpt_plus",
+      "planB": "claude_pro",
+      "overlapScore": 75,
+      "complementScore": 30,
+      "explanation": "两者都是通用聊天/推理订阅，能力重叠较高，通常不建议同时购买。"
+    },
+    {
+      "planA": "chatgpt_plus",
+      "planB": "gemini_ai_plus",
+      "overlapScore": 70,
+      "complementScore": 35,
+      "explanation": "两者都覆盖通用问答、多模态和写作，重叠较高。"
+    },
+    {
+      "planA": "claude_pro",
+      "planB": "cursor_pro",
+      "overlapScore": 40,
+      "complementScore": 80,
+      "explanation": "Claude Pro 擅长推理和代码审查，Cursor Pro 擅长 IDE 内执行，组合较好。"
+    },
+    {
+      "planA": "claude_pro",
+      "planB": "openrouter_api",
+      "overlapScore": 25,
+      "complementScore": 80,
+      "explanation": "Claude Pro 提供稳定的 Pro 体验，OpenRouter API 可作为灵活的跑量补充。"
+    },
+    {
+      "planA": "gemini_ai_plus",
+      "planB": "cursor_pro",
+      "overlapScore": 35,
+      "complementScore": 85,
+      "explanation": "Gemini Pro 提供长上下文和强多模态，Cursor Pro 提供 IDE 编程执行，互补性高。"
+    },
+    {
+      "planA": "kimi_moderato_cn",
+      "planB": "chatgpt_plus",
+      "overlapScore": 55,
+      "complementScore": 55,
+      "explanation": "Kimi 中文场景强，ChatGPT Plus 生态和多模态强，有一定互补但也有重叠。"
+    },
+    {
+      "planA": "chatgpt_plus",
+      "planB": "chatgpt_pro_5x",
+      "overlapScore": 90,
+      "complementScore": 10,
+      "explanation": "同产品不同容量档位，能力几乎完全重叠。"
+    },
+    {
+      "planA": "claude_pro",
+      "planB": "claude_max_5x",
+      "overlapScore": 90,
+      "complementScore": 10,
+      "explanation": "同产品不同容量档位，能力几乎完全重叠。"
+    },
+    {
+      "planA": "cursor_pro",
+      "planB": "cursor_pro_plus",
+      "overlapScore": 90,
+      "complementScore": 10,
+      "explanation": "同产品不同容量档位，能力几乎完全重叠。"
+    },
+    {
+      "planA": "chatgpt_plus",
+      "planB": "perplexity_pro",
+      "overlapScore": 45,
+      "complementScore": 70,
+      "explanation": "ChatGPT Plus 通用推理和多模态强，Perplexity Pro 搜索研究强，互补性较好。"
+    },
+    {
+      "planA": "claude_pro",
+      "planB": "perplexity_pro",
+      "overlapScore": 50,
+      "complementScore": 65,
+      "explanation": "Claude Pro 代码和推理强，Perplexity Pro 搜索研究强，组合适合研究型用户。"
+    }
+  ]
+}

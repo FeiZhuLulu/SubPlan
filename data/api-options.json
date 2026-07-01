@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-06-30",
+  "notes": [
+    "API options are supplementary only. They should not compete as core subscription recommendations unless user explicitly accepts API billing.",
+    "Metered API options do not have fixed monthly quotas. Estimate usable MTokens dynamically from available API budget and selected model price.",
+    "v0.1.1 default cache hit rate assumption is 95% for text workload cost estimation."
+  ],
+  "defaults": {
+    "defaultCacheHitRateAssumption": 0.95,
+    "enabledOnlyWhenUserAcceptsApiBilling": true
+  },
+  "apiOptions": [
+    {
+      "id": "openrouter_api",
+      "provider": "OpenRouter",
+      "name": "OpenRouter API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "fixedMonthlyPrice": 0,
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openrouter.ai/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "creditPurchaseFee": {
+        "type": "percentage_with_minimum",
+        "percentage": 0.055,
+        "minimum": 0.8,
+        "currency": "USD"
+      },
+      "notes": "Per-model token pricing. No fixed monthly quota."
+    },
+    {
+      "id": "deepseek_v4_flash_api_cn",
+      "provider": "DeepSeek",
+      "name": "deepseek-v4-flash API",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "concurrencyLimit": 2500,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.02,
+        "inputCacheMiss": 1,
+        "output": 2
+      },
+      "notes": "China CNY price from user-provided official screenshot."
+    },
+    {
+      "id": "deepseek_v4_pro_api_cn",
+      "provider": "DeepSeek",
+      "name": "deepseek-v4-pro API",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "concurrencyLimit": 500,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.025,
+        "inputCacheMiss": 3,
+        "output": 6
+      },
+      "notes": "China CNY price from user-provided official screenshot."
+    },
+    {
+      "id": "deepseek_v4_flash_api_global",
+      "provider": "DeepSeek",
+      "name": "deepseek-v4-flash API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.0028,
+        "inputCacheMiss": 0.14,
+        "output": 0.28
+      },
+      "notes": "Global USD API pricing."
+    },
+    {
+      "id": "deepseek_v4_pro_api_global",
+      "provider": "DeepSeek",
+      "name": "deepseek-v4-pro API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "contextTokens": 1000000,
+      "maxOutputTokens": 384000,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.003625,
+        "inputCacheMiss": 0.435,
+        "output": 0.87
+      },
+      "notes": "Global USD API pricing."
+    },
+    {
+      "id": "glm_5_2_api_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM-5.2 API",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "contextTokens": 1000000,
+      "freeQuotaTokens": 20000000,
+      "pricesPerMToken": {
+        "input": 8,
+        "output": 28,
+        "cacheHit": 2
+      },
+      "cacheStorage": "限时免费",
+      "notes": "User-provided screenshot indicates 20M token free quota. Exact free quota scope/cycle still needs confirmation."
+    },
+    {
+      "id": "glm_5_1_short_api_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM-5.1 API Short Input",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "inputLengthCondition": "[0, 32)",
+      "pricesPerMToken": {
+        "input": 6,
+        "output": 24,
+        "cacheHit": 1.3
+      },
+      "cacheStorage": "限时免费",
+      "notes": "Free quota sharing/cycle not confirmed."
+    },
+    {
+      "id": "glm_5_1_long_api_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM-5.1 API Long Input",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "inputLengthCondition": "[32+]",
+      "pricesPerMToken": {
+        "input": 8,
+        "output": 28,
+        "cacheHit": 2
+      },
+      "cacheStorage": "限时免费",
+      "notes": "Free quota sharing/cycle not confirmed."
+    },
+    {
+      "id": "minimax_api_cn",
+      "provider": "MiniMax",
+      "name": "MiniMax API China",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://platform.minimax.io/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Collect detailed CN API pricing before enabling."
+    },
+    {
+      "id": "minimax_api_global",
+      "provider": "MiniMax",
+      "name": "MiniMax API Global",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder for global MiniMax PAYG API. Add per-model pricing before enabling."
+    },
+    {
+      "id": "kimi_api_cn",
+      "provider": "Kimi",
+      "name": "Kimi API China",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://platform.moonshot.cn/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Do not combine Kimi API quota with Kimi membership quota unless explicitly verified."
+    },
+    {
+      "id": "kimi_k27_code_api_cn",
+      "provider": "Kimi",
+      "name": "Kimi K2.7 Code API China",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://www.kimi.com/zh-cn/resources/kimi-k2-7-code-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Collect detailed pricing before enabling."
+    }
+  ]
+}

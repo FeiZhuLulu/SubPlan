@@ -1,0 +1,966 @@
+{
+  "schemaVersion": "0.1.2",
+  "lastUpdatedAt": "2026-06-30",
+  "capabilityKeys": [
+    "frontend",
+    "backend",
+    "agentCoding",
+    "debugging",
+    "codeReview",
+    "chineseWriting",
+    "englishWriting",
+    "research",
+    "chat",
+    "imageGeneration",
+    "multimodal",
+    "ecosystem"
+  ],
+  "notes": [
+    "Final plan-level capability scores for recommender runtime.",
+    "Scores are 0-100 and intentionally separate from price, quota, payment friction and region availability.",
+    "These scores are manually curated from model evidence, plan-model access, product workflow fit and known plan limitations.",
+    "Quota differences between tiers should be handled by quotas.json, not by inflating capability scores."
+  ],
+  "planCapabilityScores": [
+    {
+      "planId": "chatgpt_free",
+      "scores": {
+        "frontend": 55,
+        "backend": 60,
+        "agentCoding": 45,
+        "debugging": 58,
+        "codeReview": 55,
+        "chineseWriting": 72,
+        "englishWriting": 76,
+        "research": 70,
+        "chat": 82,
+        "imageGeneration": 65,
+        "multimodal": 65,
+        "ecosystem": 75
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Free tier model access is dynamic; conservative fallback score."
+    },
+    {
+      "planId": "chatgpt_go_us",
+      "scores": {
+        "frontend": 68,
+        "backend": 76,
+        "agentCoding": 62,
+        "debugging": 74,
+        "codeReview": 72,
+        "chineseWriting": 78,
+        "englishWriting": 82,
+        "research": 82,
+        "chat": 88,
+        "imageGeneration": 78,
+        "multimodal": 78,
+        "ecosystem": 84
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Go entitlement can vary by market; score sits below Plus."
+    },
+    {
+      "planId": "chatgpt_plus",
+      "scores": {
+        "frontend": 80,
+        "backend": 88,
+        "agentCoding": 82,
+        "debugging": 86,
+        "codeReview": 84,
+        "chineseWriting": 86,
+        "englishWriting": 90,
+        "research": 92,
+        "chat": 95,
+        "imageGeneration": 94,
+        "multimodal": 94,
+        "ecosystem": 94
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "chatgpt_pro_5x",
+      "scores": {
+        "frontend": 86,
+        "backend": 94,
+        "agentCoding": 92,
+        "debugging": 92,
+        "codeReview": 90,
+        "chineseWriting": 88,
+        "englishWriting": 94,
+        "research": 95,
+        "chat": 96,
+        "imageGeneration": 95,
+        "multimodal": 95,
+        "ecosystem": 98
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "scores": {
+        "frontend": 86,
+        "backend": 94,
+        "agentCoding": 92,
+        "debugging": 92,
+        "codeReview": 90,
+        "chineseWriting": 88,
+        "englishWriting": 94,
+        "research": 95,
+        "chat": 96,
+        "imageGeneration": 95,
+        "multimodal": 95,
+        "ecosystem": 98
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "claude_free",
+      "scores": {
+        "frontend": 55,
+        "backend": 60,
+        "agentCoding": 48,
+        "debugging": 60,
+        "codeReview": 64,
+        "chineseWriting": 68,
+        "englishWriting": 78,
+        "research": 70,
+        "chat": 78,
+        "imageGeneration": 0,
+        "multimodal": 55,
+        "ecosystem": 68
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "claude_pro",
+      "scores": {
+        "frontend": 84,
+        "backend": 88,
+        "agentCoding": 86,
+        "debugging": 88,
+        "codeReview": 90,
+        "chineseWriting": 78,
+        "englishWriting": 92,
+        "research": 88,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 78,
+        "ecosystem": 88
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "claude_max_5x",
+      "scores": {
+        "frontend": 92,
+        "backend": 94,
+        "agentCoding": 90,
+        "debugging": 94,
+        "codeReview": 94,
+        "chineseWriting": 80,
+        "englishWriting": 94,
+        "research": 92,
+        "chat": 93,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 92
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "claude_max_20x",
+      "scores": {
+        "frontend": 92,
+        "backend": 94,
+        "agentCoding": 90,
+        "debugging": 94,
+        "codeReview": 94,
+        "chineseWriting": 80,
+        "englishWriting": 94,
+        "research": 92,
+        "chat": 93,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 92
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "google_ai_plus_us",
+      "scores": {
+        "frontend": 62,
+        "backend": 68,
+        "agentCoding": 58,
+        "debugging": 66,
+        "codeReview": 62,
+        "chineseWriting": 75,
+        "englishWriting": 80,
+        "research": 82,
+        "chat": 84,
+        "imageGeneration": 82,
+        "multimodal": 86,
+        "ecosystem": 88
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "google_ai_pro_us",
+      "scores": {
+        "frontend": 78,
+        "backend": 82,
+        "agentCoding": 78,
+        "debugging": 80,
+        "codeReview": 76,
+        "chineseWriting": 80,
+        "englishWriting": 86,
+        "research": 94,
+        "chat": 90,
+        "imageGeneration": 90,
+        "multimodal": 95,
+        "ecosystem": 95
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "google_ai_ultra_5x_us",
+      "scores": {
+        "frontend": 82,
+        "backend": 86,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 82,
+        "englishWriting": 88,
+        "research": 96,
+        "chat": 92,
+        "imageGeneration": 94,
+        "multimodal": 97,
+        "ecosystem": 97
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "google_ai_ultra_20x_us",
+      "scores": {
+        "frontend": 82,
+        "backend": 86,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 82,
+        "englishWriting": 88,
+        "research": 96,
+        "chat": 92,
+        "imageGeneration": 94,
+        "multimodal": 97,
+        "ecosystem": 97
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "cursor_hobby",
+      "scores": {
+        "frontend": 68,
+        "backend": 62,
+        "agentCoding": 60,
+        "debugging": 64,
+        "codeReview": 58,
+        "chineseWriting": 35,
+        "englishWriting": 45,
+        "research": 35,
+        "chat": 45,
+        "imageGeneration": 0,
+        "multimodal": 25,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "cursor_pro",
+      "scores": {
+        "frontend": 92,
+        "backend": 86,
+        "agentCoding": 94,
+        "debugging": 90,
+        "codeReview": 86,
+        "chineseWriting": 45,
+        "englishWriting": 60,
+        "research": 45,
+        "chat": 55,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 92
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "scores": {
+        "frontend": 93,
+        "backend": 87,
+        "agentCoding": 95,
+        "debugging": 91,
+        "codeReview": 87,
+        "chineseWriting": 45,
+        "englishWriting": 60,
+        "research": 45,
+        "chat": 55,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 93
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "cursor_ultra",
+      "scores": {
+        "frontend": 93,
+        "backend": 87,
+        "agentCoding": 95,
+        "debugging": 91,
+        "codeReview": 87,
+        "chineseWriting": 45,
+        "englishWriting": 60,
+        "research": 45,
+        "chat": 55,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 93
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "opencode_go_regular",
+      "scores": {
+        "frontend": 82,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 80,
+        "englishWriting": 72,
+        "research": 72,
+        "chat": 75,
+        "imageGeneration": 0,
+        "multimodal": 45,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "kimi_adagio_cn",
+      "scores": {
+        "frontend": 62,
+        "backend": 64,
+        "agentCoding": 62,
+        "debugging": 62,
+        "codeReview": 58,
+        "chineseWriting": 86,
+        "englishWriting": 62,
+        "research": 70,
+        "chat": 78,
+        "imageGeneration": 0,
+        "multimodal": 65,
+        "ecosystem": 70
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "kimi_andante_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 86,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 92,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "kimi_moderato_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 86,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 92,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "scores": {
+        "frontend": 92,
+        "backend": 86,
+        "agentCoding": 94,
+        "debugging": 90,
+        "codeReview": 86,
+        "chineseWriting": 92,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Kimi 199 includes Kimi 2.7 Code class; agent coding treated as same tier as Cursor Pro Composer 2.5 per v0.2 calibration."
+    },
+    {
+      "planId": "kimi_allegro_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 86,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 92,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_plus_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_max_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_ultra_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_plus_global",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_max_global",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "minimax_token_ultra_global",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 78,
+        "chineseWriting": 86,
+        "englishWriting": 80,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 45,
+        "multimodal": 88,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "glm_coding_lite_cn",
+      "scores": {
+        "frontend": 90,
+        "backend": 88,
+        "agentCoding": 88,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 75,
+        "chat": 78,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "glm_coding_pro_cn",
+      "scores": {
+        "frontend": 90,
+        "backend": 88,
+        "agentCoding": 88,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 75,
+        "chat": 78,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "glm_coding_max_cn",
+      "scores": {
+        "frontend": 90,
+        "backend": 88,
+        "agentCoding": 88,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 75,
+        "chat": 78,
+        "imageGeneration": 0,
+        "multimodal": 35,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": ""
+    },
+    {
+      "planId": "openrouter_api",
+      "scores": {
+        "frontend": 84,
+        "backend": 86,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 90,
+        "englishWriting": 86,
+        "research": 86,
+        "chat": 86,
+        "imageGeneration": 0,
+        "multimodal": 70,
+        "ecosystem": 85
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Aggregator API; actual quality depends on selected model."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 84,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 96,
+        "englishWriting": 80,
+        "research": 84,
+        "chat": 88,
+        "imageGeneration": 0,
+        "multimodal": 60,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Chinese writing adjusted to first-tier per v0.2 user reference; cheap API supplement."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_cn",
+      "scores": {
+        "frontend": 88,
+        "backend": 90,
+        "agentCoding": 88,
+        "debugging": 90,
+        "codeReview": 88,
+        "chineseWriting": 96,
+        "englishWriting": 82,
+        "research": 88,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 65,
+        "ecosystem": 74
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Chinese writing adjusted to first-tier per v0.2 user reference."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_global",
+      "scores": {
+        "frontend": 82,
+        "backend": 84,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 96,
+        "englishWriting": 80,
+        "research": 84,
+        "chat": 88,
+        "imageGeneration": 0,
+        "multimodal": 60,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Global DeepSeek flash API; same capability estimate as CN entry."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_global",
+      "scores": {
+        "frontend": 88,
+        "backend": 90,
+        "agentCoding": 88,
+        "debugging": 90,
+        "codeReview": 88,
+        "chineseWriting": 96,
+        "englishWriting": 82,
+        "research": 88,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 65,
+        "ecosystem": 74
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Global DeepSeek pro API; same capability estimate as CN entry."
+    },
+    {
+      "planId": "glm_5_2_api_cn",
+      "scores": {
+        "frontend": 88,
+        "backend": 88,
+        "agentCoding": 88,
+        "debugging": 86,
+        "codeReview": 84,
+        "chineseWriting": 86,
+        "englishWriting": 74,
+        "research": 82,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 45,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "GLM 5.2 API estimate."
+    },
+    {
+      "planId": "glm_5_1_short_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 84,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 82,
+        "imageGeneration": 0,
+        "multimodal": 40,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "GLM 5.1 short-context API estimate."
+    },
+    {
+      "planId": "glm_5_1_long_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 84,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 82,
+        "chat": 82,
+        "imageGeneration": 0,
+        "multimodal": 40,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "GLM 5.1 long-context API estimate."
+    },
+    {
+      "planId": "minimax_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 82,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 82,
+        "englishWriting": 78,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "MiniMax API estimate."
+    },
+    {
+      "planId": "minimax_api_global",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 82,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 82,
+        "englishWriting": 78,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Global MiniMax API estimate."
+    },
+    {
+      "planId": "kimi_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 84,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 88,
+        "englishWriting": 74,
+        "research": 82,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Kimi API estimate."
+    },
+    {
+      "planId": "kimi_k27_code_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 88,
+        "englishWriting": 74,
+        "research": 80,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Kimi K2.7 code API estimate."
+    },
+    {
+      "planId": "ollama_free",
+      "scores": {
+        "frontend": 50,
+        "backend": 55,
+        "agentCoding": 45,
+        "debugging": 50,
+        "codeReview": 45,
+        "chineseWriting": 45,
+        "englishWriting": 50,
+        "research": 35,
+        "chat": 55,
+        "imageGeneration": 20,
+        "multimodal": 25,
+        "ecosystem": 70
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Local model quality depends on user hardware and selected model; score is a workflow placeholder."
+    },
+    {
+      "planId": "ollama_pro",
+      "scores": {
+        "frontend": 60,
+        "backend": 65,
+        "agentCoding": 55,
+        "debugging": 60,
+        "codeReview": 55,
+        "chineseWriting": 55,
+        "englishWriting": 60,
+        "research": 45,
+        "chat": 65,
+        "imageGeneration": 25,
+        "multimodal": 30,
+        "ecosystem": 75
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions."
+    },
+    {
+      "planId": "ollama_max",
+      "scores": {
+        "frontend": 65,
+        "backend": 70,
+        "agentCoding": 60,
+        "debugging": 65,
+        "codeReview": 60,
+        "chineseWriting": 60,
+        "englishWriting": 65,
+        "research": 50,
+        "chat": 70,
+        "imageGeneration": 30,
+        "multimodal": 35,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
+      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions."
+    }
+  ]
+}
