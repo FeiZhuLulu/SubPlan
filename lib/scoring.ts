@@ -464,18 +464,39 @@ function estimateHighIntelligenceQuota(
 
 function getHighIntelligenceOwnerLabels(combo: Combo, weights: NeedWeights): string[] {
   const owners = new Set<string>();
-  const activeHighCapabilities = new Set(
+  const activeHighCapabilities = new Set<CapabilityKey>(
     Array.from(CORE_HIGH_INTELLIGENCE_CAPS).filter(
       (capability) => (weights[capability] ?? 0) > 0
     )
   );
+  const activeCapabilities = Array.from(activeHighCapabilities);
+  const modelTierRank = (model: NonNullable<PlanInCombo["modelAccessProfile"]>["models"][number]) =>
+    activeCapabilities.reduce((max, capability) => {
+      const tier = model.tierByCapability[capability];
+      if (tier === "S") return Math.max(max, 2);
+      if (tier === "A") return Math.max(max, 1);
+      return max;
+    }, 0);
+  const modelDisplayScore = (plan: PlanInCombo, model: NonNullable<PlanInCombo["modelAccessProfile"]>["models"][number]) =>
+    activeCapabilities.reduce((sum, capability) => {
+      const tier = model.tierByCapability[capability];
+      if (!tier) return sum;
+      return sum + getModelPoolQuota(plan, model.quotaMTokens, model.quotaShare) * getTierFactor(tier, "medium");
+    }, 0);
+
   for (const plan of combo.plans) {
-    const topModels = plan.modelAccessProfile?.models.filter((model) =>
-      [...activeHighCapabilities].some((capability) => {
+    const topModels = plan.modelAccessProfile?.models
+      .filter((model) =>
+        activeCapabilities.some((capability) => {
         const tier = model.tierByCapability[capability];
         return tier === "S" || tier === "A";
-      })
-    );
+        })
+      )
+      .sort((a, b) => {
+        const tierDelta = modelTierRank(b) - modelTierRank(a);
+        if (tierDelta !== 0) return tierDelta;
+        return modelDisplayScore(plan, b) - modelDisplayScore(plan, a);
+      });
     if (topModels?.length) {
       owners.add(`${plan.name}（${topModels.slice(0, 2).map((model) => model.label).join(" / ")}）`);
     } else if (

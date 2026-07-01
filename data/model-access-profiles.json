@@ -265,9 +265,9 @@
           "label": "MiMo v2.5 Pro",
           "quotaMTokens": 1419.6,
           "tierByCapability": {
-            "agentCoding": "A",
-            "backend": "A",
-            "debugging": "A",
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
             "codeReview": "B",
             "research": "B"
           }
