@@ -717,19 +717,23 @@ function computeHighCoverageAdjustment(combo: Combo): number {
   return -Math.min(5, (1 - coverage) * 10);
 }
 
-function generateReasons(combo: Combo, weights: NeedWeights, adjustment: number): string[] {
+function generateReasons(
+  combo: Combo,
+  weights: NeedWeights,
+  adjustment: number,
+  capabilityBreakdown: ScoredCombo["capabilityBreakdown"]
+): string[] {
   const reasons: string[] = [];
-  const topCapability = (Object.entries(weights).sort((a, b) => b[1] - a[1])[0]?.[0] ??
-    "chat") as CapabilityKey;
+  const topAllocatedCapability = Object.entries(capabilityBreakdown)
+    .sort((a, b) => {
+      const allocatedDelta = (b[1]?.allocated ?? 0) - (a[1]?.allocated ?? 0);
+      if (Math.abs(allocatedDelta) > 1) return allocatedDelta;
+      return ((weights[b[0] as CapabilityKey] ?? 0) - (weights[a[0] as CapabilityKey] ?? 0));
+    })[0] as [CapabilityKey, NonNullable<ScoredCombo["capabilityBreakdown"][CapabilityKey]>] | undefined;
 
-  const bestPlan = [...combo.plans].sort(
-    (a, b) =>
-      (b.scoreRecord.scores[topCapability] ?? 0) -
-      (a.scoreRecord.scores[topCapability] ?? 0)
-  )[0];
-
-  if (bestPlan) {
-    reasons.push(`在核心需求「${topCapability}」上，${bestPlan.name} 能力较强。`);
+  if (topAllocatedCapability) {
+    const [capability, info] = topAllocatedCapability;
+    reasons.push(`在主要需求「${capability}」上，${info.primaryPlan} 承担了最多额度。`);
   }
 
   const totalDemand = (combo.highIntelligenceDemand ?? 0) + (combo.generalDemand ?? 0);
@@ -890,7 +894,7 @@ export function recommend(input: UserInput): ScoredCombo[] {
       allocationDetails: allocation.allocationDetails,
       coverageStatus,
       budgetStatus,
-      reasons: generateReasons(combo, weights, adjustment),
+      reasons: generateReasons(combo, weights, adjustment, allocation.capabilityBreakdown),
       cautions: generateCautions(combo, budgetStatus, coverageStatus),
       capabilityBreakdown: allocation.capabilityBreakdown,
     });
