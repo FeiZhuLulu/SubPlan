@@ -58,9 +58,9 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
     cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/15 border-amber-500/30 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-500/60";
     topBarStyles += "h-2 gold-shimmer-border";
     badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
-    badgeStyles += "bg-amber-50/90 text-amber-850 border-amber-200";
+    badgeStyles += "bg-amber-50/90 text-amber-855 border-amber-200";
   } else if (isHighPerf) {
-    // LED Pixel Strip Theme
+    // Smooth flowing neon strip Theme
     cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
     topBarStyles += "h-2 bg-neutral-950";
     badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
@@ -86,8 +86,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
       {/* Top Border light effect with rounded top-t corners */}
       {isHighPerf ? (
         <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
-          <div className="led-pixel-strip absolute inset-0" />
-          <div className="led-pixel-mask absolute inset-0" />
+          <div className="flowing-neon-strip absolute inset-0" />
         </div>
       ) : isHighQuota ? (
         <div className="absolute top-0 inset-x-0 h-2 bg-stone-100 overflow-hidden rounded-t-2xl">
@@ -320,13 +319,10 @@ export default function ResultClient() {
           pointer-events: none;
           z-index: 5;
         }
-        .led-pixel-strip {
+        .flowing-neon-strip {
           background: linear-gradient(90deg, #a855f7 0%, #ec4899 25%, #3b82f6 50%, #a855f7 75%, #ec4899 100%);
           background-size: 200% auto;
           animation: flowLED 4s linear infinite;
-        }
-        .led-pixel-mask {
-          background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 4px, #0a0a0a 4px, #0a0a0a 6px);
         }
         .battery-charge-indicator {
           height: 100%;
