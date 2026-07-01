@@ -1,0 +1,943 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-06-30",
+  "notes": [
+    "v0.1.1 price dataset for AI subscription recommender.",
+    "Only stable official / high-quality third-party channels are included.",
+    "Special channels, shared accounts, day passes, regional arbitrage and temporary reseller prices are excluded.",
+    "For China-facing recommendation, prefer CN prices where available; otherwise use US/GLOBAL price.",
+    "Google AI currently only includes US prices; Japan prices intentionally left blank.",
+    "Kimi currently uses CN official pricing only; non-CN pricing is not included.",
+    "Cache hit rate assumptions and text workload capacity estimates belong in quotas.json, not in this price-only file."
+  ],
+  "defaults": {
+    "recommendationCurrency": "CNY",
+    "budgetToleranceOptions": [
+      {
+        "id": "strict",
+        "label": "严格不超预算",
+        "tolerance": 0
+      },
+      {
+        "id": "normal",
+        "label": "默认略超预算",
+        "tolerance": 0.15
+      },
+      {
+        "id": "flexible",
+        "label": "明显更好可超一点",
+        "tolerance": 0.25
+      }
+    ],
+    "defaultBudgetTolerance": 0.15,
+    "defaultCacheHitRateAssumption": 0.95
+  },
+  "plans": [
+    {
+      "id": "chatgpt_free",
+      "provider": "OpenAI",
+      "name": "ChatGPT Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://chatgpt.com/pricing/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Free personal tier."
+    },
+    {
+      "id": "chatgpt_go_us",
+      "provider": "OpenAI",
+      "name": "ChatGPT Go",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 8,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openai.com/index/introducing-chatgpt-go/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "US reference price. Some markets may have localized prices."
+    },
+    {
+      "id": "chatgpt_plus",
+      "provider": "OpenAI",
+      "name": "ChatGPT Plus",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Official help page states ChatGPT Plus is $20/month."
+    },
+    {
+      "id": "chatgpt_pro_5x",
+      "provider": "OpenAI",
+      "name": "ChatGPT Pro 5x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Plus",
+      "notes": "Lower Pro tier. Official help page describes roughly 5x Plus usage."
+    },
+    {
+      "id": "chatgpt_pro_20x",
+      "provider": "OpenAI",
+      "name": "ChatGPT Pro 20x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Plus",
+      "notes": "Higher Pro tier. Official help page describes roughly 20x Plus usage."
+    },
+    {
+      "id": "claude_free",
+      "provider": "Anthropic",
+      "name": "Claude Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://claude.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Free Claude plan."
+    },
+    {
+      "id": "claude_pro",
+      "provider": "Anthropic",
+      "name": "Claude Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 17,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year, about $17/month"
+        }
+      ],
+      "notes": "Claude Pro includes Claude Code access."
+    },
+    {
+      "id": "claude_max_5x",
+      "provider": "Anthropic",
+      "name": "Claude Max 5x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Pro capacity per session",
+      "notes": "Max lower tier."
+    },
+    {
+      "id": "claude_max_20x",
+      "provider": "Anthropic",
+      "name": "Claude Max 20x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Pro capacity per session",
+      "notes": "Max higher tier."
+    },
+    {
+      "id": "google_ai_plus_us",
+      "provider": "Google",
+      "name": "Google AI Plus",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 4.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "US pricing only. Regional prices not included in v0.1.1."
+    },
+    {
+      "id": "google_ai_pro_us",
+      "provider": "Google",
+      "name": "Google AI Pro",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 19.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "US pricing only. Regional prices not included in v0.1.1."
+    },
+    {
+      "id": "google_ai_ultra_5x_us",
+      "provider": "Google",
+      "name": "Google AI Ultra 5x",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 99.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://gemini.google/subscriptions/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x",
+      "notes": "US pricing only."
+    },
+    {
+      "id": "google_ai_ultra_20x_us",
+      "provider": "Google",
+      "name": "Google AI Ultra 20x",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 199.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://gemini.google/subscriptions/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x",
+      "notes": "US pricing only."
+    },
+    {
+      "id": "google_ai_pro_jp",
+      "provider": "Google",
+      "name": "Google AI Pro Japan",
+      "region": "JP",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": null,
+      "originalCurrency": "JPY",
+      "billingCycle": "monthly",
+      "priceStatus": "intentionally_blank",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": null,
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "notes": "Japan pricing intentionally left blank for v0.1.1."
+    },
+    {
+      "id": "cursor_hobby",
+      "provider": "Cursor",
+      "name": "Cursor Hobby",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Free plan."
+    },
+    {
+      "id": "cursor_pro",
+      "provider": "Cursor",
+      "name": "Cursor Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Entry-level plan with access to premium models, unlimited Tab completions, and more."
+    },
+    {
+      "id": "cursor_pro_plus",
+      "provider": "Cursor",
+      "name": "Cursor Pro+",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 60,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "3x Pro",
+      "notes": "User-provided official pricing screenshot confirms $60/month."
+    },
+    {
+      "id": "cursor_ultra",
+      "provider": "Cursor",
+      "name": "Cursor Ultra",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Pro",
+      "notes": "User-provided official pricing screenshot confirms $200/month."
+    },
+    {
+      "id": "cursor_teams",
+      "provider": "Cursor",
+      "name": "Cursor Teams",
+      "region": "GLOBAL",
+      "recommendationRole": "team_plan",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 40,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly_per_user",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "notes": "Team plan. Not used in v0.1 personal recommendation."
+    },
+    {
+      "id": "opencode_go_intro",
+      "provider": "OpenCode",
+      "name": "OpenCode Go First Month",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "cli",
+        "api"
+      ],
+      "originalPrice": 5,
+      "originalCurrency": "USD",
+      "billingCycle": "first_month",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://opencode.ai/go",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": false,
+      "notes": "Introductory first-month price. Use regular price for long-term recommendation."
+    },
+    {
+      "id": "opencode_go_regular",
+      "provider": "OpenCode",
+      "name": "OpenCode Go",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "cli",
+        "api"
+      ],
+      "originalPrice": 10,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://opencode.ai/go",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Regular recurring price after first month."
+    },
+    {
+      "id": "kimi_adagio_cn",
+      "provider": "Kimi",
+      "name": "Kimi 免费版",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "CNY",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "kimiCodeMultiplier": null,
+      "notes": "Official Adagio free tier."
+    },
+    {
+      "id": "kimi_andante_cn",
+      "provider": "Kimi",
+      "name": "Kimi 会员 49元档",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 49,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "kimiCodeMultiplier": "1x",
+      "notes": "Official Andante tier. Kimi Code 1x."
+    },
+    {
+      "id": "kimi_moderato_cn",
+      "provider": "Kimi",
+      "name": "Kimi 会员 99元档",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 99,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "kimiCodeMultiplier": "4x",
+      "notes": "Official Moderato tier. Kimi Code 4x."
+    },
+    {
+      "id": "kimi_allegretto_cn",
+      "provider": "Kimi",
+      "name": "Kimi 会员 199元档",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 199,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "kimiCodeMultiplier": "20x",
+      "notes": "Official Allegretto tier. Kimi Code 20x."
+    },
+    {
+      "id": "kimi_allegro_cn",
+      "provider": "Kimi",
+      "name": "Kimi 会员 699元档",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 699,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "kimiCodeMultiplier": "60x",
+      "notes": "Official Allegro tier. Kimi Code 60x."
+    },
+    {
+      "id": "minimax_token_plus_cn",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Plus",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 49,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://platform.minimax.io/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "officialTokenUsageLabel": "约 6 亿+ token M3 用量",
+      "agentConcurrencyLabel": "3-4 agents",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "id": "minimax_token_max_cn",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Max",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 119,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://platform.minimax.io/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "officialTokenUsageLabel": "约 18 亿+ token M3 用量",
+      "agentConcurrencyLabel": "4-5 agents",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "id": "minimax_token_ultra_cn",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Ultra",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 469,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://platform.minimax.io/",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "officialTokenUsageLabel": "约 71 亿+ token M3 用量",
+      "agentConcurrencyLabel": "6-7 agents",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "id": "minimax_token_plus_global",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Plus",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Global Token Plan price."
+    },
+    {
+      "id": "minimax_token_max_global",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Max",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 50,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Global Token Plan price."
+    },
+    {
+      "id": "minimax_token_ultra_global",
+      "provider": "MiniMax",
+      "name": "MiniMax Token Plan Ultra",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 120,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Global Token Plan price."
+    },
+    {
+      "id": "glm_coding_lite_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM Coding Lite",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 49,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "Lite base quota",
+      "discountPrices": [
+        {
+          "billingCycle": "quarterly",
+          "displayMonthlyPrice": 44.1,
+          "totalPrice": 132.3,
+          "currency": "CNY",
+          "discountLabel": "连续包季 9 折"
+        }
+      ],
+      "notes": "Supports Claude Code and 20+ coding tools. Requires real-name verification according to screenshot."
+    },
+    {
+      "id": "glm_coding_pro_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM Coding Pro",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 149,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Lite quota + Lite full benefits",
+      "discountPrices": [
+        {
+          "billingCycle": "quarterly",
+          "displayMonthlyPrice": 134.1,
+          "totalPrice": 402.3,
+          "currency": "CNY",
+          "discountLabel": "连续包季 9 折"
+        }
+      ],
+      "notes": "Most popular plan according to screenshot."
+    },
+    {
+      "id": "glm_coding_max_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM Coding Max",
+      "region": "CN",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 469,
+      "originalCurrency": "CNY",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Lite quota + Pro full benefits",
+      "discountPrices": [
+        {
+          "billingCycle": "quarterly",
+          "displayMonthlyPrice": 422.1,
+          "totalPrice": 1266.3,
+          "currency": "CNY",
+          "discountLabel": "连续包季 9 折"
+        }
+      ],
+      "notes": "For high-end users and medium-to-large repos."
+    },
+    {
+      "id": "ollama_free",
+      "provider": "Ollama",
+      "name": "Ollama Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Local option. Not directly comparable to fixed cloud subscription."
+    },
+    {
+      "id": "ollama_pro",
+      "provider": "Ollama",
+      "name": "Ollama Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 16.67,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year"
+        }
+      ],
+      "notes": "Cloud usage and local model workflow."
+    },
+    {
+      "id": "ollama_max",
+      "provider": "Ollama",
+      "name": "Ollama Max",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-06-30",
+      "enabledForRecommendation": true,
+      "notes": "Max cloud usage tier."
+    }
+  ],
+  "normalizationNotes": [
+    "This is the normalized working copy of the uploaded plans.json.",
+    "Cache hit rate and quota estimates are moved to quotas.json / cost-estimation-rules.json for recommender use.",
+    "Original file is preserved under docs/source-ai-subscription-prices-v0.1.1.combined.json."
+  ]
+}

@@ -1,0 +1,781 @@
+{
+  "schemaVersion": "0.1.3",
+  "lastUpdatedAt": "2026-07-01",
+  "defaults": {
+    "cacheHitRateScenarios": [
+      {
+        "id": "low_cache",
+        "label": "低缓存/新任务",
+        "cacheHitRate": 0.5
+      },
+      {
+        "id": "normal_cache",
+        "label": "普通连续任务",
+        "cacheHitRate": 0.75
+      },
+      {
+        "id": "agent_cached_workflow",
+        "label": "Agent/重复项目工作流",
+        "cacheHitRate": 0.95
+      }
+    ],
+    "defaultScenario": "agent_cached_workflow"
+  },
+  "notes": [
+    "Quota table separates text workload capacity from price data.",
+    "v0.1.2 fills recommender runtime estimates for major paid subscriptions so quota-aware allocation can run.",
+    "v0.1.3 incorporates selected observed coding-plan capacity data from mahonzhan/awesome-coding-plan while keeping billing-equivalent MTokens separate from workload MTokens.",
+    "All dynamic subscription quotas are estimated MTokens-equivalent capacity, not official fixed token limits.",
+    "OpenCode Go is value-limited by dollars and has model-specific usage profiles; do not treat its default MTokens estimate as a fixed quota.",
+    "Null estimatedTextWorkloadCapacityMTokens means local option or metered API capacity should be handled outside fixed subscription quota allocation."
+  ],
+  "quotas": [
+    {
+      "planId": "minimax_token_plus_cn",
+      "estimatedTextWorkloadCapacityMTokens": 600,
+      "quotaBasis": "official_token_usage_label_converted",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Converted from officialTokenUsageLabel in plans.json: 6亿+ token = 600 MTokens. Treat as lower-bound style capacity."
+    },
+    {
+      "planId": "minimax_token_max_cn",
+      "estimatedTextWorkloadCapacityMTokens": 1800,
+      "quotaBasis": "official_token_usage_label_converted",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Converted from officialTokenUsageLabel in plans.json: 18亿+ token = 1800 MTokens. Treat as lower-bound style capacity."
+    },
+    {
+      "planId": "minimax_token_ultra_cn",
+      "estimatedTextWorkloadCapacityMTokens": 7100,
+      "quotaBasis": "official_token_usage_label_converted",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Converted from officialTokenUsageLabel in plans.json: 71亿+ token = 7100 MTokens. Treat as lower-bound style capacity."
+    },
+    {
+      "planId": "minimax_token_plus_global",
+      "estimatedTextWorkloadCapacityMTokens": 600,
+      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Temporarily mirrors CN Plus token capacity for recommender continuity. Verify global included token amount before production use."
+    },
+    {
+      "planId": "minimax_token_max_global",
+      "estimatedTextWorkloadCapacityMTokens": 1800,
+      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Temporarily mirrors CN Max token capacity for recommender continuity. Verify global included token amount before production use."
+    },
+    {
+      "planId": "minimax_token_ultra_global",
+      "estimatedTextWorkloadCapacityMTokens": 7100,
+      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Temporarily mirrors CN Ultra token capacity for recommender continuity. Verify global included token amount before production use."
+    },
+    {
+      "planId": "kimi_andante_cn",
+      "estimatedTextWorkloadCapacityMTokens": 125,
+      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Back-calculated from user-provided Kimi Moderato 99 CNY estimate of 400-600 MTokens and official 4x multiplier; uses 500/4=125 MTokens."
+    },
+    {
+      "planId": "kimi_moderato_cn",
+      "estimatedTextWorkloadCapacityMTokens": 500,
+      "quotaBasis": "user_provided_range_midpoint",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "4x",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "User-provided practical estimate: Kimi 99 CNY about 400-600 MTokens/month; stored midpoint 500."
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "estimatedTextWorkloadCapacityMTokens": 2500,
+      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x / 5x Moderato",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "User notes official promotion treats 199 CNY tier as 5x the 99 CNY tier; uses 500*5=2500 MTokens."
+    },
+    {
+      "planId": "kimi_allegro_cn",
+      "estimatedTextWorkloadCapacityMTokens": 7500,
+      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "60x / 3x Allegretto",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Uses Kimi base multiplier ladder: 60x base = 7500 MTokens when Andante base is 125 MTokens."
+    },
+    {
+      "planId": "kimi_adagio_cn",
+      "estimatedTextWorkloadCapacityMTokens": 80,
+      "quotaBasis": "manual_free_tier_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Free Kimi tier conservative estimate for occasional use."
+    },
+    {
+      "planId": "cursor_pro",
+      "estimatedTextWorkloadCapacityMTokens": 700,
+      "quotaBasis": "user_provided_range_midpoint",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "User-provided practical estimate: Cursor Pro about 600-800 MTokens/month; stored midpoint 700. Billing-equivalent MTokens from $5.40/MTokens model is 3.704, kept separate from cached workload capacity.",
+      "billingValueUsd": 20,
+      "billingEquivalentMTokens": 3.704,
+      "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
+        }
+      ]
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "estimatedTextWorkloadCapacityMTokens": 2100,
+      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "3x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Uses Cursor Pro 700 MTokens midpoint multiplied by Pro+ 3x tier label. Billing-equivalent MTokens from $5.40/MTokens model is 11.111, kept separate from cached workload capacity.",
+      "billingValueUsd": 60,
+      "billingEquivalentMTokens": 11.111,
+      "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
+        }
+      ]
+    },
+    {
+      "planId": "cursor_ultra",
+      "estimatedTextWorkloadCapacityMTokens": 14000,
+      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Uses Cursor Pro 700 MTokens midpoint multiplied by Ultra 20x tier label. Billing-equivalent MTokens from $5.40/MTokens model is 74.074, kept separate from cached workload capacity.",
+      "billingValueUsd": 200,
+      "billingEquivalentMTokens": 74.074,
+      "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
+        }
+      ]
+    },
+    {
+      "planId": "chatgpt_plus",
+      "estimatedTextWorkloadCapacityMTokens": 480,
+      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x Plus",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Updated from awesome-coding-plan observed Codex GPT-5.4 coding-plan estimate: about 4.8亿 tokens/month = 480 MTokens. Still an observed coding-workload estimate, not an official fixed ChatGPT token quota.",
+      "observedCodingPlanCapacityMTokens": 480,
+      "observedCodingPlanModel": "gpt-5.4",
+      "observedFiveHourWindowMTokens": 20,
+      "observedWeeklyWindowMTokens": 120,
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Observed ChatGPT Plus Codex GPT-5.4 monthly tokens around 4.8亿."
+        }
+      ]
+    },
+    {
+      "planId": "chatgpt_pro_5x",
+      "estimatedTextWorkloadCapacityMTokens": 2400,
+      "quotaBasis": "official_multiplier_applied_to_awesome_coding_plan_plus_observation",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "5x Plus",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Uses updated ChatGPT Plus 480 MTokens observed coding-plan baseline multiplied by the official 5x usage label; dynamic model/tool limits still apply.",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Derived from ChatGPT Plus observed 480 MTokens baseline."
+        }
+      ]
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "estimatedTextWorkloadCapacityMTokens": 9600,
+      "quotaBasis": "official_multiplier_applied_to_awesome_coding_plan_plus_observation",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x Plus",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Uses updated ChatGPT Plus 480 MTokens observed coding-plan baseline multiplied by the official 20x usage label; dynamic model/tool limits still apply.",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Derived from ChatGPT Plus observed 480 MTokens baseline."
+        }
+      ]
+    },
+    {
+      "planId": "claude_pro",
+      "estimatedTextWorkloadCapacityMTokens": 300,
+      "quotaBasis": "manual_dynamic_limit_estimate",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Conservative stable estimate remains 300 MTokens. awesome-coding-plan observed Claude Code Opus 4.7 at about 4.16亿 tokens/month = 416 MTokens during the 2026-05-14 to 2026-07-13 temporary weekly boost window.",
+      "observedCodingPlanCapacityMTokens": 416,
+      "temporaryBoostedCapacityMTokens": 416,
+      "temporaryBoostEndsAt": "2026-07-13",
+      "observedFiveHourWindowMTokens": 22.98,
+      "observedWeeklyWindowMTokens": 104,
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Observed Claude Pro Claude Code Opus 4.7 monthly tokens around 4.16亿 during temporary boost."
+        }
+      ]
+    },
+    {
+      "planId": "claude_max_5x",
+      "estimatedTextWorkloadCapacityMTokens": 1500,
+      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "5x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Anthropic states Max 5x provides 5x Pro usage per session; estimated from a 300 MTokens Pro baseline, not an official token quota. Temporary boosted capacity is separately tracked from awesome-coding-plan Claude Pro observation and should not be treated as long-term stable quota.",
+      "temporaryBoostedCapacityMTokens": 2080,
+      "temporaryBoostEndsAt": "2026-07-13",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Temporary boosted capacity derived from Claude Pro observed 416 MTokens times 5."
+        }
+      ]
+    },
+    {
+      "planId": "claude_max_20x",
+      "estimatedTextWorkloadCapacityMTokens": 6000,
+      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Anthropic states Max 20x provides 20x Pro usage per session; estimated from a 300 MTokens Pro baseline, with dynamic weekly/monthly caveats. Temporary boosted capacity is separately tracked from awesome-coding-plan Claude Pro observation and should not be treated as long-term stable quota.",
+      "temporaryBoostedCapacityMTokens": 8320,
+      "temporaryBoostEndsAt": "2026-07-13",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Temporary boosted capacity derived from Claude Pro observed 416 MTokens times 20."
+        }
+      ]
+    },
+    {
+      "planId": "google_ai_ultra_5x_us",
+      "estimatedTextWorkloadCapacityMTokens": 4000,
+      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "5x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Uses Google AI Pro 800 MTokens baseline multiplied by the 5x tier label."
+    },
+    {
+      "planId": "google_ai_ultra_20x_us",
+      "estimatedTextWorkloadCapacityMTokens": 16000,
+      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Uses Google AI Pro 800 MTokens baseline multiplied by the 20x tier label."
+    },
+    {
+      "planId": "glm_coding_lite_cn",
+      "estimatedTextWorkloadCapacityMTokens": 128,
+      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x Lite",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (observed_glm_5_1_lite): about 128 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "observedFiveHourWindowMTokens": 6,
+      "observedWeeklyWindowMTokens": 32,
+      "observedCodingPlanModel": "glm-5.1",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Observed GLM Coding Plan token usage table."
+        }
+      ]
+    },
+    {
+      "planId": "glm_coding_pro_cn",
+      "estimatedTextWorkloadCapacityMTokens": 640,
+      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "5x Lite",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (5x_lite_observed_glm_5_1): about 640 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "observedFiveHourWindowMTokens": 30,
+      "observedWeeklyWindowMTokens": 160,
+      "observedCodingPlanModel": "glm-5.1",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Observed GLM Coding Plan token usage table."
+        }
+      ]
+    },
+    {
+      "planId": "glm_coding_max_cn",
+      "estimatedTextWorkloadCapacityMTokens": 2560,
+      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "20x Lite",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_recheck_2026_07_01",
+      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (20x_lite_observed_glm_5_1): about 2560 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "observedFiveHourWindowMTokens": 120,
+      "observedWeeklyWindowMTokens": 640,
+      "observedCodingPlanModel": "glm-5.1",
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Observed GLM Coding Plan token usage table."
+        }
+      ]
+    },
+    {
+      "planId": "opencode_go_regular",
+      "estimatedTextWorkloadCapacityMTokens": 600,
+      "quotaBasis": "official_value_limits_with_model_specific_profiles",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "$60 monthly usage value",
+      "cacheHitRateAssumption": 0.95,
+      "source": "official_opencode_go_docs_rechecked_2026_06_30",
+      "notes": "OpenCode Go limits are defined in dollar value: $12 per 5 hours, $30 weekly, $60 monthly. Actual workload capacity depends heavily on selected model price. Runtime should prefer modelSpecificUsageProfiles when model choice is known; 600 MTokens is a conservative quality-balanced default, not a fixed plan quota.",
+      "valueLimitsUsd": {
+        "per5Hours": 12,
+        "weekly": 30,
+        "monthly": 60
+      },
+      "modelSpecificUsageProfiles": [
+        {
+          "modelId": "glm-5.2",
+          "officialEstimatedRequestsPerMonth": 4300,
+          "observedAverageTokensPerRequest": {
+            "input": 700,
+            "cached": 52000,
+            "output": 150
+          },
+          "estimatedMonthlyWorkloadMTokens": 227.3,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "glm-5.1",
+          "officialEstimatedRequestsPerMonth": 4300,
+          "observedAverageTokensPerRequest": {
+            "input": 700,
+            "cached": 52000,
+            "output": 150
+          },
+          "estimatedMonthlyWorkloadMTokens": 227.3,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "officialEstimatedRequestsPerMonth": 5750,
+          "observedAverageTokensPerRequest": {
+            "input": 870,
+            "cached": 55000,
+            "output": 200
+          },
+          "estimatedMonthlyWorkloadMTokens": 322.4,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "officialEstimatedRequestsPerMonth": 9250,
+          "observedAverageTokensPerRequest": {
+            "input": 870,
+            "cached": 55000,
+            "output": 200
+          },
+          "estimatedMonthlyWorkloadMTokens": 518.6,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "mimo-v2.5",
+          "officialEstimatedRequestsPerMonth": 150400,
+          "observedAverageTokensPerRequest": {
+            "input": 830,
+            "cached": 71500,
+            "output": 295
+          },
+          "estimatedMonthlyWorkloadMTokens": 10922.8,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "mimo-v2.5-pro",
+          "officialEstimatedRequestsPerMonth": 16300,
+          "observedAverageTokensPerRequest": {
+            "input": 790,
+            "cached": 86000,
+            "output": 305
+          },
+          "estimatedMonthlyWorkloadMTokens": 1419.6,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "minimax-m3",
+          "officialEstimatedRequestsPerMonth": 16000,
+          "observedAverageTokensPerRequest": {
+            "input": 510,
+            "cached": 56000,
+            "output": 190
+          },
+          "estimatedMonthlyWorkloadMTokens": 907.2,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "minimax-m2.7",
+          "officialEstimatedRequestsPerMonth": 17000,
+          "observedAverageTokensPerRequest": {
+            "input": 300,
+            "cached": 55000,
+            "output": 125
+          },
+          "estimatedMonthlyWorkloadMTokens": 942.2,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "qwen3.7-max",
+          "officialEstimatedRequestsPerMonth": 4770,
+          "observedAverageTokensPerRequest": {
+            "input": 420,
+            "cached": 66000,
+            "output": 200
+          },
+          "estimatedMonthlyWorkloadMTokens": 317.8,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "qwen3.7-plus",
+          "officialEstimatedRequestsPerMonth": 21600,
+          "observedAverageTokensPerRequest": {
+            "input": 500,
+            "cached": 57000,
+            "output": 190
+          },
+          "estimatedMonthlyWorkloadMTokens": 1246.1,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "qwen3.6-plus",
+          "officialEstimatedRequestsPerMonth": 16300,
+          "observedAverageTokensPerRequest": {
+            "input": 500,
+            "cached": 57000,
+            "output": 190
+          },
+          "estimatedMonthlyWorkloadMTokens": 940.3,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "deepseek-v4-pro",
+          "officialEstimatedRequestsPerMonth": 17150,
+          "observedAverageTokensPerRequest": {
+            "input": 750,
+            "cached": 82000,
+            "output": 290
+          },
+          "estimatedMonthlyWorkloadMTokens": 1424.1,
+          "source": "https://opencode.ai/docs/go/"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "officialEstimatedRequestsPerMonth": 158150,
+          "observedAverageTokensPerRequest": {
+            "input": 790,
+            "cached": 68000,
+            "output": 280
+          },
+          "estimatedMonthlyWorkloadMTokens": 10923.4,
+          "source": "https://opencode.ai/docs/go/"
+        }
+      ],
+      "billingValueUsd": 60,
+      "billingEquivalentMTokens": 11.111,
+      "billingEquivalentBasis": "monthly_value_usd_divided_by_5_40_usd_per_mtoken",
+      "observedFiveHourBillingEquivalentMTokens": 2.222,
+      "observedWeeklyBillingEquivalentMTokens": 5.556,
+      "additionalSources": [
+        {
+          "sourceId": "awesome-coding-plan",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "note": "Confirms OpenCode Go is a $60/month value-limited plan with about 6x value multiple; use modelSpecificUsageProfiles for workload capacity."
+        }
+      ]
+    },
+    {
+      "planId": "ollama_free",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "local_or_cloud_usage_not_text_quota",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+    },
+    {
+      "planId": "ollama_pro",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "local_or_cloud_usage_not_text_quota",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+    },
+    {
+      "planId": "ollama_max",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "local_or_cloud_usage_not_text_quota",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+    },
+    {
+      "planId": "openrouter_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_global",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_global",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "glm_5_2_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "glm_5_1_short_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "glm_5_1_long_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "minimax_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "minimax_api_global",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "kimi_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "kimi_k27_code_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic_budget",
+      "quotaConfidence": "not_applicable",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": null,
+      "source": "manual_from_price_file",
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+    },
+    {
+      "planId": "chatgpt_free",
+      "estimatedTextWorkloadCapacityMTokens": 40,
+      "quotaBasis": "official_dynamic_message_limit_manual_mtokens_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_recheck_2026_06_30",
+      "notes": "OpenAI documents Free access as limited and dynamic within a 5-hour window. Conservative MTokens-equivalent fallback estimate; not an official token quota."
+    },
+    {
+      "planId": "chatgpt_go_us",
+      "estimatedTextWorkloadCapacityMTokens": 180,
+      "quotaBasis": "official_message_cap_manual_mtokens_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_recheck_2026_06_30",
+      "notes": "OpenAI documents Plus/Go GPT-5.5 message caps, but not fixed token quotas. Go also has lower Thinking usage than Plus; conservative MTokens-equivalent estimate."
+    },
+    {
+      "planId": "claude_free",
+      "estimatedTextWorkloadCapacityMTokens": 60,
+      "quotaBasis": "manual_dynamic_limit_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Free tier conservative estimate; Claude limits are dynamic and not exposed as fixed token quotas."
+    },
+    {
+      "planId": "cursor_hobby",
+      "estimatedTextWorkloadCapacityMTokens": 80,
+      "quotaBasis": "manual_free_tier_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Free IDE usage estimate for occasional coding; not a fixed token quota."
+    },
+    {
+      "planId": "google_ai_plus_us",
+      "estimatedTextWorkloadCapacityMTokens": 250,
+      "quotaBasis": "manual_dynamic_limit_estimate",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "US AI Plus estimate; model entitlement and regional pricing should be rechecked before strong recommendations."
+    },
+    {
+      "planId": "google_ai_pro_us",
+      "estimatedTextWorkloadCapacityMTokens": 800,
+      "quotaBasis": "manual_dynamic_limit_estimate",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": "1x Pro",
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.1.2",
+      "notes": "Practical text workload estimate for Google AI Pro. Google publishes product access, not a fixed token quota."
+    }
+  ]
+}

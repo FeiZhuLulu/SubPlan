@@ -1,0 +1,611 @@
+{
+  "schemaVersion": "0.2",
+  "lastUpdatedAt": "2026-07-01",
+  "notes": [
+    "Capability key model tier assignments for v0.2 AI intelligence capability awareness.",
+    "Intelligence tiers: S (premium / 100%), A (high-end / 85%), B (mainstream / 45%), C (entry-level / 15%), D (negligible / 0%).",
+    "Every planId in this file must match an id from plans.json or api-options.json."
+  ],
+  "tiers": [
+    {
+      "planId": "chatgpt_free",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "B"
+      },
+      "evidenceLevel": "high",
+      "notes": "Free plan is useful for light tasks but should not be actively recommended as a new paid-combo filler."
+    },
+    {
+      "planId": "chatgpt_go_us",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Lower paid ChatGPT tier."
+    },
+    {
+      "planId": "chatgpt_plus",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "Strong general reasoning and research subscription."
+    },
+    {
+      "planId": "chatgpt_pro_5x",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "High-reasoning ChatGPT Pro tier, lower quota than Pro 20x."
+    },
+    {
+      "planId": "chatgpt_pro_20x",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "High-reasoning ChatGPT Pro tier with larger quota."
+    },
+    {
+      "planId": "claude_free",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "C"
+      },
+      "evidenceLevel": "high",
+      "notes": "Highly restricted free tier."
+    },
+    {
+      "planId": "claude_pro",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Strong coding and agent workflow subscription."
+    },
+    {
+      "planId": "claude_max_5x",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Same high-intelligence class as Claude Pro with larger quota."
+    },
+    {
+      "planId": "claude_max_20x",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Same high-intelligence class as Claude Pro with much larger quota."
+    },
+    {
+      "planId": "google_ai_plus_us",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Lower Google AI paid tier."
+    },
+    {
+      "planId": "google_ai_pro_us",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "Strong research and context-oriented tier."
+    },
+    {
+      "planId": "google_ai_pro_jp",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "Japan Google AI Pro entry."
+    },
+    {
+      "planId": "google_ai_ultra_5x_us",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Premium Google AI tier with higher quota."
+    },
+    {
+      "planId": "google_ai_ultra_20x_us",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Premium Google AI tier with much higher quota."
+    },
+    {
+      "planId": "cursor_hobby",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "D"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Free / hobby coding tier."
+    },
+    {
+      "planId": "cursor_pro",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "high",
+      "notes": "IDE agent workflow using strong coding models."
+    },
+    {
+      "planId": "cursor_pro_plus",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "high",
+      "notes": "Same model class as Cursor Pro with larger quota."
+    },
+    {
+      "planId": "cursor_ultra",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Premium IDE agent tier."
+    },
+    {
+      "planId": "cursor_teams",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Team-oriented Cursor tier."
+    },
+    {
+      "planId": "opencode_go_intro",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "C"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Introductory OpenCode Go pricing, same model class as regular tier."
+    },
+    {
+      "planId": "opencode_go_regular",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "C"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Value developer subscription using standard models."
+    },
+    {
+      "planId": "kimi_adagio_cn",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi free tier with small practical quota."
+    },
+    {
+      "planId": "kimi_andante_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi 49 CNY subscription."
+    },
+    {
+      "planId": "kimi_moderato_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi 99 CNY subscription."
+    },
+    {
+      "planId": "kimi_allegretto_cn",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi 199 CNY subscription with Kimi 2.7 Code class; agent coding treated as same tier as Cursor Pro Composer 2.5."
+    },
+    {
+      "planId": "kimi_allegro_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi 699 CNY subscription, large quota."
+    },
+    {
+      "planId": "minimax_token_plus_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Token-heavy plan; intelligence treated as mainstream."
+    },
+    {
+      "planId": "minimax_token_max_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Token-heavy plan; intelligence treated as mainstream."
+    },
+    {
+      "planId": "minimax_token_ultra_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Token-heavy plan; intelligence treated as mainstream."
+    },
+    {
+      "planId": "minimax_token_plus_global",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Global Token Plan Plus."
+    },
+    {
+      "planId": "minimax_token_max_global",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Global Token Plan Max."
+    },
+    {
+      "planId": "minimax_token_ultra_global",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Global Token Plan Ultra."
+    },
+    {
+      "planId": "glm_coding_lite_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "C"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Entry GLM Coding subscription."
+    },
+    {
+      "planId": "glm_coding_pro_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Main GLM Coding subscription."
+    },
+    {
+      "planId": "glm_coding_max_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Higher GLM Coding subscription."
+    },
+    {
+      "planId": "ollama_free",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "C"
+      },
+      "evidenceLevel": "low",
+      "notes": "Local model quality depends on selected local model and hardware."
+    },
+    {
+      "planId": "ollama_pro",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "low",
+      "notes": "Local model quality depends on selected local model and hardware."
+    },
+    {
+      "planId": "ollama_max",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "low",
+      "notes": "Local model quality depends on selected local model and hardware."
+    },
+    {
+      "planId": "openrouter_api",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aggregator API; actual tier depends on selected routed model."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "high",
+      "notes": "Cheap flash API for budget filling."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Higher reasoning DeepSeek API."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_global",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "high",
+      "notes": "Global flash API."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "high",
+      "notes": "Global higher reasoning DeepSeek API."
+    },
+    {
+      "planId": "glm_5_2_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Higher intelligence GLM API."
+    },
+    {
+      "planId": "glm_5_1_short_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Lower cost GLM API."
+    },
+    {
+      "planId": "glm_5_1_long_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Long-context GLM API."
+    },
+    {
+      "planId": "minimax_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "MiniMax API as token/value supplement."
+    },
+    {
+      "planId": "minimax_api_global",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Global MiniMax API as token/value supplement."
+    },
+    {
+      "planId": "kimi_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi API with good context retention for research."
+    },
+    {
+      "planId": "kimi_k27_code_api_cn",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "B",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Kimi code API, treated as mainstream intelligence."
+    }
+  ]
+}

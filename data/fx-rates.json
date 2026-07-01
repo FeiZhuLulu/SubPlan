@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-06-30",
+  "baseCurrency": "CNY",
+  "status": "manual_mid_market_estimate",
+  "rates": [
+    {
+      "currency": "CNY",
+      "rateToCny": 1,
+      "source": "identity",
+      "asOf": "2026-06-30"
+    },
+    {
+      "currency": "USD",
+      "rateToCny": 6.798,
+      "source": "manual_from_public_mid_market_sources",
+      "asOf": "2026-06-30"
+    },
+    {
+      "currency": "JPY",
+      "rateToCny": 0.0419,
+      "source": "manual_from_public_mid_market_sources",
+      "asOf": "2026-06-30"
+    },
+    {
+      "currency": "EUR",
+      "rateToCny": 7.95,
+      "source": "manual_placeholder_not_used_by_v0.1_plans",
+      "asOf": "2026-06-30"
+    }
+  ],
+  "notes": [
+    "Manual mid-market estimates for v0.1 recommendation comparisons, not payment settlement rates.",
+    "USD/CNY uses late-June 2026 public mid-market range around 6.79-6.80.",
+    "JPY/CNY uses late-June 2026 public mid-market range around 0.0419-0.0420.",
+    "Refresh before production release or display an exchange-rate timestamp in the UI."
+  ]
+}
