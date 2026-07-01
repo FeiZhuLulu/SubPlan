@@ -12,7 +12,7 @@
       "models": [
         {
           "modelId": "gpt-5.5-plus",
-          "label": "GPT 5.5 class",
+          "label": "GPT 5.5级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -30,7 +30,7 @@
       "models": [
         {
           "modelId": "gpt-5.5-pro",
-          "label": "GPT 5.5 Pro class",
+          "label": "GPT 5.5 Pro级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -47,7 +47,7 @@
       "models": [
         {
           "modelId": "gpt-5.5-pro",
-          "label": "GPT 5.5 Pro class",
+          "label": "GPT 5.5 Pro级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -64,7 +64,7 @@
       "models": [
         {
           "modelId": "opus-4.7-pro",
-          "label": "Opus 4.7 class",
+          "label": "Opus 4.7级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -81,7 +81,7 @@
       "models": [
         {
           "modelId": "opus-4.8-max",
-          "label": "Opus 4.8 class",
+          "label": "Opus 4.8级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -98,7 +98,7 @@
       "models": [
         {
           "modelId": "opus-4.8-max",
-          "label": "Opus 4.8 class",
+          "label": "Opus 4.8级模型",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "S",
@@ -115,7 +115,7 @@
       "models": [
         {
           "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus premium pool",
+          "label": "GPT / Opus 高级模型池",
           "quotaMTokens": 160,
           "tierByCapability": {
             "agentCoding": "S",
@@ -145,7 +145,7 @@
       "models": [
         {
           "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus premium pool",
+          "label": "GPT / Opus 高级模型池",
           "quotaMTokens": 480,
           "tierByCapability": {
             "agentCoding": "S",
@@ -174,7 +174,7 @@
       "models": [
         {
           "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus premium pool",
+          "label": "GPT / Opus 高级模型池",
           "quotaMTokens": 1600,
           "tierByCapability": {
             "agentCoding": "S",
