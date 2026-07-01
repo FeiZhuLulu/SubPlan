@@ -140,22 +140,18 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
     <>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl rounded-3xl bg-white/85 p-6 shadow-xl ring-1 ring-zinc-200/50 backdrop-blur-md sm:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5"
+        className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-md border border-stone-200/80 sm:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-lg"
       >
-        {/* Glow effect */}
-        <div className="absolute -right-32 -top-32 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-32 -bottom-32 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
-
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 relative z-10">
           
           {/* Budget input */}
           <div className="sm:col-span-2 group">
-            <label className="block text-sm font-semibold text-zinc-700 group-hover:text-blue-600 transition-colors">
+            <label className="block text-sm font-semibold text-stone-700 group-hover:text-black transition-colors">
               {t.budget}
             </label>
             <div className="mt-2 relative rounded-xl shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                <span className="text-zinc-400 sm:text-sm">¥</span>
+                <span className="text-stone-400 sm:text-sm">¥</span>
               </div>
               <input
                 type="number"
@@ -163,7 +159,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                 step="any"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
-                className="block w-full pl-8 pr-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+                className="block w-full pl-8 pr-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none"
                 placeholder="200"
                 required
               />
@@ -171,11 +167,11 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-zinc-700">{t.budgetTolerance}</label>
+            <label className="block text-sm font-semibold text-stone-700">{t.budgetTolerance}</label>
             <select
               value={budgetTolerance}
               onChange={(e) => setBudgetTolerance(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none cursor-pointer"
             >
               <option value="strict">{t.toleranceStrict}</option>
               <option value="normal">{t.toleranceNormal}</option>
@@ -186,13 +182,13 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
           {/* Quota input */}
           <div className="sm:col-span-2">
             <div className="flex justify-between items-center">
-              <label className="block text-sm font-semibold text-zinc-700">
+              <label className="block text-sm font-semibold text-stone-700">
                 {t.monthlyUsage}
               </label>
               <button
                 type="button"
                 onClick={() => setShowEstimator(true)}
-                className="text-xs font-semibold text-blue-600 hover:text-blue-750 bg-blue-50 hover:bg-blue-100/80 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer"
+                className="text-xs font-semibold text-neutral-800 hover:text-black bg-stone-100 hover:bg-stone-200/80 px-2.5 py-1.5 rounded-md transition-colors cursor-pointer border border-stone-200"
               >
                 {t.dontKnowUsage}
               </button>
@@ -203,21 +199,21 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               step="any"
               value={usage}
               onChange={(e) => setUsage(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none"
               placeholder="500"
               required
             />
-            <p className="mt-2 text-xs text-zinc-400 leading-normal">
+            <p className="mt-2 text-xs text-stone-400 leading-normal">
               {t.usageHint}
             </p>
           </div>
 
           {/* High Intelligence Ratio Segmented Selector */}
           <div className="sm:col-span-2">
-            <label className="block text-sm font-semibold text-zinc-700">
+            <label className="block text-sm font-semibold text-stone-700">
               {t.highIntelRatio}
             </label>
-            <div className="mt-2 grid grid-cols-4 gap-2 p-1 bg-zinc-100/50 border border-zinc-200/50 rounded-2xl">
+            <div className="mt-2 grid grid-cols-4 gap-2 p-1 bg-stone-100/50 border border-stone-200/50 rounded-2xl">
               {highIntelOptions.map((item) => (
                 <button
                   key={item.id}
@@ -225,12 +221,12 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                   onClick={() => setHighIntelRatio(item.id)}
                   className={`py-2 px-1 rounded-xl text-xs font-bold transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer ${
                     highIntelRatio === item.id
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-600/10"
-                      : "text-zinc-650 hover:text-zinc-950 hover:bg-zinc-50/50"
+                      ? "bg-neutral-900 text-white shadow-sm"
+                      : "text-stone-600 hover:text-neutral-900 hover:bg-stone-50"
                   }`}
                 >
                   <span>{item.label}</span>
-                  <span className={`text-[9px] font-medium leading-none ${highIntelRatio === item.id ? "text-blue-100" : "text-zinc-400"}`}>
+                  <span className={`text-[9px] font-medium leading-none ${highIntelRatio === item.id ? "text-stone-300" : "text-stone-400"}`}>
                     {item.desc}
                   </span>
                 </button>
@@ -240,11 +236,11 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
           {/* Primary Use Case */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">{t.primaryUse}</label>
+            <label className="block text-sm font-semibold text-stone-700">{t.primaryUse}</label>
             <select
               value={primary}
               onChange={(e) => setPrimary(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none cursor-pointer"
             >
               {presets.primaryUseCases.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -256,11 +252,11 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
           {/* Secondary Use Case */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">{t.secondaryUse}</label>
+            <label className="block text-sm font-semibold text-stone-700">{t.secondaryUse}</label>
             <select
               value={secondary}
               onChange={(e) => setSecondary(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none cursor-pointer"
             >
               {presets.secondaryUseCases.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -272,11 +268,11 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
           {/* Region */}
           <div>
-            <label className="block text-sm font-semibold text-zinc-700">{t.region}</label>
+            <label className="block text-sm font-semibold text-stone-700">{t.region}</label>
             <select
               value={region}
               onChange={(e) => setRegion(e.target.value)}
-              className="mt-2 block w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 text-zinc-900 transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:outline-none cursor-pointer"
+              className="mt-2 block w-full px-4 py-3 rounded-xl border border-stone-200 bg-stone-50/50 text-neutral-900 transition-all focus:border-neutral-900 focus:bg-white focus:outline-none cursor-pointer"
             >
               <option value="CN">{t.regionCN}</option>
               <option value="US">{t.regionUS}</option>
@@ -286,22 +282,22 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
           </div>
 
           {/* Checklist options */}
-          <div className="flex flex-col justify-center gap-3 bg-zinc-50/50 border border-zinc-100 rounded-xl p-4 mt-2">
-            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-650 hover:text-zinc-800 cursor-pointer select-none">
+          <div className="flex flex-col justify-center gap-3 bg-stone-50/50 border border-stone-150 rounded-xl p-4 mt-2">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-605 hover:text-neutral-900 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={acceptsApi}
                 onChange={(e) => setAcceptsApi(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
               />
               {t.acceptApi}
             </label>
-            <label className="flex items-center gap-2.5 text-sm font-medium text-zinc-650 hover:text-zinc-800 cursor-pointer select-none">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-605 hover:text-neutral-900 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={hasForeignCard}
                 onChange={(e) => setHasForeignCard(e.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
               />
               {t.foreignCard}
             </label>
@@ -311,13 +307,13 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
         <div id="existing-subscriptions" className="mt-8 relative z-10 scroll-mt-6">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <span className="block text-sm font-semibold text-zinc-700">{t.existingSubs}</span>
-              <p className="mt-1 text-xs text-zinc-400 leading-normal">
+              <span className="block text-sm font-semibold text-stone-700">{t.existingSubs}</span>
+              <p className="mt-1 text-xs text-stone-400 leading-normal">
                 {t.existingSubsHint}
               </p>
             </div>
             {existingPlanIds.length > 0 && (
-              <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 flex items-center gap-1">
+              <span className="shrink-0 rounded-full bg-stone-100 border border-stone-200 px-2.5 py-1 text-xs font-bold text-neutral-800 flex items-center gap-1">
                 {t.selectedCount.replace("{count}", existingPlanIds.length.toString())}
                 <button
                   type="button"
@@ -330,7 +326,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               </span>
             )}
           </div>
-          <div className="mt-3 max-h-44 overflow-y-auto rounded-2xl border border-zinc-100 bg-zinc-50/40 p-3">
+          <div className="mt-3 max-h-44 overflow-y-auto rounded-xl border border-stone-150 bg-stone-50/40 p-3">
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {existingPlanOptions.map((plan) => {
                 const active = existingPlanIds.includes(plan.id);
@@ -340,10 +336,10 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                     type="button"
                     aria-pressed={active}
                     onClick={() => toggleExistingPlan(plan.id)}
-                    className={`rounded-xl border px-3 py-2.5 text-left text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer flex items-center justify-between ${
+                    className={`rounded-xl border px-3 py-2.5 text-left text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer flex items-center justify-between ${
                       active
-                        ? "border-emerald-500 bg-emerald-50 text-emerald-850 shadow-sm"
-                        : "border-zinc-200 bg-white/60 text-zinc-600 hover:border-zinc-350 hover:bg-white"
+                        ? "border-neutral-900 bg-stone-100 text-neutral-950 font-bold"
+                        : "border-stone-200 bg-white/60 text-stone-600 hover:border-stone-350 hover:bg-white"
                     }`}
                   >
                     <div className="truncate flex-1 pr-2">
@@ -352,7 +348,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                         {plan.provider}
                       </span>
                     </div>
-                    {active && <span className="text-emerald-600 font-black text-sm shrink-0">✓</span>}
+                    {active && <span className="text-neutral-950 font-black text-sm shrink-0">✓</span>}
                   </button>
                 );
               })}
@@ -362,7 +358,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
         {/* Add ons */}
         <div className="mt-8 relative z-10">
-          <span className="block text-sm font-semibold text-zinc-700">{t.addons}</span>
+          <span className="block text-sm font-semibold text-stone-700">{t.addons}</span>
           <div className="mt-3 flex flex-wrap gap-2.5">
             {ADD_ONS.map((addOn) => {
               const active = selectedAddOns.includes(addOn.id);
@@ -372,10 +368,10 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                   type="button"
                   aria-pressed={active}
                   onClick={() => toggleAddOn(addOn.id)}
-                  className={`rounded-xl border px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer ${
+                  className={`rounded-xl border px-3.5 py-2 text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer ${
                     active
-                      ? "border-blue-500 bg-blue-50 text-blue-700 shadow-sm"
-                      : "border-zinc-200/80 bg-zinc-50/30 text-zinc-650 hover:border-zinc-305 hover:bg-zinc-50"
+                      ? "border-neutral-900 bg-stone-100 text-neutral-900 shadow-sm"
+                      : "border-stone-200 bg-white text-stone-600 hover:border-stone-300 hover:bg-stone-50"
                   }`}
                 >
                   <span>{addOn.icon}</span>
@@ -390,7 +386,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
         <div className="mt-8 relative z-10">
           <button
             type="submit"
-            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-550 hover:to-indigo-550 px-5 py-4 text-base font-bold text-white shadow-lg shadow-blue-500/20 transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 cursor-pointer"
+            className="w-full rounded-xl bg-neutral-900 hover:bg-neutral-850 px-5 py-4 text-base font-bold text-white shadow transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer"
           >
             {t.submitBtn}
           </button>
@@ -399,16 +395,16 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
       {/* Estimator Modal Dialog */}
       {showEstimator && (
-        <div className="fixed inset-0 bg-zinc-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-          <div className="bg-white border border-zinc-100 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 bg-zinc-50 border-b border-zinc-100 flex items-center justify-between">
-              <h3 className="font-bold text-zinc-900 flex items-center gap-1.5">
+        <div className="fixed inset-0 bg-neutral-950/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
+          <div className="bg-white border border-stone-200 rounded-2xl w-full max-w-lg overflow-hidden shadow-xl animate-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 bg-stone-50 border-b border-stone-200 flex items-center justify-between">
+              <h3 className="font-bold text-neutral-900 flex items-center gap-1.5">
                 <span>📊</span> {t.estTitle}
               </h3>
               <button
                 type="button"
                 onClick={() => setShowEstimator(false)}
-                className="text-zinc-400 hover:text-zinc-600 font-semibold p-1 cursor-pointer"
+                className="text-stone-400 hover:text-stone-600 font-semibold p-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -417,7 +413,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
             <div className="p-6 space-y-4">
               {/* Question 1 */}
               <div>
-                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">{t.estDevTime}</label>
+                <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider">{t.estDevTime}</label>
                 <div className="mt-2 grid grid-cols-5 gap-1.5">
                   {codingTimeOptions.map((x) => (
                     <button
@@ -426,8 +422,8 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                       onClick={() => setEstCodingTime(x.id)}
                       className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estCodingTime === x.id
-                          ? "border-blue-500 bg-blue-50/50 text-blue-700"
-                          : "border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                          ? "border-neutral-900 bg-stone-105 text-neutral-900"
+                          : "border-stone-200 text-stone-600 hover:bg-stone-50"
                       }`}
                     >
                       {x.label}
@@ -438,7 +434,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
               {/* Question 2 */}
               <div>
-                <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider">{t.estTurns}</label>
+                <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider">{t.estTurns}</label>
                 <div className="mt-2 grid grid-cols-4 gap-1.5">
                   {conversationOptions.map((x) => (
                     <button
@@ -447,8 +443,8 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                       onClick={() => setEstConversations(x.id)}
                       className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estConversations === x.id
-                          ? "border-blue-500 bg-blue-50/50 text-blue-700"
-                          : "border-zinc-200 text-zinc-600 hover:bg-zinc-50"
+                          ? "border-neutral-900 bg-stone-105 text-neutral-900"
+                          : "border-stone-200 text-stone-600 hover:bg-stone-50"
                       }`}
                     >
                       {x.label}
@@ -458,34 +454,34 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               </div>
 
               {/* Switches */}
-              <div className="border border-zinc-100 bg-zinc-50/40 p-4 rounded-2xl space-y-3">
-                <span className="block text-xs font-bold text-zinc-450 uppercase tracking-wider">{t.estMultipliers}</span>
+              <div className="border border-stone-200 bg-stone-50/40 p-4 rounded-2xl space-y-3">
+                <span className="block text-xs font-bold text-stone-450 uppercase tracking-wider">{t.estMultipliers}</span>
                 <div className="flex flex-col gap-3">
-                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer">
+                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer">
                     <span className="flex flex-col pr-3">
                       <span>{t.estMultiFile}</span>
-                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estMultiFileDesc}</span>
+                      <span className="text-[10px] text-stone-450 font-normal mt-0.5">{t.estMultiFileDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estAgent}
                       onChange={(e) => setEstAgent(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
+                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer border-t border-stone-150 pt-3">
                     <span className="flex flex-col pr-3">
                       <span>{t.estLargeContext}</span>
-                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estLargeContextDesc}</span>
+                      <span className="text-[10px] text-stone-450 font-normal mt-0.5">{t.estLargeContextDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estLongFiles}
                       onChange={(e) => setEstLongFiles(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-zinc-750 font-semibold cursor-pointer border-t border-zinc-100 pt-3">
+                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer border-t border-stone-150 pt-3">
                     <span className="flex flex-col pr-3">
                       <span>{t.estDebug}</span>
                       <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estDebugDesc}</span>
@@ -494,18 +490,18 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                       type="checkbox"
                       checked={estDebugging}
                       onChange={(e) => setEstDebugging(e.target.checked)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
                     />
                   </label>
                 </div>
               </div>
 
               {/* Estimate results */}
-              <div className="bg-blue-600 border border-blue-500 text-white p-5 rounded-2xl flex items-center justify-between shadow-lg shadow-blue-600/10">
+              <div className="bg-neutral-900 border border-neutral-850 text-white p-5 rounded-xl flex items-center justify-between shadow">
                 <div>
-                  <span className="text-xs font-semibold opacity-90 block">{t.estResultLabel}</span>
+                  <span className="text-xs font-semibold opacity-85 block">{t.estResultLabel}</span>
                   <span className="text-2xl font-black">{getEstimatedValue()}</span>
-                  <span className="text-sm font-semibold opacity-90">{t.estResultUnit}</span>
+                  <span className="text-sm font-semibold opacity-85">{t.estResultUnit}</span>
                 </div>
                 <span className="text-xs border border-white/20 bg-white/10 px-3 py-1.5 rounded-lg text-center backdrop-blur-sm">
                   {t.estCacheAssumption}
@@ -513,18 +509,18 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               </div>
             </div>
 
-            <div className="px-6 py-4 bg-zinc-50 border-t border-zinc-100 flex justify-end gap-3">
+            <div className="px-6 py-4 bg-stone-50 border-t border-stone-200 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setShowEstimator(false)}
-                className="rounded-xl bg-zinc-200 hover:bg-zinc-300 text-zinc-700 px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer"
+                className="rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-700 px-4 py-2.5 text-sm font-semibold transition-all cursor-pointer"
               >
                 {t.cancel}
               </button>
               <button
                 type="button"
                 onClick={applyEstimation}
-                className="rounded-xl bg-blue-600 hover:bg-blue-550 text-white px-5 py-2.5 text-sm font-semibold transition-all shadow-md shadow-blue-600/10 cursor-pointer"
+                className="rounded-xl bg-neutral-900 hover:bg-neutral-850 text-white px-5 py-2.5 text-sm font-semibold transition-all shadow cursor-pointer"
               >
                 {t.apply}
               </button>

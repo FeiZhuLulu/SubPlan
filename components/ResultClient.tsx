@@ -43,38 +43,73 @@ function usageEstimateText(result: ScoredCombo, lang: Locale) {
 function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: string; lang: Locale }) {
   const t = dict[lang];
 
+  const isBest = badge === "最推荐";
+  const isHighQuota = badge === "量大";
+  const isHighPerf = badge === "高性能";
+  const isChineseFriendly = badge === "高额度";
+
+  let cardStyles = "rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group border ";
+  let topBarStyles = "absolute top-0 inset-x-0 ";
+  let badgeLabel = "";
+  let badgeStyles = "rounded-full px-3 py-0.5 text-xs font-bold border ";
+
+  if (isBest) {
+    cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/10 border-amber-200/80 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-350";
+    topBarStyles += "h-2 bg-gradient-to-r from-amber-400 via-yellow-250 to-amber-500";
+    badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
+    badgeStyles += "bg-amber-50 text-amber-700 border-amber-100";
+  } else if (isHighPerf) {
+    cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
+    topBarStyles += "h-2 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600";
+    badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
+    badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
+  } else if (isHighQuota) {
+    cardStyles += "bg-stone-50/80 border-stone-250 hover:bg-stone-50 hover:border-stone-350 shadow-sm";
+    topBarStyles += "h-1 bg-stone-500";
+    badgeLabel = lang === "en" ? "🔋 High Quota" : "🔋 量大管饱";
+    badgeStyles += "bg-stone-200 text-stone-850 border-stone-300";
+  } else if (isChineseFriendly) {
+    cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
+    topBarStyles += "h-1 bg-amber-400";
+    badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
+    badgeStyles += "bg-amber-50 text-amber-800 border-amber-100";
+  } else {
+    cardStyles += "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
+    topBarStyles += "h-1 bg-stone-200";
+  }
+
   return (
-    <article className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-xl shadow-zinc-100">
+    <article className={cardStyles}>
+      <div className={topBarStyles} />
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          {badge && (
-            <span className="mb-2 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-              {badge === "最推荐" ? t.bestBadge :
-               badge === "量大" ? t.highQuotaBadge :
-               badge === "高性能" ? t.highPerfBadge :
-               t.chineseFriendlyBadge}
+          {badgeLabel && (
+            <span className={badgeStyles}>
+              {badgeLabel}
             </span>
           )}
-          <h2 className="text-xl font-extrabold text-zinc-900">
+          <h2 className={`font-extrabold text-neutral-900 transition-colors flex items-center gap-2 ${isBest ? "text-2xl" : "text-xl"} mt-2`}>
             {result.combo.plans.map((plan) => plan.name).join(" + ")}
           </h2>
           <div className="mt-2 flex flex-wrap gap-2">
             {result.combo.plans.map((plan) => {
               let stateText = "";
-              if (plan.isExisting) stateText = t.planStateOwned;
-              else if (plan.isUpgrade) stateText = t.planStateUpgrade;
-              else stateText = t.planStateNew;
+              let badgeColor = "";
+              if (plan.isExisting) {
+                stateText = t.planStateOwned;
+                badgeColor = "bg-emerald-50 text-emerald-800 border border-emerald-250";
+              } else if (plan.isUpgrade) {
+                stateText = t.planStateUpgrade;
+                badgeColor = "bg-amber-50 text-amber-800 border border-amber-250";
+              } else {
+                stateText = t.planStateNew;
+                badgeColor = "bg-blue-50 text-blue-800 border border-blue-200";
+              }
 
               return (
                 <span
                   key={plan.id}
-                  className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
-                    plan.isExisting
-                      ? "bg-emerald-50 text-emerald-700"
-                      : plan.isUpgrade
-                        ? "bg-amber-50 text-amber-700"
-                      : "bg-zinc-100 text-zinc-600"
-                  }`}
+                  className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${badgeColor}`}
                 >
                   {stateText} · {plan.provider} · {formatPriceCny(plan.priceCny)}
                 </span>
@@ -83,42 +118,42 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
           </div>
         </div>
         <div className="text-right">
-          <p className="text-2xl font-black text-zinc-900">
+          <p className="text-2xl font-black text-neutral-900">
             {formatPriceCny(result.combo.totalPriceCny)}
-            <span className="text-xs font-semibold text-zinc-400">{t.monthUnit}</span>
+            <span className="text-xs font-semibold text-stone-400">{t.monthUnit}</span>
           </p>
           {result.combo.newPriceCny !== result.combo.totalPriceCny && (
-            <p className="text-xs font-bold text-zinc-400">
+            <p className="text-xs font-bold text-stone-400">
               {t.ownedHeader
                 .replace("{owned}", formatPriceCny(existingPriceCny(result)))
                 .replace("{new}", formatPriceCny(result.combo.newPriceCny))}
             </p>
           )}
-          <p className="text-xs font-bold text-zinc-400">
+          <p className="text-xs font-bold text-stone-400">
             {lang === "en" ? "Approx. " : "约 "} {Math.round(result.combo.totalTextQuota)} MTokens
           </p>
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Cap Score" : "能力分"}</p>
-          <p className="text-lg font-black text-zinc-900">{result.capabilityScore.toFixed(1)}</p>
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5">
+        <div className="space-y-1">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{lang === "en" ? "Cap Score" : "能力分"}</p>
+          <p className="text-lg font-black text-neutral-900">{result.capabilityScore.toFixed(1)}</p>
         </div>
-        <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Composite Score" : "综合分"}</p>
+        <div className="space-y-1">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{lang === "en" ? "Composite Score" : "综合分"}</p>
           <p className="text-lg font-black text-blue-700">{result.finalScore.toFixed(1)}</p>
         </div>
-        <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Coverage" : "覆盖率"}</p>
-          <p className="text-lg font-black text-zinc-900">
+        <div className="space-y-1">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{lang === "en" ? "Coverage" : "覆盖率"}</p>
+          <p className="text-lg font-black text-neutral-900">
             {(result.combo.usageCoverage * 100).toFixed(0)}%
           </p>
-          <p className="text-xs font-semibold text-zinc-500">{coverageLabel(result.coverageStatus, t)}</p>
+          <p className="text-xs font-semibold text-stone-500">{coverageLabel(result.coverageStatus, t)}</p>
         </div>
-        <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">{t.paramBudget}</p>
-          <p className="text-sm font-bold text-zinc-800">{budgetLabel(result.budgetStatus, t)}</p>
+        <div className="space-y-1">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.paramBudget}</p>
+          <p className="text-sm font-bold text-neutral-800">{budgetLabel(result.budgetStatus, t)}</p>
         </div>
       </div>
 
@@ -126,12 +161,12 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
         {Object.entries(result.capabilityBreakdown)
           .sort((a, b) => b[1].allocated - a[1].allocated)
           .map(([capability, info]) => (
-            <div key={capability} className="rounded-2xl border border-zinc-100 bg-zinc-50 p-3">
-              <div className="flex items-center justify-between text-xs font-bold text-zinc-700">
+            <div key={capability} className="rounded-2xl border border-stone-150 bg-stone-50/50 p-3">
+              <div className="flex items-center justify-between text-xs font-bold text-neutral-700">
                 <span>{getCapabilityLabel(capability, lang)}</span>
                 <span>{Math.round(info.allocated)} MTokens</span>
               </div>
-              <p className="mt-1 text-xs text-zinc-500">
+              <p className="mt-1 text-xs text-stone-500">
                 {lang === "en" ? "Mainly by " : "主要由 "} <strong>{info.primaryPlan}</strong> {lang === "en" ? ", score: " : " 承担，能力分 "}{info.score}
               </p>
             </div>
@@ -139,7 +174,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
       </div>
 
       {(result.reasons.length > 0 || result.combo.totalTextQuota > 0) && (
-        <ul className="mt-5 space-y-2 text-sm font-medium text-zinc-700">
+        <ul className="mt-5 space-y-2 text-sm font-medium text-stone-700 border-t border-stone-100 pt-4">
           {result.reasons.map((reason) => (
             <li key={reason}>• {translateReason(reason, lang)}</li>
           ))}
@@ -148,7 +183,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
       )}
 
       {result.cautions.length > 0 && (
-        <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs font-medium text-amber-800">
+        <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-4 text-xs font-medium text-amber-850">
           {result.cautions.map((caution) => (
             <p key={caution}>• {translateCaution(caution, lang)}</p>
           ))}
@@ -221,23 +256,23 @@ export default function ResultClient() {
     .slice(0, 4);
 
   return (
-    <main className="min-h-screen bg-zinc-50 px-4 py-8 text-zinc-900 sm:px-6">
+    <main className="min-h-screen bg-stone-50 px-4 py-8 text-neutral-900 sm:px-6">
       <div className="mx-auto flex max-w-5xl flex-col gap-6">
-        <div className="flex items-center justify-between border-b border-zinc-200 pb-4">
+        <div className="flex items-center justify-between border-b border-stone-200 pb-4">
           <Link
             href={`/#existing-subscriptions${lang === "en" ? "?lang=en" : ""}`}
-            className="rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-bold text-blue-700 shadow-sm"
+            className="rounded-xl border border-stone-200 bg-white px-4 py-2 text-sm font-bold text-neutral-800 hover:text-black shadow-sm"
           >
             {t.reenter}
           </Link>
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-stone-400">
             {data?.dataVersion ?? "v0.1"}
           </span>
         </div>
 
         <section>
-          <h1 className="text-3xl font-extrabold tracking-tight">{t.resultTitle}</h1>
-          <p className="mt-2 text-sm font-medium text-zinc-500">
+          <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900">{t.resultTitle}</h1>
+          <p className="mt-2 text-sm font-medium text-stone-500">
             {lang === "en"
               ? "Recommendations are computed via `/api/recommend`, evaluated against budget, usage, and capability preferences."
               : "推荐结果通过 `/api/recommend` 计算，按预算、用量和能力需求进行额度约束评分。"}
@@ -245,19 +280,19 @@ export default function ResultClient() {
         </section>
 
         {loading && (
-          <div className="rounded-3xl border border-zinc-200 bg-white p-8 text-sm font-bold text-zinc-500">
+          <div className="rounded-2xl border border-stone-250 bg-white p-8 text-sm font-bold text-stone-500">
             {lang === "en" ? "Calculating recommendations..." : "正在计算推荐组合..."}
           </div>
         )}
 
         {error && (
-          <div className="rounded-3xl border border-red-200 bg-red-50 p-6 text-sm font-bold text-red-700">
+          <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-sm font-bold text-red-750">
             {error}
           </div>
         )}
 
         {!loading && !error && results.length === 0 && (
-          <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 text-sm font-medium text-amber-900">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm font-medium text-amber-905">
             {lang === "en"
               ? "No combination fits the budget and quota requirements. Try raising budget, reducing usage, or enabling API billing. Selected existing plans are also included in total cost."
               : "未找到符合预算和额度约束的组合。可以提高预算、降低用量，或开启 API 计费补位后重试。如果选择了已有订阅，它们也会计入总预算。"}
@@ -297,7 +332,7 @@ export default function ResultClient() {
             )}
 
             {data?.assumptions.length ? (
-              <div className="rounded-3xl border border-zinc-200 bg-white p-5 text-xs font-medium leading-relaxed text-zinc-500">
+              <div className="rounded-2xl border border-stone-200 bg-white p-5 text-xs font-medium leading-relaxed text-stone-500">
                 {data.assumptions.map((assumption) => (
                   <p key={assumption}>• {assumption}</p>
                 ))}
