@@ -705,14 +705,14 @@
     {
       "planId": "deepseek_v4_pro_api_cn",
       "scores": {
-        "frontend": 88,
-        "backend": 90,
-        "agentCoding": 88,
-        "debugging": 90,
-        "codeReview": 88,
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 76,
+        "debugging": 88,
+        "codeReview": 80,
         "chineseWriting": 96,
         "englishWriting": 82,
-        "research": 88,
+        "research": 82,
         "chat": 90,
         "imageGeneration": 0,
         "multimodal": 65,
@@ -720,7 +720,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Chinese writing adjusted to first-tier per v0.2 user reference."
+      "notes": "Calibrated as a low-cost API supplement: strong Chinese writing and debugging, but not a primary backend/agent-coding subscription."
     },
     {
       "planId": "deepseek_v4_flash_api_global",
@@ -745,14 +745,14 @@
     {
       "planId": "deepseek_v4_pro_api_global",
       "scores": {
-        "frontend": 88,
-        "backend": 90,
-        "agentCoding": 88,
-        "debugging": 90,
-        "codeReview": 88,
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 76,
+        "debugging": 88,
+        "codeReview": 80,
         "chineseWriting": 96,
         "englishWriting": 82,
-        "research": 88,
+        "research": 82,
         "chat": 90,
         "imageGeneration": 0,
         "multimodal": 65,
@@ -760,7 +760,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Global DeepSeek pro API; same capability estimate as CN entry."
+      "notes": "Global DeepSeek pro API; same calibrated supplement profile as CN entry."
     },
     {
       "planId": "glm_5_2_api_cn",
