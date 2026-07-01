@@ -128,37 +128,40 @@ function ComboCard({
   const isHighPerf = badge === "高性能";
   const isChineseFriendly = badge === "高额度";
 
-
   // Custom visual configurations
-  let cardStyles = "rounded-3xl p-6 transition-all duration-300 relative overflow-hidden group border ";
+  let cardStyles = "rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group border ";
   let topBarStyles = "absolute top-0 inset-x-0 ";
   let badgeLabel = "";
   let badgeStyles = "rounded-full px-3 py-0.5 text-xs font-bold border ";
 
   if (isBest) {
-    cardStyles += "bg-gradient-to-br from-white via-white to-blue-50/15 shadow-2xl shadow-blue-500/10 border-blue-200/80 hover:shadow-blue-500/20 hover:border-blue-300";
-    topBarStyles += "h-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600";
+    // Gold Glowing Theme
+    cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/10 border-amber-200/80 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-350";
+    topBarStyles += "h-2 bg-gradient-to-r from-amber-400 via-yellow-250 to-amber-500";
     badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
-    badgeStyles += "bg-blue-50 text-blue-700 border-blue-100";
-  } else if (isHighQuota) {
-    cardStyles += "bg-gradient-to-br from-white via-white to-emerald-50/10 shadow-xl shadow-emerald-500/5 border-emerald-200/80 hover:shadow-emerald-500/15 hover:border-emerald-300";
-    topBarStyles += "h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500";
-    badgeLabel = lang === "en" ? "🔋 High Quota" : "🔋 量大管饱";
-    badgeStyles += "bg-emerald-50 text-emerald-700 border-emerald-100";
-  } else if (isHighPerf) {
-    cardStyles += "bg-gradient-to-br from-white via-white to-purple-50/10 shadow-xl shadow-purple-500/5 border-purple-200/80 hover:shadow-purple-500/15 hover:border-purple-300";
-    topBarStyles += "h-1.5 bg-gradient-to-r from-purple-500 to-pink-500";
-    badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
-    badgeStyles += "bg-purple-50 text-purple-700 border-purple-100";
-  } else if (isChineseFriendly) {
-    cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/10 shadow-xl shadow-amber-500/5 border-amber-200/80 hover:shadow-amber-500/15 hover:border-amber-300";
-    topBarStyles += "h-1.5 bg-gradient-to-r from-amber-500 to-orange-500";
-    badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
     badgeStyles += "bg-amber-50 text-amber-700 border-amber-100";
+  } else if (isHighPerf) {
+    // Purple Gradient Light Strip Theme
+    cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
+    topBarStyles += "h-2 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600";
+    badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
+    badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
+  } else if (isHighQuota) {
+    // Dark Slate Industrial Theme
+    cardStyles += "bg-stone-50/80 border-stone-250 hover:bg-stone-50 hover:border-stone-350 shadow-sm";
+    topBarStyles += "h-1 bg-stone-500";
+    badgeLabel = lang === "en" ? "🔋 High Quota" : "🔋 量大管饱";
+    badgeStyles += "bg-stone-200 text-stone-800 border-stone-300";
+  } else if (isChineseFriendly) {
+    // Clean Amber Accent Theme
+    cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
+    topBarStyles += "h-1 bg-amber-400";
+    badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
+    badgeStyles += "bg-amber-50 text-amber-800 border-amber-100";
   } else {
     // Ordinary alternatives: neutral and set-back visually
-    cardStyles += "bg-white border-zinc-200 shadow-sm hover:shadow-md hover:border-zinc-300";
-    topBarStyles += "h-1 bg-zinc-200";
+    cardStyles += "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
+    topBarStyles += "h-1 bg-stone-200";
   }
 
   return (
@@ -173,16 +176,16 @@ function ComboCard({
                 {badgeLabel}
               </span>
             )}
-            <span className="rounded-full bg-zinc-100 border border-zinc-200 px-2.5 py-0.5 text-xs font-bold text-zinc-600">
+            <span className="rounded-full bg-stone-100 border border-stone-200 px-2.5 py-0.5 text-xs font-bold text-stone-600">
               Rank #{rank}
             </span>
           </div>
           
-          <h2 className={`font-extrabold text-zinc-900 transition-colors flex items-center gap-2 ${isBest ? "text-2xl" : "text-xl"}`}>
+          <h2 className={`font-extrabold text-neutral-900 transition-colors flex items-center gap-2 ${isBest ? "text-2xl" : "text-xl"}`}>
             {r.combo.plans.map((p) => p.name).join(" + ")}
           </h2>
           
-          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+          <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
             {r.combo.plans.map((p) => p.provider).join(" · ")}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -192,16 +195,16 @@ function ComboCard({
 
               if (plan.isExisting) {
                 stateLabel = t.planStateOwned;
-                badgeColor = "bg-emerald-50 text-emerald-700 border border-emerald-100";
+                badgeColor = "bg-emerald-50 text-emerald-800 border border-emerald-200";
               } else if (plan.isUpgrade) {
                 stateLabel = t.planStateUpgradeFrom.replace(
                   "{from}",
                   plan.upgradeFromPlanName ?? ""
                 );
-                badgeColor = "bg-amber-50 text-amber-700 border border-amber-100";
+                badgeColor = "bg-amber-50 text-amber-850 border border-amber-200";
               } else {
                 stateLabel = t.planStateNew;
-                badgeColor = "bg-blue-50 text-blue-700 border border-blue-100";
+                badgeColor = "bg-blue-50 text-blue-800 border border-blue-200";
               }
 
               return (
@@ -217,12 +220,12 @@ function ComboCard({
         </div>
 
         <div className="text-right">
-          <p className={`font-black text-zinc-900 leading-tight ${isBest ? "text-3xl" : "text-2xl"}`}>
+          <p className={`font-black text-neutral-900 leading-tight ${isBest ? "text-3xl" : "text-2xl"}`}>
             {formatPriceCny(r.combo.totalPriceCny)}
-            <span className="text-xs font-semibold text-zinc-400">{t.monthUnit}</span>
+            <span className="text-xs font-semibold text-stone-400">{t.monthUnit}</span>
           </p>
           {r.combo.newPriceCny !== r.combo.totalPriceCny && (
-            <p className="mt-1 text-xs font-bold text-zinc-400">
+            <p className="mt-1 text-xs font-bold text-stone-400">
               {t.ownedHeader
                 .replace("{owned}", formatPriceCny(existingPriceCny(r)))
                 .replace("{new}", formatPriceCny(r.combo.newPriceCny))}
@@ -233,7 +236,7 @@ function ComboCard({
               r.budgetStatus === "within" ? "bg-emerald-500" :
               r.budgetStatus === "slightlyOver" ? "bg-amber-500" : "bg-red-500"
             }`} />
-            <span className="text-xs font-bold text-zinc-500">
+            <span className="text-xs font-bold text-stone-500">
               {getBudgetLabel(r.budgetStatus, t)}
             </span>
           </div>
@@ -241,31 +244,31 @@ function ComboCard({
       </div>
 
       {/* Main score metrics grids */}
-      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-zinc-100 py-4 my-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5">
         <div className="space-y-1">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-wide">{t.metricsCapability}</p>
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsCapability}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-zinc-800">{r.capabilityScore.toFixed(1)}</span>
-            <div className="w-16 bg-zinc-100 rounded-full h-1.5 overflow-hidden hidden sm:block">
+            <span className="text-lg font-black text-neutral-800">{r.capabilityScore.toFixed(1)}</span>
+            <div className="w-16 bg-stone-100 rounded-full h-1.5 overflow-hidden hidden sm:block">
               <div
-                className="bg-blue-600 h-full rounded-full"
+                className="bg-neutral-800 h-full rounded-full"
                 style={{ width: `${r.capabilityScore}%` }}
               />
             </div>
           </div>
         </div>
 
-        <div className="space-y-1 border-l border-zinc-100 pl-4">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-wide">{t.metricsAlgScore}</p>
-          <p className="text-lg font-black text-zinc-850 bg-gradient-to-r from-blue-750 to-indigo-750 bg-clip-text text-transparent">
+        <div className="space-y-1 border-l border-stone-100 pl-4">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsAlgScore}</p>
+          <p className="text-lg font-black text-neutral-850">
             {r.finalScore.toFixed(1)}
           </p>
         </div>
 
-        <div className="space-y-1 border-l border-zinc-100 pl-4">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-wide">{t.metricsQuotaCoverage}</p>
+        <div className="space-y-1 border-l border-stone-100 pl-4">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsQuotaCoverage}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-zinc-800">
+            <span className="text-lg font-black text-neutral-800">
               {(r.combo.usageCoverage * 100).toFixed(0)}%
             </span>
             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
@@ -278,10 +281,10 @@ function ComboCard({
           </div>
         </div>
 
-        <div className="space-y-1 border-l border-zinc-100 pl-4">
-          <p className="text-xs font-bold text-zinc-400 uppercase tracking-wide">{t.metricsIntelCoverage}</p>
+        <div className="space-y-1 border-l border-stone-100 pl-4">
+          <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsIntelCoverage}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-zinc-800">
+            <span className="text-lg font-black text-neutral-800">
               {r.combo.highIntelligenceCoverage !== undefined ? `${(r.combo.highIntelligenceCoverage * 100).toFixed(0)}%` : "100%"}
             </span>
             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
@@ -298,24 +301,24 @@ function ComboCard({
 
       {/* Allocation breakdown */}
       <div className="space-y-3.5">
-        <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-wider">{t.allocHeader}</h3>
+        <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">{t.allocHeader}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {Object.entries(r.capabilityBreakdown)
             .sort((a, b) => b[1].allocated - a[1].allocated)
             .map(([cap, info]) => (
               <div
                 key={cap}
-                className="rounded-2xl border border-zinc-100 bg-zinc-50/50 p-3 hover:border-zinc-200 transition-colors"
+                className="rounded-2xl border border-stone-150 bg-stone-50/50 p-3 hover:border-stone-250 transition-colors"
               >
-                <div className="flex items-center justify-between text-xs font-bold text-zinc-705 mb-1.5">
-                  <span className="text-zinc-800">{getCapabilityLabel(cap, lang)}</span>
-                  <span className="text-zinc-500 font-mono">
+                <div className="flex items-center justify-between text-xs font-bold text-stone-700 mb-1.5">
+                  <span className="text-neutral-800">{getCapabilityLabel(cap, lang)}</span>
+                  <span className="text-stone-500 font-mono">
                     {Math.round(info.allocated)} MTokens ({t.allocScore} {info.score})
                   </span>
                 </div>
-                <div className="text-[11px] text-zinc-500 flex items-center justify-between">
-                  <span>{t.allocPlan}: <strong className="text-zinc-700">{info.primaryPlan}</strong></span>
-                  <span className="font-semibold text-blue-600 font-mono">{t.allocDone}</span>
+                <div className="text-[11px] text-stone-500 flex items-center justify-between">
+                  <span>{t.allocPlan}: <strong className="text-neutral-800">{info.primaryPlan}</strong></span>
+                  <span className="font-semibold text-neutral-800 font-mono">{t.allocDone}</span>
                 </div>
               </div>
             ))}
@@ -324,12 +327,12 @@ function ComboCard({
 
       {/* Reasons and recommendations */}
       {r.reasons.length > 0 && (
-        <div className="mt-5 border-t border-zinc-100 pt-4">
-          <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">{t.logicHeader}</h3>
-          <ul className="space-y-1.5 text-sm text-zinc-700">
+        <div className="mt-5 border-t border-stone-150 pt-4">
+          <h3 className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{t.logicHeader}</h3>
+          <ul className="space-y-1.5 text-sm text-stone-700">
             {r.reasons.map((reason, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-blue-500 text-xs mt-0.5">✦</span>
+                <span className="text-stone-500 text-xs mt-0.5">✦</span>
                 <span className="font-medium">{translateReason(reason, lang)}</span>
               </li>
             ))}
@@ -339,7 +342,7 @@ function ComboCard({
 
       {/* Cautions */}
       {r.cautions.length > 0 && (
-        <div className="mt-4 rounded-2xl bg-amber-50/40 border border-amber-200/50 p-4">
+        <div className="mt-4 rounded-2xl bg-amber-55/40 border border-amber-200/50 p-4">
           <h3 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1.5">{t.cautionHeader}</h3>
           <ul className="space-y-1 text-xs text-amber-850">
             {r.cautions.map((caution, i) => (
@@ -401,67 +404,62 @@ export default async function ResultPage({
     .slice(0, 4);
 
   return (
-    <main className="flex-1 min-h-screen bg-zinc-50 flex flex-col relative overflow-hidden pb-16">
-      
-      {/* Background grids */}
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-blue-200/10 to-indigo-300/15 rounded-full blur-3xl pointer-events-none" />
-      
+    <main className="flex-1 min-h-screen bg-stone-50 flex flex-col relative overflow-hidden pb-16">
       <div className="max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 flex-1 flex flex-col gap-6">
         
         {/* Navigation */}
-        <div className="flex items-center justify-between border-b border-zinc-200/60 pb-4">
+        <div className="flex items-center justify-between border-b border-stone-200/80 pb-4">
           <Link
             href={`/${lang === "en" ? "?lang=en" : ""}`}
-            className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 bg-white shadow-sm border border-zinc-200/50 rounded-xl px-4 py-2 transition-all hover:shadow cursor-pointer"
+            className="inline-flex items-center text-sm font-semibold text-neutral-800 hover:text-black bg-white shadow-sm border border-stone-200 rounded-xl px-4 py-2 transition-all hover:shadow cursor-pointer"
           >
             {t.reenter}
           </Link>
           
           <div className="flex items-center gap-3">
             <LanguageToggle />
-            <span className="text-xs text-zinc-400 font-bold uppercase tracking-wider hidden sm:inline">
+            <span className="text-xs text-stone-400 font-bold uppercase tracking-wider hidden sm:inline">
               {t.engineFinished}
             </span>
           </div>
         </div>
 
-        <h1 className="text-3xl font-extrabold text-zinc-900 tracking-tight">
+        <h1 className="text-3xl font-extrabold text-neutral-900 tracking-tight">
           {t.resultTitle}
         </h1>
 
         {/* Input Parameters panel */}
-        <div className="rounded-3xl bg-zinc-900 text-zinc-100 p-5 shadow-xl border border-zinc-800 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
-          <h2 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">{t.evalParams}</h2>
+        <div className="rounded-2xl bg-neutral-900 text-neutral-100 p-5 shadow-lg border border-neutral-850 relative overflow-hidden">
+          <h2 className="text-xs font-bold text-neutral-505 uppercase tracking-wider mb-3">{t.evalParams}</h2>
           
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 text-sm font-medium">
-            <div className="bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800">
-              <span className="block text-[10px] text-zinc-500 font-bold uppercase">{t.paramBudget}</span>
-              <span className="text-sm sm:text-base text-zinc-200 font-bold">{formatPriceCny(input.budgetCny)}{t.monthUnit}</span>
+            <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramBudget}</span>
+              <span className="text-sm sm:text-base text-neutral-200 font-bold">{formatPriceCny(input.budgetCny)}{t.monthUnit}</span>
             </div>
-            <div className="bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800">
-              <span className="block text-[10px] text-zinc-500 font-bold uppercase">{t.paramUsage}</span>
-              <span className="text-sm sm:text-base text-zinc-200 font-bold">{input.monthlyDemandMTokens} MTokens{t.monthUnit}</span>
+            <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramUsage}</span>
+              <span className="text-sm sm:text-base text-neutral-200 font-bold">{input.monthlyDemandMTokens} MTokens{t.monthUnit}</span>
             </div>
-            <div className="bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800">
-              <span className="block text-[10px] text-zinc-500 font-bold uppercase">{t.paramIntel}</span>
-              <span className="text-sm sm:text-base text-zinc-200 font-bold">
+            <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramIntel}</span>
+              <span className="text-sm sm:text-base text-neutral-200 font-bold">
                 {input.highIntelligenceRatioPreset === "low" ? t.intelLow :
                  input.highIntelligenceRatioPreset === "medium" ? t.intelMedium :
                  input.highIntelligenceRatioPreset === "high" ? t.intelHigh : t.intelExtreme}
               </span>
             </div>
-            <div className="bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800">
-              <span className="block text-[10px] text-zinc-500 font-bold uppercase">{t.paramRegion}</span>
-              <span className="text-sm sm:text-base text-zinc-200 font-bold">
+            <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramRegion}</span>
+              <span className="text-sm sm:text-base text-neutral-200 font-bold">
                 {input.region === "CN" ? (lang === "en" ? "🇨🇳 China" : "🇨🇳 中国") :
                  input.region === "US" ? (lang === "en" ? "🇺🇸 USA" : "🇺🇸 美国") :
                  input.region === "JP" ? (lang === "en" ? "🇯🇵 Japan" : "🇯🇵 日本") : (lang === "en" ? "🌐 Global" : "🌐 全球")}
               </span>
             </div>
-            <div className="bg-zinc-800/40 p-3 rounded-2xl border border-zinc-800">
-              <span className="block text-[10px] text-zinc-500 font-bold uppercase">{t.paramPayment}</span>
-              <span className="text-[11px] text-zinc-300 font-semibold leading-tight block mt-0.5">
+            <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramPayment}</span>
+              <span className="text-[11px] text-neutral-300 font-semibold leading-tight block mt-0.5">
                 {input.acceptsApiBilling ? t.paramApiOk : t.paramApiNo}
                 <br />
                 {input.hasForeignCard ? t.paramCardOk : t.paramCardNo}
@@ -469,15 +467,15 @@ export default async function ResultPage({
             </div>
           </div>
 
-          <div className="mt-4 border-t border-zinc-800/60 pt-3">
-            <span className="block text-[10px] text-zinc-500 font-bold uppercase mb-1.5">{t.paramWeights}</span>
+          <div className="mt-4 border-t border-neutral-800/60 pt-3">
+            <span className="block text-[10px] text-neutral-400 font-bold uppercase mb-1.5">{t.paramWeights}</span>
             <div className="flex flex-wrap gap-2">
               {Object.entries(weights)
                 .sort((a, b) => b[1] - a[1])
                 .map(([k, v]) => (
                   <span
                     key={k}
-                    className="inline-flex items-center rounded-lg bg-zinc-800 border border-zinc-700 px-2.5 py-1 text-xs font-semibold text-zinc-300"
+                    className="inline-flex items-center rounded-lg bg-neutral-850 border border-neutral-800 px-2.5 py-1 text-xs font-semibold text-neutral-350"
                   >
                     {getCapabilityLabel(k, lang)} {(v * 100).toFixed(0)}%
                   </span>
@@ -488,7 +486,7 @@ export default async function ResultPage({
 
         {/* Results area */}
         {results.length === 0 ? (
-          <div className="mt-4 rounded-3xl bg-amber-50 border border-amber-200 p-6 text-amber-900 shadow-md">
+          <div className="mt-4 rounded-2xl bg-amber-50 border border-amber-200 p-6 text-amber-900 shadow-md">
             <p className="font-bold flex items-center gap-1">
               <span>⚠️</span> {t.noResultTitle}
             </p>
@@ -502,8 +500,8 @@ export default async function ResultPage({
             {/* 1. Best Pick */}
             {top && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold text-zinc-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-blue-600">★</span> {t.bestPick}
+                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
+                  <span className="text-amber-500">★</span> {t.bestPick}
                 </h2>
                 <ComboCard r={top} rank={1} badge="最推荐" lang={lang} />
               </section>
@@ -512,8 +510,8 @@ export default async function ResultPage({
             {/* 2. High quota pick */}
             {highQuotaPick && top && highQuotaPick !== top && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold text-zinc-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-emerald-500">★</span> {t.highQuotaPick}
+                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
+                  <span className="text-stone-600">★</span> {t.highQuotaPick}
                 </h2>
                 <ComboCard
                   r={highQuotaPick}
@@ -527,8 +525,8 @@ export default async function ResultPage({
             {/* 3. Performance Pick */}
             {performancePick && top && performancePick !== top && performancePick !== highQuotaPick && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold text-zinc-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-purple-500">★</span> {t.highPerfPick}
+                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
+                  <span className="text-fuchsia-600">★</span> {t.highPerfPick}
                 </h2>
                 <ComboCard
                   r={performancePick}
@@ -541,8 +539,8 @@ export default async function ResultPage({
 
             {chineseQuotaPick && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold text-zinc-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-amber-500">★</span> {t.chineseFriendlyPick}
+                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
+                  <span className="text-amber-600">★</span> {t.chineseFriendlyPick}
                 </h2>
                 <ComboCard
                   r={chineseQuotaPick}
@@ -556,7 +554,7 @@ export default async function ResultPage({
             {/* 4. Alternatives */}
             {alternatives.length > 0 && (
               <section className="space-y-3.5">
-                <h2 className="text-lg font-extrabold text-zinc-800 tracking-tight">
+                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight">
                   {t.otherCandidates}
                 </h2>
                 <div className="space-y-5">
@@ -576,7 +574,7 @@ export default async function ResultPage({
         )}
 
         {/* Footer */}
-        <p className="mt-8 text-center text-[11px] text-zinc-400 font-medium leading-relaxed">
+        <p className="mt-8 text-center text-[11px] text-stone-400 font-medium leading-relaxed">
           {t.footer2}
         </p>
       </div>
