@@ -58,18 +58,19 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
     cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/15 border-amber-500/30 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-500/60";
     topBarStyles += "h-2 gold-shimmer-border";
     badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
-    badgeStyles += "bg-amber-50/90 text-amber-800 border-amber-200";
+    badgeStyles += "bg-amber-50/90 text-amber-850 border-amber-200";
   } else if (isHighPerf) {
     // LED Pixel Strip Theme
     cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
-    topBarStyles += "h-2 bg-neutral-950 overflow-hidden";
+    topBarStyles += "h-2 bg-neutral-950";
     badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
     badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
   } else if (isHighQuota) {
-    cardStyles += "bg-stone-50/80 border-stone-250 hover:bg-stone-50 hover:border-stone-350 shadow-sm";
-    topBarStyles += "h-1 bg-stone-500";
+    // Battery Charging Theme
+    cardStyles += "bg-gradient-to-br from-white via-white to-emerald-50/10 border-emerald-250/80 shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/15 hover:border-emerald-350";
+    topBarStyles += "h-2 bg-stone-100";
     badgeLabel = lang === "en" ? "🔋 High Quota" : "🔋 量大管饱";
-    badgeStyles += "bg-stone-200 text-stone-850 border-stone-300";
+    badgeStyles += "bg-emerald-50 text-emerald-800 border-emerald-100";
   } else if (isChineseFriendly) {
     cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
     topBarStyles += "h-1 bg-amber-400";
@@ -82,14 +83,18 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
 
   return (
     <article className={cardStyles}>
-      {/* Top Border light effect */}
+      {/* Top Border light effect with rounded top-t corners */}
       {isHighPerf ? (
-        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
           <div className="led-pixel-strip absolute inset-0" />
           <div className="led-pixel-mask absolute inset-0" />
         </div>
+      ) : isHighQuota ? (
+        <div className="absolute top-0 inset-x-0 h-2 bg-stone-100 overflow-hidden rounded-t-2xl">
+          <div className="battery-charge-indicator" />
+        </div>
       ) : (
-        <div className={topBarStyles} />
+        <div className={`${topBarStyles} rounded-t-2xl`} />
       )}
 
       {/* Sweeping golden reflection overlay */}
@@ -161,7 +166,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
         <div className="space-y-1">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{lang === "en" ? "Coverage" : "覆盖率"}</p>
           <p className="text-lg font-black text-neutral-900">
-            {(result.combo.usageCoverage * 105).toFixed(0)}%
+            {(result.combo.usageCoverage * 100).toFixed(0)}%
           </p>
           <p className="text-xs font-semibold text-stone-500">{coverageLabel(result.coverageStatus, t)}</p>
         </div>
@@ -197,7 +202,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
       )}
 
       {result.cautions.length > 0 && (
-        <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-4 text-xs font-medium text-amber-855 relative z-10">
+        <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50/40 p-4 text-xs font-medium text-amber-850 relative z-10">
           {result.cautions.map((caution) => (
             <p key={caution}>• {translateCaution(caution, lang)}</p>
           ))}
@@ -285,10 +290,25 @@ export default function ResultClient() {
           0% { background-position: 0% 50%; }
           100% { background-position: -200% 50%; }
         }
+        @keyframes batteryCharge {
+          0% { width: 0%; opacity: 0.3; }
+          75% { width: 100%; opacity: 1; }
+          90% { width: 100%; opacity: 1; }
+          95% { width: 100%; opacity: 0; }
+          100% { width: 0%; opacity: 0; }
+        }
         .gold-shimmer-border {
           background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
           background-size: 200% auto;
           animation: goldShimmer 6s linear infinite;
+        }
+        .gold-shimmer-text {
+          background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: goldShimmer 6s linear infinite;
+          display: inline-block;
         }
         .gold-shine-sweep {
           position: absolute;
@@ -307,6 +327,11 @@ export default function ResultClient() {
         }
         .led-pixel-mask {
           background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 4px, #0a0a0a 4px, #0a0a0a 6px);
+        }
+        .battery-charge-indicator {
+          height: 100%;
+          background: linear-gradient(90deg, #34d399, #10b981);
+          animation: batteryCharge 3s ease-in-out infinite;
         }
       `}} />
 
@@ -355,20 +380,26 @@ export default function ResultClient() {
         {!loading && !error && top && (
           <div className="space-y-8">
             <section className="space-y-3">
-              <h2 className="text-lg font-extrabold">{t.bestPick}</h2>
+              <h2 className="text-lg font-extrabold flex items-center gap-1.5">
+                <span className="gold-shimmer-text">★</span> {t.bestPick}
+              </h2>
               <ComboCard result={top} badge="最推荐" lang={lang} />
             </section>
 
             {budgetPick && budgetPick !== top && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold">{t.highQuotaPick}</h2>
+                <h2 className="text-lg font-extrabold flex items-center gap-1.5">
+                  <span className="text-emerald-600">★</span> {t.highQuotaPick}
+                </h2>
                 <ComboCard result={budgetPick} badge="量大" lang={lang} />
               </section>
             )}
 
             {performancePick && performancePick !== top && performancePick !== budgetPick && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold">{t.highPerfPick}</h2>
+                <h2 className="text-lg font-extrabold flex items-center gap-1.5">
+                  <span className="text-fuchsia-600">★</span> {t.highPerfPick}
+                </h2>
                 <ComboCard result={performancePick} badge="高性能" lang={lang} />
               </section>
             )}
