@@ -135,15 +135,15 @@ function ComboCard({
   let badgeStyles = "rounded-full px-3 py-0.5 text-xs font-bold border ";
 
   if (isBest) {
-    // Gold Glowing Theme
-    cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/10 border-amber-200/80 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-350";
-    topBarStyles += "h-2 bg-gradient-to-r from-amber-400 via-yellow-250 to-amber-500";
+    // True Premium Metallic Gold Theme with animation
+    cardStyles += "bg-gradient-to-br from-white via-white to-amber-50/15 border-amber-500/30 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-500/60";
+    topBarStyles += "h-2 gold-shimmer-border";
     badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
-    badgeStyles += "bg-amber-50 text-amber-700 border-amber-100";
+    badgeStyles += "bg-amber-50/90 text-amber-800 border-amber-200";
   } else if (isHighPerf) {
-    // Purple Gradient Light Strip Theme
+    // LED Pixel Strip Theme
     cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
-    topBarStyles += "h-2 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-600";
+    topBarStyles += "h-2 bg-neutral-950 overflow-hidden";
     badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
     badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
   } else if (isHighQuota) {
@@ -157,7 +157,7 @@ function ComboCard({
     cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
     topBarStyles += "h-1 bg-amber-400";
     badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
-    badgeStyles += "bg-amber-50 text-amber-800 border-amber-100";
+    badgeStyles += "bg-amber-50 text-amber-850 border-amber-250";
   } else {
     // Ordinary alternatives: neutral and set-back visually
     cardStyles += "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
@@ -166,9 +166,20 @@ function ComboCard({
 
   return (
     <div className={cardStyles}>
-      <div className={topBarStyles} />
+      {/* Top Border light effect */}
+      {isHighPerf ? (
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden">
+          <div className="led-pixel-strip absolute inset-0" />
+          <div className="led-pixel-mask absolute inset-0" />
+        </div>
+      ) : (
+        <div className={topBarStyles} />
+      )}
 
-      <div className="flex flex-wrap items-start justify-between gap-4">
+      {/* Sweeping golden reflection overlay */}
+      {isBest && <div className="gold-shine-sweep" />}
+
+      <div className="flex flex-wrap items-start justify-between gap-4 relative z-10">
         <div className="space-y-2">
           <div className="flex items-center flex-wrap gap-2">
             {badgeLabel && (
@@ -185,7 +196,7 @@ function ComboCard({
             {r.combo.plans.map((p) => p.name).join(" + ")}
           </h2>
           
-          <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
+          <p className="text-xs font-semibold text-stone-405 uppercase tracking-wider">
             {r.combo.plans.map((p) => p.provider).join(" · ")}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -225,7 +236,7 @@ function ComboCard({
             <span className="text-xs font-semibold text-stone-400">{t.monthUnit}</span>
           </p>
           {r.combo.newPriceCny !== r.combo.totalPriceCny && (
-            <p className="mt-1 text-xs font-bold text-stone-400">
+            <p className="mt-1 text-xs font-bold text-stone-450">
               {t.ownedHeader
                 .replace("{owned}", formatPriceCny(existingPriceCny(r)))
                 .replace("{new}", formatPriceCny(r.combo.newPriceCny))}
@@ -244,14 +255,14 @@ function ComboCard({
       </div>
 
       {/* Main score metrics grids */}
-      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5 relative z-10">
         <div className="space-y-1">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsCapability}</p>
           <div className="flex items-center gap-2">
             <span className="text-lg font-black text-neutral-800">{r.capabilityScore.toFixed(1)}</span>
             <div className="w-16 bg-stone-100 rounded-full h-1.5 overflow-hidden hidden sm:block">
               <div
-                className="bg-neutral-800 h-full rounded-full"
+                className="bg-neutral-850 h-full rounded-full"
                 style={{ width: `${r.capabilityScore}%` }}
               />
             </div>
@@ -300,7 +311,7 @@ function ComboCard({
       </div>
 
       {/* Allocation breakdown */}
-      <div className="space-y-3.5">
+      <div className="space-y-3.5 relative z-10">
         <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">{t.allocHeader}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {Object.entries(r.capabilityBreakdown)
@@ -327,7 +338,7 @@ function ComboCard({
 
       {/* Reasons and recommendations */}
       {r.reasons.length > 0 && (
-        <div className="mt-5 border-t border-stone-150 pt-4">
+        <div className="mt-5 border-t border-stone-150 pt-4 relative z-10">
           <h3 className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">{t.logicHeader}</h3>
           <ul className="space-y-1.5 text-sm text-stone-700">
             {r.reasons.map((reason, i) => (
@@ -342,7 +353,7 @@ function ComboCard({
 
       {/* Cautions */}
       {r.cautions.length > 0 && (
-        <div className="mt-4 rounded-2xl bg-amber-55/40 border border-amber-200/50 p-4">
+        <div className="mt-4 rounded-2xl bg-amber-55/40 border border-amber-200/50 p-4 relative z-10">
           <h3 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1.5">{t.cautionHeader}</h3>
           <ul className="space-y-1 text-xs text-amber-850">
             {r.cautions.map((caution, i) => (
@@ -405,6 +416,45 @@ export default async function ResultPage({
 
   return (
     <main className="flex-1 min-h-screen bg-stone-50 flex flex-col relative overflow-hidden pb-16">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes goldShimmer {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes shineSweep {
+          0% { transform: translateX(-150%) skewX(-15deg); }
+          100% { transform: translateX(250%) skewX(-15deg); }
+        }
+        @keyframes flowLED {
+          0% { background-position: 0% 50%; }
+          100% { background-position: -200% 50%; }
+        }
+        .gold-shimmer-border {
+          background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
+          background-size: 200% auto;
+          animation: goldShimmer 6s linear infinite;
+        }
+        .gold-shine-sweep {
+          position: absolute;
+          inset: 0;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45) 50%, transparent);
+          animation: shineSweep 5s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 5;
+        }
+        .led-pixel-strip {
+          background: linear-gradient(90deg, #a855f7 0%, #ec4899 25%, #3b82f6 50%, #a855f7 75%, #ec4899 100%);
+          background-size: 200% auto;
+          animation: flowLED 4s linear infinite;
+        }
+        .led-pixel-mask {
+          background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 4px, #0a0a0a 4px, #0a0a0a 6px);
+        }
+      `}} />
+
       <div className="max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 flex-1 flex flex-col gap-6">
         
         {/* Navigation */}
@@ -511,7 +561,7 @@ export default async function ResultPage({
             {highQuotaPick && top && highQuotaPick !== top && (
               <section className="space-y-3">
                 <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-stone-600">★</span> {t.highQuotaPick}
+                  <span className="text-stone-605">★</span> {t.highQuotaPick}
                 </h2>
                 <ComboCard
                   r={highQuotaPick}
@@ -525,7 +575,7 @@ export default async function ResultPage({
             {/* 3. Performance Pick */}
             {performancePick && top && performancePick !== top && performancePick !== highQuotaPick && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
+                <h2 className="text-lg font-extrabold text-neutral-850 tracking-tight flex items-center gap-1.5">
                   <span className="text-fuchsia-600">★</span> {t.highPerfPick}
                 </h2>
                 <ComboCard
