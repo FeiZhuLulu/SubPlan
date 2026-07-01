@@ -6,6 +6,7 @@ import presetsData from "@/data/presets.json";
 import fxRatesData from "@/data/fx-rates.json";
 import apiOptionsData from "@/data/api-options.json";
 import modelTiersData from "@/data/model-tiers.json";
+import modelAccessProfilesData from "@/data/model-access-profiles.json";
 
 import type {
   Plan,
@@ -15,6 +16,7 @@ import type {
   Presets,
   FxRate,
   ModelTierRecord,
+  ModelAccessProfile,
 } from "./types";
 
 type DataFile = Record<string, unknown>;
@@ -25,6 +27,7 @@ type QuotasFile = DataFile & { quotas?: Quota[] };
 type RelationsFile = DataFile & { planRelations?: PlanRelation[] };
 type FxRatesFile = DataFile & { rates?: FxRate[] };
 type ModelTiersFile = DataFile & { tiers?: ModelTierRecord[] };
+type ModelAccessProfilesFile = DataFile & { profiles?: ModelAccessProfile[] };
 
 // Static definitions for client-side bundle or build-time fallback
 const staticPlans: Plan[] = (plansData as unknown as PlansFile).plans ?? [];
@@ -37,6 +40,8 @@ const staticPlanRelations: PlanRelation[] =
   (relationsData as unknown as RelationsFile).planRelations ?? [];
 const staticModelTiers: ModelTierRecord[] =
   (modelTiersData as unknown as ModelTiersFile).tiers ?? [];
+const staticModelAccessProfiles: ModelAccessProfile[] =
+  (modelAccessProfilesData as unknown as ModelAccessProfilesFile).profiles ?? [];
 
 export const presets: Presets = presetsData as unknown as Presets;
 export const fxRates: FxRate[] = (fxRatesData as unknown as FxRatesFile).rates ?? [];
@@ -107,6 +112,16 @@ export function getAllModelTiers(): ModelTierRecord[] {
     return dynamicTiersFile.tiers || [];
   }
   return staticModelTiers;
+}
+
+export function getModelAccessProfile(planId: string): ModelAccessProfile | undefined {
+  const dynamicProfilesFile = readDataFileOnServer<ModelAccessProfilesFile>(
+    "model-access-profiles.json"
+  );
+  const profiles: ModelAccessProfile[] = dynamicProfilesFile
+    ? dynamicProfilesFile.profiles || []
+    : staticModelAccessProfiles;
+  return profiles.find((profile) => profile.planId === planId);
 }
 
 const fxMap = new Map<string, number>();

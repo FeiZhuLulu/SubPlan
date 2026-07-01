@@ -55,10 +55,11 @@ export async function POST(request: Request) {
 
     const response: RecommendResponse = {
       results,
-      dataVersion: "v0.1.3",
+      dataVersion: "v0.2.1",
       assumptions: [
         "用量按 MTokens-equivalent 估算，不代表官方固定 token 上限。",
         "缓存命中率默认按 95% 的 Agent/重复项目工作流口径处理。",
+        "高智能覆盖率按订阅计划内模型画像估算，不再由整套餐总额度直接折算。",
         "API 只在用户接受 API 计费时作为补位项参与组合。",
         "已有订阅会参与能力和额度分配，但仍计入组合月成本展示。",
       ],

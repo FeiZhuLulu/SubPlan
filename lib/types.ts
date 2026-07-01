@@ -175,6 +175,21 @@ export type ModelTierRecord = { // Added for v0.2
   notes?: string;
 };
 
+export type ModelAccessModel = {
+  modelId: string;
+  label: string;
+  tierByCapability: Partial<Record<CapabilityKey, IntelligenceTier>>;
+  quotaMTokens?: number;
+  quotaShare?: number;
+  notes?: string;
+};
+
+export type ModelAccessProfile = {
+  planId: string;
+  models: ModelAccessModel[];
+  notes?: string;
+};
+
 export type PlanInCombo = Plan & {
   scoreRecord: CapabilityScoreRecord;
   quota: Quota | null;
@@ -185,6 +200,7 @@ export type PlanInCombo = Plan & {
   upgradeFromPlanName?: string;
   upgradeDeltaCny?: number;
   modelTier?: ModelTierRecord; // Added for v0.2
+  modelAccessProfile?: ModelAccessProfile;
   highIntelligenceQuotaByCapability?: Record<CapabilityKey, number>; // Added for v0.2
 };
 
