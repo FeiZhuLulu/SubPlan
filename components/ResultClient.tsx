@@ -420,6 +420,20 @@ export default function ResultClient() {
             ) : null}
           </div>
         )}
+
+        {/* Footer */}
+        <div className="mt-8 text-center space-y-3">
+          <p>
+            <a
+              href="https://github.com/FeiZhuLulu/SubPlan/issues/new/choose"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-neutral-700 hover:text-black underline transition-colors cursor-pointer"
+            >
+              提交额度数据 / Submit data
+            </a>
+          </p>
+        </div>
       </div>
     </main>
   );

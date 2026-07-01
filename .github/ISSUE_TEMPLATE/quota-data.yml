@@ -1,0 +1,103 @@
+name: 提交/修正套餐额度数据 / Submit or Correct Quota Data
+description: 提交新的 AI 套餐额度估算规则，或修正现有不准的数据（支持上传 JSON 配置文件、屏幕截图或文档）
+title: "[数据提交] "
+labels: ["data-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您提交或修正套餐额度数据！请填写以下表单。若有相关 JSON 配置文件、文档或截图，可在相应字段处直接拖拽上传。
+        Thank you for submitting or correcting quota data! Please fill out this form. If you have JSON files, documents, or screenshots, you can drag and drop them directly.
+  
+  - type: input
+    id: plan-name
+    attributes:
+      label: 套餐名 / Plan Name
+      placeholder: 例如 Cursor Pro / GLM 4 个人套餐 / Kimi 199
+    validations:
+      required: true
+
+  - type: input
+    id: provider
+    attributes:
+      label: 服务商 / Provider
+      placeholder: 例如 Cursor / Zhipu AI / Moonshot
+    validations:
+      required: true
+
+  - type: input
+    id: region
+    attributes:
+      label: 地区 / Region
+      placeholder: 例如 CN / Global / US
+    validations:
+      required: true
+
+  - type: input
+    id: price
+    attributes:
+      label: 价格 / Price
+      placeholder: 例如 20 USD/mo 或 99 CNY/月
+    validations:
+      required: true
+
+  - type: input
+    id: estimated-quota
+    attributes:
+      label: 估算额度 / Estimated Quota
+      placeholder: 例如 约 500 次高级模型额度 / 500 MTokens / 无限
+    validations:
+      required: true
+
+  - type: input
+    id: period
+    attributes:
+      label: 统计周期 / Statistical Period
+      placeholder: 例如 5小时*2 / 2周 / 3周 / 按月 / Weekly (可设置多个或自定义组合周期)
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景与限制 / Usage Scenario & Limits
+      placeholder: 例如 代码补全、对话限流、具体配额翻倍规则等
+    validations:
+      required: false
+
+  - type: input
+    id: models
+    attributes:
+      label: 涉及模型 / Models Included
+      placeholder: 例如 GPT-4o, Claude 3.5 Sonnet, DeepSeek-V3
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: 来源文档/JSON/截图 / Source docs, JSON, or Screenshots
+      placeholder: 请在此处拖拽上传您的 JSON 配置文件、文档报告、截图，或粘贴官方链接。
+    validations:
+      required: false
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: 置信度 / Confidence Level
+      options:
+        - 100% 官方确切数据 / 100% Official confirmed
+        - 社区大量反馈统计 / Community statistical feedback
+        - 个人使用估算 / Personal estimation
+    validations:
+      required: true
+
+  - type: dropdown
+    id: follow-up
+    attributes:
+      label: 是否愿意被追问 / Willing to be follow-up questioned
+      options:
+        - 是，愿意提供更多反馈或校对测试 / Yes, willing to help
+        - 否，仅作一次性提交 / No
+    validations:
+      required: false
