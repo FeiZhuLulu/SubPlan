@@ -644,9 +644,21 @@ export default async function ResultPage({
         )}
 
         {/* Footer */}
-        <p className="mt-8 text-center text-[11px] text-stone-400 font-medium leading-relaxed">
-          {t.footer2}
-        </p>
+        <div className="mt-8 text-center space-y-3">
+          <p>
+            <a
+              href="https://github.com/FeiZhuLulu/SubPlan/issues/new/choose"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-neutral-700 hover:text-black underline transition-colors cursor-pointer"
+            >
+              提交额度数据 / Submit data
+            </a>
+          </p>
+          <p className="text-[11px] text-stone-400 font-medium leading-relaxed">
+            {t.footer2}
+          </p>
+        </div>
       </div>
     </main>
   );

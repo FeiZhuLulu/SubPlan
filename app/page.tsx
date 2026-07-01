@@ -65,6 +65,16 @@ export default async function Home({
           <p className="mt-1 text-stone-350">
             {t.footer2}
           </p>
+          <p className="mt-3">
+            <a
+              href="https://github.com/FeiZhuLulu/SubPlan/issues/new/choose"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-stone-500 hover:text-black font-bold underline transition-colors cursor-pointer"
+            >
+              提交额度数据 / Submit data
+            </a>
+          </p>
         </div>
       </div>
     </main>
