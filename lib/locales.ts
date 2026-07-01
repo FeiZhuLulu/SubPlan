@@ -316,7 +316,10 @@ export function getCapabilityLabel(key: string, lang: Locale): string {
  */
 export function getUseCaseLabel(key: string, lang: Locale): string {
   const map = lang === "en" ? USE_CASES_EN : USE_CASES_ZH;
-  return map[key] ?? key;
+  if (map[key]) return map[key];
+
+  const capMap = lang === "en" ? CAPABILITY_LABELS_EN : CAPABILITY_LABELS_ZH;
+  return capMap[key] ?? key;
 }
 
 /**
