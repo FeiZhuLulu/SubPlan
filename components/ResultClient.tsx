@@ -4,19 +4,19 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { formatPriceCny } from "@/lib/budget";
-import { presets } from "@/lib/data";
-import type { CapabilityKey, RecommendResponse, ScoredCombo } from "@/lib/types";
+import { dict, getCapabilityLabel, translateReason, translateCaution, type Locale } from "@/lib/locales";
+import type { RecommendResponse, ScoredCombo } from "@/lib/types";
 
-function coverageLabel(status: ScoredCombo["coverageStatus"]) {
-  if (status === "sufficient") return "覆盖充足";
-  if (status === "tight") return "额度紧凑";
-  return "覆盖不足";
+function coverageLabel(status: ScoredCombo["coverageStatus"], t: Record<string, string>) {
+  if (status === "sufficient") return t.coverageSufficient;
+  if (status === "tight") return t.coverageTight;
+  return t.coverageInsufficient;
 }
 
-function budgetLabel(status: ScoredCombo["budgetStatus"]) {
-  if (status === "within") return "预算内";
-  if (status === "slightlyOver") return "略超预算";
-  return "超出预算";
+function budgetLabel(status: ScoredCombo["budgetStatus"], t: Record<string, string>) {
+  if (status === "within") return t.budgetWithin;
+  if (status === "slightlyOver") return t.budgetSlightlyOver;
+  return t.budgetOver;
 }
 
 function existingPriceCny(result: ScoredCombo) {
@@ -28,85 +28,97 @@ function formatQuota(value: number) {
   return `${Math.round(value)} MTokens`;
 }
 
-function usageEstimateText(result: ScoredCombo) {
+function usageEstimateText(result: ScoredCombo, lang: Locale) {
   const planQuotas = result.combo.plans
     .filter((plan) => plan.textQuota > 0)
-    .map((plan) => `${plan.name} 约 ${formatQuota(plan.textQuota)}`)
+    .map((plan) => `${plan.name} ${lang === "en" ? "approx." : "约"} ${formatQuota(plan.textQuota)}`)
     .join(" / ");
 
-  const detail = planQuotas ? `，单项估算：${planQuotas}` : "";
-  return `额度估算约 ${formatQuota(result.combo.totalTextQuota)}${detail}。来源为社区统计与 AI 估算，不承诺 100% 准确。`;
+  const detail = planQuotas ? `${lang === "en" ? ", individual estimation: " : "，单项估算："}${planQuotas}` : "";
+  return lang === "en"
+    ? `Quota estimate is approx. ${formatQuota(result.combo.totalTextQuota)}${detail}. Sources are from community statistics and AI estimation, not guaranteed to be 100% accurate.`
+    : `额度估算约 ${formatQuota(result.combo.totalTextQuota)}${detail}。来源为社区统计与 AI 估算，不承诺 100% 准确。`;
 }
 
-function ComboCard({ result, badge }: { result: ScoredCombo; badge?: string }) {
+function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: string; lang: Locale }) {
+  const t = dict[lang];
+
   return (
     <article className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-xl shadow-zinc-100">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           {badge && (
             <span className="mb-2 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-              {badge}
+              {badge === "最推荐" ? t.bestBadge :
+               badge === "量大" ? t.highQuotaBadge :
+               badge === "高性能" ? t.highPerfBadge :
+               t.chineseFriendlyBadge}
             </span>
           )}
           <h2 className="text-xl font-extrabold text-zinc-900">
             {result.combo.plans.map((plan) => plan.name).join(" + ")}
           </h2>
           <div className="mt-2 flex flex-wrap gap-2">
-            {result.combo.plans.map((plan) => (
-              <span
-                key={plan.id}
-                className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
-                  plan.isExisting
-                    ? "bg-emerald-50 text-emerald-700"
-                    : plan.isUpgrade
-                      ? "bg-amber-50 text-amber-700"
-                    : "bg-zinc-100 text-zinc-600"
-                }`}
-              >
-                {plan.isExisting
-                  ? "已拥有"
-                  : plan.isUpgrade
-                    ? `建议升级${plan.upgradeFromPlanName ? `自 ${plan.upgradeFromPlanName}` : ""}`
-                    : "建议新增"} · {plan.provider} · {formatPriceCny(plan.priceCny)}
-              </span>
-            ))}
+            {result.combo.plans.map((plan) => {
+              let stateText = "";
+              if (plan.isExisting) stateText = t.planStateOwned;
+              else if (plan.isUpgrade) stateText = t.planStateUpgrade;
+              else stateText = t.planStateNew;
+
+              return (
+                <span
+                  key={plan.id}
+                  className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
+                    plan.isExisting
+                      ? "bg-emerald-50 text-emerald-700"
+                      : plan.isUpgrade
+                        ? "bg-amber-50 text-amber-700"
+                      : "bg-zinc-100 text-zinc-600"
+                  }`}
+                >
+                  {stateText} · {plan.provider} · {formatPriceCny(plan.priceCny)}
+                </span>
+              );
+            })}
           </div>
         </div>
         <div className="text-right">
           <p className="text-2xl font-black text-zinc-900">
             {formatPriceCny(result.combo.totalPriceCny)}
-            <span className="text-xs font-semibold text-zinc-400"> /月</span>
+            <span className="text-xs font-semibold text-zinc-400">{t.monthUnit}</span>
           </p>
           {result.combo.newPriceCny !== result.combo.totalPriceCny && (
             <p className="text-xs font-bold text-zinc-400">
-              已有 {formatPriceCny(existingPriceCny(result))} · 新增 {formatPriceCny(result.combo.newPriceCny)}
+              {t.ownedHeader
+                .replace("{owned}", formatPriceCny(existingPriceCny(result)))
+                .replace("{new}", formatPriceCny(result.combo.newPriceCny))}
             </p>
           )}
           <p className="text-xs font-bold text-zinc-400">
-            约 {Math.round(result.combo.totalTextQuota)} MTokens
+            {lang === "en" ? "Approx. " : "约 "} {Math.round(result.combo.totalTextQuota)} MTokens
           </p>
         </div>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">能力分</p>
+          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Cap Score" : "能力分"}</p>
           <p className="text-lg font-black text-zinc-900">{result.capabilityScore.toFixed(1)}</p>
         </div>
         <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">综合分</p>
+          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Composite Score" : "综合分"}</p>
           <p className="text-lg font-black text-blue-700">{result.finalScore.toFixed(1)}</p>
         </div>
         <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">覆盖率</p>
+          <p className="text-xs font-bold text-zinc-400">{lang === "en" ? "Coverage" : "覆盖率"}</p>
           <p className="text-lg font-black text-zinc-900">
             {(result.combo.usageCoverage * 100).toFixed(0)}%
           </p>
-          <p className="text-xs font-semibold text-zinc-500">{coverageLabel(result.coverageStatus)}</p>
+          <p className="text-xs font-semibold text-zinc-500">{coverageLabel(result.coverageStatus, t)}</p>
         </div>
         <div className="rounded-2xl bg-zinc-50 p-3">
-          <p className="text-xs font-bold text-zinc-400">预算</p>
-          <p className="text-sm font-bold text-zinc-800">{budgetLabel(result.budgetStatus)}</p>
+          <p className="text-xs font-bold text-zinc-400">{t.paramBudget}</p>
+          <p className="text-sm font-bold text-zinc-800">{budgetLabel(result.budgetStatus, t)}</p>
         </div>
       </div>
 
@@ -116,11 +128,11 @@ function ComboCard({ result, badge }: { result: ScoredCombo; badge?: string }) {
           .map(([capability, info]) => (
             <div key={capability} className="rounded-2xl border border-zinc-100 bg-zinc-50 p-3">
               <div className="flex items-center justify-between text-xs font-bold text-zinc-700">
-                <span>{presets.capabilityLabels[capability as CapabilityKey] ?? capability}</span>
+                <span>{getCapabilityLabel(capability, lang)}</span>
                 <span>{Math.round(info.allocated)} MTokens</span>
               </div>
               <p className="mt-1 text-xs text-zinc-500">
-                主要由 <strong>{info.primaryPlan}</strong> 承担，能力分 {info.score}
+                {lang === "en" ? "Mainly by " : "主要由 "} <strong>{info.primaryPlan}</strong> {lang === "en" ? ", score: " : " 承担，能力分 "}{info.score}
               </p>
             </div>
           ))}
@@ -129,16 +141,16 @@ function ComboCard({ result, badge }: { result: ScoredCombo; badge?: string }) {
       {(result.reasons.length > 0 || result.combo.totalTextQuota > 0) && (
         <ul className="mt-5 space-y-2 text-sm font-medium text-zinc-700">
           {result.reasons.map((reason) => (
-            <li key={reason}>• {reason}</li>
+            <li key={reason}>• {translateReason(reason, lang)}</li>
           ))}
-          {result.combo.totalTextQuota > 0 && <li>• {usageEstimateText(result)}</li>}
+          {result.combo.totalTextQuota > 0 && <li>• {usageEstimateText(result, lang)}</li>}
         </ul>
       )}
 
       {result.cautions.length > 0 && (
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs font-medium text-amber-800">
           {result.cautions.map((caution) => (
-            <p key={caution}>• {caution}</p>
+            <p key={caution}>• {translateCaution(caution, lang)}</p>
           ))}
         </div>
       )}
@@ -148,6 +160,9 @@ function ComboCard({ result, badge }: { result: ScoredCombo; badge?: string }) {
 
 export default function ResultClient() {
   const searchParams = useSearchParams();
+  const lang: Locale = searchParams.get("lang") === "en" ? "en" : "zh";
+  const t = dict[lang];
+
   const [data, setData] = useState<RecommendResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -210,10 +225,10 @@ export default function ResultClient() {
       <div className="mx-auto flex max-w-5xl flex-col gap-6">
         <div className="flex items-center justify-between border-b border-zinc-200 pb-4">
           <Link
-            href="/#existing-subscriptions"
+            href={`/#existing-subscriptions${lang === "en" ? "?lang=en" : ""}`}
             className="rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-bold text-blue-700 shadow-sm"
           >
-            ← 重新输入需求
+            {t.reenter}
           </Link>
           <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
             {data?.dataVersion ?? "v0.1"}
@@ -221,15 +236,17 @@ export default function ResultClient() {
         </div>
 
         <section>
-          <h1 className="text-3xl font-extrabold tracking-tight">SubPlan 智能订阅组合推荐</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight">{t.resultTitle}</h1>
           <p className="mt-2 text-sm font-medium text-zinc-500">
-            推荐结果通过 `/api/recommend` 计算，按预算、用量和能力需求进行额度约束评分。
+            {lang === "en"
+              ? "Recommendations are computed via `/api/recommend`, evaluated against budget, usage, and capability preferences."
+              : "推荐结果通过 `/api/recommend` 计算，按预算、用量和能力需求进行额度约束评分。"}
           </p>
         </section>
 
         {loading && (
           <div className="rounded-3xl border border-zinc-200 bg-white p-8 text-sm font-bold text-zinc-500">
-            正在计算推荐组合...
+            {lang === "en" ? "Calculating recommendations..." : "正在计算推荐组合..."}
           </div>
         )}
 
@@ -241,38 +258,39 @@ export default function ResultClient() {
 
         {!loading && !error && results.length === 0 && (
           <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6 text-sm font-medium text-amber-900">
-            未找到符合预算和额度约束的组合。可以提高预算、降低用量，或开启 API 计费补位后重试。
-            如果选择了已有订阅，它们也会计入总预算。
+            {lang === "en"
+              ? "No combination fits the budget and quota requirements. Try raising budget, reducing usage, or enabling API billing. Selected existing plans are also included in total cost."
+              : "未找到符合预算和额度约束的组合。可以提高预算、降低用量，或开启 API 计费补位后重试。如果选择了已有订阅，它们也会计入总预算。"}
           </div>
         )}
 
         {!loading && !error && top && (
           <div className="space-y-8">
             <section className="space-y-3">
-              <h2 className="text-lg font-extrabold">最优推荐方案</h2>
-              <ComboCard result={top} badge="最推荐" />
+              <h2 className="text-lg font-extrabold">{t.bestPick}</h2>
+              <ComboCard result={top} badge="最推荐" lang={lang} />
             </section>
 
             {budgetPick && budgetPick !== top && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold">量大管饱备选</h2>
-                <ComboCard result={budgetPick} badge="量大" />
+                <h2 className="text-lg font-extrabold">{t.highQuotaPick}</h2>
+                <ComboCard result={budgetPick} badge="量大" lang={lang} />
               </section>
             )}
 
             {performancePick && performancePick !== top && performancePick !== budgetPick && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold">高性能强力组合</h2>
-                <ComboCard result={performancePick} badge="高性能" />
+                <h2 className="text-lg font-extrabold">{t.highPerfPick}</h2>
+                <ComboCard result={performancePick} badge="高性能" lang={lang} />
               </section>
             )}
 
             {alternatives.length > 0 && (
               <section className="space-y-3">
-                <h2 className="text-lg font-extrabold">其它候选组合</h2>
+                <h2 className="text-lg font-extrabold">{t.otherCandidates}</h2>
                 <div className="space-y-5">
                   {alternatives.map((result) => (
-                    <ComboCard key={result.combo.plans.map((plan) => plan.id).join("-")} result={result} />
+                    <ComboCard key={result.combo.plans.map((plan) => plan.id).join("-")} result={result} lang={lang} />
                   ))}
                 </div>
               </section>
