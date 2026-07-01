@@ -143,15 +143,15 @@ function ComboCard({
   } else if (isHighPerf) {
     // LED Pixel Strip Theme
     cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
-    topBarStyles += "h-2 bg-neutral-950 overflow-hidden";
+    topBarStyles += "h-2 bg-neutral-950";
     badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
     badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
   } else if (isHighQuota) {
-    // Dark Slate Industrial Theme
-    cardStyles += "bg-stone-50/80 border-stone-250 hover:bg-stone-50 hover:border-stone-350 shadow-sm";
-    topBarStyles += "h-1 bg-stone-500";
+    // Battery Charging Theme
+    cardStyles += "bg-gradient-to-br from-white via-white to-emerald-50/10 border-emerald-250/80 shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/15 hover:border-emerald-350";
+    topBarStyles += "h-2 bg-stone-100";
     badgeLabel = lang === "en" ? "🔋 High Quota" : "🔋 量大管饱";
-    badgeStyles += "bg-stone-200 text-stone-800 border-stone-300";
+    badgeStyles += "bg-emerald-50 text-emerald-800 border-emerald-100";
   } else if (isChineseFriendly) {
     // Clean Amber Accent Theme
     cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
@@ -166,14 +166,18 @@ function ComboCard({
 
   return (
     <div className={cardStyles}>
-      {/* Top Border light effect */}
+      {/* Top Border light effect with rounded top-t corners */}
       {isHighPerf ? (
-        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden">
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
           <div className="led-pixel-strip absolute inset-0" />
           <div className="led-pixel-mask absolute inset-0" />
         </div>
+      ) : isHighQuota ? (
+        <div className="absolute top-0 inset-x-0 h-2 bg-stone-100 overflow-hidden rounded-t-2xl">
+          <div className="battery-charge-indicator" />
+        </div>
       ) : (
-        <div className={topBarStyles} />
+        <div className={`${topBarStyles} rounded-t-2xl`} />
       )}
 
       {/* Sweeping golden reflection overlay */}
@@ -196,7 +200,7 @@ function ComboCard({
             {r.combo.plans.map((p) => p.name).join(" + ")}
           </h2>
           
-          <p className="text-xs font-semibold text-stone-405 uppercase tracking-wider">
+          <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
             {r.combo.plans.map((p) => p.provider).join(" · ")}
           </p>
           <div className="flex flex-wrap gap-2">
@@ -430,10 +434,25 @@ export default async function ResultPage({
           0% { background-position: 0% 50%; }
           100% { background-position: -200% 50%; }
         }
+        @keyframes batteryCharge {
+          0% { width: 0%; opacity: 0.3; }
+          75% { width: 100%; opacity: 1; }
+          90% { width: 100%; opacity: 1; }
+          95% { width: 100%; opacity: 0; }
+          100% { width: 0%; opacity: 0; }
+        }
         .gold-shimmer-border {
           background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
           background-size: 200% auto;
           animation: goldShimmer 6s linear infinite;
+        }
+        .gold-shimmer-text {
+          background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: goldShimmer 6s linear infinite;
+          display: inline-block;
         }
         .gold-shine-sweep {
           position: absolute;
@@ -452,6 +471,11 @@ export default async function ResultPage({
         }
         .led-pixel-mask {
           background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 4px, #0a0a0a 4px, #0a0a0a 6px);
+        }
+        .battery-charge-indicator {
+          height: 100%;
+          background: linear-gradient(90deg, #34d399, #10b981);
+          animation: batteryCharge 3s ease-in-out infinite;
         }
       `}} />
 
@@ -509,7 +533,7 @@ export default async function ResultPage({
             </div>
             <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
               <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramPayment}</span>
-              <span className="text-[11px] text-neutral-300 font-semibold leading-tight block mt-0.5">
+              <span className="text-[11px] text-zinc-350 font-semibold leading-tight block mt-0.5">
                 {input.acceptsApiBilling ? t.paramApiOk : t.paramApiNo}
                 <br />
                 {input.hasForeignCard ? t.paramCardOk : t.paramCardNo}
@@ -551,7 +575,7 @@ export default async function ResultPage({
             {top && (
               <section className="space-y-3">
                 <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-amber-500">★</span> {t.bestPick}
+                  <span className="gold-shimmer-text">★</span> {t.bestPick}
                 </h2>
                 <ComboCard r={top} rank={1} badge="最推荐" lang={lang} />
               </section>
@@ -561,7 +585,7 @@ export default async function ResultPage({
             {highQuotaPick && top && highQuotaPick !== top && (
               <section className="space-y-3">
                 <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
-                  <span className="text-stone-605">★</span> {t.highQuotaPick}
+                  <span className="text-emerald-600">★</span> {t.highQuotaPick}
                 </h2>
                 <ComboCard
                   r={highQuotaPick}
