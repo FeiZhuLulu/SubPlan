@@ -75,7 +75,7 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
     cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
     topBarStyles += "h-1 bg-amber-400";
     badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
-    badgeStyles += "bg-amber-50 text-amber-800 border-amber-100";
+    badgeStyles += "bg-amber-50 text-amber-805 border-amber-250";
   } else {
     cardStyles += "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
     topBarStyles += "h-1 bg-stone-200";
@@ -83,9 +83,9 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
 
   return (
     <article className={cardStyles}>
-      {/* Top Border light effect with rounded top-t corners */}
+      {/* Top Border light effect. Sharp corners for flow neon strip, rounded corners for others */}
       {isHighPerf ? (
-        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-none">
           <div className="flowing-neon-strip absolute inset-0" />
         </div>
       ) : isHighQuota ? (
@@ -115,10 +115,10 @@ function ComboCard({ result, badge, lang }: { result: ScoredCombo; badge?: strin
               let badgeColor = "";
               if (plan.isExisting) {
                 stateText = t.planStateOwned;
-                badgeColor = "bg-emerald-50 text-emerald-800 border border-emerald-250";
+                badgeColor = "bg-emerald-50 text-emerald-800 border border-emerald-255";
               } else if (plan.isUpgrade) {
                 stateText = t.planStateUpgrade;
-                badgeColor = "bg-amber-50 text-amber-800 border border-amber-250";
+                badgeColor = "bg-amber-50 text-amber-800 border border-amber-255";
               } else {
                 stateText = t.planStateNew;
                 badgeColor = "bg-blue-50 text-blue-800 border border-blue-200";
