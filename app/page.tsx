@@ -1,5 +1,6 @@
-import Link from "next/link";
 import RecommendForm from "@/components/RecommendForm";
+
+const SHOW_ADMIN_ENTRY = process.env.NEXT_PUBLIC_ENABLE_ADMIN === "1";
 
 export default function Home() {
   return (
@@ -18,12 +19,14 @@ export default function Home() {
             SubPlan
           </span>
         </div>
-        <Link
-          href="/admin"
-          className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-4 py-2 text-xs font-semibold text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:shadow-sm transition-all"
-        >
-          ⚙️ 数据管理后台
-        </Link>
+        {SHOW_ADMIN_ENTRY && (
+          <a
+            href="/admin"
+            className="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-md px-4 py-2 text-xs font-semibold text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:shadow-sm transition-all"
+          >
+            ⚙️ 数据管理后台
+          </a>
+        )}
       </div>
 
       {/* Main Form content */}
