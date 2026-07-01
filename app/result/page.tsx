@@ -141,7 +141,7 @@ function ComboCard({
     badgeLabel = lang === "en" ? "✨ Best Pick" : "✨ 综合首选";
     badgeStyles += "bg-amber-50/90 text-amber-800 border-amber-200";
   } else if (isHighPerf) {
-    // LED Pixel Strip Theme
+    // Smooth flowing neon strip Theme
     cardStyles += "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-350";
     topBarStyles += "h-2 bg-neutral-950";
     badgeLabel = lang === "en" ? "⚡ Max Performance" : "⚡ 极致性能";
@@ -157,7 +157,7 @@ function ComboCard({
     cardStyles += "bg-white border-stone-200/80 shadow-sm hover:border-stone-350 hover:shadow-md";
     topBarStyles += "h-1 bg-amber-400";
     badgeLabel = lang === "en" ? "✍️ Chinese Friendly" : "✍️ 中文友好";
-    badgeStyles += "bg-amber-50 text-amber-850 border-amber-250";
+    badgeStyles += "bg-amber-50 text-amber-855 border-amber-250";
   } else {
     // Ordinary alternatives: neutral and set-back visually
     cardStyles += "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
@@ -169,8 +169,7 @@ function ComboCard({
       {/* Top Border light effect with rounded top-t corners */}
       {isHighPerf ? (
         <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-t-2xl">
-          <div className="led-pixel-strip absolute inset-0" />
-          <div className="led-pixel-mask absolute inset-0" />
+          <div className="flowing-neon-strip absolute inset-0" />
         </div>
       ) : isHighQuota ? (
         <div className="absolute top-0 inset-x-0 h-2 bg-stone-100 overflow-hidden rounded-t-2xl">
@@ -216,7 +215,7 @@ function ComboCard({
                   "{from}",
                   plan.upgradeFromPlanName ?? ""
                 );
-                badgeColor = "bg-amber-50 text-amber-850 border border-amber-200";
+                badgeColor = "bg-amber-50 text-amber-855 border border-amber-200";
               } else {
                 stateLabel = t.planStateNew;
                 badgeColor = "bg-blue-50 text-blue-800 border border-blue-200";
@@ -275,7 +274,7 @@ function ComboCard({
 
         <div className="space-y-1 border-l border-stone-100 pl-4">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsAlgScore}</p>
-          <p className="text-lg font-black text-neutral-850">
+          <p className="text-lg font-black text-neutral-855">
             {r.finalScore.toFixed(1)}
           </p>
         </div>
@@ -283,7 +282,7 @@ function ComboCard({
         <div className="space-y-1 border-l border-stone-100 pl-4">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">{t.metricsQuotaCoverage}</p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-black text-neutral-800">
+            <span className="text-lg font-black text-neutral-805">
               {(r.combo.usageCoverage * 100).toFixed(0)}%
             </span>
             <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
@@ -358,7 +357,7 @@ function ComboCard({
       {/* Cautions */}
       {r.cautions.length > 0 && (
         <div className="mt-4 rounded-2xl bg-amber-55/40 border border-amber-200/50 p-4 relative z-10">
-          <h3 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1.5">{t.cautionHeader}</h3>
+          <h3 className="text-xs font-bold text-amber-805 uppercase tracking-wider mb-1.5">{t.cautionHeader}</h3>
           <ul className="space-y-1 text-xs text-amber-850">
             {r.cautions.map((caution, i) => (
               <li key={i} className="flex items-start gap-1.5">
@@ -464,13 +463,10 @@ export default async function ResultPage({
           pointer-events: none;
           z-index: 5;
         }
-        .led-pixel-strip {
+        .flowing-neon-strip {
           background: linear-gradient(90deg, #a855f7 0%, #ec4899 25%, #3b82f6 50%, #a855f7 75%, #ec4899 100%);
           background-size: 200% auto;
           animation: flowLED 4s linear infinite;
-        }
-        .led-pixel-mask {
-          background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 4px, #0a0a0a 4px, #0a0a0a 6px);
         }
         .battery-charge-indicator {
           height: 100%;
@@ -533,7 +529,7 @@ export default async function ResultPage({
             </div>
             <div className="bg-neutral-850/60 p-3 rounded-xl border border-neutral-800">
               <span className="block text-[10px] text-neutral-400 font-bold uppercase">{t.paramPayment}</span>
-              <span className="text-[11px] text-zinc-350 font-semibold leading-tight block mt-0.5">
+              <span className="text-[11px] text-neutral-300 font-semibold leading-tight block mt-0.5">
                 {input.acceptsApiBilling ? t.paramApiOk : t.paramApiNo}
                 <br />
                 {input.hasForeignCard ? t.paramCardOk : t.paramCardNo}
