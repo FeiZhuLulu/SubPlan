@@ -72,35 +72,7 @@ npm run build
 
 ## 部署
 
-### Vercel
-
-推荐使用 Vercel 部署：
-
-1. 将仓库推送到 GitHub。
-2. 在 Vercel 导入项目。
-3. Framework Preset 选择 `Next.js`。
-4. Build Command 使用默认值：
-
-```bash
-npm run build
-```
-
-5. Deploy。
-
-正常推荐功能不需要任何环境变量。
-
-### Admin 后台
-
-`/admin` 和 `/api/admin` 只用于本地维护 JSON 数据。生产环境默认禁用。
-
-如需在私有部署中临时启用：
-
-```bash
-ENABLE_ADMIN_API=1
-NEXT_PUBLIC_ENABLE_ADMIN=1
-```
-
-公开站点不建议启用后台，除非你已经增加认证和权限控制。
+SubPlan 是标准 Next.js 应用，可部署到 Vercel、Cloudflare Pages 等支持 Next.js 的平台。正常推荐功能不需要环境变量。
 
 ## 开源贡献
 
