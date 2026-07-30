@@ -5,6 +5,8 @@
 - `app/page.tsx`：首页输入表单
 - `app/result/page.tsx`：推荐结果页（服务端渲染，读取 query string）
 - `components/RecommendForm.tsx`：表单客户端组件
+- `components/ComboCard.tsx`：推荐组合卡片（客户端组件，结果页与全部列表共用）
+- `components/AllResults.tsx`：全部组合的可展开列表（客户端组件）
 - `lib/recommend.ts`：推荐引擎入口
 - `lib/scoring.ts`：核心评分、组合生成、额度分配
 - `data/*.json`：运行时数据
