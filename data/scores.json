@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.1",
+  "schemaVersion": "0.4.7",
   "lastUpdatedAt": "2026-07-30",
   "capabilityKeys": [
     "frontend",
@@ -16,11 +16,10 @@
     "ecosystem"
   ],
   "notes": [
-    "Plan-level 0–100 capability scores.",
-    "v0.4.1 ALIGNED TO ORIGINAL DATASET SCALE (git HEAD scores.json).",
-    "Model upgrades (GPT-5.6 Sol, Claude Fable/Opus5, Kimi K3, Gemini 3.6 Flash, Grok, Perplexity) applied as modest deltas on HEAD bases — not a 95–100 remap.",
-    "Unified benchmark matrix in model-benchmarks.json remains the relative evidence source; plan scores stay comparable to Cursor/GLM/DeepSeek rows.",
-    "Sol Pro excluded. Gemini 3.6 Flash not Gemini 3 Flash. K3 coding treated as S-class relative to Sol/Fable, absolute numbers on dataset scale."
+    "v0.4.7: frontend PRIMARY = Frontend Code Arena real scores from user chart HNXpi8UaIAAM6Ag.jpg.",
+    "K3 1679, Fable 1631, Sol 1618, GLM-5.2 1587, Opus4.8T 1562, Grok-4.5 1558.",
+    "Not WebDev Overall (different board).",
+    "Raw: data/arena-webdev-scores.json → boards.frontendCodeArena"
   ],
   "planCapabilityScores": [
     {
@@ -66,7 +65,7 @@
     {
       "planId": "chatgpt_plus",
       "scores": {
-        "frontend": 82,
+        "frontend": 92,
         "backend": 91,
         "agentCoding": 88,
         "debugging": 89,
@@ -80,13 +79,13 @@
         "ecosystem": 94
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD base + GPT-5.6 Sol (unified rank ~Sol). Scale aligned to original dataset."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
     },
     {
       "planId": "chatgpt_pro_5x",
       "scores": {
-        "frontend": 86,
+        "frontend": 92,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -100,13 +99,13 @@
         "ecosystem": 98
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD Pro base + Sol higher-effort quota (not Sol Pro). Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
     },
     {
       "planId": "chatgpt_pro_20x",
       "scores": {
-        "frontend": 86,
+        "frontend": 92,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -120,8 +119,8 @@
         "ecosystem": 98
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD Pro base + Sol higher-effort quota (not Sol Pro). Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
     },
     {
       "planId": "claude_free",
@@ -146,7 +145,7 @@
     {
       "planId": "claude_pro",
       "scores": {
-        "frontend": 88,
+        "frontend": 87,
         "backend": 91,
         "agentCoding": 90,
         "debugging": 91,
@@ -160,13 +159,13 @@
         "ecosystem": 88
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + Opus 5/4.8 main, Fable via credits. Dataset scale (not 95–100 remap)."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1562 (claude-opus-4.8) → frontend 87 [HNXpi8UaIAAM6Ag.jpg]. was 87."
     },
     {
       "planId": "claude_max_5x",
       "scores": {
-        "frontend": 94,
+        "frontend": 93,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -180,13 +179,13 @@
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + Fable 5 (~50% limits) + Opus 5. Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
     },
     {
       "planId": "claude_max_20x",
       "scores": {
-        "frontend": 94,
+        "frontend": 93,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -200,13 +199,13 @@
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + Fable 5 + Opus 5. Same class as Max 5x; quota differs."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
     },
     {
       "planId": "google_ai_plus_us",
       "scores": {
-        "frontend": 68,
+        "frontend": 84,
         "backend": 73,
         "agentCoding": 66,
         "debugging": 71,
@@ -221,12 +220,12 @@
       },
       "scoreConfidence": "low",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + Gemini 3.6 Flash (GA 2026-07-21), not Gemini 3 Flash."
+      "notes": "Arena WebDev Elo 1528 (gemini-3.6-flash) → frontend 84 [scraped arena.ai 2026-07-30]. was 68."
     },
     {
       "planId": "google_ai_pro_us",
       "scores": {
-        "frontend": 81,
+        "frontend": 79,
         "backend": 85,
         "agentCoding": 82,
         "debugging": 83,
@@ -241,7 +240,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + 3.1 Pro research + 3.6 Flash volume."
+      "notes": "Arena WebDev Elo 1447 (gemini-3.1-pro) → frontend 79 [scraped arena.ai 2026-07-30]. was 81."
     },
     {
       "planId": "google_ai_ultra_5x_us",
@@ -286,7 +285,7 @@
     {
       "planId": "google_ai_pro_jp",
       "scores": {
-        "frontend": 84,
+        "frontend": 79,
         "backend": 88,
         "agentCoding": 86,
         "debugging": 86,
@@ -301,7 +300,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Mirrors US Pro capability (HEAD+3.1 Pro/3.6 Flash); JP price only differs."
+      "notes": "Arena WebDev Elo 1447 (gemini-3.1-pro) → frontend 79 [scraped arena.ai 2026-07-30]. was 84."
     },
     {
       "planId": "cursor_hobby",
@@ -426,7 +425,7 @@
     {
       "planId": "kimi_andante_cn",
       "scores": {
-        "frontend": 87,
+        "frontend": 98,
         "backend": 84,
         "agentCoding": 89,
         "debugging": 84,
@@ -440,13 +439,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + limited K3 share."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_moderato_cn",
       "scores": {
-        "frontend": 90,
+        "frontend": 98,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -460,13 +459,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + K3 pool. Unified rank: K3 coding S but below Sol/Fable; absolute scale = HEAD+delta."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_allegretto_cn",
       "scores": {
-        "frontend": 94,
+        "frontend": 98,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -480,13 +479,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD Allegretto already strong coding; +K3 research/multimodal. Keep dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_allegro_cn",
       "scores": {
-        "frontend": 95,
+        "frontend": 98,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -500,8 +499,8 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "CN Allegro above Allegretto (HEAD allegro row was misaligned/duplicated moderato). K3 long-context/swarm. Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "minimax_token_plus_cn",
@@ -646,7 +645,7 @@
     {
       "planId": "glm_coding_pro_cn",
       "scores": {
-        "frontend": 90,
+        "frontend": 89,
         "backend": 88,
         "agentCoding": 88,
         "debugging": 86,
@@ -661,12 +660,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "Frontend Code Arena 1587 (glm-5.2) → frontend 89 [HNXpi8UaIAAM6Ag.jpg]. was 89."
     },
     {
       "planId": "glm_coding_max_cn",
       "scores": {
-        "frontend": 90,
+        "frontend": 89,
         "backend": 88,
         "agentCoding": 88,
         "debugging": 86,
@@ -681,7 +680,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "Frontend Code Arena 1587 (glm-5.2) → frontend 89 [HNXpi8UaIAAM6Ag.jpg]. was 89."
     },
     {
       "planId": "ollama_free",
@@ -766,7 +765,7 @@
     {
       "planId": "supergrok_lite",
       "scores": {
-        "frontend": 68,
+        "frontend": 86,
         "backend": 81,
         "agentCoding": 72,
         "debugging": 78,
@@ -781,12 +780,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Between Go and Plus; SuperGrok Lite. Dataset scale."
+      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
     },
     {
       "planId": "supergrok",
       "scores": {
-        "frontend": 82,
+        "frontend": 86,
         "backend": 89,
         "agentCoding": 90,
         "debugging": 88,
@@ -801,7 +800,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Peer ChatGPT Plus (HEAD) then Grok 4.5 profile: research/Imagine strong, coding a step under Sol."
+      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
     },
     {
       "planId": "supergrok_heavy",
@@ -821,7 +820,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Peer Pro-class quota; Heavy multi-agent. Dataset scale."
+      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
     },
     {
       "planId": "perplexity_free",
@@ -886,7 +885,7 @@
     {
       "planId": "kimi_moderato_global",
       "scores": {
-        "frontend": 90,
+        "frontend": 98,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -900,13 +899,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "GLOBAL Moderato ≈ CN Moderato capability (K3). Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_allegretto_global",
       "scores": {
-        "frontend": 94,
+        "frontend": 98,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -920,13 +919,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "GLOBAL Allegretto ≈ CN Allegretto (K3). Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_allegro_global",
       "scores": {
-        "frontend": 95,
+        "frontend": 98,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -940,13 +939,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "GLOBAL Allegro ≈ CN Allegro. Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_vivace_global",
       "scores": {
-        "frontend": 95,
+        "frontend": 99,
         "backend": 92,
         "agentCoding": 97,
         "debugging": 94,
@@ -960,8 +959,8 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Top GLOBAL above Allegro. Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 99."
     },
     {
       "planId": "openrouter_api",
@@ -1206,7 +1205,7 @@
     {
       "planId": "openai_gpt56_sol_api",
       "scores": {
-        "frontend": 86,
+        "frontend": 92,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -1220,8 +1219,8 @@
         "ecosystem": 94
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Sol API ≈ Pro-class coding (HEAD Pro + Sol). No image product."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
     },
     {
       "planId": "openai_gpt56_terra_api",
@@ -1266,7 +1265,7 @@
     {
       "planId": "claude_opus_5_api",
       "scores": {
-        "frontend": 94,
+        "frontend": 87,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -1281,12 +1280,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Opus 5 API ≈ Max coding band (HEAD Max + Fable/Opus refresh)."
+      "notes": "Frontend Code Arena score 1562 (claude-opus-4.8) → frontend 87 [chart HNXpi8UaIAAM6Ag.jpg]. was 95."
     },
     {
       "planId": "claude_opus_48_api",
       "scores": {
-        "frontend": 88,
+        "frontend": 87,
         "backend": 93,
         "agentCoding": 92,
         "debugging": 93,
@@ -1301,12 +1300,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Opus 4.8 API slightly under Opus 5 / Fable ceiling."
+      "notes": "Frontend Code Arena 1562 (claude-opus-4.8) → frontend 87 [HNXpi8UaIAAM6Ag.jpg]. was 87."
     },
     {
       "planId": "claude_sonnet_5_api",
       "scores": {
-        "frontend": 88,
+        "frontend": 85,
         "backend": 88,
         "agentCoding": 86,
         "debugging": 88,
@@ -1321,12 +1320,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Sonnet 5 workhorse under Opus/Fable. Dataset scale."
+      "notes": "Frontend Code Arena 1542 (claude-sonnet-5) → frontend 85 [HNXpi8UaIAAM6Ag.jpg]. was 85."
     },
     {
       "planId": "kimi_k3_api_global",
       "scores": {
-        "frontend": 94,
+        "frontend": 98,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -1340,13 +1339,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "K3 API coding S on unified rank, absolute ≈ Allegretto band (HEAD scale)."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "kimi_k3_api_cn",
       "scores": {
-        "frontend": 94,
+        "frontend": 98,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -1360,13 +1359,13 @@
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Same K3 model as GLOBAL; CN price estimated."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
     },
     {
       "planId": "claude_fable_5_api",
       "scores": {
-        "frontend": 94,
+        "frontend": 93,
         "backend": 96,
         "agentCoding": 95,
         "debugging": 96,
@@ -1380,8 +1379,8 @@
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Fable 5 API: unified rank ≈ Sol, intelligence slightly above Sol. Dataset scale."
+      "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
+      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
     }
   ]
 }

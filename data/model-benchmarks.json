@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "0.4.1",
+  "schemaVersion": "0.4.7",
   "lastUpdatedAt": "2026-07-30",
   "methodology": {
-    "principle": "One fixed metric set for every model. Missing values are null. We never score model A with metric set X and model B with a different set Y.",
+    "principle": "Unified metric set per dimension. Missing = null. Frontend primary = Arena (Code Arena Fullstack/Frontend), not ad-hoc proxies.",
     "metrics": {
       "aaIntelligenceIndex": {
         "id": "aaIntelligenceIndex",
@@ -42,6 +42,36 @@
         "asOf": "2026-07",
         "role": "agent_coding_secondary",
         "caveat": "Index score is somewhat harness-coupled. Used only as a secondary weight, never as the sole coding score, and never replaced by a different coding bench when missing."
+      },
+      "arenaFrontendCode": {
+        "id": "arenaFrontendCode",
+        "label": "Arena.ai Frontend / Fullstack Code Arena (rank or Elo when published)",
+        "unit": "rank_or_elo",
+        "comparableAcrossModels": true,
+        "harness": "Arena Code (community human preference / fullstack-frontend arena)",
+        "sources": [
+          "https://arena.ai/",
+          "community reports of Code Arena Fullstack leaderboard (2026-07)"
+        ],
+        "asOf": "2026-07",
+        "role": "frontend_primary",
+        "note": "PRIMARY = Frontend Code Arena scores from Arena chart (user screenshot + arena.ai). Not WebDev Overall.",
+        "scraped": true,
+        "board": "Frontend Code Arena"
+      },
+      "grokBuildCodingAgent": {
+        "id": "grokBuildCodingAgent",
+        "label": "AA Coding Agent Index in Grok Build harness",
+        "unit": "index",
+        "comparableAcrossModels": "limited_harness_coupled",
+        "harness": "Grok Build (xAI coding agent CLI) — AA Coding Agent Index components",
+        "sources": [
+          "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+          "https://x.ai/news/grok-4-5"
+        ],
+        "asOf": "2026-07",
+        "role": "agent_coding_grok_build",
+        "note": "Grok-native harness. Score 76 for Grok 4.5; avg ~1.9M tokens/task (vs Fable Claude Code ~7.2M, GPT-5.5 Codex ~6.2M)."
       }
     },
     "normalization": {
@@ -62,13 +92,16 @@
         "multimodal",
         "ecosystem"
       ],
-      "planScore": "quotaShare-weighted average of model derived scores + fixed product deltas (not alternate benches)."
+      "planScore": "quotaShare-weighted average of model derived scores + fixed product deltas (not alternate benches).",
+      "frontend": "PRIMARY: Arena Frontend/Fullstack Code Arena rank. Map rank→0-100 relative, then apply as DELTA on HEAD plan scores (dataset scale). Do not use SWE-bench or AA Coding Agent as frontend primary.",
+      "grokBuild": "Grok Build is SuperGrok/X Premium+ coding path. Prefer Grok Build Coding Agent Index + token/task when discussing Grok coding efficiency."
     },
     "nonGoals": [
       "Do not use vendor-only SWE-bench Pro to fill missing Vals SWE cells.",
-      "Do not use Code Arena only for Kimi frontend while using another frontend proxy for others inside the matrix.",
-      "Do not mix AA Coding Agent Index into primary scores across different agent harnesses.",
-      "Do not use Sol Pro (not in Codex path)."
+      "Do not use non-Arena proxies as primary frontend when Arena rank exists for the model.",
+      "Do not mix AA Coding Agent Index into primary scores across different agent harnesses without labeling harness.",
+      "Do not use Sol Pro (not in Codex path).",
+      "Do not treat kimi-k2.5 as current product model."
     ],
     "planScore": "quotaShare-weighted evidence informs DELTAS on HEAD plan scores; absolute plan scores stay on dataset scale (v0.4.1)."
   },
@@ -96,6 +129,25 @@
       "title": "AA Claude Opus 5 writeup",
       "url": "https://artificialanalysis.ai/",
       "asOf": "2026-07"
+    },
+    {
+      "id": "arena_frontend",
+      "title": "Arena.ai Code Arena (Frontend/Fullstack)",
+      "url": "https://arena.ai/",
+      "asOf": "2026-07",
+      "role": "frontend_primary"
+    },
+    {
+      "id": "aa_grok45",
+      "title": "AA: Grok 4.5 brings xAI to the intelligence frontier",
+      "url": "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+      "asOf": "2026-07-08"
+    },
+    {
+      "id": "grok_build",
+      "title": "xAI Grok 4.5 / Grok Build",
+      "url": "https://x.ai/news/grok-4-5",
+      "asOf": "2026-07"
     }
   ],
   "models": [
@@ -107,7 +159,15 @@
       "metrics": {
         "aaIntelligenceIndex": 61,
         "swebenchVerifiedVals": 97,
-        "aaCodingAgentIndex": 80
+        "aaCodingAgentIndex": 80,
+        "arenaFrontendCode": {
+          "elo": 1669,
+          "frontendScore0to100": 95,
+          "webdevOverall": 1669,
+          "fullstack": null,
+          "primaryFor": "frontend",
+          "source": "https://arena.ai/leaderboard/code/webdev"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA: Opus 5 (max) ~61, narrowly leads Fable 5",
@@ -149,7 +209,15 @@
       "metrics": {
         "aaIntelligenceIndex": 59.9,
         "swebenchVerifiedVals": 95,
-        "aaCodingAgentIndex": 77.2
+        "aaCodingAgentIndex": 77.2,
+        "arenaFrontendCode": {
+          "elo": 1631,
+          "rank": 2,
+          "frontendScore0to100": 93,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA / OpenAI table ~59.9",
@@ -173,7 +241,8 @@
         "chineseWriting": null,
         "imageGeneration": null,
         "multimodal": null,
-        "ecosystem": null
+        "ecosystem": null,
+        "frontendFromArena": 93
       },
       "coverage": {
         "hasSwe": true,
@@ -191,7 +260,15 @@
       "metrics": {
         "aaIntelligenceIndex": 58.9,
         "swebenchVerifiedVals": 96.2,
-        "aaCodingAgentIndex": 80
+        "aaCodingAgentIndex": 80,
+        "arenaFrontendCode": {
+          "elo": 1618,
+          "rank": 3,
+          "frontendScore0to100": 92,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "OpenAI/AA table 58.9 (max)",
@@ -215,7 +292,8 @@
         "chineseWriting": null,
         "imageGeneration": null,
         "multimodal": null,
-        "ecosystem": null
+        "ecosystem": null,
+        "frontendFromArena": 96
       },
       "coverage": {
         "hasSwe": true,
@@ -233,7 +311,13 @@
       "metrics": {
         "aaIntelligenceIndex": 55,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": 77.4
+        "aaCodingAgentIndex": 77.4,
+        "arenaFrontendCode": {
+          "rank": null,
+          "relativeScoreHint": null,
+          "note": null,
+          "primaryFor": "frontend"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "OpenAI/AA ~55 (max)",
@@ -275,7 +359,13 @@
       "metrics": {
         "aaIntelligenceIndex": 51.2,
         "swebenchVerifiedVals": 93,
-        "aaCodingAgentIndex": 74.6
+        "aaCodingAgentIndex": 74.6,
+        "arenaFrontendCode": {
+          "rank": null,
+          "relativeScoreHint": null,
+          "note": null,
+          "primaryFor": "frontend"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "OpenAI/AA 51.2",
@@ -317,7 +407,15 @@
       "metrics": {
         "aaIntelligenceIndex": 57,
         "swebenchVerifiedVals": 93.4,
-        "aaCodingAgentIndex": 57
+        "aaCodingAgentIndex": 57,
+        "arenaFrontendCode": {
+          "elo": 1679,
+          "rank": 1,
+          "frontendScore0to100": 98,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA ~57",
@@ -341,7 +439,8 @@
         "chineseWriting": null,
         "imageGeneration": null,
         "multimodal": null,
-        "ecosystem": null
+        "ecosystem": null,
+        "frontendFromArena": 100
       },
       "coverage": {
         "hasSwe": true,
@@ -359,7 +458,15 @@
       "metrics": {
         "aaIntelligenceIndex": 56,
         "swebenchVerifiedVals": 88.6,
-        "aaCodingAgentIndex": 55
+        "aaCodingAgentIndex": 55,
+        "arenaFrontendCode": {
+          "elo": 1562,
+          "rank": 5,
+          "frontendScore0to100": 87,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA Opus 4.8 max ~56",
@@ -401,12 +508,48 @@
       "metrics": {
         "aaIntelligenceIndex": 54,
         "swebenchVerifiedVals": 86.6,
-        "aaCodingAgentIndex": 58
+        "aaCodingAgentIndex": {
+          "value": 76,
+          "harness": "Grok Build",
+          "note": "AA Coding Agent Index in Grok Build (not Codex/Claude Code)"
+        },
+        "arenaFrontendCode": {
+          "elo": 1558,
+          "rank": 6,
+          "frontendScore0to100": 86,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        },
+        "grokBuild": {
+          "harness": "Grok Build",
+          "aaCodingAgentIndex": 76,
+          "avgTokensPerCodingAgentTask": 1900000,
+          "costPerTaskUsd": 2.49,
+          "compare": {
+            "claude-fable-5_claude_code": {
+              "aaCodingAgentIndex": 77,
+              "avgTokensPerTask": 7200000,
+              "costPerTaskUsd": 11.8
+            },
+            "gpt-5.5_codex": {
+              "aaCodingAgentIndex": 76,
+              "avgTokensPerTask": 6200000,
+              "costPerTaskUsd": 5.07
+            }
+          },
+          "access": "SuperGrok and X Premium+ (Grok Build beta); default model Grok 4.5 in Grok Build",
+          "sources": [
+            "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+            "https://x.ai/news/grok-4-5",
+            "https://composio.dev/content/grok-build-cli-vs-claude-code"
+          ]
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA Grok 4.5 high ~54",
         "swebenchVerifiedVals": "Vals 86.60%",
-        "aaCodingAgentIndex": "AA coding-agent high ~58 (Grok Build; harness-coupled)"
+        "aaCodingAgentIndex": "Grok 4.5 in Grok Build scores 76 (AA); ~1.9M tokens/task avg"
       },
       "normalized": {
         "aaIntelligenceIndex": 88.5,
@@ -433,7 +576,8 @@
         "hasCodingAgent": true,
         "codingAgentUsedInScore": false,
         "confidence": "high"
-      }
+      },
+      "harnessNotes": "Primary coding agent path for SuperGrok: Grok Build CLI (xAI). Token-efficient vs Claude Code/Codex on AA Coding Agent tasks."
     },
     {
       "modelId": "gemini-3.6-flash",
@@ -443,7 +587,15 @@
       "metrics": {
         "aaIntelligenceIndex": 50,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "elo": 1528,
+          "frontendScore0to100": 84,
+          "webdevOverall": 1528,
+          "fullstack": null,
+          "primaryFor": "frontend",
+          "source": "https://arena.ai/leaderboard/code/webdev"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": "AA Gemini 3.6 Flash (high) ~50 vs Sol high 56",
@@ -485,7 +637,15 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "elo": 1447,
+          "frontendScore0to100": 79,
+          "webdevOverall": 1446,
+          "fullstack": 1448,
+          "primaryFor": "frontend",
+          "source": "https://arena.ai/leaderboard/code/webdev"
+        }
       },
       "metricNotes": {
         "aaIntelligenceIndex": null,
@@ -527,7 +687,15 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "elo": 1542,
+          "rank": 10,
+          "frontendScore0to100": 85,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -565,7 +733,15 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "elo": 1515,
+          "rank": 18,
+          "frontendScore0to100": 82,
+          "board": "Frontend Code Arena",
+          "primaryFor": "frontend",
+          "source": "user screenshot HNXpi8UaIAAM6Ag.jpg / arena.ai"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -603,7 +779,15 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "elo": 1473,
+          "frontendScore0to100": 80,
+          "webdevOverall": 1473,
+          "fullstack": null,
+          "primaryFor": "frontend",
+          "source": "https://arena.ai/leaderboard/code/webdev"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -641,7 +825,13 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "rank": null,
+          "relativeScoreHint": null,
+          "note": null,
+          "primaryFor": "frontend"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -679,7 +869,13 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "rank": null,
+          "relativeScoreHint": null,
+          "note": null,
+          "primaryFor": "frontend"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -717,7 +913,13 @@
       "metrics": {
         "aaIntelligenceIndex": null,
         "swebenchVerifiedVals": null,
-        "aaCodingAgentIndex": null
+        "aaCodingAgentIndex": null,
+        "arenaFrontendCode": {
+          "rank": null,
+          "relativeScoreHint": null,
+          "note": null,
+          "primaryFor": "frontend"
+        }
       },
       "metricNotes": {},
       "normalized": {
@@ -752,5 +954,181 @@
     "version": "0.4.1",
     "rule": "model-benchmarks.json is for relative model ranking only. planCapabilityScores are calibrated to the original SubPlan dataset scale (HEAD), using HEAD scores + modest upgrade deltas. Do not write raw norm(SWE)/norm(AA) * 100 into plan scores.",
     "reason": "Cursor/GLM/DeepSeek/etc. remain on the original curation scale; remapping frontier plans to 95–100 broke cross-plan comparability."
+  },
+  "arenaFrontendLeaderboard": {
+    "asOf": "2026-07-30",
+    "board": "Frontend Code Arena",
+    "sourceImage": "E:\\图片\\HNXpi8UaIAAM6Ag.jpg",
+    "scrapedFile": "data/arena-webdev-scores.json",
+    "scoreType": "Arena Score",
+    "policy": "PRIMARY frontend = Frontend Code Arena only.",
+    "top20": [
+      {
+        "rank": 1,
+        "modelId": "kimi-k3",
+        "label": "Kimi-K3",
+        "score": 1679
+      },
+      {
+        "rank": 2,
+        "modelId": "claude-fable-5",
+        "label": "Claude Fable 5",
+        "score": 1631
+      },
+      {
+        "rank": 3,
+        "modelId": "gpt-5.6-sol",
+        "label": "GPT-5.6 Sol (xHigh)",
+        "score": 1618
+      },
+      {
+        "rank": 4,
+        "modelId": "glm-5.2",
+        "label": "GLM-5.2 (Max)",
+        "score": 1587
+      },
+      {
+        "rank": 5,
+        "modelId": "claude-opus-4.8",
+        "label": "Claude Opus 4.8 (Thinking)",
+        "score": 1562
+      },
+      {
+        "rank": 6,
+        "modelId": "grok-4.5",
+        "label": "Grok-4.5",
+        "score": 1558
+      },
+      {
+        "rank": 7,
+        "modelId": "claude-opus-4.7-thinking",
+        "label": "Claude Opus 4.7 (Thinking)",
+        "score": 1558
+      },
+      {
+        "rank": 8,
+        "modelId": "claude-opus-4.7",
+        "label": "Claude Opus 4.7",
+        "score": 1555
+      },
+      {
+        "rank": 9,
+        "modelId": "claude-opus-4.6-thinking",
+        "label": "Claude Opus 4.6 (Thinking)",
+        "score": 1542
+      },
+      {
+        "rank": 10,
+        "modelId": "claude-sonnet-5",
+        "label": "Claude Sonnet 5 (High)",
+        "score": 1542
+      },
+      {
+        "rank": 11,
+        "modelId": "muse-spark-1.1",
+        "label": "Muse Spark 1.1",
+        "score": 1538
+      },
+      {
+        "rank": 12,
+        "modelId": "claude-opus-4.6",
+        "label": "Claude Opus 4.6",
+        "score": 1536
+      },
+      {
+        "rank": 13,
+        "modelId": "claude-opus-4.8-base",
+        "label": "Claude Opus 4.8",
+        "score": 1534
+      },
+      {
+        "rank": 14,
+        "modelId": "seed-2.1-pro",
+        "label": "Seed-2.1 Pro",
+        "score": 1534
+      },
+      {
+        "rank": 15,
+        "modelId": "glm-5.1",
+        "label": "GLM-5.1",
+        "score": 1526
+      },
+      {
+        "rank": 16,
+        "modelId": "claude-sonnet-4.6",
+        "label": "Claude Sonnet 4.6",
+        "score": 1522
+      },
+      {
+        "rank": 17,
+        "modelId": "qwen-3.7-max",
+        "label": "Qwen-3.7 Max",
+        "score": 1516
+      },
+      {
+        "rank": 18,
+        "modelId": "kimi-k2.6",
+        "label": "Kimi-K2.6",
+        "score": 1515
+      },
+      {
+        "rank": 19,
+        "modelId": "gpt-5.5",
+        "label": "GPT-5.5 (xHigh)",
+        "score": 1504
+      },
+      {
+        "rank": 20,
+        "modelId": "minimax-m3",
+        "label": "MiniMax-M3",
+        "score": 1493
+      }
+    ],
+    "keyScores": {
+      "kimi-k3": 1679,
+      "claude-fable-5": 1631,
+      "gpt-5.6-sol": 1618,
+      "glm-5.2": 1587,
+      "claude-opus-4.8": 1562,
+      "grok-4.5": 1558,
+      "claude-sonnet-5": 1542,
+      "kimi-k2.6": 1515
+    }
+  },
+  "grokBuild": {
+    "product": "Grok Build",
+    "description": "xAI terminal coding agent CLI; default model Grok 4.5; included with SuperGrok / X Premium+.",
+    "metrics": {
+      "grok-4.5": {
+        "harness": "Grok Build",
+        "aaCodingAgentIndex": 76,
+        "avgTokensPerCodingAgentTask": 1900000,
+        "costPerTaskUsd": 2.49,
+        "compare": {
+          "claude-fable-5_claude_code": {
+            "aaCodingAgentIndex": 77,
+            "avgTokensPerTask": 7200000,
+            "costPerTaskUsd": 11.8
+          },
+          "gpt-5.5_codex": {
+            "aaCodingAgentIndex": 76,
+            "avgTokensPerTask": 6200000,
+            "costPerTaskUsd": 5.07
+          }
+        },
+        "access": "SuperGrok and X Premium+ (Grok Build beta); default model Grok 4.5 in Grok Build",
+        "sources": [
+          "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+          "https://x.ai/news/grok-4-5",
+          "https://composio.dev/content/grok-build-cli-vs-claude-code"
+        ]
+      }
+    },
+    "accessPlans": [
+      "supergrok",
+      "supergrok_heavy",
+      "supergrok_lite"
+    ],
+    "note": "supergrok_lite may have reduced Build limits — treat Heavy as full multi-agent Build."
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.5",
+  "schemaVersion": "0.4.6",
   "lastUpdatedAt": "2026-07-30",
   "purpose": "Multi-community usage observations (tokens) to supplement awesome-coding-plan per-model meters.",
   "platforms": [
@@ -274,6 +274,16 @@
       "topic": "Perplexity Pro",
       "value": "~600 rolling Pro searches; deep research tight (Reddit)",
       "impact": "token proxy remains search-based"
+    },
+    {
+      "topic": "Grok Build",
+      "value": "Grok 4.5 Coding Agent Index 76; 1.9M tok/task; SuperGrok access",
+      "impact": "supergrok quotas + access profiles"
+    },
+    {
+      "topic": "Arena Frontend",
+      "value": "K3 #1, Sol #2, Fable #3 (Code Arena Fullstack reports)",
+      "impact": "frontend scores re-anchored"
     }
   ]
 }
