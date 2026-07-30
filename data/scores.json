@@ -426,7 +426,7 @@
     {
       "planId": "kimi_andante_cn",
       "scores": {
-        "frontend": 85,
+        "frontend": 87,
         "backend": 84,
         "agentCoding": 89,
         "debugging": 84,
@@ -446,7 +446,7 @@
     {
       "planId": "kimi_moderato_cn",
       "scores": {
-        "frontend": 88,
+        "frontend": 90,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -466,7 +466,7 @@
     {
       "planId": "kimi_allegretto_cn",
       "scores": {
-        "frontend": 92,
+        "frontend": 94,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -486,7 +486,7 @@
     {
       "planId": "kimi_allegro_cn",
       "scores": {
-        "frontend": 93,
+        "frontend": 95,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -886,7 +886,7 @@
     {
       "planId": "kimi_moderato_global",
       "scores": {
-        "frontend": 88,
+        "frontend": 90,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -906,7 +906,7 @@
     {
       "planId": "kimi_allegretto_global",
       "scores": {
-        "frontend": 92,
+        "frontend": 94,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -926,7 +926,7 @@
     {
       "planId": "kimi_allegro_global",
       "scores": {
-        "frontend": 93,
+        "frontend": 95,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -946,7 +946,7 @@
     {
       "planId": "kimi_vivace_global",
       "scores": {
-        "frontend": 93,
+        "frontend": 95,
         "backend": 92,
         "agentCoding": 97,
         "debugging": 94,
@@ -1326,7 +1326,7 @@
     {
       "planId": "kimi_k3_api_global",
       "scores": {
-        "frontend": 92,
+        "frontend": 94,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -1346,7 +1346,7 @@
     {
       "planId": "kimi_k3_api_cn",
       "scores": {
-        "frontend": 92,
+        "frontend": 94,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,

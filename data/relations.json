@@ -155,6 +155,20 @@
       "overlapScore": 55,
       "complementScore": 55,
       "explanation": "Kimi GLOBAL 与 ChatGPT Plus 通用能力重叠，中文 Agent 与 GPT 生态可互补。"
+    },
+    {
+      "planA": "chatgpt_plus",
+      "planB": "kimi_allegretto_cn",
+      "overlapScore": 45,
+      "complementScore": 65,
+      "explanation": "ChatGPT Plus 偏通用对话、多模态与生态；Kimi 会员 199 元档偏长上下文、中文场景与 K3/K2.7 Code 编程额度。通用能力有重叠，但 Kimi 在国内可用性与编程额度上互补明显。"
+    },
+    {
+      "planA": "cursor_pro",
+      "planB": "kimi_allegretto_cn",
+      "overlapScore": 35,
+      "complementScore": 80,
+      "explanation": "Cursor Pro 偏 IDE 内编程执行；Kimi 会员提供 K3 模型与额外编程/对话额度，可作为 Cursor 之外的模型补充，互补性高。"
     }
   ]
 }
