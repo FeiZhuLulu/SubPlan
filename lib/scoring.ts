@@ -4,9 +4,10 @@ import {
   getCapabilityScore,
   getModelTier,
   getModelAccessProfile,
+  getFxRateToCny,
 } from "./data";
 import { buildNeedWeights } from "./normalize";
-import { getMonthlyPriceCny, classifyBudgetStatus } from "./budget";
+import { resolveMonthlyPrice, classifyBudgetStatus } from "./budget";
 import { getEffectiveTextQuota, classifyCoverage } from "./quota";
 import {
   type CapabilityKey,
@@ -156,8 +157,7 @@ function estimateApiQuota(plan: Plan, budgetForApiCny: number): number {
 
   if (costPerMToken <= 0) return 0;
 
-  const budgetInPlanCurrency =
-    plan.originalCurrency === "USD" ? budgetForApiCny / 6.798 : budgetForApiCny;
+  const budgetInPlanCurrency = budgetForApiCny / getFxRateToCny(plan.originalCurrency);
 
   return budgetInPlanCurrency / costPerMToken;
 }
@@ -214,7 +214,7 @@ function planWithRuntime(plan: Plan, input: UserInput): PlanInCombo {
     scoreBasis: "fallback",
   };
 
-  const priceCny = getMonthlyPriceCny(plan);
+  const { priceCny, priceSource } = resolveMonthlyPrice(plan, input.region);
   const textQuota = getEffectiveTextQuota(plan);
   const modelTier = getModelTier(plan.id);
   const modelAccessProfile = getModelAccessProfile(plan.id);
@@ -224,6 +224,7 @@ function planWithRuntime(plan: Plan, input: UserInput): PlanInCombo {
     scoreRecord,
     quota: null,
     priceCny,
+    priceSource,
     textQuota,
     isExisting: isExistingPlan(plan, input),
     modelTier,
@@ -782,6 +783,9 @@ function generateCautions(
     combo.highIntelligenceCoverage >= MIN_HIGH_INTELLIGENCE_COVERAGE
   ) {
     cautions.push("总额度充足，但复杂 Agent/后端任务的高智能额度偏紧。");
+  }
+  if (combo.plans.some((plan) => plan.priceSource === "regional_app_store")) {
+    cautions.push("部分订阅按 App Store 当地月付价计价，与官网价格可能略有差异。");
   }
   if (combo.plans.some((plan) => plan.originalCurrency === "USD")) {
     cautions.push("部分订阅为美元定价，需确认支付方式。");

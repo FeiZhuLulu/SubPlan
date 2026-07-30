@@ -15,6 +15,7 @@
 - 能力评分采用「额度约束下的贪心分配」：按需求权重拆分各能力维度，优先使用该维度评分最高的订阅额度。
 - 组合修正只在小范围（±5）内调整，不盖过能力分。
 - 默认缓存命中率 95%。
+- 计价以 `data/plans.json` 官网基线价为准；US/JP 用户优先用 `data/regional-prices.json` 的 App Store 当地月付价（同一 hint 多个 IAP 产品时取月付 priceCny 众数），入口是 `lib/budget.ts` 的 `resolveMonthlyPrice`。
 
 ## 修改建议
 
