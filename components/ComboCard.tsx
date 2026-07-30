@@ -36,28 +36,69 @@ export default function ComboCard({
 }) {
   const t = dict[lang];
   const isBest = badge === "best";
+  const isPerf = badge === "perf";
+  const isQuota = badge === "quota";
+  const isChinese = badge === "chinese";
 
-  const cardStyles = isBest
-    ? "rounded-2xl border p-6 relative bg-gradient-to-br from-white to-amber-50/40 border-amber-300/80 shadow-lg shadow-amber-900/5 transition-shadow hover:shadow-xl"
-    : "rounded-2xl border p-6 relative bg-white border-stone-200 shadow-sm transition-shadow hover:shadow-md";
+  let cardStyles =
+    "rounded-2xl p-6 transition-all duration-300 relative overflow-hidden group border ";
+  let topBarStyles = "absolute top-0 inset-x-0 ";
+  let badgeStyles = "rounded-full px-3 py-0.5 text-xs font-bold border ";
 
-  const badgeStyles =
-    badge === "best"
-      ? "rounded-md bg-amber-100 border border-amber-300/70 px-2.5 py-0.5 text-xs font-bold text-amber-900"
-      : badge === "perf"
-        ? "rounded-md bg-neutral-900 px-2.5 py-0.5 text-xs font-bold text-white"
-        : "rounded-md bg-stone-100 border border-stone-200 px-2.5 py-0.5 text-xs font-bold text-stone-600";
+  if (isBest) {
+    // 鎏金主题：金色流光顶条 + 扫光
+    cardStyles +=
+      "bg-gradient-to-br from-white via-white to-amber-50/15 border-amber-500/30 shadow-2xl shadow-amber-500/10 hover:shadow-amber-500/20 hover:border-amber-500/60";
+    topBarStyles += "h-2 gold-shimmer-border";
+    badgeStyles += "bg-amber-50/90 text-amber-800 border-amber-200";
+  } else if (isPerf) {
+    // 霓虹灯带主题
+    cardStyles +=
+      "bg-gradient-to-br from-white via-white to-fuchsia-50/10 border-fuchsia-200/80 shadow-xl shadow-fuchsia-500/5 hover:shadow-fuchsia-500/15 hover:border-fuchsia-300";
+    topBarStyles += "h-2 bg-neutral-950";
+    badgeStyles += "bg-fuchsia-50 text-fuchsia-700 border-fuchsia-100";
+  } else if (isQuota) {
+    // 充电特效主题
+    cardStyles +=
+      "bg-gradient-to-br from-white via-white to-emerald-50/10 border-emerald-200/80 shadow-xl shadow-emerald-500/5 hover:shadow-emerald-500/15 hover:border-emerald-300";
+    topBarStyles += "h-2 bg-stone-100";
+    badgeStyles += "bg-emerald-50 text-emerald-800 border-emerald-100";
+  } else if (isChinese) {
+    cardStyles +=
+      "bg-white border-stone-200/80 shadow-sm hover:border-stone-300 hover:shadow-md";
+    topBarStyles += "h-1 bg-amber-400";
+    badgeStyles += "bg-amber-50 text-amber-800 border-amber-200";
+  } else {
+    cardStyles +=
+      "bg-white border-stone-200 shadow-sm hover:shadow-md hover:border-stone-300";
+    topBarStyles += "h-1 bg-stone-200";
+    badgeStyles += "bg-stone-100 text-stone-600 border-stone-200";
+  }
 
   return (
     <article className={cardStyles}>
-      <div className="flex flex-wrap items-start justify-between gap-4">
+      {/* 顶部光效：霓虹灯带为直角，其余跟随卡片圆角 */}
+      {isPerf ? (
+        <div className="absolute top-0 inset-x-0 h-2 bg-neutral-950 overflow-hidden rounded-none">
+          <div className="flowing-neon-strip absolute inset-0" />
+        </div>
+      ) : isQuota ? (
+        <div className="absolute top-0 inset-x-0 h-2 bg-stone-100 overflow-hidden rounded-t-2xl">
+          <div className="battery-charge-indicator" />
+        </div>
+      ) : (
+        <div className={`${topBarStyles} rounded-t-2xl`} />
+      )}
+
+      {/* 鎏金扫光 */}
+      {isBest && <div className="gold-shine-sweep" />}
+
+      <div className="flex flex-wrap items-start justify-between gap-4 relative z-10">
         <div className="space-y-2 min-w-0">
           <div className="flex items-center flex-wrap gap-2">
-            {badge && (
-              <span className={badgeStyles}>{BADGE_LABELS[badge][lang]}</span>
-            )}
-            <span className="rounded-md bg-stone-100 border border-stone-200 px-2 py-0.5 text-xs font-bold text-stone-500 tnum">
-              #{rank}
+            {badge && <span className={badgeStyles}>{BADGE_LABELS[badge][lang]}</span>}
+            <span className="rounded-full bg-stone-100 border border-stone-200 px-2.5 py-0.5 text-xs font-bold text-stone-600 tnum">
+              Rank #{rank}
             </span>
           </div>
 
@@ -95,7 +136,7 @@ export default function ComboCard({
               return (
                 <span
                   key={plan.id}
-                  className={`rounded-md px-2.5 py-1 text-[11px] font-bold ${badgeColor}`}
+                  className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${badgeColor}`}
                 >
                   {stateLabel} · {plan.provider} ·{" "}
                   <span className="tnum">
@@ -147,7 +188,7 @@ export default function ComboCard({
       </div>
 
       {/* Metrics */}
-      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4 border-t border-b border-stone-100 py-4 my-5 relative z-10">
         <div className="space-y-1">
           <p className="text-xs font-bold text-stone-400 uppercase tracking-wide">
             {t.metricsCapability}
@@ -229,7 +270,7 @@ export default function ComboCard({
 
       {/* Allocation breakdown */}
       {Object.keys(r.capabilityBreakdown).length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-3 relative z-10">
           <h3 className="text-xs font-bold text-stone-500 uppercase tracking-wider">
             {t.allocHeader}
           </h3>
@@ -262,7 +303,7 @@ export default function ComboCard({
 
       {/* Reasons */}
       {r.reasons.length > 0 && (
-        <div className="mt-5 border-t border-stone-100 pt-4">
+        <div className="mt-5 border-t border-stone-100 pt-4 relative z-10">
           <h3 className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">
             {t.logicHeader}
           </h3>
@@ -279,7 +320,7 @@ export default function ComboCard({
 
       {/* Cautions */}
       {r.cautions.length > 0 && (
-        <div className="mt-4 rounded-xl bg-amber-50/60 border border-amber-200/60 p-4">
+        <div className="mt-4 rounded-xl bg-amber-50/60 border border-amber-200/60 p-4 relative z-10">
           <h3 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1.5">
             {t.cautionHeader}
           </h3>

@@ -31,3 +31,66 @@ body {
 ::selection {
   background: #e7c99633;
 }
+
+/* ---- Card light effects (best pick gold / perf neon / quota battery) ---- */
+@keyframes goldShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shineSweep {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+@keyframes flowLED {
+  0% { background-position: 0% 50%; }
+  100% { background-position: -200% 50%; }
+}
+
+@keyframes batteryCharge {
+  0% { width: 0%; opacity: 0.3; }
+  75% { width: 100%; opacity: 1; }
+  90% { width: 100%; opacity: 1; }
+  95% { width: 100%; opacity: 0; }
+  100% { width: 0%; opacity: 0; }
+}
+
+.gold-shimmer-border {
+  background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
+  background-size: 200% auto;
+  animation: goldShimmer 6s linear infinite;
+}
+
+.gold-shimmer-text {
+  background: linear-gradient(90deg, #aa771c 0%, #f1e4c3 25%, #fcf6ba 50%, #e7c996 75%, #aa771c 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 6s linear infinite;
+  display: inline-block;
+}
+
+.gold-shine-sweep {
+  position: absolute;
+  inset: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45) 50%, transparent);
+  animation: shineSweep 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.flowing-neon-strip {
+  background: linear-gradient(90deg, #a855f7 0%, #ec4899 25%, #3b82f6 50%, #a855f7 75%, #ec4899 100%);
+  background-size: 200% auto;
+  animation: flowLED 4s linear infinite;
+}
+
+.battery-charge-indicator {
+  height: 100%;
+  background: linear-gradient(90deg, #34d399, #10b981);
+  animation: batteryCharge 3s ease-in-out infinite;
+}

@@ -94,7 +94,7 @@ function PickSection({
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-extrabold text-neutral-800 tracking-tight flex items-center gap-1.5">
-        <span className={gold ? "text-amber-500" : "text-stone-400"}>★</span> {title}
+        <span className={gold ? "gold-shimmer-text" : "text-stone-400"}>★</span> {title}
       </h2>
       <ComboCard r={result} rank={rank} badge={badge} lang={lang} />
     </section>
