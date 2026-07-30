@@ -62,7 +62,7 @@ export default async function Home({
           <p>
             {t.footer1}
           </p>
-          <p className="mt-1 text-stone-350">
+          <p className="mt-1 text-stone-400">
             {t.footer2}
           </p>
           <p className="mt-3">

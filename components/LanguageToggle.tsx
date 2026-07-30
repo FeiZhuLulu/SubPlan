@@ -25,7 +25,7 @@ export default function LanguageToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="rounded-xl border border-zinc-200 bg-white/70 hover:bg-zinc-50/90 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-zinc-650 hover:text-zinc-900 hover:border-zinc-300 hover:shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+      className="rounded-xl border border-stone-200 bg-white/80 hover:bg-stone-50 px-3.5 py-1.5 text-xs font-semibold text-stone-600 hover:text-stone-900 hover:border-stone-300 hover:shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
     >
       <span>{isEn ? "🇨🇳 中文" : "🇺🇸 English"}</span>
     </button>

@@ -37,6 +37,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [existingPlanIds, setExistingPlanIds] = useState<string[]>([]);
   const [highIntelRatio, setHighIntelRatio] = useState<string>("medium");
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   // Estimator Modal State
   const [showEstimator, setShowEstimator] = useState(false);
@@ -92,6 +93,8 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     const params = new URLSearchParams();
     params.set("budget", budget);
     params.set("tolerance", budgetTolerance);
@@ -282,22 +285,22 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
           </div>
 
           {/* Checklist options */}
-          <div className="flex flex-col justify-center gap-3 bg-stone-50/50 border border-stone-150 rounded-xl p-4 mt-2">
-            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-605 hover:text-neutral-900 cursor-pointer select-none">
+          <div className="flex flex-col justify-center gap-3 bg-stone-50/50 border border-stone-200 rounded-xl p-4 mt-2">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-600 hover:text-neutral-900 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={acceptsApi}
                 onChange={(e) => setAcceptsApi(e.target.checked)}
-                className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
+                className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
               />
               {t.acceptApi}
             </label>
-            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-605 hover:text-neutral-900 cursor-pointer select-none">
+            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-600 hover:text-neutral-900 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={hasForeignCard}
                 onChange={(e) => setHasForeignCard(e.target.checked)}
-                className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
+                className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
               />
               {t.foreignCard}
             </label>
@@ -318,7 +321,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                 <button
                   type="button"
                   onClick={() => setExistingPlanIds([])}
-                  className="hover:text-red-650 ml-1 font-bold cursor-pointer"
+                  className="hover:text-red-600 ml-1 font-bold cursor-pointer"
                   title={lang === "en" ? "Clear all" : "清除全部"}
                 >
                   ×
@@ -326,7 +329,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               </span>
             )}
           </div>
-          <div className="mt-3 max-h-44 overflow-y-auto rounded-xl border border-stone-150 bg-stone-50/40 p-3">
+          <div className="mt-3 max-h-44 overflow-y-auto rounded-xl border border-stone-200 bg-stone-50/40 p-3">
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
               {existingPlanOptions.map((plan) => {
                 const active = existingPlanIds.includes(plan.id);
@@ -339,7 +342,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                     className={`rounded-xl border px-3 py-2.5 text-left text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer flex items-center justify-between ${
                       active
                         ? "border-neutral-900 bg-stone-100 text-neutral-950 font-bold"
-                        : "border-stone-200 bg-white/60 text-stone-600 hover:border-stone-350 hover:bg-white"
+                        : "border-stone-200 bg-white/60 text-stone-600 hover:border-stone-400 hover:bg-white"
                     }`}
                   >
                     <div className="truncate flex-1 pr-2">
@@ -386,9 +389,10 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
         <div className="mt-8 relative z-10">
           <button
             type="submit"
-            className="w-full rounded-xl bg-neutral-900 hover:bg-neutral-850 px-5 py-4 text-base font-bold text-white shadow transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer"
+            disabled={submitting}
+            className="w-full rounded-xl bg-neutral-900 hover:bg-neutral-800 px-5 py-4 text-base font-bold text-white shadow transition-all active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 cursor-pointer disabled:opacity-60 disabled:cursor-wait"
           >
-            {t.submitBtn}
+            {submitting ? t.submitting : t.submitBtn}
           </button>
         </div>
       </form>
@@ -422,7 +426,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                       onClick={() => setEstCodingTime(x.id)}
                       className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estCodingTime === x.id
-                          ? "border-neutral-900 bg-stone-105 text-neutral-900"
+                          ? "border-neutral-900 bg-stone-100 text-neutral-900"
                           : "border-stone-200 text-stone-600 hover:bg-stone-50"
                       }`}
                     >
@@ -443,7 +447,7 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
                       onClick={() => setEstConversations(x.id)}
                       className={`py-2 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         estConversations === x.id
-                          ? "border-neutral-900 bg-stone-105 text-neutral-900"
+                          ? "border-neutral-900 bg-stone-100 text-neutral-900"
                           : "border-stone-200 text-stone-600 hover:bg-stone-50"
                       }`}
                     >
@@ -455,42 +459,42 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
 
               {/* Switches */}
               <div className="border border-stone-200 bg-stone-50/40 p-4 rounded-2xl space-y-3">
-                <span className="block text-xs font-bold text-stone-450 uppercase tracking-wider">{t.estMultipliers}</span>
+                <span className="block text-xs font-bold text-stone-400 uppercase tracking-wider">{t.estMultipliers}</span>
                 <div className="flex flex-col gap-3">
-                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer">
+                  <label className="flex items-center justify-between text-sm text-stone-700 font-semibold cursor-pointer">
                     <span className="flex flex-col pr-3">
                       <span>{t.estMultiFile}</span>
-                      <span className="text-[10px] text-stone-450 font-normal mt-0.5">{t.estMultiFileDesc}</span>
+                      <span className="text-[10px] text-stone-400 font-normal mt-0.5">{t.estMultiFileDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estAgent}
                       onChange={(e) => setEstAgent(e.target.checked)}
-                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer border-t border-stone-150 pt-3">
+                  <label className="flex items-center justify-between text-sm text-stone-700 font-semibold cursor-pointer border-t border-stone-200 pt-3">
                     <span className="flex flex-col pr-3">
                       <span>{t.estLargeContext}</span>
-                      <span className="text-[10px] text-stone-450 font-normal mt-0.5">{t.estLargeContextDesc}</span>
+                      <span className="text-[10px] text-stone-400 font-normal mt-0.5">{t.estLargeContextDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estLongFiles}
                       onChange={(e) => setEstLongFiles(e.target.checked)}
-                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
                     />
                   </label>
-                  <label className="flex items-center justify-between text-sm text-stone-750 font-semibold cursor-pointer border-t border-stone-150 pt-3">
+                  <label className="flex items-center justify-between text-sm text-stone-700 font-semibold cursor-pointer border-t border-stone-200 pt-3">
                     <span className="flex flex-col pr-3">
                       <span>{t.estDebug}</span>
-                      <span className="text-[10px] text-zinc-400 font-normal mt-0.5">{t.estDebugDesc}</span>
+                      <span className="text-[10px] text-stone-400 font-normal mt-0.5">{t.estDebugDesc}</span>
                     </span>
                     <input
                       type="checkbox"
                       checked={estDebugging}
                       onChange={(e) => setEstDebugging(e.target.checked)}
-                      className="h-4 w-4 rounded border-stone-300 text-neutral-900 focus:ring-neutral-900 cursor-pointer"
+                      className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
                     />
                   </label>
                 </div>

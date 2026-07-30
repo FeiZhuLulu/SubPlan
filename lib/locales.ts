@@ -103,6 +103,7 @@ export const dict = {
     
     addons: "附加能力需求",
     submitBtn: "📊 分析并生成订阅推荐组合",
+    submitting: "分析中…",
     
     // Estimator Modal
     estTitle: "📊 AI 用量估算模型",
@@ -145,6 +146,8 @@ export const dict = {
     highPerfPick: "高性能强力组合",
     chineseFriendlyPick: "高额度中文友好备选",
     otherCandidates: "其它候选订阅组合",
+    viewAllCombos: "查看全部 {count} 个组合",
+    showLess: "收起",
     
     bestBadge: "最推荐",
     highQuotaBadge: "量大",
@@ -225,6 +228,7 @@ export const dict = {
     
     addons: "Add-on Capabilities",
     submitBtn: "📊 Analyze & Generate Subscription Recommendations",
+    submitting: "Analyzing…",
     
     // Estimator Modal
     estTitle: "📊 AI Usage Estimation Model",
@@ -267,6 +271,8 @@ export const dict = {
     highPerfPick: "High-Performance Mix",
     chineseFriendlyPick: "High-Quota Chinese-Friendly Alternative",
     otherCandidates: "Other Candidate Subscription Mixes",
+    viewAllCombos: "View all {count} mixes",
+    showLess: "Show less",
     
     bestBadge: "Best Pick",
     highQuotaBadge: "High Quota",
