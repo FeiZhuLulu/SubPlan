@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.7",
+  "schemaVersion": "0.4.8",
   "lastUpdatedAt": "2026-07-30",
   "methodology": {
     "principle": "Unified metric set per dimension. Missing = null. Frontend primary = Arena (Code Arena Fullstack/Frontend), not ad-hoc proxies.",
@@ -956,144 +956,58 @@
     "reason": "Cursor/GLM/DeepSeek/etc. remain on the original curation scale; remapping frontier plans to 95–100 broke cross-plan comparability."
   },
   "arenaFrontendLeaderboard": {
-    "asOf": "2026-07-30",
     "board": "Frontend Code Arena",
-    "sourceImage": "E:\\图片\\HNXpi8UaIAAM6Ag.jpg",
-    "scrapedFile": "data/arena-webdev-scores.json",
-    "scoreType": "Arena Score",
-    "policy": "PRIMARY frontend = Frontend Code Arena only.",
-    "top20": [
-      {
-        "rank": 1,
-        "modelId": "kimi-k3",
-        "label": "Kimi-K3",
-        "score": 1679
-      },
-      {
-        "rank": 2,
-        "modelId": "claude-fable-5",
-        "label": "Claude Fable 5",
-        "score": 1631
-      },
-      {
-        "rank": 3,
-        "modelId": "gpt-5.6-sol",
-        "label": "GPT-5.6 Sol (xHigh)",
-        "score": 1618
-      },
-      {
-        "rank": 4,
-        "modelId": "glm-5.2",
-        "label": "GLM-5.2 (Max)",
-        "score": 1587
-      },
-      {
-        "rank": 5,
-        "modelId": "claude-opus-4.8",
-        "label": "Claude Opus 4.8 (Thinking)",
-        "score": 1562
-      },
-      {
-        "rank": 6,
-        "modelId": "grok-4.5",
-        "label": "Grok-4.5",
-        "score": 1558
-      },
-      {
-        "rank": 7,
-        "modelId": "claude-opus-4.7-thinking",
-        "label": "Claude Opus 4.7 (Thinking)",
-        "score": 1558
-      },
-      {
-        "rank": 8,
-        "modelId": "claude-opus-4.7",
-        "label": "Claude Opus 4.7",
-        "score": 1555
-      },
-      {
-        "rank": 9,
-        "modelId": "claude-opus-4.6-thinking",
-        "label": "Claude Opus 4.6 (Thinking)",
-        "score": 1542
-      },
-      {
-        "rank": 10,
-        "modelId": "claude-sonnet-5",
-        "label": "Claude Sonnet 5 (High)",
-        "score": 1542
-      },
-      {
-        "rank": 11,
-        "modelId": "muse-spark-1.1",
-        "label": "Muse Spark 1.1",
-        "score": 1538
-      },
-      {
-        "rank": 12,
-        "modelId": "claude-opus-4.6",
-        "label": "Claude Opus 4.6",
-        "score": 1536
-      },
-      {
-        "rank": 13,
-        "modelId": "claude-opus-4.8-base",
-        "label": "Claude Opus 4.8",
-        "score": 1534
-      },
-      {
-        "rank": 14,
-        "modelId": "seed-2.1-pro",
-        "label": "Seed-2.1 Pro",
-        "score": 1534
-      },
-      {
-        "rank": 15,
-        "modelId": "glm-5.1",
-        "label": "GLM-5.1",
-        "score": 1526
-      },
-      {
-        "rank": 16,
-        "modelId": "claude-sonnet-4.6",
-        "label": "Claude Sonnet 4.6",
-        "score": 1522
-      },
-      {
-        "rank": 17,
-        "modelId": "qwen-3.7-max",
-        "label": "Qwen-3.7 Max",
-        "score": 1516
-      },
-      {
-        "rank": 18,
-        "modelId": "kimi-k2.6",
-        "label": "Kimi-K2.6",
-        "score": 1515
-      },
-      {
-        "rank": 19,
-        "modelId": "gpt-5.5",
-        "label": "GPT-5.5 (xHigh)",
-        "score": 1504
-      },
-      {
-        "rank": 20,
-        "modelId": "minimax-m3",
-        "label": "MiniMax-M3",
-        "score": 1493
-      }
+    "sourceImages": [
+      "E:\\图片\\HNXpi8UaIAAM6Ag.jpg",
+      "E:\\图片\\HNYpK-LbEAAg2yw.jpg"
     ],
     "keyScores": {
-      "kimi-k3": 1679,
-      "claude-fable-5": 1631,
-      "gpt-5.6-sol": 1618,
-      "glm-5.2": 1587,
-      "claude-opus-4.8": 1562,
-      "grok-4.5": 1558,
-      "claude-sonnet-5": 1542,
-      "kimi-k2.6": 1515
-    }
+      "kimi-k3": {
+        "elo": 1679,
+        "fieldWinRate": 0.76,
+        "planFrontend": 96
+      },
+      "claude-fable-5": {
+        "elo": 1631,
+        "fieldWinRate": 0.63,
+        "planFrontend": 94
+      },
+      "gpt-5.6-sol": {
+        "elo": 1618,
+        "fieldWinRate": 0.58,
+        "planFrontend": 93
+      },
+      "glm-5.2": {
+        "elo": 1587,
+        "fieldWinRate": 0.55,
+        "planFrontend": 92
+      },
+      "claude-opus-4.8": {
+        "elo": 1562,
+        "fieldWinRate": 0.53,
+        "planFrontend": 91
+      },
+      "grok-4.5": {
+        "elo": 1558,
+        "fieldWinRate": 0.53,
+        "planFrontend": 90
+      }
+    },
+    "pairwise": {
+      "k3VsFable": {
+        "eloGap": 48,
+        "expectedH2H": 0.569
+      },
+      "k3VsSol": {
+        "eloGap": 61,
+        "expectedH2H": 0.587
+      },
+      "fableVsSol": {
+        "eloGap": 13,
+        "expectedH2H": 0.519
+      }
+    },
+    "policy": "PRIMARY frontend board. Compress Elo→score so small Elo gaps stay small."
   },
   "grokBuild": {
     "product": "Grok Build",

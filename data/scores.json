@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.7",
+  "schemaVersion": "0.4.9",
   "lastUpdatedAt": "2026-07-30",
   "capabilityKeys": [
     "frontend",
@@ -16,10 +16,11 @@
     "ecosystem"
   ],
   "notes": [
-    "v0.4.7: frontend PRIMARY = Frontend Code Arena real scores from user chart HNXpi8UaIAAM6Ag.jpg.",
-    "K3 1679, Fable 1631, Sol 1618, GLM-5.2 1587, Opus4.8T 1562, Grok-4.5 1558.",
-    "Not WebDev Overall (different board).",
-    "Raw: data/arena-webdev-scores.json → boards.frontendCodeArena"
+    "v0.4.9: 修复模型归属误继承——andante 主用 K2.7 Code（几乎无 K3），不再按 K3 给分。",
+    "规则：订阅分按该套餐实际主用模型定基准，禁止按产品族继承旗舰模型分。",
+    "v0.4.8: frontend = Frontend Code Arena absolute Elo + relative field win rates (user charts).",
+    "K3 1679/76% vs Fable 1631/63%: Elo gap 48 only (~57% H2H); plan scores 96 vs 94 — close.",
+    "Raw: data/arena-webdev-scores.json"
   ],
   "planCapabilityScores": [
     {
@@ -65,7 +66,7 @@
     {
       "planId": "chatgpt_plus",
       "scores": {
-        "frontend": 92,
+        "frontend": 93,
         "backend": 91,
         "agentCoding": 88,
         "debugging": 89,
@@ -80,12 +81,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
+      "notes": "Frontend Code Arena Elo 1618 / field-WR 58% (gpt-5.6-sol) → frontend 93. K3–Fable only +48 Elo (~57% H2H). was 92."
     },
     {
       "planId": "chatgpt_pro_5x",
       "scores": {
-        "frontend": 92,
+        "frontend": 93,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -100,12 +101,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
+      "notes": "Frontend Code Arena Elo 1618 / field-WR 58% (gpt-5.6-sol) → frontend 93. K3–Fable only +48 Elo (~57% H2H). was 92."
     },
     {
       "planId": "chatgpt_pro_20x",
       "scores": {
-        "frontend": 92,
+        "frontend": 93,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -120,7 +121,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
+      "notes": "Frontend Code Arena Elo 1618 / field-WR 58% (gpt-5.6-sol) → frontend 93. K3–Fable only +48 Elo (~57% H2H). was 92."
     },
     {
       "planId": "claude_free",
@@ -145,7 +146,7 @@
     {
       "planId": "claude_pro",
       "scores": {
-        "frontend": 87,
+        "frontend": 91,
         "backend": 91,
         "agentCoding": 90,
         "debugging": 91,
@@ -160,12 +161,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1562 (claude-opus-4.8) → frontend 87 [HNXpi8UaIAAM6Ag.jpg]. was 87."
+      "notes": "Frontend Code Arena Elo 1562 / field-WR 53% (claude-opus-4.8) → frontend 91. K3–Fable only +48 Elo (~57% H2H). was 87."
     },
     {
       "planId": "claude_max_5x",
       "scores": {
-        "frontend": 93,
+        "frontend": 94,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -180,12 +181,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
+      "notes": "Frontend Code Arena Elo 1631 / field-WR 63% (claude-fable-5) → frontend 94. K3–Fable only +48 Elo (~57% H2H). was 93."
     },
     {
       "planId": "claude_max_20x",
       "scores": {
-        "frontend": 93,
+        "frontend": 94,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -200,7 +201,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
+      "notes": "Frontend Code Arena Elo 1631 / field-WR 63% (claude-fable-5) → frontend 94. K3–Fable only +48 Elo (~57% H2H). was 93."
     },
     {
       "planId": "google_ai_plus_us",
@@ -425,7 +426,7 @@
     {
       "planId": "kimi_andante_cn",
       "scores": {
-        "frontend": 98,
+        "frontend": 88,
         "backend": 84,
         "agentCoding": 89,
         "debugging": 84,
@@ -440,12 +441,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "主用模型 K2.7 Code（几乎不含 K3）。K2.7 Code 未上 Frontend Code Arena，按 K2.6 1515 锚点映射 frontend 88。was 96（v0.4.8 误按 K3 继承）。"
     },
     {
       "planId": "kimi_moderato_cn",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -460,12 +461,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_allegretto_cn",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -480,12 +481,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_allegro_cn",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -500,7 +501,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "minimax_token_plus_cn",
@@ -645,7 +646,7 @@
     {
       "planId": "glm_coding_pro_cn",
       "scores": {
-        "frontend": 89,
+        "frontend": 92,
         "backend": 88,
         "agentCoding": 88,
         "debugging": 86,
@@ -660,12 +661,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1587 (glm-5.2) → frontend 89 [HNXpi8UaIAAM6Ag.jpg]. was 89."
+      "notes": "Frontend Code Arena Elo 1587 / field-WR 55% (glm-5.2) → frontend 92. K3–Fable only +48 Elo (~57% H2H). was 89."
     },
     {
       "planId": "glm_coding_max_cn",
       "scores": {
-        "frontend": 89,
+        "frontend": 92,
         "backend": 88,
         "agentCoding": 88,
         "debugging": 86,
@@ -680,7 +681,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1587 (glm-5.2) → frontend 89 [HNXpi8UaIAAM6Ag.jpg]. was 89."
+      "notes": "Frontend Code Arena Elo 1587 / field-WR 55% (glm-5.2) → frontend 92. K3–Fable only +48 Elo (~57% H2H). was 89."
     },
     {
       "planId": "ollama_free",
@@ -765,7 +766,7 @@
     {
       "planId": "supergrok_lite",
       "scores": {
-        "frontend": 86,
+        "frontend": 90,
         "backend": 81,
         "agentCoding": 72,
         "debugging": 78,
@@ -780,12 +781,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
+      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
     },
     {
       "planId": "supergrok",
       "scores": {
-        "frontend": 86,
+        "frontend": 90,
         "backend": 89,
         "agentCoding": 90,
         "debugging": 88,
@@ -800,12 +801,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
+      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
     },
     {
       "planId": "supergrok_heavy",
       "scores": {
-        "frontend": 86,
+        "frontend": 90,
         "backend": 92,
         "agentCoding": 92,
         "debugging": 93,
@@ -820,7 +821,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1558 (grok-4.5) → frontend 86 [HNXpi8UaIAAM6Ag.jpg]. was 86."
+      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
     },
     {
       "planId": "perplexity_free",
@@ -885,7 +886,7 @@
     {
       "planId": "kimi_moderato_global",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 86,
         "agentCoding": 90,
         "debugging": 86,
@@ -900,12 +901,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_allegretto_global",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -920,12 +921,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_allegro_global",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 91,
         "agentCoding": 96,
         "debugging": 94,
@@ -940,12 +941,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_vivace_global",
       "scores": {
-        "frontend": 99,
+        "frontend": 97,
         "backend": 92,
         "agentCoding": 97,
         "debugging": 94,
@@ -960,7 +961,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 99."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 99."
     },
     {
       "planId": "openrouter_api",
@@ -1205,7 +1206,7 @@
     {
       "planId": "openai_gpt56_sol_api",
       "scores": {
-        "frontend": 92,
+        "frontend": 93,
         "backend": 95,
         "agentCoding": 94,
         "debugging": 93,
@@ -1220,7 +1221,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1618 (gpt-5.6-sol) → frontend 92 [HNXpi8UaIAAM6Ag.jpg]. was 92."
+      "notes": "Frontend Code Arena Elo 1618 / field-WR 58% (gpt-5.6-sol) → frontend 93. K3–Fable only +48 Elo (~57% H2H). was 92."
     },
     {
       "planId": "openai_gpt56_terra_api",
@@ -1265,7 +1266,7 @@
     {
       "planId": "claude_opus_5_api",
       "scores": {
-        "frontend": 87,
+        "frontend": 91,
         "backend": 96,
         "agentCoding": 94,
         "debugging": 96,
@@ -1280,12 +1281,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena score 1562 (claude-opus-4.8) → frontend 87 [chart HNXpi8UaIAAM6Ag.jpg]. was 95."
+      "notes": "Profile 为 claude-opus-5；Opus 5 未上 Frontend Code Arena，按 Opus 4.8 1562 锚点保守映射 frontend 91。was 87（旧注释残留）。"
     },
     {
       "planId": "claude_opus_48_api",
       "scores": {
-        "frontend": 87,
+        "frontend": 91,
         "backend": 93,
         "agentCoding": 92,
         "debugging": 93,
@@ -1300,12 +1301,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1562 (claude-opus-4.8) → frontend 87 [HNXpi8UaIAAM6Ag.jpg]. was 87."
+      "notes": "Frontend Code Arena Elo 1562 / field-WR 53% (claude-opus-4.8) → frontend 91. K3–Fable only +48 Elo (~57% H2H). was 87."
     },
     {
       "planId": "claude_sonnet_5_api",
       "scores": {
-        "frontend": 85,
+        "frontend": 90,
         "backend": 88,
         "agentCoding": 86,
         "debugging": 88,
@@ -1320,12 +1321,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena 1542 (claude-sonnet-5) → frontend 85 [HNXpi8UaIAAM6Ag.jpg]. was 85."
+      "notes": "Frontend Code Arena Elo 1542 / field-WR 48% (claude-sonnet-5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 85."
     },
     {
       "planId": "kimi_k3_api_global",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -1340,12 +1341,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "kimi_k3_api_cn",
       "scores": {
-        "frontend": 98,
+        "frontend": 96,
         "backend": 89,
         "agentCoding": 95,
         "debugging": 93,
@@ -1360,12 +1361,12 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1679 (kimi-k3) → frontend 98 [HNXpi8UaIAAM6Ag.jpg]. was 98."
+      "notes": "Frontend Code Arena Elo 1679 / field-WR 76% (kimi-k3) → frontend 96. K3–Fable only +48 Elo (~57% H2H). was 98."
     },
     {
       "planId": "claude_fable_5_api",
       "scores": {
-        "frontend": 93,
+        "frontend": 94,
         "backend": 96,
         "agentCoding": 95,
         "debugging": 96,
@@ -1380,7 +1381,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena 1631 (claude-fable-5) → frontend 93 [HNXpi8UaIAAM6Ag.jpg]. was 93."
+      "notes": "Frontend Code Arena Elo 1631 / field-WR 63% (claude-fable-5) → frontend 94. K3–Fable only +48 Elo (~57% H2H). was 93."
     }
   ]
 }
