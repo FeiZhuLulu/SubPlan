@@ -7,6 +7,7 @@ import fxRatesData from "@/data/fx-rates.json";
 import apiOptionsData from "@/data/api-options.json";
 import modelTiersData from "@/data/model-tiers.json";
 import modelAccessProfilesData from "@/data/model-access-profiles.json";
+import regionalPricesData from "@/data/regional-prices.json";
 
 import type {
   Plan,
@@ -17,6 +18,7 @@ import type {
   FxRate,
   ModelTierRecord,
   ModelAccessProfile,
+  RegionalPriceApp,
 } from "./types";
 
 type DataFile = Record<string, unknown>;
@@ -28,6 +30,7 @@ type RelationsFile = DataFile & { planRelations?: PlanRelation[] };
 type FxRatesFile = DataFile & { rates?: FxRate[] };
 type ModelTiersFile = DataFile & { tiers?: ModelTierRecord[] };
 type ModelAccessProfilesFile = DataFile & { profiles?: ModelAccessProfile[] };
+type RegionalPricesFile = DataFile & { apps?: RegionalPriceApp[] };
 
 // Static definitions for client-side bundle or build-time fallback
 const staticPlans: Plan[] = (plansData as unknown as PlansFile).plans ?? [];
@@ -42,6 +45,8 @@ const staticModelTiers: ModelTierRecord[] =
   (modelTiersData as unknown as ModelTiersFile).tiers ?? [];
 const staticModelAccessProfiles: ModelAccessProfile[] =
   (modelAccessProfilesData as unknown as ModelAccessProfilesFile).profiles ?? [];
+const staticRegionalPriceApps: RegionalPriceApp[] =
+  (regionalPricesData as unknown as RegionalPricesFile).apps ?? [];
 
 export const presets: Presets = presetsData as unknown as Presets;
 export const fxRates: FxRate[] = (fxRatesData as unknown as FxRatesFile).rates ?? [];
@@ -122,6 +127,58 @@ export function getModelAccessProfile(planId: string): ModelAccessProfile | unde
     ? dynamicProfilesFile.profiles || []
     : staticModelAccessProfiles;
   return profiles.find((profile) => profile.planId === planId);
+}
+
+// App Store products whose planIdHint does not equal the plan id in plans.json.
+const REGIONAL_PRICE_HINT_ALIASES: Record<string, string> = {
+  google_ai_ultra_20x_us: "google_ai_ultra_us",
+};
+
+/**
+ * Monthly App Store regional list price (CNY) for a plan, from
+ * data/regional-prices.json. Only US / JP are exposed per product.
+ * A single hint often maps to several IAP products (storage tiers,
+ * annual vs monthly, promos), so we take the most common monthly
+ * priceCny (mode; ties resolve to the lower price).
+ */
+export function getRegionalMonthlyPriceCny(
+  planId: string,
+  region: string
+): number | null {
+  if (region !== "US" && region !== "JP") return null;
+
+  const dynamicRegionalFile = readDataFileOnServer<RegionalPricesFile>(
+    "regional-prices.json"
+  );
+  const apps: RegionalPriceApp[] = dynamicRegionalFile
+    ? dynamicRegionalFile.apps || []
+    : staticRegionalPriceApps;
+
+  const hint = REGIONAL_PRICE_HINT_ALIASES[planId] ?? planId;
+  const priceKey = region === "US" ? "usPrice" : "jpPrice";
+
+  const counts = new Map<number, number>();
+  for (const app of apps) {
+    for (const product of app.products) {
+      if (product.planIdHint !== hint || product.period !== "P1M") continue;
+      const priceCny = product[priceKey]?.priceCny;
+      if (typeof priceCny !== "number" || priceCny <= 0) continue;
+      counts.set(priceCny, (counts.get(priceCny) ?? 0) + 1);
+    }
+  }
+  if (counts.size === 0) return null;
+
+  let best: number | null = null;
+  for (const [priceCny, count] of counts) {
+    if (
+      best === null ||
+      count > counts.get(best)! ||
+      (count === counts.get(best)! && priceCny < best)
+    ) {
+      best = priceCny;
+    }
+  }
+  return best;
 }
 
 const fxMap = new Map<string, number>();

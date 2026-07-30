@@ -148,6 +148,31 @@ export type FxRate = {
   asOf: string;
 };
 
+export type RegionalPricePoint = {
+  region: string;
+  currency: string;
+  price: number;
+  priceUsd?: number;
+  priceCny?: number;
+  observedAt?: string;
+  isFree?: boolean;
+};
+
+export type RegionalPriceProduct = {
+  productId: string;
+  name: string;
+  period?: string | null;
+  planIdHint?: string;
+  usPrice?: RegionalPricePoint;
+  jpPrice?: RegionalPricePoint;
+};
+
+export type RegionalPriceApp = {
+  appKey: string;
+  provider: string;
+  products: RegionalPriceProduct[];
+};
+
 export type HighIntelligenceRatioPreset = "low" | "medium" | "high" | "extreme";
 
 export type UserInput = {
@@ -194,6 +219,7 @@ export type PlanInCombo = Plan & {
   scoreRecord: CapabilityScoreRecord;
   quota: Quota | null;
   priceCny: number;
+  priceSource?: "official" | "regional_app_store";
   textQuota: number; // effective monthly MTokens
   isExisting?: boolean;
   isUpgrade?: boolean;
