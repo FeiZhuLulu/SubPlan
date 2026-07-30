@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.1.3",
-  "lastUpdatedAt": "2026-07-01",
+  "schemaVersion": "0.4.5",
+  "lastUpdatedAt": "2026-07-30",
   "defaults": {
     "cacheHitRateScenarios": [
       {
@@ -22,123 +22,481 @@
     "defaultScenario": "agent_cached_workflow"
   },
   "notes": [
-    "Quota table separates text workload capacity from price data.",
-    "v0.1.2 fills recommender runtime estimates for major paid subscriptions so quota-aware allocation can run.",
-    "v0.1.3 incorporates selected observed coding-plan capacity data from mahonzhan/awesome-coding-plan while keeping billing-equivalent MTokens separate from workload MTokens.",
-    "All dynamic subscription quotas are estimated MTokens-equivalent capacity, not official fixed token limits.",
-    "OpenCode Go is value-limited by dollars and has model-specific usage profiles; do not treat its default MTokens estimate as a fixed quota.",
-    "Null estimatedTextWorkloadCapacityMTokens means local option or metered API capacity should be handled outside fixed subscription quota allocation."
+    "v0.4.5: Kimi models corrected — K3 + K2.7 Code + K2.6. K2.5 is historical ACP measurement label only, not current product.",
+    "v0.4.4: multi-community supplement (Reddit, X, search-visible V2EX/linux.do discussions) + per-model ACP meters.",
+    "Unit: tokens (estimatedMonthlyTokens); MToken=1e6 tokens for algorithm field.",
+    "Claude Max 20x monthly for recommender now ~9.84B tokens (X weekly full burn 2.46B×4), not ACP×20 alone.",
+    "ChatGPT Pro 5x blended ACP×5 and X weekly half-burn estimate.",
+    "See data/community-usage-reports.json for platform-level citations.",
+    "Still not official hard caps; windows bind first.",
+    "Unit: estimatedMonthlyTokens raw tokens; MToken=1e6. Per-model in modelUsage[]. Multi-community reports in community-usage-reports.json."
   ],
   "quotas": [
     {
       "planId": "minimax_token_plus_cn",
-      "estimatedTextWorkloadCapacityMTokens": 600,
-      "quotaBasis": "official_token_usage_label_converted",
+      "estimatedTextWorkloadCapacityMTokens": 2400,
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
       "quotaConfidence": "medium",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Converted from officialTokenUsageLabel in plans.json: 6亿+ token = 600 MTokens. Treat as lower-bound style capacity."
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
+      "estimatedMonthlyTokens": 2400000000,
+      "lastCheckedAt": "2026-07-30",
+      "estimatedWeeklyTokens": 600000000,
+      "estimatedFiveHourWindowTokens": 60000000,
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 2400000000,
+          "relativeBurn": 1,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan MiniMax Coding Plan Plus m2.7: mo 54400/24亿 (repo notes plan may have changed)",
+          "estimatedMonthlyMTokens": 2400,
+          "tokenizerRatioVsGpt54": 0.8923
+        }
+      ]
     },
     {
       "planId": "minimax_token_max_cn",
       "estimatedTextWorkloadCapacityMTokens": 1800,
-      "quotaBasis": "official_token_usage_label_converted",
-      "quotaConfidence": "medium",
+      "quotaBasis": "community_plus_scale_or_label",
+      "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Converted from officialTokenUsageLabel in plans.json: 18亿+ token = 1800 MTokens. Treat as lower-bound style capacity."
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "estimatedMonthlyTokens": 1800000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 1800000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Scaled from Plus observation or prior label"
+        }
+      ]
     },
     {
       "planId": "minimax_token_ultra_cn",
       "estimatedTextWorkloadCapacityMTokens": 7100,
-      "quotaBasis": "official_token_usage_label_converted",
-      "quotaConfidence": "medium",
-      "capacityMultiplier": null,
-      "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Converted from officialTokenUsageLabel in plans.json: 71亿+ token = 7100 MTokens. Treat as lower-bound style capacity."
-    },
-    {
-      "planId": "minimax_token_plus_global",
-      "estimatedTextWorkloadCapacityMTokens": 600,
-      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaBasis": "community_plus_scale_or_label",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Temporarily mirrors CN Plus token capacity for recommender continuity. Verify global included token amount before production use."
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "estimatedMonthlyTokens": 7100000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 7100000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Scaled from Plus observation or prior label"
+        }
+      ]
+    },
+    {
+      "planId": "minimax_token_plus_global",
+      "estimatedTextWorkloadCapacityMTokens": 2400,
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps. GLOBAL mirror.",
+      "estimatedMonthlyTokens": 2400000000,
+      "lastCheckedAt": "2026-07-30",
+      "estimatedWeeklyTokens": 600000000,
+      "estimatedFiveHourWindowTokens": 60000000,
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 2400000000,
+          "relativeBurn": 1,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan MiniMax Coding Plan Plus m2.7: mo 54400/24亿 (repo notes plan may have changed)",
+          "estimatedMonthlyMTokens": 2400,
+          "tokenizerRatioVsGpt54": 0.8923
+        }
+      ]
     },
     {
       "planId": "minimax_token_max_global",
       "estimatedTextWorkloadCapacityMTokens": 1800,
-      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaBasis": "community_plus_scale_or_label",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Temporarily mirrors CN Max token capacity for recommender continuity. Verify global included token amount before production use."
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "estimatedMonthlyTokens": 1800000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 1800000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Scaled from Plus observation or prior label"
+        }
+      ]
     },
     {
       "planId": "minimax_token_ultra_global",
       "estimatedTextWorkloadCapacityMTokens": 7100,
-      "quotaBasis": "cn_plan_capacity_mirrored_pending_global_verification",
+      "quotaBasis": "community_plus_scale_or_label",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Temporarily mirrors CN Ultra token capacity for recommender continuity. Verify global included token amount before production use."
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "estimatedMonthlyTokens": 7100000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "minimax-m2.7",
+      "modelUsage": [
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7",
+          "estimatedMonthlyTokens": 7100000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Scaled from Plus observation or prior label"
+        }
+      ]
     },
     {
       "planId": "kimi_andante_cn",
-      "estimatedTextWorkloadCapacityMTokens": 125,
-      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "estimatedTextWorkloadCapacityMTokens": 84,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
       "quotaConfidence": "medium",
-      "capacityMultiplier": "1x",
+      "capacityMultiplier": "Kimi Code 1x",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Back-calculated from user-provided Kimi Moderato 99 CNY estimate of 400-600 MTokens and official 4x multiplier; uses 500/4=125 MTokens."
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code 1x. ",
+      "estimatedMonthlyTokens": 84000000,
+      "estimatedWeeklyTokens": 21000000,
+      "estimatedFiveHourWindowTokens": 15000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k2.7-code",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 84000000,
+          "estimatedWeeklyTokens": 21000000,
+          "estimatedMonthlyMTokens": 84,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 84000000,
+          "estimatedWeeklyTokens": 21000000,
+          "estimatedFiveHourWindowTokens": 15000000,
+          "estimatedMonthlyMTokens": 84,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 84000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
     },
     {
       "planId": "kimi_moderato_cn",
-      "estimatedTextWorkloadCapacityMTokens": 500,
-      "quotaBasis": "user_provided_range_midpoint",
-      "quotaConfidence": "medium",
-      "capacityMultiplier": "4x",
+      "estimatedTextWorkloadCapacityMTokens": 336,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "Kimi Code ~4x",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "User-provided practical estimate: Kimi 99 CNY about 400-600 MTokens/month; stored midpoint 500."
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code ~4x. ",
+      "estimatedMonthlyTokens": 336000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 336000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedMonthlyMTokens": 336,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 336000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedFiveHourWindowTokens": null,
+          "estimatedMonthlyMTokens": 336,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 336000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
     },
     {
       "planId": "kimi_allegretto_cn",
-      "estimatedTextWorkloadCapacityMTokens": 2500,
-      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "estimatedTextWorkloadCapacityMTokens": 1428,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
       "quotaConfidence": "medium",
-      "capacityMultiplier": "20x / 5x Moderato",
+      "capacityMultiplier": "Kimi Code 20x",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "User notes official promotion treats 199 CNY tier as 5x the 99 CNY tier; uses 500*5=2500 MTokens."
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code 20x. ",
+      "estimatedMonthlyTokens": 1428000000,
+      "estimatedWeeklyTokens": 357000000,
+      "estimatedFiveHourWindowTokens": 65000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 1428000000,
+          "estimatedWeeklyTokens": 357000000,
+          "estimatedMonthlyMTokens": 1428,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 1428000000,
+          "estimatedWeeklyTokens": 357000000,
+          "estimatedFiveHourWindowTokens": 65000000,
+          "estimatedMonthlyMTokens": 1428,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "communityReports": [
+        {
+          "platform": "github_community",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "asOf": "2026-07-30",
+          "claim": "Kimi Code Allegretto pool ~14.28亿 tokens/mo (ACP). Measurement row historically said k2.5; current Code=K2.7 Code, flagship=K3. 429/TPS issues noted.",
+          "metric": {
+            "unit": "tokens_per_month",
+            "value": 1428000000
+          },
+          "note": " Model label corrected: not current K2.5."
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/tak_ltc/status/2082475833562914946",
+          "asOf": "2026-07-29",
+          "claim": "Kimi current plan quotas feel too low vs Codex 20x 100+亿/mo class; need more coding-plan tokens.",
+          "metric": null
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 1428000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
     },
     {
       "planId": "kimi_allegro_cn",
-      "estimatedTextWorkloadCapacityMTokens": 7500,
-      "quotaBasis": "official_multiplier_applied_to_user_base",
-      "quotaConfidence": "medium",
-      "capacityMultiplier": "60x / 3x Allegretto",
+      "estimatedTextWorkloadCapacityMTokens": 4284,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "Kimi Code 60x ladder",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Uses Kimi base multiplier ladder: 60x base = 7500 MTokens when Andante base is 125 MTokens."
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code 60x ladder. ",
+      "estimatedMonthlyTokens": 4284000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 4284000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedMonthlyMTokens": 4284,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 4284000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedFiveHourWindowTokens": null,
+          "estimatedMonthlyMTokens": 4284,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 4284000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
     },
     {
       "planId": "kimi_adagio_cn",
       "estimatedTextWorkloadCapacityMTokens": 80,
-      "quotaBasis": "manual_free_tier_estimate",
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
       "quotaConfidence": "low",
-      "capacityMultiplier": null,
+      "capacityMultiplier": "free",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Free Kimi tier conservative estimate for occasional use."
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: free. ",
+      "estimatedMonthlyTokens": 80000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "primaryModelId": "kimi-k2.6",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": 40000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "notes": "Free tier general chat."
+        },
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": 2228706,
+          "confidence": "low",
+          "notes": "Limited free K3 if any; mostly paid pool."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 80000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      },
+      "lastCheckedAt": "2026-07-30"
     },
     {
       "planId": "cursor_pro",
@@ -148,7 +506,7 @@
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "User-provided practical estimate: Cursor Pro about 600-800 MTokens/month; stored midpoint 700. Billing-equivalent MTokens from $5.40/MTokens model is 3.704, kept separate from cached workload capacity.",
+      "notes": "Community/user practical: Cursor Pro ~600–800 MTokens/month workload (mid 700). Value/credit limited; not a pure token counter.",
       "billingValueUsd": 20,
       "billingEquivalentMTokens": 3.704,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -156,19 +514,33 @@
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
+          "note": "Cursor is value/credit limited"
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 700000000,
+      "communityReports": [
+        {
+          "platform": "github_community",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "asOf": "2026-07-30",
+          "claim": "Cursor Pro =  API usage included (+ more on Auto/Composer). Value-limited not pure token pool.",
+          "metric": {
+            "unit": "usd_api_value",
+            "value": 20
+          }
+        }
+      ],
+      "lastCheckedAt": "2026-07-30"
     },
     {
       "planId": "cursor_pro_plus",
       "estimatedTextWorkloadCapacityMTokens": 2100,
-      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaBasis": "3x_pro_midpoint",
       "quotaConfidence": "medium",
       "capacityMultiplier": "3x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Uses Cursor Pro 700 MTokens midpoint multiplied by Pro+ 3x tier label. Billing-equivalent MTokens from $5.40/MTokens model is 11.111, kept separate from cached workload capacity.",
+      "notes": "Pro 700 × 3. Tokens = 2.1e9.",
       "billingValueUsd": 60,
       "billingEquivalentMTokens": 11.111,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -178,17 +550,18 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 2100000000
     },
     {
       "planId": "cursor_ultra",
       "estimatedTextWorkloadCapacityMTokens": 14000,
-      "quotaBasis": "official_multiplier_applied_to_user_base",
+      "quotaBasis": "20x_pro_midpoint",
       "quotaConfidence": "medium",
       "capacityMultiplier": "20x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Uses Cursor Pro 700 MTokens midpoint multiplied by Ultra 20x tier label. Billing-equivalent MTokens from $5.40/MTokens model is 74.074, kept separate from cached workload capacity.",
+      "notes": "Pro 700 × 20. Tokens = 1.4e10.",
       "billingValueUsd": 200,
       "billingEquivalentMTokens": 74.074,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -198,152 +571,625 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 14000000000
     },
     {
       "planId": "chatgpt_plus",
-      "estimatedTextWorkloadCapacityMTokens": 480,
-      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "estimatedTextWorkloadCapacityMTokens": 616,
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
       "quotaConfidence": "medium",
       "capacityMultiplier": "1x Plus",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Updated from awesome-coding-plan observed Codex GPT-5.4 coding-plan estimate: about 4.8亿 tokens/month = 480 MTokens. Still an observed coding-workload estimate, not an official fixed ChatGPT token quota.",
-      "observedCodingPlanCapacityMTokens": 480,
-      "observedCodingPlanModel": "gpt-5.4",
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps. Multi-source: ACP primary; X notes separate Chat/Agent paths can differ from Codex weekly pool.",
+      "observedCodingPlanCapacityMTokens": 616,
+      "observedCodingPlanModel": "gpt-5.6-sol",
       "observedFiveHourWindowMTokens": 20,
-      "observedWeeklyWindowMTokens": 120,
+      "observedWeeklyWindowMTokens": 154,
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Observed ChatGPT Plus Codex GPT-5.4 monthly tokens around 4.8亿."
+          "note": "ChatGPT Plus Codex monthly tokens ~6.16亿"
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 616000000,
+      "estimatedWeeklyTokens": 154000000,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "gpt-5.6-sol",
+      "modelUsage": [
+        {
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol (Codex)",
+          "estimatedMonthlyTokens": 616000000,
+          "estimatedWeeklyTokens": 154000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 1004195,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan row: ChatGPT Plus Codex gpt-5.6-sol, mo 8760/6.16亿",
+          "estimatedMonthlyMTokens": 616,
+          "tokenizerRatioVsGpt54": 1
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 0.59,
+          "taskBurnTokens": 590028,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "No monthly observation. Task-level burn ~0.59× Sol on same harness test → more tasks per plan, not a separate mo meter.",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1.32,
+          "taskBurnTokens": 1321527,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task-level burn higher than Sol on that scene; monthly plan still message-window limited.",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1
+        }
+      ],
+      "communityReports": [
+        {
+          "platform": "github_community",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "asOf": "2026-07-30",
+          "claim": "Codex gpt-5.6-sol on Plus: mo ~6.16亿 tokens, week ~1.54亿.",
+          "metric": {
+            "unit": "tokens_per_month",
+            "value": 616000000
+          }
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/grok/status/2082210698575093832",
+          "asOf": "2026-07-28",
+          "claim": "ChatGPT Plus chat/Agent path (not Codex quota) can show multi-billion token totals in some agent setups — separate from Codex weekly pool.",
+          "metric": null
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 400000000,
+        "mid": 616000000,
+        "high": 800000000,
+        "unit": "tokens",
+        "note": "mid=ACP Codex Sol 6.16亿; range is soft"
+      }
     },
     {
       "planId": "chatgpt_pro_5x",
-      "estimatedTextWorkloadCapacityMTokens": 2400,
-      "quotaBasis": "official_multiplier_applied_to_awesome_coding_plan_plus_observation",
+      "estimatedTextWorkloadCapacityMTokens": 3890,
+      "quotaBasis": "blend_acp_plus5x_and_x_weekly_half",
       "quotaConfidence": "medium",
       "capacityMultiplier": "5x Plus",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Uses updated ChatGPT Plus 480 MTokens observed coding-plan baseline multiplied by the official 5x usage label; dynamic model/tool limits still apply.",
+      "source": "x_2026_07_30_plus_acp",
+      "notes": "Codex Pro 5x: X user 587.5M overnight ≈50% weekly → ~1.17B tokens/week. Blended with ACP Plus×5 (3.08B/mo). Model mix Sol/Terra/Luna still differs per task.",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Derived from ChatGPT Plus observed 480 MTokens baseline."
+          "note": "Derived from Plus 6.16亿 ×5"
+        }
+      ],
+      "estimatedMonthlyTokens": 3890000000,
+      "estimatedWeeklyTokens": 1175000000,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "gpt-5.6-sol",
+      "modelUsage": [
+        {
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol",
+          "estimatedMonthlyTokens": 3890000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 1004195,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Plus Sol mo × official 5x",
+          "estimatedMonthlyMTokens": 3080,
+          "tokenizerRatioVsGpt54": 1
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 0.59,
+          "taskBurnTokens": 590028,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task burn relative only",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1.32,
+          "taskBurnTokens": 1321527,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task burn relative only",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 3080000000,
+        "mid": 3890000000,
+        "high": 4700000000,
+        "unit": "tokens",
+        "note": "low=ACP Plus×5; high=X weekly 1.17B×4; mid=blend"
+      },
+      "communityReports": [
+        {
+          "platform": "x",
+          "url": "https://x.com/navinsharmacse/status/2082697148647477364",
+          "asOf": "2026-07-30",
+          "claim": "Codex two sessions overnight ~587.5M tokens ≈ 50% of weekly limit → weekly pool ~1.17B tokens for that Pro-tier Codex account.",
+          "metric": {
+            "unit": "tokens_per_week_estimate",
+            "value": 1175000000,
+            "from": "587.5M is ~50% weekly"
+          }
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/IND_is_Here/status/2082538459449733357",
+          "asOf": "2026-07-29",
+          "claim": "Codex drank 58M tokens with limited use; 60% remaining until weekly reset date.",
+          "metric": {
+            "unit": "tokens_snapshot",
+            "value": 58000000,
+            "remainingPct": 60
+          }
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/crazycloudccc/status/2082324228570046610",
+          "asOf": "2026-07-29",
+          "claim": "CN user: Codex reset cards wasted ~50% twice ≈ full Pro 5x weekly quota wasted (several 亿 tokens). Mentions 5h limits returning.",
+          "metric": null
         }
       ]
     },
     {
       "planId": "chatgpt_pro_20x",
-      "estimatedTextWorkloadCapacityMTokens": 9600,
-      "quotaBasis": "official_multiplier_applied_to_awesome_coding_plan_plus_observation",
+      "estimatedTextWorkloadCapacityMTokens": 12320,
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
       "quotaConfidence": "medium",
       "capacityMultiplier": "20x Plus",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Uses updated ChatGPT Plus 480 MTokens observed coding-plan baseline multiplied by the official 20x usage label; dynamic model/tool limits still apply.",
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Primary 123.2亿 tokens (Plus Codex 6.16亿×20). X community claims Codex 20x 100+亿/mo class — same order of magnitude.",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Derived from ChatGPT Plus observed 480 MTokens baseline."
+          "note": "Derived from Plus 6.16亿 ×20"
+        }
+      ],
+      "estimatedMonthlyTokens": 12320000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "gpt-5.6-sol",
+      "modelUsage": [
+        {
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol",
+          "estimatedMonthlyTokens": 12320000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 1004195,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Plus Sol mo × official 20x",
+          "estimatedMonthlyMTokens": 12320,
+          "tokenizerRatioVsGpt54": 1
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 10000000000,
+        "mid": 12320000000,
+        "high": 14784000000,
+        "unit": "tokens",
+        "note": "X CN claim 100+亿 class; ACP Plus×20=123.2亿"
+      },
+      "communityReports": [
+        {
+          "platform": "x",
+          "url": "https://x.com/tak_ltc/status/2082475833562914946",
+          "asOf": "2026-07-29",
+          "claim": "CN discussion: Codex 20x can do 100+亿 tokens/month class usage vs Kimi coding plans feeling too small.",
+          "metric": {
+            "unit": "tokens_per_month_community_claim",
+            "value": 10000000000,
+            "note": "order-of-magnitude claim"
+          }
         }
       ]
     },
     {
       "planId": "claude_pro",
-      "estimatedTextWorkloadCapacityMTokens": 300,
-      "quotaBasis": "manual_dynamic_limit_estimate",
+      "estimatedTextWorkloadCapacityMTokens": 1588,
+      "quotaBasis": "acp_primary_with_reddit_x_bounds",
       "quotaConfidence": "medium",
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Conservative stable estimate remains 300 MTokens. awesome-coding-plan observed Claude Code Opus 4.7 at about 4.16亿 tokens/month = 416 MTokens during the 2026-05-14 to 2026-07-13 temporary weekly boost window.",
-      "observedCodingPlanCapacityMTokens": 416,
+      "source": "awesome_coding_plan_plus_reddit_x",
+      "notes": "Primary mo 15.88亿 tokens (ACP Claude Code opus-4.8). Reddit: ~10–40 prompts/5h, Opus-hours/week much tighter than Sonnet-hours. Session % jumps can feel non-linear.",
+      "observedCodingPlanCapacityMTokens": 1588,
       "temporaryBoostedCapacityMTokens": 416,
       "temporaryBoostEndsAt": "2026-07-13",
-      "observedFiveHourWindowMTokens": 22.98,
-      "observedWeeklyWindowMTokens": 104,
+      "observedFiveHourWindowMTokens": 39.66,
+      "observedWeeklyWindowMTokens": 397,
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Observed Claude Pro Claude Code Opus 4.7 monthly tokens around 4.16亿 during temporary boost."
+          "note": "Claude Pro monthly tokens ~15.88亿"
+        },
+        {
+          "sourceId": "community_claude_code_window",
+          "url": "https://www.ssdnodes.com/blog/claude-code-pricing-in-2026-every-plan-explained-pro-max-api-teams/",
+          "note": "Alternate community estimate ~44k tokens per 5h window (different metering; not used as primary)"
+        }
+      ],
+      "estimatedMonthlyTokens": 1588000000,
+      "estimatedWeeklyTokens": 397000000,
+      "estimatedFiveHourWindowTokens": 39660000,
+      "observedCodingPlanModel": "claude-opus-4.8",
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "claude-opus-4.8",
+      "modelUsage": [
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8 (Claude Code)",
+          "estimatedMonthlyTokens": 1588000000,
+          "estimatedWeeklyTokens": 397000000,
+          "estimatedFiveHourWindowTokens": 39660000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 2008418,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan: Claude Pro Claude Code claude-opus-4.8, 5h 359/3966万, w 3590/3.97亿, mo 14360/15.88亿",
+          "estimatedMonthlyMTokens": 1588,
+          "tokenizerRatioVsGpt54": 1.656
+        },
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": null,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "No mo observation yet (released 2026-07-25). Tokenizer compression ~same class as Opus 4.8 (~165% of GPT on CN-heavy text). Treat burn ~Opus 4.8 until measured.",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.6558
+        },
+        {
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1.73,
+          "taskBurnTokens": 3482397,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Same agent task: Fable 5 high burned ~3.48M tokens vs Opus 4.8 ~2.01M (~1.73×). Same plan quota empties much faster on Fable. Pro often credits-limited for Fable.",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.656
+        },
+        {
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 0.53,
+          "taskBurnTokens": 1070526,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task burn ~0.53× Opus 4.8 on that scene; community also reports high effort can feel costly due to verbosity/new tokenizer (~30% more tokens vs prior Sonnet).",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.6596
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 492000000,
+        "mid": 1588000000,
+        "high": 1588000000,
+        "unit": "tokens",
+        "note": "low≈scaled from X Max20x weekly; mid/high=ACP Claude Code opus-4.8 mo"
+      },
+      "communityReports": [
+        {
+          "platform": "reddit",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+          "asOf": "2026-07",
+          "claim": "Pro ~10–40 prompts per 5h; ~40–80 Sonnet-hours/week and ~10–40 Opus-hours/week (community summary).",
+          "metric": {
+            "unit": "prompts_per_5h",
+            "low": 10,
+            "high": 40
+          }
+        },
+        {
+          "platform": "reddit",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1s7fcjf/claude_usage_limits_discussion_megathread_ongoing/",
+          "asOf": "2026-03~07",
+          "claim": "Ongoing megathread: limits tightened Mar–Apr 2026; single prompts can eat large % of session; Max 20x can die in a day under heavy agent use.",
+          "metric": null
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/kevkeysr/status/2070634304686924226",
+          "asOf": "2026-06-26",
+          "claim": "Pro user: two prompts jumped 20%→100% of current 5h session; first message after reset can jump to ~30%.",
+          "metric": null
         }
       ]
     },
     {
       "planId": "claude_max_5x",
-      "estimatedTextWorkloadCapacityMTokens": 1500,
-      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "estimatedTextWorkloadCapacityMTokens": 2460,
+      "quotaBasis": "multi_community_scaled_from_max20x_weekly",
       "quotaConfidence": "medium",
       "capacityMultiplier": "5x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Anthropic states Max 5x provides 5x Pro usage per session; estimated from a 300 MTokens Pro baseline, not an official token quota. Temporary boosted capacity is separately tracked from awesome-coding-plan Claude Pro observation and should not be treated as long-term stable quota.",
+      "source": "x_reddit_2026_07_plus_acp",
+      "notes": "Monthly ~2.46B tokens (scaled from X Max20x weekly 2.46B/4). Fable xHigh multi-agent can burn majority of 5h window in minutes (X). Reddit: ~50–200 prompts/5h.",
       "temporaryBoostedCapacityMTokens": 2080,
       "temporaryBoostEndsAt": "2026-07-13",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Temporary boosted capacity derived from Claude Pro observed 416 MTokens times 5."
+          "note": "Derived from Claude Pro 15.88亿 ×5"
+        }
+      ],
+      "estimatedMonthlyTokens": 2460000000,
+      "estimatedWeeklyTokens": 615000000,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "claude-opus-4.8",
+      "modelUsage": [
+        {
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "estimatedMonthlyTokens": 1421965318,
+          "relativeBurn": 1.73,
+          "taskBurnTokens": 3482397,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Max includes Fable ~50% limits; burn ~1.73× Opus 4.8 per task → effective Fable tasks fewer than Opus pool ×5",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.656
+        },
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
+          "estimatedMonthlyTokens": 2460000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": null,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Assume ~Opus 4.8 burn class until measured",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.6558
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8",
+          "estimatedMonthlyTokens": 2460000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 2008418,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Pro mo ×5 if entire pool were Opus 4.8 coding",
+          "estimatedMonthlyMTokens": 7940,
+          "tokenizerRatioVsGpt54": 1.656
+        },
+        {
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5",
+          "estimatedMonthlyTokens": 4641509434,
+          "relativeBurn": 0.53,
+          "taskBurnTokens": 1070526,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Cheaper burn per task → more tasks from same plan",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.6596
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 1230000000,
+        "mid": 2460000000,
+        "high": 7940000000,
+        "unit": "tokens",
+        "note": "mid≈Max20x X weekly/4 ×4; high=ACP Pro×5"
+      },
+      "communityReports": [
+        {
+          "platform": "reddit",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+          "asOf": "2026-07",
+          "claim": "Max 5x ~50–200 prompts/5h; ~140–280 Sonnet-hours/week + ~15–35 Opus-hours/week.",
+          "metric": {
+            "unit": "prompts_per_5h",
+            "low": 50,
+            "high": 200
+          }
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/luongnv89/status/2075123267287777381",
+          "asOf": "2026-07-09",
+          "claim": "Fable 5 xHigh on Max 5x: 20% of 5h usage in <1 min with 9 sub-agents; 7%→60% in <3 min. Confirms multi-agent Fable burns extremely fast.",
+          "metric": {
+            "unit": "percent_of_5h_window",
+            "note": "60% in ~3 min multi-agent"
+          }
+        },
+        {
+          "platform": "web_community",
+          "url": "https://www.ssdnodes.com/blog/claude-code-pricing-in-2026-every-plan-explained-pro-max-api-teams/",
+          "asOf": "2026-03",
+          "claim": "Alternate community table: Pro ~44k tokens/5h window, Max5x ~88k, Max20x ~220k (different metering than ACP coding-plan totals — treat as lower-bound window token guess).",
+          "metric": {
+            "unit": "tokens_per_5h",
+            "pro": 44000,
+            "max5x": 88000,
+            "max20x": 220000
+          }
         }
       ]
     },
     {
       "planId": "claude_max_20x",
-      "estimatedTextWorkloadCapacityMTokens": 6000,
-      "quotaBasis": "official_multiplier_applied_to_manual_base",
+      "estimatedTextWorkloadCapacityMTokens": 9840,
+      "quotaBasis": "multi_community_weekly_burn_plus_acp",
       "quotaConfidence": "medium",
       "capacityMultiplier": "20x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Anthropic states Max 20x provides 20x Pro usage per session; estimated from a 300 MTokens Pro baseline, with dynamic weekly/monthly caveats. Temporary boosted capacity is separately tracked from awesome-coding-plan Claude Pro observation and should not be treated as long-term stable quota.",
+      "source": "x_2026_07_22_plus_awesome_coding_plan",
+      "notes": "PRIMARY monthly for algorithm: ~9.84B tokens (X: Max20x weekly full burn ~2.46B ×4). ACP Pro×20 (31.76B) kept as high end of range — may overstate if weekly window is the real ceiling. Fable multi-agent burns 5h pool in minutes (X 2026-07-09).",
       "temporaryBoostedCapacityMTokens": 8320,
       "temporaryBoostEndsAt": "2026-07-13",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
-          "note": "Temporary boosted capacity derived from Claude Pro observed 416 MTokens times 20."
+          "note": "Derived from Claude Pro 15.88亿 ×20"
+        }
+      ],
+      "estimatedMonthlyTokens": 9840000000,
+      "estimatedWeeklyTokens": 2460000000,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "claude-opus-4.8",
+      "modelUsage": [
+        {
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "estimatedMonthlyTokens": 5687861272,
+          "relativeBurn": 1.73,
+          "taskBurnTokens": 3482397,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Fable burns ~1.73× Opus 4.8 per comparable agent task",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.656
+        },
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
+          "estimatedMonthlyTokens": 9840000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "~Opus 4.8 class burn pending measure",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 1.6558
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8",
+          "estimatedMonthlyTokens": 9840000000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 2008418,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Pro mo ×20 if all Opus 4.8",
+          "estimatedMonthlyMTokens": 31760,
+          "tokenizerRatioVsGpt54": 1.656
+        }
+      ],
+      "communityMonthlyTokenRange": {
+        "low": 4920000000,
+        "mid": 9840000000,
+        "high": 31760000000,
+        "unit": "tokens",
+        "note": "mid=X full weekly×4; high=ACP Pro×20 coding-plan extrapolation"
+      },
+      "communityReports": [
+        {
+          "platform": "x",
+          "url": "https://x.com/Deepusleepy/status/2079911639026221488",
+          "asOf": "2026-07-22",
+          "claim": "Burned entire Claude Max 20x WEEKLY limit in ~1 day ≈ 2.46B tokens (~.8k API-equivalent). Implies weekly hard pool ~2.46e9 tokens under heavy use.",
+          "metric": {
+            "unit": "tokens_per_week_full_burn",
+            "value": 2460000000
+          }
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/jeeacheff/status/2082565802213916982",
+          "asOf": "2026-07-29",
+          "claim": "Max 20x weekly usage already maxed; user starved for tokens mid-week.",
+          "metric": null
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/OsySharp/status/2082068840356200574",
+          "asOf": "2026-07-28",
+          "claim": "Opus 5 uses fewer tokens than 4.8 for same work for this user — Max 20x may last the week.",
+          "metric": null
+        },
+        {
+          "platform": "reddit",
+          "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+          "asOf": "2026-07",
+          "claim": "Max 20x ~200–800+ prompts/5h; 240–480 Sonnet-hours/week + 24–40 Opus-hours/week.",
+          "metric": {
+            "unit": "prompts_per_5h",
+            "low": 200,
+            "high": 800
+          }
         }
       ]
     },
     {
       "planId": "google_ai_ultra_5x_us",
-      "estimatedTextWorkloadCapacityMTokens": 4000,
-      "quotaBasis": "official_multiplier_applied_to_manual_base",
-      "quotaConfidence": "medium",
+      "estimatedTextWorkloadCapacityMTokens": 4500,
+      "quotaBasis": "community_and_official_multiplier_proxy",
+      "quotaConfidence": "low",
       "capacityMultiplier": "5x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Uses Google AI Pro 800 MTokens baseline multiplied by the 5x tier label."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Ultra higher access + Deep Think. ~5× Pro proxy when treating Pro as 900 MTokens.",
+      "estimatedMonthlyTokens": 4500000000
     },
     {
       "planId": "google_ai_ultra_20x_us",
-      "estimatedTextWorkloadCapacityMTokens": 16000,
-      "quotaBasis": "official_multiplier_applied_to_manual_base",
-      "quotaConfidence": "medium",
+      "estimatedTextWorkloadCapacityMTokens": 18000,
+      "quotaBasis": "community_and_official_multiplier_proxy",
+      "quotaConfidence": "low",
       "capacityMultiplier": "20x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Uses Google AI Pro 800 MTokens baseline multiplied by the 20x tier label."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Ultra 20x proxy from Pro baseline ×20.",
+      "estimatedMonthlyTokens": 18000000000
     },
     {
       "planId": "glm_coding_lite_cn",
       "estimatedTextWorkloadCapacityMTokens": 128,
-      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
       "quotaConfidence": "medium",
       "capacityMultiplier": "1x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (observed_glm_5_1_lite): about 128 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
       "observedFiveHourWindowMTokens": 6,
       "observedWeeklyWindowMTokens": 32,
       "observedCodingPlanModel": "glm-5.1",
@@ -353,17 +1199,47 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Observed GLM Coding Plan token usage table."
         }
+      ],
+      "estimatedMonthlyTokens": 128000000,
+      "estimatedWeeklyTokens": 32000000,
+      "estimatedFiveHourWindowTokens": 6000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "glm-5.1",
+      "modelUsage": [
+        {
+          "modelId": "glm-5.1",
+          "label": "GLM-5.1",
+          "estimatedMonthlyTokens": 128000000,
+          "relativeBurn": 1,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan GLM Coding Lite: mo 2400/1.28亿",
+          "estimatedMonthlyMTokens": 128,
+          "tokenizerRatioVsGpt54": 0.9593
+        },
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM-5.2",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": 8145637,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task burn very high (~8.1M) on sample — may exhaust plan faster",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 0.9569
+        }
       ]
     },
     {
       "planId": "glm_coding_pro_cn",
       "estimatedTextWorkloadCapacityMTokens": 640,
-      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
       "quotaConfidence": "medium",
       "capacityMultiplier": "5x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (5x_lite_observed_glm_5_1): about 640 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
       "observedFiveHourWindowMTokens": 30,
       "observedWeeklyWindowMTokens": 160,
       "observedCodingPlanModel": "glm-5.1",
@@ -373,17 +1249,47 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Observed GLM Coding Plan token usage table."
         }
+      ],
+      "estimatedMonthlyTokens": 640000000,
+      "estimatedWeeklyTokens": 160000000,
+      "estimatedFiveHourWindowTokens": 30000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "glm-5.1",
+      "modelUsage": [
+        {
+          "modelId": "glm-5.1",
+          "label": "GLM-5.1",
+          "estimatedMonthlyTokens": 640000000,
+          "relativeBurn": 1,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "awesome-coding-plan GLM Coding Pro: mo 12000/6.4亿",
+          "estimatedMonthlyMTokens": 640,
+          "tokenizerRatioVsGpt54": 0.9593
+        },
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM-5.2",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": 8145637,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Heavy task burn",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 0.9569
+        }
       ]
     },
     {
       "planId": "glm_coding_max_cn",
       "estimatedTextWorkloadCapacityMTokens": 2560,
-      "quotaBasis": "awesome_coding_plan_observed_monthly_tokens",
-      "quotaConfidence": "medium",
+      "quotaBasis": "multiplier_on_lite_observation",
+      "quotaConfidence": "low",
       "capacityMultiplier": "20x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_recheck_2026_07_01",
-      "notes": "Updated from awesome-coding-plan observed GLM Coding Plan data (20x_lite_observed_glm_5_1): about 2560 MTokens/month. Window fields are observed coding-plan workload estimates, not official fixed token quotas.",
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Max not in ACP table; ~20× Lite 1.28亿.",
       "observedFiveHourWindowMTokens": 120,
       "observedWeeklyWindowMTokens": 640,
       "observedCodingPlanModel": "glm-5.1",
@@ -393,7 +1299,31 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Observed GLM Coding Plan token usage table."
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 2560000000,
+      "primaryModelId": "glm-5.1",
+      "modelUsage": [
+        {
+          "modelId": "glm-5.1",
+          "label": "GLM-5.1",
+          "estimatedMonthlyTokens": 2560000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Prior 20× Lite ladder; ACP only measured Lite/Pro"
+        },
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM-5.2",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": 8145637,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Very high task burn on sample"
+        }
+      ],
+      "lastCheckedAt": "2026-07-30"
     },
     {
       "planId": "opencode_go_regular",
@@ -565,7 +1495,8 @@
           "url": "https://github.com/mahonzhan/awesome-coding-plan",
           "note": "Confirms OpenCode Go is a $60/month value-limited plan with about 6x value multiple; use modelSpecificUsageProfiles for workload capacity."
         }
-      ]
+      ],
+      "estimatedMonthlyTokens": 600000000
     },
     {
       "planId": "ollama_free",
@@ -720,32 +1651,35 @@
     {
       "planId": "chatgpt_free",
       "estimatedTextWorkloadCapacityMTokens": 40,
-      "quotaBasis": "official_dynamic_message_limit_manual_mtokens_estimate",
+      "quotaBasis": "community_free_tier_conservative",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_recheck_2026_06_30",
-      "notes": "OpenAI documents Free access as limited and dynamic within a 5-hour window. Conservative MTokens-equivalent fallback estimate; not an official token quota."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Free tier heavily rate-limited; token figure is conservative workload proxy only.",
+      "estimatedMonthlyTokens": 40000000
     },
     {
       "planId": "chatgpt_go_us",
-      "estimatedTextWorkloadCapacityMTokens": 180,
-      "quotaBasis": "official_message_cap_manual_mtokens_estimate",
+      "estimatedTextWorkloadCapacityMTokens": 200,
+      "quotaBasis": "community_fraction_of_plus_coding_plan",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_recheck_2026_06_30",
-      "notes": "OpenAI documents Plus/Go GPT-5.5 message caps, but not fixed token quotas. Go also has lower Thinking usage than Plus; conservative MTokens-equivalent estimate."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Go has lower limits than Plus; rough ~1/3 of Plus Codex community monthly tokens. No solid public token table — low confidence.",
+      "estimatedMonthlyTokens": 200000000
     },
     {
       "planId": "claude_free",
       "estimatedTextWorkloadCapacityMTokens": 60,
-      "quotaBasis": "manual_dynamic_limit_estimate",
+      "quotaBasis": "community_free_tier_conservative",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Free tier conservative estimate; Claude limits are dynamic and not exposed as fixed token quotas."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Free Claude highly restricted; token proxy only.",
+      "estimatedMonthlyTokens": 60000000
     },
     {
       "planId": "cursor_hobby",
@@ -759,23 +1693,558 @@
     },
     {
       "planId": "google_ai_plus_us",
-      "estimatedTextWorkloadCapacityMTokens": 250,
-      "quotaBasis": "manual_dynamic_limit_estimate",
+      "estimatedTextWorkloadCapacityMTokens": 350,
+      "quotaBasis": "community_flash_workhorse_proxy",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "US AI Plus estimate; model entitlement and regional pricing should be rechecked before strong recommendations."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Plus emphasizes Gemini 3.6 Flash volume. No public monthly token meter; estimate between free-heavy chat and Pro. Low confidence.",
+      "estimatedMonthlyTokens": 350000000
     },
     {
       "planId": "google_ai_pro_us",
-      "estimatedTextWorkloadCapacityMTokens": 800,
-      "quotaBasis": "manual_dynamic_limit_estimate",
-      "quotaConfidence": "medium",
+      "estimatedTextWorkloadCapacityMTokens": 900,
+      "quotaBasis": "community_pro_tier_token_proxy",
+      "quotaConfidence": "low",
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "manual_estimate_v0.1.2",
-      "notes": "Practical text workload estimate for Google AI Pro. Google publishes product access, not a fixed token quota."
+      "source": "community_estimate_v0.4.2",
+      "notes": "Pro: 3.1 Pro + 3.6 Flash. Community treats as solid daily research/coding volume without published token pool. Proxy only.",
+      "estimatedMonthlyTokens": 900000000
+    },
+    {
+      "planId": "grok_free",
+      "estimatedTextWorkloadCapacityMTokens": 25,
+      "quotaBasis": "community_rate_limit_to_token_proxy",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Free Grok rate-limited. Token figure is a rough monthly workload proxy from rate-limit reports, not official tokens.",
+      "estimatedMonthlyTokens": 25000000
+    },
+    {
+      "planId": "supergrok_lite",
+      "estimatedTextWorkloadCapacityMTokens": 120,
+      "quotaBasis": "community_tier_relative_to_supergrok",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Lite between free and SuperGrok. No public token meter; ~half of SuperGrok practical estimate.",
+      "estimatedMonthlyTokens": 120000000
+    },
+    {
+      "planId": "supergrok",
+      "estimatedTextWorkloadCapacityMTokens": 280,
+      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30",
+      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
+      "estimatedMonthlyTokens": 280000000,
+      "additionalSources": [
+        {
+          "sourceId": "supergrok_pricing_guides",
+          "url": "https://suprmind.ai/hub/grok/pricing/",
+          "note": "Usage described via rate windows, not official monthly token quota"
+        }
+      ],
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "grok-4.5",
+      "modelUsage": [
+        {
+          "modelId": "grok-4.5",
+          "label": "Grok 4.5",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": 1,
+          "taskBurnTokens": 1005853,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Task burn ~1.01M (similar to Sol) on sample; monthly still rate-window limited — no ACP mo row for SuperGrok",
+          "estimatedMonthlyMTokens": null,
+          "tokenizerRatioVsGpt54": 0.9996
+        }
+      ],
+      "communityReports": [
+        {
+          "platform": "web_community",
+          "url": "https://suprmind.ai/hub/grok/pricing/",
+          "asOf": "2026-07",
+          "claim": "SuperGrok ~/mo higher limits / frontier models; usage described via rate windows not public monthly token meters.",
+          "metric": null
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/matt_kaschel/status/2082385174503866802",
+          "asOf": "2026-07-29",
+          "claim": "Grok 4.5 described as very token-efficient vs other stacks in multi-agent orchestration comparisons.",
+          "metric": null
+        }
+      ]
+    },
+    {
+      "planId": "supergrok_heavy",
+      "estimatedTextWorkloadCapacityMTokens": 1800,
+      "quotaBasis": "community_price_and_tier_relative",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Heavy multi-agent; community positions as ~order-of-magnitude above SuperGrok. Token proxy only.",
+      "estimatedMonthlyTokens": 1800000000
+    },
+    {
+      "planId": "perplexity_free",
+      "estimatedTextWorkloadCapacityMTokens": 30,
+      "quotaBasis": "community_search_limit_to_token_proxy",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Free weekly search caps. Token proxy only.",
+      "estimatedMonthlyTokens": 30000000
+    },
+    {
+      "planId": "perplexity_pro",
+      "estimatedTextWorkloadCapacityMTokens": 280,
+      "quotaBasis": "community_search_volume_to_token_proxy",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Community: Pro Search often ~300–600/day with rolling counters; Deep Research much tighter (tens/month class, varies). Token proxy assumes ~450 multi-model searches/day * ~25k tokens * ~25 days. Not official. Advanced-model weekly caps have tightened in 2026 per Reddit.",
+      "estimatedMonthlyTokens": 280000000,
+      "additionalSources": [
+        {
+          "sourceId": "reddit_perplexity_limits",
+          "url": "https://www.reddit.com/r/perplexity_ai/",
+          "note": "Pro search counters and deep-research caps discussed; numbers vary over time"
+        },
+        {
+          "sourceId": "perplexity_help",
+          "url": "https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you.html",
+          "note": "Official describes limits qualitatively by plan"
+        }
+      ],
+      "communityReports": [
+        {
+          "platform": "reddit",
+          "url": "https://www.reddit.com/r/perplexity_ai/comments/1r1xg6i/notes_on_the_new_limits_for_perplexity_pro/",
+          "asOf": "2026",
+          "claim": "remaining_pro often ~600 (rolling); deep research much tighter (e.g. remaining_research single digits / monthly style caps reported).",
+          "metric": {
+            "unit": "pro_searches_rolling",
+            "value": 600
+          }
+        },
+        {
+          "platform": "reddit",
+          "url": "https://www.androidauthority.com/perplexity-pro-advanced-ai-limits-reduced-3667942/",
+          "asOf": "2026-05",
+          "claim": "Users report tighter advanced-model weekly limits in 2026; some claim ~100–150 advanced queries/week class.",
+          "metric": null
+        }
+      ],
+      "lastCheckedAt": "2026-07-30"
+    },
+    {
+      "planId": "perplexity_max",
+      "estimatedTextWorkloadCapacityMTokens": 1400,
+      "quotaBasis": "community_tier_relative_to_pro",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Max / Computer: community and marketing as much higher / unlimited-style vs Pro. Token proxy ~5× Pro practical estimate. Low confidence.",
+      "estimatedMonthlyTokens": 1400000000
+    },
+    {
+      "planId": "google_ai_pro_jp",
+      "estimatedTextWorkloadCapacityMTokens": 900,
+      "quotaBasis": "mirrors_us_pro",
+      "quotaConfidence": "low",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "community_estimate_v0.4.2",
+      "notes": "Same model access as US Pro; JP App Store price only.",
+      "estimatedMonthlyTokens": 900000000
+    },
+    {
+      "planId": "kimi_moderato_global",
+      "estimatedTextWorkloadCapacityMTokens": 336,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "Kimi Code ~4x",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code ~4x.  GLOBAL mirror of CN current-model ladder (K3 + K2.7 Code).",
+      "estimatedMonthlyTokens": 336000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 336000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedMonthlyMTokens": 336,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 336000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedFiveHourWindowTokens": null,
+          "estimatedMonthlyMTokens": 336,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 336000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
+    },
+    {
+      "planId": "kimi_allegretto_global",
+      "estimatedTextWorkloadCapacityMTokens": 1428,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "Kimi Code 20x",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code 20x.  GLOBAL mirror of CN current-model ladder (K3 + K2.7 Code).",
+      "estimatedMonthlyTokens": 1428000000,
+      "estimatedWeeklyTokens": 357000000,
+      "estimatedFiveHourWindowTokens": 65000000,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 1428000000,
+          "estimatedWeeklyTokens": 357000000,
+          "estimatedMonthlyMTokens": 1428,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 1428000000,
+          "estimatedWeeklyTokens": 357000000,
+          "estimatedFiveHourWindowTokens": 65000000,
+          "estimatedMonthlyMTokens": 1428,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "communityReports": [
+        {
+          "platform": "github_community",
+          "url": "https://github.com/mahonzhan/awesome-coding-plan",
+          "asOf": "2026-07-30",
+          "claim": "Kimi Code Allegretto (K2.7 Code (ACP historical row said k2.5)): mo 14.28亿 tokens; notes 429 frequent, TPS down, K2.6 loops.",
+          "metric": {
+            "unit": "tokens_per_month",
+            "value": 1428000000
+          },
+          "note": " Model label corrected: not current K2.5."
+        },
+        {
+          "platform": "x",
+          "url": "https://x.com/tak_ltc/status/2082475833562914946",
+          "asOf": "2026-07-29",
+          "claim": "Kimi current plan quotas feel too low vs Codex 20x 100+亿/mo class; need more coding-plan tokens.",
+          "metric": null
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 1428000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
+    },
+    {
+      "planId": "kimi_allegro_global",
+      "estimatedTextWorkloadCapacityMTokens": 4284,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "Kimi Code 60x ladder",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: Kimi Code 60x ladder.  GLOBAL mirror of CN current-model ladder (K3 + K2.7 Code).",
+      "estimatedMonthlyTokens": 4284000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "lastCheckedAt": "2026-07-30",
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 4284000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedMonthlyMTokens": 4284,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 4284000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedFiveHourWindowTokens": null,
+          "estimatedMonthlyMTokens": 4284,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 4284000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      }
+    },
+    {
+      "planId": "kimi_vivace_global",
+      "estimatedTextWorkloadCapacityMTokens": 6000,
+      "quotaBasis": "community_code_pool_reattributed_to_current_models",
+      "quotaConfidence": "low",
+      "capacityMultiplier": "GLOBAL top",
+      "cacheHitRateAssumption": 0.95,
+      "source": "awesome_coding_plan_2026_07_30_model_labels_corrected",
+      "notes": "Current models: Kimi K3 (membership flagship) + Kimi K2.7 Code (coding path) + K2.6 chat. NOT K2.5. Code-pool monthly tokens from ACP Kimi Code rows (table still says k2.5 at old measure time) re-attributed to K2.7 Code; K3 shares membership wallet. Multiplier: GLOBAL top. ",
+      "estimatedMonthlyTokens": 6000000000,
+      "estimatedWeeklyTokens": null,
+      "estimatedFiveHourWindowTokens": null,
+      "primaryModelId": "kimi-k3",
+      "modelUsage": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "estimatedMonthlyTokens": 6000000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedMonthlyMTokens": 6000,
+          "relativeBurn": 0.55,
+          "taskBurnTokens": 2228706,
+          "tokenizerRatioVsGpt54": 0.9013,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current membership flagship (2026-07). Draws from shared membership quota with Code/Agent — not a separate K2.5 meter. Task burn ~2.23M (~0.55× K2.7 Code on same sample)."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "estimatedMonthlyTokens": 6000000000,
+          "estimatedWeeklyTokens": null,
+          "estimatedFiveHourWindowTokens": null,
+          "estimatedMonthlyMTokens": 6000,
+          "relativeBurn": 1,
+          "taskBurnTokens": 4051232,
+          "tokenizerRatioVsGpt54": 0.876,
+          "confidence": "medium",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "Current Kimi Code model. Plan Code-pool size taken from ACP Kimi Code row (historically labeled kimi-k2.5 at measure time); re-attributed to K2.7 Code. Task burn ~4.05M on ACP sample agent task."
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "label": "Kimi K2.6",
+          "estimatedMonthlyTokens": null,
+          "relativeBurn": null,
+          "taskBurnTokens": null,
+          "tokenizerRatioVsGpt54": 0.8799,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "General chat model; free/chat entry often does not burn membership pool (official help)."
+        }
+      ],
+      "historicalMeasurement": {
+        "modelId": "kimi-k2.5",
+        "label": "Kimi K2.5 (HISTORICAL only)",
+        "status": "deprecated_measurement_label",
+        "note": "ACP table still shows kimi-k2.5 on Code Andante/Allegretto rows — that is the model name at observation time, NOT the current product default. Do not recommend or score as current.",
+        "measuredMonthlyTokens": 6000000000,
+        "source": "https://github.com/mahonzhan/awesome-coding-plan"
+      },
+      "lastCheckedAt": "2026-07-30"
+    },
+    {
+      "planId": "openai_gpt56_sol_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "openai_gpt56_terra_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "openai_gpt56_luna_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "claude_opus_5_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "claude_opus_48_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "claude_sonnet_5_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "kimi_k3_api_global",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "kimi_k3_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.0",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+    },
+    {
+      "planId": "claude_fable_5_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api_dynamic",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "manual_estimate_v0.3.2",
+      "notes": "Metered API."
     }
-  ]
+  ],
+  "unit": {
+    "mtokenDefinition": "1 MToken = 1e6 tokens",
+    "primaryField": "estimatedTextWorkloadCapacityMTokens",
+    "rawTokenField": "estimatedMonthlyTokens"
+  },
+  "perModelUsagePolicy": {
+    "rule": "Never assume one monthly token number applies equally to every model inside a plan.",
+    "relativeBurnDefinition": "taskBurn(model) / taskBurn(primary) on the same ACP non-rigorous agent task when available.",
+    "effectiveMonthlyTokensApprox": "When only primary mo is known: primaryMo / relativeBurn (higher burn → fewer equivalent tokens of work)."
+  }
 }

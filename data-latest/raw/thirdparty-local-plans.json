@@ -1,0 +1,461 @@
+{
+  "schemaVersion": "0.2.0",
+  "lastUpdatedAt": "2026-07-12",
+  "source": "official_web_collection_thirdparty",
+  "notes": [
+    "Collection focused on local/self-hosted/desktop AI runtimes and third-party API routers.",
+    "Prices are official USD list prices as of 2026-07-12 unless otherwise noted.",
+    "Local options are hardware-cost-only for the runtime; cloud usage tiers are priced monthly.",
+    "API-router / cloud-model entries are metered; representative per-1M-token rates are included for major models.",
+    "Ollama Pro price ($20) is not shown in the text-extracted portion of the official pricing page but matches the existing verified dataset and the page's Pro/Max tier structure.",
+    "Poe subscription price is widely reported by official-adjacent sources; the official pricing page could not be fetched directly during this collection pass.",
+    "Cloudflare AI Gateway core features are free; log and request overage pricing is from the official developer docs."
+  ],
+  "plans": [
+    {
+      "id": "ollama_free",
+      "provider": "Ollama",
+      "name": "Ollama Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Local runtime plus limited cloud usage. 1 concurrent cloud model. Unlimited local models on own hardware.",
+      "_collectionSource": "ollama_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "ollama_pro",
+      "provider": "Ollama",
+      "name": "Ollama Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 16.67,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year"
+        }
+      ],
+      "notes": "50x more cloud usage than Free; 3 concurrent cloud models; upload/share private models.",
+      "_collectionSource": "ollama_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "ollama_max",
+      "provider": "Ollama",
+      "name": "Ollama Max",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://ollama.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "5x more cloud usage than Pro; 10 concurrent cloud models.",
+      "_collectionSource": "ollama_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "lm_studio_free",
+      "provider": "LM Studio",
+      "name": "LM Studio Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://lmstudio.ai/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free for home and work use. Enterprise/Teams plan is contact-sales only.",
+      "_collectionSource": "lmstudio_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "jan_free",
+      "provider": "Jan",
+      "name": "Jan Desktop Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/janhq/jan",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Open-source desktop client. Runs 100% offline. Optional cloud integrations require user's own API keys.",
+      "_collectionSource": "jan_github_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "jan_server_enterprise",
+      "provider": "Jan",
+      "name": "Jan Server Enterprise",
+      "region": "GLOBAL",
+      "recommendationRole": "team_plan",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "api",
+        "cli"
+      ],
+      "originalPrice": null,
+      "originalCurrency": "USD",
+      "billingCycle": "unknown",
+      "priceStatus": "pending",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://github.com/janhq/server",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": false,
+      "notes": "Self-hosted enterprise LLM API platform. Pricing is contact-sales; not a personal-tier option.",
+      "_collectionSource": "jan_github_official",
+      "_confidence": "low"
+    },
+    {
+      "id": "gpt4all_free",
+      "provider": "Nomic AI",
+      "name": "GPT4All Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.nomic.ai/gpt4all",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free, private local chatbot for Windows, macOS, Linux. Supports thousands of models via LocalDocs.",
+      "_collectionSource": "nomic_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "llamafile_free",
+      "provider": "Mozilla.ai",
+      "name": "llamafile Free",
+      "region": "GLOBAL",
+      "recommendationRole": "local_option",
+      "category": "local_model",
+      "accessModes": [
+        "local_runtime",
+        "cli",
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/mozilla-ai/llamafile",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Single-file executable that runs open LLMs locally on most OS/CPU architectures. Apache 2.0 licensed.",
+      "_collectionSource": "mozilla_ai_github_official",
+      "_confidence": "high"
+    }
+  ],
+  "apiOptions": [
+    {
+      "id": "openrouter_free",
+      "provider": "OpenRouter",
+      "name": "OpenRouter Free",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openrouter.ai/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": false,
+      "notes": "Free models only. 50 requests/day and 20 RPM limit. Free-model quota depends on lifetime credit purchases.",
+      "_collectionSource": "openrouter_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "openrouter_payg",
+      "provider": "OpenRouter",
+      "name": "OpenRouter Pay-as-you-go",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openrouter.ai/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 2.0,
+        "output": 6.0,
+        "inputCacheHit": 2.0,
+        "inputCacheMiss": 2.0
+      },
+      "notes": "Prepaid credits, no monthly minimums, no lock-in. Official FAQ states OpenRouter does not mark up provider pricing; representative rates shown for major frontier models (e.g., xAI Grok). BYOK: first 1M requests/month free, then 5% overage fee per third-party reports.",
+      "_collectionSource": "openrouter_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "poe_subscription",
+      "provider": "Poe",
+      "name": "Poe Subscription",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 19.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "pricingModel": "fixed",
+      "fixedMonthlyPrice": 19.99,
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://poe.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": false,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 16.67,
+          "totalPrice": 199.99,
+          "currency": "USD",
+          "discountLabel": "$199.99/year"
+        }
+      ],
+      "notes": "Unlimited access to premium bots across GPT, Claude, Gemini, etc. Official pricing page could not be fetched directly; price is consistently reported by official-adjacent sources.",
+      "_collectionSource": "poe_official_indirect",
+      "_confidence": "medium"
+    },
+    {
+      "id": "poe_api",
+      "provider": "Poe",
+      "name": "Poe API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": null,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "pending",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://poe.com/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": false,
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Poe offers a creator/API platform; public per-token pricing is not listed on the official landing page. Requires direct inquiry.",
+      "_collectionSource": "poe_official_indirect",
+      "_confidence": "low"
+    },
+    {
+      "id": "fireworks_serverless",
+      "provider": "Fireworks AI",
+      "name": "Fireworks AI Serverless",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://docs.fireworks.ai/serverless/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 0.95,
+        "inputCacheHit": 0.19,
+        "inputCacheMiss": 0.95,
+        "output": 4.0
+      },
+      "notes": "Representative Standard-tier pricing for Kimi K2.7 Code. Cached input 50% by default. Batch inference 50% off. Size-based fallback: <$4B $0.10/M, 4-16B $0.20/M, >16B $0.90/M, MoE up to 56B $0.50/M, MoE 56-176B $1.20/M.",
+      "_collectionSource": "fireworks_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "together_serverless",
+      "provider": "Together AI",
+      "name": "Together AI Serverless",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.together.ai/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 0.95,
+        "inputCacheHit": 0.19,
+        "inputCacheMiss": 0.95,
+        "output": 4.0
+      },
+      "notes": "Representative rates for Kimi K2.7 Code. Also offers provisioned throughput (PTUs) and dedicated GPU endpoints. Batch API up to 50% off.",
+      "_collectionSource": "together_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "groq_ondemand",
+      "provider": "Groq",
+      "name": "Groq On-Demand",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://groq.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 0.075,
+        "inputCacheHit": 0.0375,
+        "inputCacheMiss": 0.075,
+        "output": 0.3
+      },
+      "notes": "Representative rates for GPT-OSS 20B (very fast TPU inference). Prompt caching discounts apply on cache hits. Batch API 50% off. Compound tool use priced separately.",
+      "_collectionSource": "groq_official",
+      "_confidence": "high"
+    },
+    {
+      "id": "cloudflare_ai_gateway",
+      "provider": "Cloudflare",
+      "name": "Cloudflare AI Gateway",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "accessModes": [
+        "api"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "pricingModel": "metered",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://developers.cloudflare.com/ai-gateway/pricing/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 0,
+        "output": 0
+      },
+      "creditPurchaseFee": {
+        "type": "per_request",
+        "percentage": 0,
+        "minimum": 0,
+        "currency": "USD"
+      },
+      "notes": "Core gateway features (routing, caching, rate limiting, analytics) free. Paid plan includes 10M requests/month then $0.05/million; persistent logs free allocation then overage. Model inference billed separately at the upstream provider.",
+      "_collectionSource": "cloudflare_official",
+      "_confidence": "high"
+    }
+  ]
+}

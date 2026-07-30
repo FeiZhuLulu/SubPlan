@@ -1,0 +1,1903 @@
+{
+  "schemaVersion": "0.1.1",
+  "lastUpdatedAt": "2026-07-12",
+  "sourcePath": "E:\\项目库\\订阅推荐器\\ai-subscription-recommender-data-v0.1.1 (1)\\ai-subscription-recommender-data-v0.1.1",
+  "notes": [
+    "Generated from local reference dataset v0.1.3.",
+    "Source counts: plans=38, apiOptions=12, models=17, benchmarkRecords=94, dimensionEvidence=87.",
+    "Suggested SubPlan IDs are kept identical to canonical source IDs because the current SubPlan runtime data uses the same plan and API option IDs.",
+    "API options are metered; price.amount is fixedMonthlyPrice when present and null otherwise.",
+    "Benchmark scores are raw evidence values; do not compare across units without normalization."
+  ],
+  "planMappings": [
+    {
+      "sourcePlanId": "chatgpt_free",
+      "sourceProvider": "OpenAI",
+      "sourceName": "ChatGPT Free",
+      "suggestedSubPlanId": "chatgpt_free",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "billingCycle": "free"
+      },
+      "sourceUrl": "https://chatgpt.com/pricing/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Free personal tier."
+    },
+    {
+      "sourcePlanId": "chatgpt_go_us",
+      "sourceProvider": "OpenAI",
+      "sourceName": "ChatGPT Go",
+      "suggestedSubPlanId": "chatgpt_go_us",
+      "region": "US",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 8,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://openai.com/index/introducing-chatgpt-go/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "US reference price. Some markets may have localized prices."
+    },
+    {
+      "sourcePlanId": "chatgpt_plus",
+      "sourceProvider": "OpenAI",
+      "sourceName": "ChatGPT Plus",
+      "suggestedSubPlanId": "chatgpt_plus",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 20,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Official help page states ChatGPT Plus is $20/month."
+    },
+    {
+      "sourcePlanId": "chatgpt_pro_5x",
+      "sourceProvider": "OpenAI",
+      "sourceName": "ChatGPT Pro 5x",
+      "suggestedSubPlanId": "chatgpt_pro_5x",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 100,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Lower Pro tier. Official help page describes roughly 5x Plus usage."
+    },
+    {
+      "sourcePlanId": "chatgpt_pro_20x",
+      "sourceProvider": "OpenAI",
+      "sourceName": "ChatGPT Pro 20x",
+      "suggestedSubPlanId": "chatgpt_pro_20x",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Higher Pro tier. Official help page describes roughly 20x Plus usage."
+    },
+    {
+      "sourcePlanId": "claude_free",
+      "sourceProvider": "Anthropic",
+      "sourceName": "Claude Free",
+      "suggestedSubPlanId": "claude_free",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "billingCycle": "free"
+      },
+      "sourceUrl": "https://claude.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Free Claude plan."
+    },
+    {
+      "sourcePlanId": "claude_pro",
+      "sourceProvider": "Anthropic",
+      "sourceName": "Claude Pro",
+      "suggestedSubPlanId": "claude_pro",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "price": {
+        "amount": 20,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Claude Pro includes Claude Code access."
+    },
+    {
+      "sourcePlanId": "claude_max_5x",
+      "sourceProvider": "Anthropic",
+      "sourceName": "Claude Max 5x",
+      "suggestedSubPlanId": "claude_max_5x",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "price": {
+        "amount": 100,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Max lower tier."
+    },
+    {
+      "sourcePlanId": "claude_max_20x",
+      "sourceProvider": "Anthropic",
+      "sourceName": "Claude Max 20x",
+      "suggestedSubPlanId": "claude_max_20x",
+      "region": "GLOBAL",
+      "category": "chat_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli"
+      ],
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Max higher tier."
+    },
+    {
+      "sourcePlanId": "google_ai_plus_us",
+      "sourceProvider": "Google",
+      "sourceName": "Google AI Plus",
+      "suggestedSubPlanId": "google_ai_plus_us",
+      "region": "US",
+      "category": "bundle",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "price": {
+        "amount": 4.99,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "US pricing only. Regional prices not included in v0.1.1."
+    },
+    {
+      "sourcePlanId": "google_ai_pro_us",
+      "sourceProvider": "Google",
+      "sourceName": "Google AI Pro",
+      "suggestedSubPlanId": "google_ai_pro_us",
+      "region": "US",
+      "category": "bundle",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "price": {
+        "amount": 19.99,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "US pricing only. Regional prices not included in v0.1.1."
+    },
+    {
+      "sourcePlanId": "google_ai_ultra_5x_us",
+      "sourceProvider": "Google",
+      "sourceName": "Google AI Ultra 5x",
+      "suggestedSubPlanId": "google_ai_ultra_5x_us",
+      "region": "US",
+      "category": "bundle",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "price": {
+        "amount": 99.99,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://gemini.google/subscriptions/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "US pricing only."
+    },
+    {
+      "sourcePlanId": "google_ai_ultra_20x_us",
+      "sourceProvider": "Google",
+      "sourceName": "Google AI Ultra 20x",
+      "suggestedSubPlanId": "google_ai_ultra_20x_us",
+      "region": "US",
+      "category": "bundle",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "price": {
+        "amount": 199.99,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://gemini.google/subscriptions/",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "US pricing only."
+    },
+    {
+      "sourcePlanId": "google_ai_pro_jp",
+      "sourceProvider": "Google",
+      "sourceName": "Google AI Pro Japan",
+      "suggestedSubPlanId": "google_ai_pro_jp",
+      "region": "JP",
+      "category": "bundle",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "JPY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": null,
+      "priceStatus": "intentionally_blank",
+      "sourceStatus": "pending_manual_url",
+      "notes": "Japan pricing intentionally left blank for v0.1.1."
+    },
+    {
+      "sourcePlanId": "cursor_hobby",
+      "sourceProvider": "Cursor",
+      "sourceName": "Cursor Hobby",
+      "suggestedSubPlanId": "cursor_hobby",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "billingCycle": "free"
+      },
+      "sourceUrl": "https://cursor.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Free plan."
+    },
+    {
+      "sourcePlanId": "cursor_pro",
+      "sourceProvider": "Cursor",
+      "sourceName": "Cursor Pro",
+      "suggestedSubPlanId": "cursor_pro",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 20,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://cursor.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Entry-level plan with access to premium models, unlimited Tab completions, and more."
+    },
+    {
+      "sourcePlanId": "cursor_pro_plus",
+      "sourceProvider": "Cursor",
+      "sourceName": "Cursor Pro+",
+      "suggestedSubPlanId": "cursor_pro_plus",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 60,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://cursor.com/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "User-provided official pricing screenshot confirms $60/month."
+    },
+    {
+      "sourcePlanId": "cursor_ultra",
+      "sourceProvider": "Cursor",
+      "sourceName": "Cursor Ultra",
+      "suggestedSubPlanId": "cursor_ultra",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 200,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://cursor.com/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "User-provided official pricing screenshot confirms $200/month."
+    },
+    {
+      "sourcePlanId": "cursor_teams",
+      "sourceProvider": "Cursor",
+      "sourceName": "Cursor Teams",
+      "suggestedSubPlanId": "cursor_teams",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "team_plan",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 40,
+        "currency": "USD",
+        "billingCycle": "monthly_per_user"
+      },
+      "sourceUrl": "https://cursor.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Team plan. Not used in v0.1 personal recommendation."
+    },
+    {
+      "sourcePlanId": "opencode_go_intro",
+      "sourceProvider": "OpenCode",
+      "sourceName": "OpenCode Go First Month",
+      "suggestedSubPlanId": "opencode_go_intro",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "cli",
+        "api"
+      ],
+      "price": {
+        "amount": 5,
+        "currency": "USD",
+        "billingCycle": "first_month"
+      },
+      "sourceUrl": "https://opencode.ai/go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Introductory first-month price. Use regular price for long-term recommendation."
+    },
+    {
+      "sourcePlanId": "opencode_go_regular",
+      "sourceProvider": "OpenCode",
+      "sourceName": "OpenCode Go",
+      "suggestedSubPlanId": "opencode_go_regular",
+      "region": "GLOBAL",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "cli",
+        "api"
+      ],
+      "price": {
+        "amount": 10,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://opencode.ai/go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Regular recurring price after first month."
+    },
+    {
+      "sourcePlanId": "kimi_adagio_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi Adagio",
+      "suggestedSubPlanId": "kimi_adagio_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "CNY",
+        "billingCycle": "free"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Free Kimi tier."
+    },
+    {
+      "sourcePlanId": "kimi_andante_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi Andante",
+      "suggestedSubPlanId": "kimi_andante_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 49,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Kimi Code 1x."
+    },
+    {
+      "sourcePlanId": "kimi_moderato_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi Moderato",
+      "suggestedSubPlanId": "kimi_moderato_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 99,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Kimi Code 4x."
+    },
+    {
+      "sourcePlanId": "kimi_allegretto_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi Allegretto",
+      "suggestedSubPlanId": "kimi_allegretto_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 199,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Kimi Code 20x."
+    },
+    {
+      "sourcePlanId": "kimi_allegro_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi Allegro",
+      "suggestedSubPlanId": "kimi_allegro_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 699,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Kimi Code 60x."
+    },
+    {
+      "sourcePlanId": "minimax_token_plus_cn",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Plus",
+      "suggestedSubPlanId": "minimax_token_plus_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 49,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "sourcePlanId": "minimax_token_max_cn",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Max",
+      "suggestedSubPlanId": "minimax_token_max_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 119,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "sourcePlanId": "minimax_token_ultra_cn",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Ultra",
+      "suggestedSubPlanId": "minimax_token_ultra_cn",
+      "region": "CN",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 469,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "China-region price from user-provided official screenshot."
+    },
+    {
+      "sourcePlanId": "minimax_token_plus_global",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Plus",
+      "suggestedSubPlanId": "minimax_token_plus_global",
+      "region": "GLOBAL",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 20,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Global Token Plan price."
+    },
+    {
+      "sourcePlanId": "minimax_token_max_global",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Max",
+      "suggestedSubPlanId": "minimax_token_max_global",
+      "region": "GLOBAL",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 50,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Global Token Plan price."
+    },
+    {
+      "sourcePlanId": "minimax_token_ultra_global",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax Token Plan Ultra",
+      "suggestedSubPlanId": "minimax_token_ultra_global",
+      "region": "GLOBAL",
+      "category": "agent_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "web_app",
+        "api",
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 120,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Global Token Plan price."
+    },
+    {
+      "sourcePlanId": "glm_coding_lite_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM Coding Lite",
+      "suggestedSubPlanId": "glm_coding_lite_cn",
+      "region": "CN",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 49,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "Supports Claude Code and 20+ coding tools. Requires real-name verification according to screenshot."
+    },
+    {
+      "sourcePlanId": "glm_coding_pro_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM Coding Pro",
+      "suggestedSubPlanId": "glm_coding_pro_cn",
+      "region": "CN",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 149,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "Most popular plan according to screenshot."
+    },
+    {
+      "sourcePlanId": "glm_coding_max_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM Coding Max",
+      "suggestedSubPlanId": "glm_coding_max_cn",
+      "region": "CN",
+      "category": "coding_subscription",
+      "recommendationRole": "primary_subscription",
+      "accessModes": [
+        "cli",
+        "ide_plugin"
+      ],
+      "price": {
+        "amount": 469,
+        "currency": "CNY",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://bigmodel.cn/glm-coding",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "notes": "For high-end users and medium-to-large repos."
+    },
+    {
+      "sourcePlanId": "ollama_free",
+      "sourceProvider": "Ollama",
+      "sourceName": "Ollama Free",
+      "suggestedSubPlanId": "ollama_free",
+      "region": "GLOBAL",
+      "category": "local_model",
+      "recommendationRole": "local_option",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "billingCycle": "free"
+      },
+      "sourceUrl": "https://ollama.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Local option. Not directly comparable to fixed cloud subscription."
+    },
+    {
+      "sourcePlanId": "ollama_pro",
+      "sourceProvider": "Ollama",
+      "sourceName": "Ollama Pro",
+      "suggestedSubPlanId": "ollama_pro",
+      "region": "GLOBAL",
+      "category": "local_model",
+      "recommendationRole": "local_option",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "price": {
+        "amount": 20,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://ollama.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Cloud usage and local model workflow."
+    },
+    {
+      "sourcePlanId": "ollama_max",
+      "sourceProvider": "Ollama",
+      "sourceName": "Ollama Max",
+      "suggestedSubPlanId": "ollama_max",
+      "region": "GLOBAL",
+      "category": "local_model",
+      "recommendationRole": "local_option",
+      "accessModes": [
+        "local_runtime",
+        "desktop_app",
+        "cli",
+        "api"
+      ],
+      "price": {
+        "amount": 100,
+        "currency": "USD",
+        "billingCycle": "monthly"
+      },
+      "sourceUrl": "https://ollama.com/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "notes": "Max cloud usage tier."
+    }
+  ],
+  "apiOptionMappings": [
+    {
+      "sourceApiOptionId": "openrouter_api",
+      "sourceProvider": "OpenRouter",
+      "sourceName": "OpenRouter API",
+      "suggestedSubPlanApiOptionId": "openrouter_api",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": 0,
+        "currency": "USD",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://openrouter.ai/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Per-model token pricing. No fixed monthly quota."
+    },
+    {
+      "sourceApiOptionId": "deepseek_v4_flash_api_cn",
+      "sourceProvider": "DeepSeek",
+      "sourceName": "deepseek-v4-flash API",
+      "suggestedSubPlanApiOptionId": "deepseek_v4_flash_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "China CNY price from user-provided official screenshot."
+    },
+    {
+      "sourceApiOptionId": "deepseek_v4_pro_api_cn",
+      "sourceProvider": "DeepSeek",
+      "sourceName": "deepseek-v4-pro API",
+      "suggestedSubPlanApiOptionId": "deepseek_v4_pro_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "China CNY price from user-provided official screenshot."
+    },
+    {
+      "sourceApiOptionId": "deepseek_v4_flash_api_global",
+      "sourceProvider": "DeepSeek",
+      "sourceName": "deepseek-v4-flash API",
+      "suggestedSubPlanApiOptionId": "deepseek_v4_flash_api_global",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Global USD API pricing."
+    },
+    {
+      "sourceApiOptionId": "deepseek_v4_pro_api_global",
+      "sourceProvider": "DeepSeek",
+      "sourceName": "deepseek-v4-pro API",
+      "suggestedSubPlanApiOptionId": "deepseek_v4_pro_api_global",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Global USD API pricing."
+    },
+    {
+      "sourceApiOptionId": "glm_5_2_api_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM-5.2 API",
+      "suggestedSubPlanApiOptionId": "glm_5_2_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "User-provided screenshot indicates 20M token free quota. Exact free quota scope/cycle still needs confirmation."
+    },
+    {
+      "sourceApiOptionId": "glm_5_1_short_api_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM-5.1 API Short Input",
+      "suggestedSubPlanApiOptionId": "glm_5_1_short_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Free quota sharing/cycle not confirmed."
+    },
+    {
+      "sourceApiOptionId": "glm_5_1_long_api_cn",
+      "sourceProvider": "Zhipu BigModel",
+      "sourceName": "GLM-5.1 API Long Input",
+      "suggestedSubPlanApiOptionId": "glm_5_1_long_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://bigmodel.cn/pricing",
+      "priceStatus": "verified_by_manual_official_screenshot",
+      "sourceStatus": "official_page_manual_screenshot",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Free quota sharing/cycle not confirmed."
+    },
+    {
+      "sourceApiOptionId": "minimax_api_cn",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax API China",
+      "suggestedSubPlanApiOptionId": "minimax_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://platform.minimax.io/",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Collect detailed CN API pricing before enabling."
+    },
+    {
+      "sourceApiOptionId": "minimax_api_global",
+      "sourceProvider": "MiniMax",
+      "sourceName": "MiniMax API Global",
+      "suggestedSubPlanApiOptionId": "minimax_api_global",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "USD",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder for global MiniMax PAYG API. Add per-model pricing before enabling."
+    },
+    {
+      "sourceApiOptionId": "kimi_api_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi API China",
+      "suggestedSubPlanApiOptionId": "kimi_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://platform.moonshot.cn/",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Do not combine Kimi API quota with Kimi membership quota unless explicitly verified."
+    },
+    {
+      "sourceApiOptionId": "kimi_k27_code_api_cn",
+      "sourceProvider": "Kimi",
+      "sourceName": "Kimi K2.7 Code API China",
+      "suggestedSubPlanApiOptionId": "kimi_k27_code_api_cn",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "price": {
+        "amount": null,
+        "currency": "CNY",
+        "billingCycle": "metered"
+      },
+      "sourceUrl": "https://www.kimi.com/zh-cn/resources/kimi-k2-7-code-pricing",
+      "priceStatus": "pending_detailed_collection",
+      "sourceStatus": "pending_manual_url",
+      "requiresUserAcceptsApiBilling": true,
+      "notes": "Placeholder. Collect detailed pricing before enabling."
+    }
+  ],
+  "benchmarkSources": [
+    {
+      "benchmarkName": "BrowseComp",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 84.4,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI chart"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 82.7,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI chart"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 84.3,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.8 system card"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 79.3,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.7 system card"
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 74.72,
+          "unit": "%",
+          "notes": "vendor_system_card; Sonnet 4.6 system card"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 85.9,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方模型页"
+        },
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 83.4,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Code Arena WebDev Overall",
+      "sourceUrl": "https://arena.ai/leaderboard/code/webdev",
+      "modelScores": [
+        {
+          "modelId": "glm-5.2",
+          "score": 1593.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; 当前公开前端强信号之一"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 1565.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev Original benchmark model variant: claude-opus-4.8-thinking."
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 1563.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev Original benchmark model variant: claude-opus-4.7-thinking."
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 1521.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 1506.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev"
+        },
+        {
+          "modelId": "minimax-m3",
+          "score": 1505.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev"
+        },
+        {
+          "modelId": "gpt-5.5",
+          "score": 1502.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Codex harness 变体 Original benchmark model variant: gpt-5.5-xhigh-codex-harness."
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "score": 1479.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev"
+        },
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 1458.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev Original benchmark model variant: deepseek-v4-pro-thinking."
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 1447.0,
+          "unit": "arena score",
+          "notes": "benchmark_official_leaderboard; Arena WebDev"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "DeepSWE v1.1",
+      "sourceUrl": "https://deepswe.datacurve.ai/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 67.0,
+          "unit": "% ±6",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 52.0,
+          "unit": "% ±2",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 59.0,
+          "unit": "% ±2",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 30.0,
+          "unit": "% ±4",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 12.0,
+          "unit": "% ±2",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 37.0,
+          "unit": "% ±2",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "score": 31.0,
+          "unit": "% ±1",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        },
+        {
+          "modelId": "glm-5.2",
+          "score": 44.0,
+          "unit": "% ±2",
+          "notes": "benchmark_official_leaderboard; Datacurve 官方榜"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "GDPval",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 84.9,
+          "unit": "% wins or ties",
+          "notes": "vendor_benchmark_page; OpenAI chart"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 83.0,
+          "unit": "% wins or ties",
+          "notes": "vendor_benchmark_page; OpenAI chart"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "GDPval-AA",
+      "sourceUrl": "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf",
+      "modelScores": [
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 1890.0,
+          "unit": "elo",
+          "notes": "vendor_system_card; Opus 4.8 system card"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 1753.0,
+          "unit": "elo",
+          "notes": "vendor_system_card; 在 Opus 4.8 comparative summary 中出现"
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 1633.0,
+          "unit": "elo",
+          "notes": "vendor_system_card; Sonnet 4.6 system card"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 1317.0,
+          "unit": "elo",
+          "notes": "vendor_model_page; 官方模型页"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 1656.0,
+          "unit": "elo",
+          "notes": "vendor_model_card; 官方 model card"
+        },
+        {
+          "modelId": "minimax-m2.7",
+          "score": 1495.0,
+          "unit": "elo",
+          "notes": "vendor_benchmark_blog; MiniMax M2.7 launch page"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "GPQA Diamond",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-flash",
+          "score": 88.1,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "HLE w/ tools",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 48.2,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Humanity's Last Exam",
+      "sourceUrl": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+      "modelScores": [
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 40.2,
+          "unit": "%",
+          "notes": "vendor_model_card; 官方 model card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Humanity's Last Exam (with tools)",
+      "sourceUrl": "https://openai.com/ja-JP/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 52.2,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; 官方日文页表格"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 57.9,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.8 system card"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 54.7,
+          "unit": "%",
+          "notes": "vendor_system_card; 在 Opus 4.8 comparative summary 中出现"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 51.4,
+          "unit": "%",
+          "notes": "vendor_pdf_eval_methodology; Google methodology PDF"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "LiveCodeBench",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 93.5,
+          "unit": "% pass@1",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "score": 91.6,
+          "unit": "% pass@1",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "MCP Atlas",
+      "sourceUrl": "https://deepmind.google/models/gemini/pro/",
+      "modelScores": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 69.2,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方模型页"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 83.6,
+          "unit": "%",
+          "notes": "vendor_model_card; 官方 model card"
+        },
+        {
+          "modelId": "minimax-m3",
+          "score": 74.2,
+          "unit": "%",
+          "notes": "vendor_benchmark_blog; MiniMax M3 launch blog"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "MCP-Atlas",
+      "sourceUrl": "https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf",
+      "modelScores": [
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 61.3,
+          "unit": "%",
+          "notes": "vendor_system_card; Sonnet 4.6 system card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "MMMU Pro (no tools)",
+      "sourceUrl": "https://openai.com/ja-JP/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 81.2,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; \"官方日文页表格\""
+        }
+      ]
+    },
+    {
+      "benchmarkName": "MMMU-Pro",
+      "sourceUrl": "https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf",
+      "modelScores": [
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 74.5,
+          "unit": "%",
+          "notes": "vendor_system_card; \"Sonnet 4.6 system card\""
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 80.5,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方模型页"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 83.6,
+          "unit": "%",
+          "notes": "vendor_model_card; 官方 model card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE Pro",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 55.4,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "score": 52.6,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE Verified",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 80.6,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "score": 79.0,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-Bench Pro",
+      "sourceUrl": "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf",
+      "modelScores": [
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 69.2,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.8 system card"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 64.3,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.7 system card"
+        },
+        {
+          "modelId": "minimax-m3",
+          "score": 59.0,
+          "unit": "%",
+          "notes": "vendor_benchmark_blog; MiniMax M3 launch blog"
+        },
+        {
+          "modelId": "glm-5.1",
+          "score": 58.4,
+          "unit": "%",
+          "notes": "vendor_docs_overview; Z.AI docs"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-Bench Pro (Public)",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 58.6,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI 官方页"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 57.7,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI 官方页"
+        },
+        {
+          "modelId": "gpt-5.3-codex",
+          "score": 56.8,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI appendix"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 54.2,
+          "unit": "%",
+          "notes": "vendor_model_page; Gemini 3.1 Pro 模型页"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 55.1,
+          "unit": "%",
+          "notes": "vendor_model_card; Gemini 3.5 Flash model card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-Bench Pro (sealed history / restricted internet)",
+      "sourceUrl": "https://cursor.com/blog/reward-hacking-coding-benchmarks",
+      "modelScores": [
+        {
+          "modelId": "composer-2.5",
+          "score": 54.0,
+          "unit": "%",
+          "notes": "vendor_research_blog; Cursor 研究博客"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-Bench Verified",
+      "sourceUrl": "https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf",
+      "modelScores": [
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 79.6,
+          "unit": "%",
+          "notes": "vendor_system_card; Sonnet 4.6 system card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-Pro",
+      "sourceUrl": "https://www.minimax.io/news/minimax-m27-en",
+      "modelScores": [
+        {
+          "modelId": "minimax-m2.7",
+          "score": 56.22,
+          "unit": "%",
+          "notes": "vendor_benchmark_blog; MiniMax M2.7 launch page"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "SWE-bench Pro",
+      "sourceUrl": "https://docs.z.ai/guides/llm/glm-5.2",
+      "modelScores": [
+        {
+          "modelId": "glm-5.2",
+          "score": 62.1,
+          "unit": "%",
+          "notes": "vendor_docs_overview; Z.AI docs"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Terminal Bench 2",
+      "sourceUrl": "https://www.minimax.io/news/minimax-m27-en",
+      "modelScores": [
+        {
+          "modelId": "minimax-m2.7",
+          "score": 57.0,
+          "unit": "%",
+          "notes": "vendor_benchmark_blog; MiniMax M2.7 launch page"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Terminal Bench 2.0",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "modelScores": [
+        {
+          "modelId": "deepseek-v4-pro",
+          "score": 67.9,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        },
+        {
+          "modelId": "deepseek-v4-flash",
+          "score": 56.9,
+          "unit": "%",
+          "notes": "vendor_model_page; 官方 HF 模型页"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Terminal-Bench 2.0",
+      "sourceUrl": "https://openai.com/index/introducing-gpt-5-5/",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 82.7,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI 官方页"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 75.1,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI 官方页"
+        },
+        {
+          "modelId": "gpt-5.3-codex",
+          "score": 77.3,
+          "unit": "%",
+          "notes": "vendor_benchmark_page; OpenAI appendix"
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 59.1,
+          "unit": "%",
+          "notes": "vendor_system_card; Sonnet 4.6 system card"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Terminal-Bench 2.1",
+      "sourceUrl": "https://www.tbench.ai/leaderboard/terminal-bench/2.1",
+      "modelScores": [
+        {
+          "modelId": "gpt-5.5",
+          "score": 83.4,
+          "unit": "%",
+          "notes": "benchmark_official_leaderboard; TB2.1 官方榜单，Codex CLI"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 74.6,
+          "unit": "%",
+          "notes": "vendor_system_card; Opus 4.8 system card"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 78.9,
+          "unit": "%",
+          "notes": "benchmark_official_leaderboard; TB2.1 官方榜单"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 66.1,
+          "unit": "%",
+          "notes": "benchmark_official_leaderboard; TB2.1 官方榜单"
+        },
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 69.7,
+          "unit": "%",
+          "notes": "benchmark_official_leaderboard; TB2.1 官方榜单"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 70.3,
+          "unit": "%",
+          "notes": "vendor_model_page; Gemini 3.1 Pro 模型页"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 76.2,
+          "unit": "%",
+          "notes": "vendor_model_card; Gemini 3.5 Flash model card"
+        },
+        {
+          "modelId": "minimax-m3",
+          "score": 66.0,
+          "unit": "%",
+          "notes": "vendor_benchmark_blog; MiniMax M3 launch blog"
+        },
+        {
+          "modelId": "glm-5.2",
+          "score": 81.0,
+          "unit": "%",
+          "notes": "vendor_docs_overview; Z.AI docs"
+        },
+        {
+          "modelId": "glm-5.1",
+          "score": 58.7,
+          "unit": "%",
+          "notes": "benchmark_official_leaderboard; TB2.1 官方榜单"
+        }
+      ]
+    },
+    {
+      "benchmarkName": "Text Arena Overall",
+      "sourceUrl": "https://arena.ai/leaderboard/text",
+      "modelScores": [
+        {
+          "modelId": "claude-opus-4.7",
+          "score": 1494.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "score": 1479.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "claude-sonnet-4.6",
+          "score": 1472.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "gemini-3.1-pro",
+          "score": 1486.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "gemini-3.5-flash",
+          "score": 1476.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "gpt-5.5",
+          "score": 1475.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "gpt-5.4",
+          "score": 1467.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "glm-5.1",
+          "score": 1473.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "glm-5.2",
+          "score": 1470.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        },
+        {
+          "modelId": "kimi-k2.6",
+          "score": 1461.0,
+          "unit": "elo",
+          "notes": "benchmark_official_leaderboard; Arena Text 总榜"
+        }
+      ]
+    }
+  ],
+  "modelAliases": {
+    "claude-opus-4.8-thinking": "claude-opus-4.8",
+    "claude-opus-4.7-thinking": "claude-opus-4.7",
+    "gpt-5.5-xhigh-codex-harness": "gpt-5.5",
+    "deepseek-v4-pro-thinking": "deepseek-v4-pro"
+  },
+  "missingOrPending": [
+    "[missing_001] Code Review for all: 公开、跨模型、同口径 PR review leaderboard — 目前多为厂商新闻/合作伙伴引述，如 CodeRabbit、Rakuten-SWE-Bench，缺少统一公开榜单",
+    "[missing_002] 中文写作 for all: 统一、跨模型、面向写作质量而非知识问答的中文榜单 — C-Eval/CMMLU/OpenCompass 更偏知识/理解，不足以代表写作风格与表达",
+    "[missing_003] 英文写作 for all: WritingBench — 当前公开抓取到的高置信原始分不完整",
+    "[missing_004] 前端 for all: Design Arena / Image-to-WebDev 全量原始分 — 公开抓取可得性不稳定，动态页面较多",
+    "[missing_005] 跨平台可比 coding for composer-2.5: 公开第三方统一榜单覆盖不足 — Cursor 自身披露多、第三方少",
+    "[missing_006] 研究/多模态/聊天 for kimi-k2.7-code: 公开统一榜单覆盖不足 — 官方更多是内部 Kimi Code Bench / Program Bench",
+    "[missing_007] 后端/研究/深搜 for kimi-k2.6: 公开高置信覆盖不足 — 官方公开结构化原始分有限",
+    "[missing_008] 通用聊天/多模态统一榜单 for minimax-m3: 官方声明强，但统一第三方榜单覆盖仍少 — 缺少和 GPT/Claude/Gemini 同口径完整表",
+    "Plan google_ai_pro_jp (Google AI Pro Japan) is disabled for recommendation.",
+    "Plan cursor_teams (Cursor Teams) is disabled for recommendation.",
+    "Plan opencode_go_intro (OpenCode Go First Month) is disabled for recommendation.",
+    "API option minimax_api_cn (MiniMax API China) is disabled for recommendation.",
+    "API option minimax_api_global (MiniMax API Global) is disabled for recommendation.",
+    "API option kimi_api_cn (Kimi API China) is disabled for recommendation.",
+    "API option kimi_k27_code_api_cn (Kimi K2.7 Code API China) is disabled for recommendation."
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.1.1",
-  "lastUpdatedAt": "2026-06-30",
+  "schemaVersion": "0.3.2",
+  "lastUpdatedAt": "2026-07-30",
   "notes": [
     "API options are supplementary only. They should not compete as core subscription recommendations unless user explicitly accepts API billing.",
     "Metered API options do not have fixed monthly quotas. Estimate usable MTokens dynamically from available API budget and selected model price.",
@@ -26,7 +26,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://openrouter.ai/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "creditPurchaseFee": {
@@ -51,7 +51,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -78,7 +78,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -105,7 +105,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -131,7 +131,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -157,7 +157,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -184,7 +184,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "inputLengthCondition": "[0, 32)",
@@ -210,7 +210,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "inputLengthCondition": "[32+]",
@@ -236,7 +236,7 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://platform.minimax.io/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder. Collect detailed CN API pricing before enabling."
@@ -255,7 +255,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder for global MiniMax PAYG API. Add per-model pricing before enabling."
@@ -274,7 +274,7 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://platform.moonshot.cn/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder. Do not combine Kimi API quota with Kimi membership quota unless explicitly verified."
@@ -293,10 +293,235 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://www.kimi.com/zh-cn/resources/kimi-k2-7-code-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
-      "notes": "Placeholder. Collect detailed pricing before enabling."
+      "notes": "K2.7 Code GLOBAL reference is about $0.95/$4 per MTok; CN detailed price still pending. Keep disabled until CN verified."
+    },
+    {
+      "id": "openai_gpt56_sol_api",
+      "provider": "OpenAI",
+      "name": "GPT-5.6 Sol API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://developers.openai.com/api/docs/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 5,
+        "output": 30
+      },
+      "notes": "Flagship GPT-5.6 Sol. Cache hit ~10% of uncached input."
+    },
+    {
+      "id": "openai_gpt56_terra_api",
+      "provider": "OpenAI",
+      "name": "GPT-5.6 Terra API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://developers.openai.com/api/docs/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.25,
+        "inputCacheMiss": 2.5,
+        "output": 15
+      },
+      "notes": "Mid-tier GPT-5.6 Terra."
+    },
+    {
+      "id": "openai_gpt56_luna_api",
+      "provider": "OpenAI",
+      "name": "GPT-5.6 Luna API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://developers.openai.com/api/docs/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.1,
+        "inputCacheMiss": 1,
+        "output": 6
+      },
+      "notes": "Lower-cost GPT-5.6 Luna."
+    },
+    {
+      "id": "claude_opus_5_api",
+      "provider": "Anthropic",
+      "name": "Claude Opus 5 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 5,
+        "output": 25
+      },
+      "notes": "Claude Opus 5 standard pricing $5/$25 per MTok. Fast mode is $10/$50."
+    },
+    {
+      "id": "claude_opus_48_api",
+      "provider": "Anthropic",
+      "name": "Claude Opus 4.8 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 5,
+        "output": 25
+      },
+      "notes": "Claude Opus 4.8 $5/$25 per MTok. Fast mode $10/$50."
+    },
+    {
+      "id": "claude_sonnet_5_api",
+      "provider": "Anthropic",
+      "name": "Claude Sonnet 5 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.2,
+        "inputCacheMiss": 2,
+        "output": 10
+      },
+      "notes": "Introductory Sonnet 5 pricing $2/$10 through 2026-08-31; standard becomes $3/$15 from 2026-09-01."
+    },
+    {
+      "id": "kimi_k3_api_global",
+      "provider": "Kimi",
+      "name": "Kimi K3 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.kimi.com/resources/kimi-k3-pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.3,
+        "inputCacheMiss": 3,
+        "output": 15
+      },
+      "notes": "Kimi K3 first-party API ~$3/$15 per MTok, cache hit $0.30. 1M context. Released 2026-07-16."
+    },
+    {
+      "id": "kimi_k3_api_cn",
+      "provider": "Kimi",
+      "name": "Kimi K3 API China",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://platform.kimi.com/docs/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 2.1,
+        "inputCacheMiss": 21,
+        "output": 105
+      },
+      "notes": "CNY estimate roughly converting GLOBAL $3/$15 at ~7 CNY/USD. Prefer official CN platform page when refreshed; enable carefully."
+    },
+    {
+      "id": "claude_fable_5_api",
+      "provider": "Anthropic",
+      "name": "Claude Fable 5 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 1,
+        "inputCacheMiss": 10,
+        "output": 50
+      },
+      "notes": "Fable 5 API / per MTok (cache hit ). Top-tier intelligence; slightly above Sol on AA Intelligence Index, slightly below Sol Codex on AA coding-agent index."
     }
   ]
 }

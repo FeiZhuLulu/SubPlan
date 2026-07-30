@@ -1,0 +1,756 @@
+{
+  "schemaVersion": "0.4.1",
+  "lastUpdatedAt": "2026-07-30",
+  "methodology": {
+    "principle": "One fixed metric set for every model. Missing values are null. We never score model A with metric set X and model B with a different set Y.",
+    "metrics": {
+      "aaIntelligenceIndex": {
+        "id": "aaIntelligenceIndex",
+        "label": "Artificial Analysis Intelligence Index v4.1",
+        "unit": "index",
+        "comparableAcrossModels": true,
+        "harness": "Artificial Analysis (same eval suite for all models)",
+        "sources": [
+          "https://artificialanalysis.ai/",
+          "https://openai.com/index/gpt-5-6/"
+        ],
+        "asOf": "2026-07",
+        "role": "general_intelligence"
+      },
+      "swebenchVerifiedVals": {
+        "id": "swebenchVerifiedVals",
+        "label": "SWE-bench Verified % (Vals AI Mini-SWE-agent)",
+        "unit": "percent",
+        "comparableAcrossModels": true,
+        "harness": "Vals AI Mini-SWE-agent (single harness)",
+        "sources": [
+          "https://vals.ai/benchmarks/swebench"
+        ],
+        "asOf": "2026-07-22",
+        "role": "coding_patch_quality"
+      },
+      "aaCodingAgentIndex": {
+        "id": "aaCodingAgentIndex",
+        "label": "Artificial Analysis Coding Agent Index",
+        "unit": "index",
+        "comparableAcrossModels": "limited_harness_coupled",
+        "harness": "AA Coding Agent Index components (DeepSWE, Terminal-Bench, SWE-Atlas-QnA) with model-native agent harness",
+        "sources": [
+          "https://artificialanalysis.ai/articles/gpt-5-6-has-landed",
+          "https://openai.com/index/gpt-5-6/"
+        ],
+        "asOf": "2026-07",
+        "role": "agent_coding_secondary",
+        "caveat": "Index score is somewhat harness-coupled. Used only as a secondary weight, never as the sole coding score, and never replaced by a different coding bench when missing."
+      }
+    },
+    "normalization": {
+      "method": "value / frontier_max_in_matrix * 100",
+      "frontierMax": {
+        "aaIntelligenceIndex": 61,
+        "swebenchVerifiedVals": 97,
+        "aaCodingAgentIndex": 80
+      },
+      "note": "Same ceiling for every model. No lo/hi window that over-penalizes mid-frontier."
+    },
+    "modelScoreFormula": {
+      "codingFamily": "PRIMARY ONLY: 0.55*norm(Vals SWE-bench Verified) + 0.45*norm(AA Intelligence Index). If one missing: use the other * 0.97 (medium confidence). AA Coding Agent Index is recorded but NOT mixed into the score (harness-coupled).",
+      "research": "Primarily norm(AA Intelligence); else coding base.",
+      "productOnlyDims": [
+        "chineseWriting",
+        "imageGeneration",
+        "multimodal",
+        "ecosystem"
+      ],
+      "planScore": "quotaShare-weighted average of model derived scores + fixed product deltas (not alternate benches)."
+    },
+    "nonGoals": [
+      "Do not use vendor-only SWE-bench Pro to fill missing Vals SWE cells.",
+      "Do not use Code Arena only for Kimi frontend while using another frontend proxy for others inside the matrix.",
+      "Do not mix AA Coding Agent Index into primary scores across different agent harnesses.",
+      "Do not use Sol Pro (not in Codex path)."
+    ],
+    "planScore": "quotaShare-weighted evidence informs DELTAS on HEAD plan scores; absolute plan scores stay on dataset scale (v0.4.1)."
+  },
+  "sources": [
+    {
+      "id": "aa",
+      "title": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/",
+      "asOf": "2026-07"
+    },
+    {
+      "id": "vals_swe",
+      "title": "Vals AI SWE-bench Verified",
+      "url": "https://vals.ai/benchmarks/swebench",
+      "asOf": "2026-07-22"
+    },
+    {
+      "id": "openai_gpt56",
+      "title": "OpenAI GPT-5.6 post (tables citing AA)",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "asOf": "2026-07-09"
+    },
+    {
+      "id": "aa_opus5",
+      "title": "AA Claude Opus 5 writeup",
+      "url": "https://artificialanalysis.ai/",
+      "asOf": "2026-07"
+    }
+  ],
+  "models": [
+    {
+      "modelId": "claude-opus-5",
+      "label": "Claude Opus 5",
+      "provider": "Anthropic",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 61,
+        "swebenchVerifiedVals": 97,
+        "aaCodingAgentIndex": 80
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA: Opus 5 (max) ~61, narrowly leads Fable 5",
+        "swebenchVerifiedVals": "Vals Mini-SWE-agent 97.00%",
+        "aaCodingAgentIndex": "AA: joint first with Claude Code (xhigh); treated as ~80 ceiling peer to Sol Codex"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 100,
+        "swebenchVerifiedVals": 100,
+        "aaCodingAgentIndex": 100
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 100,
+        "backend": 99,
+        "debugging": 99,
+        "codeReview": 98,
+        "frontend": 97,
+        "research": 100,
+        "chat": 100,
+        "englishWriting": 100,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "claude-fable-5",
+      "label": "Claude Fable 5",
+      "provider": "Anthropic",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 59.9,
+        "swebenchVerifiedVals": 95,
+        "aaCodingAgentIndex": 77.2
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA / OpenAI table ~59.9",
+        "swebenchVerifiedVals": "Vals 95.00%",
+        "aaCodingAgentIndex": "OpenAI GPT-5.6 announcement table: Fable 5 77.2 on Coding Agent Index v1.1"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 98.2,
+        "swebenchVerifiedVals": 97.9,
+        "aaCodingAgentIndex": 96.5
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 98,
+        "backend": 97,
+        "debugging": 97,
+        "codeReview": 96,
+        "frontend": 95,
+        "research": 100,
+        "chat": 99,
+        "englishWriting": 99,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "gpt-5.6-sol",
+      "label": "GPT-5.6 Sol",
+      "provider": "OpenAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 58.9,
+        "swebenchVerifiedVals": 96.2,
+        "aaCodingAgentIndex": 80
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "OpenAI/AA table 58.9 (max)",
+        "swebenchVerifiedVals": "Vals 96.20%",
+        "aaCodingAgentIndex": "Sol max in Codex harness 80 (AA)"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 96.6,
+        "swebenchVerifiedVals": 99.2,
+        "aaCodingAgentIndex": 100
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 98,
+        "backend": 97,
+        "debugging": 97,
+        "codeReview": 96,
+        "frontend": 95,
+        "research": 100,
+        "chat": 98,
+        "englishWriting": 98,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "gpt-5.6-terra",
+      "label": "GPT-5.6 Terra",
+      "provider": "OpenAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 55,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": 77.4
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "OpenAI/AA ~55 (max)",
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": "Terra max 77.4"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 90.2,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": 96.8
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 87,
+        "backend": 86,
+        "debugging": 86,
+        "codeReview": 85,
+        "frontend": 84,
+        "research": 96,
+        "chat": 93,
+        "englishWriting": 94,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "modelId": "gpt-5.6-luna",
+      "label": "GPT-5.6 Luna",
+      "provider": "OpenAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 51.2,
+        "swebenchVerifiedVals": 93,
+        "aaCodingAgentIndex": 74.6
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "OpenAI/AA 51.2",
+        "swebenchVerifiedVals": "Vals 93.00%",
+        "aaCodingAgentIndex": "Luna max 74.6"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 83.9,
+        "swebenchVerifiedVals": 95.9,
+        "aaCodingAgentIndex": 93.2
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 91,
+        "backend": 90,
+        "debugging": 90,
+        "codeReview": 89,
+        "frontend": 88,
+        "research": 90,
+        "chat": 89,
+        "englishWriting": 90,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "kimi-k3",
+      "label": "Kimi K3",
+      "provider": "Kimi / Moonshot",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 57,
+        "swebenchVerifiedVals": 93.4,
+        "aaCodingAgentIndex": 57
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA ~57",
+        "swebenchVerifiedVals": "Vals 93.40%",
+        "aaCodingAgentIndex": "Kimi Code CLI harness 57 (AA #5 class)"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 93.4,
+        "swebenchVerifiedVals": 96.3,
+        "aaCodingAgentIndex": 71.3
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 95,
+        "backend": 94,
+        "debugging": 94,
+        "codeReview": 93,
+        "frontend": 92,
+        "research": 99,
+        "chat": 95,
+        "englishWriting": 96,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "claude-opus-4.8",
+      "label": "Claude Opus 4.8",
+      "provider": "Anthropic",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 56,
+        "swebenchVerifiedVals": 88.6,
+        "aaCodingAgentIndex": 55
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA Opus 4.8 max ~56",
+        "swebenchVerifiedVals": "Vals 88.60%",
+        "aaCodingAgentIndex": "AA Opus 4.8 max ~55"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 91.8,
+        "swebenchVerifiedVals": 91.3,
+        "aaCodingAgentIndex": 68.8
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 92,
+        "backend": 91,
+        "debugging": 91,
+        "codeReview": 90,
+        "frontend": 89,
+        "research": 98,
+        "chat": 94,
+        "englishWriting": 95,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "grok-4.5",
+      "label": "Grok 4.5",
+      "provider": "xAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 54,
+        "swebenchVerifiedVals": 86.6,
+        "aaCodingAgentIndex": 58
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA Grok 4.5 high ~54",
+        "swebenchVerifiedVals": "Vals 86.60%",
+        "aaCodingAgentIndex": "AA coding-agent high ~58 (Grok Build; harness-coupled)"
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 88.5,
+        "swebenchVerifiedVals": 89.3,
+        "aaCodingAgentIndex": 72.5
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 89,
+        "backend": 88,
+        "debugging": 88,
+        "codeReview": 87,
+        "frontend": 86,
+        "research": 95,
+        "chat": 92,
+        "englishWriting": 93,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": true,
+        "hasIntel": true,
+        "hasCodingAgent": true,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "modelId": "gemini-3.6-flash",
+      "label": "Gemini 3.6 Flash",
+      "provider": "Google",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 50,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA Gemini 3.6 Flash (high) ~50 vs Sol high 56",
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 82,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 80,
+        "backend": 79,
+        "debugging": 79,
+        "codeReview": 78,
+        "frontend": 77,
+        "research": 88,
+        "chat": 87,
+        "englishWriting": 89,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": true,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "modelId": "gemini-3.1-pro",
+      "label": "Gemini 3.1 Pro",
+      "provider": "Google",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "claude-sonnet-5",
+      "label": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "kimi-k2.6",
+      "label": "Kimi K2.6",
+      "provider": "Kimi",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "kimi-k2.7-code",
+      "label": "Kimi K2.7 Code",
+      "provider": "Kimi",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "grok-4",
+      "label": "Grok 4",
+      "provider": "xAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "perplexity-research-pool",
+      "label": "Perplexity multi-model research pool",
+      "provider": "Perplexity",
+      "isProductPool": true,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    },
+    {
+      "modelId": "perplexity-computer",
+      "label": "Perplexity Computer + research",
+      "provider": "Perplexity",
+      "isProductPool": true,
+      "metrics": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {},
+      "normalized": {
+        "aaIntelligenceIndex": null,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": null,
+        "backend": null,
+        "debugging": null,
+        "codeReview": null,
+        "frontend": null,
+        "research": null,
+        "chat": null,
+        "englishWriting": null,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": false,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "none"
+      }
+    }
+  ],
+  "planScorePolicy": {
+    "version": "0.4.1",
+    "rule": "model-benchmarks.json is for relative model ranking only. planCapabilityScores are calibrated to the original SubPlan dataset scale (HEAD), using HEAD scores + modest upgrade deltas. Do not write raw norm(SWE)/norm(AA) * 100 into plan scores.",
+    "reason": "Cursor/GLM/DeepSeek/etc. remain on the original curation scale; remapping frontier plans to 95–100 broke cross-plan comparability."
+  }
+}

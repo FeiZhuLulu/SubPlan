@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "0.4.5",
+  "lastUpdatedAt": "2026-07-30",
+  "purpose": "Multi-community usage observations (tokens) to supplement awesome-coding-plan per-model meters.",
+  "platforms": [
+    "reddit",
+    "x",
+    "v2ex",
+    "linux.do",
+    "github_community"
+  ],
+  "notes": [
+    "linux.do / v2ex pages often block scrapers or require login; claims below use public search snippets + X/Reddit posts that are fetchable.",
+    "Prefer raw token numbers when users publish them; otherwise keep as qualitative.",
+    "Weekly windows often bind before calendar-month totals (esp. Claude Max / Codex).",
+    "2026-07-30 correction: do not treat kimi-k2.5 as a current model. ACP rows that say k2.5 are historical measurement labels; product is K2.7 Code + K3."
+  ],
+  "reports": {
+    "claude_pro": [
+      {
+        "platform": "reddit",
+        "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+        "asOf": "2026-07",
+        "claim": "Pro ~10–40 prompts per 5h; ~40–80 Sonnet-hours/week and ~10–40 Opus-hours/week (community summary).",
+        "metric": {
+          "unit": "prompts_per_5h",
+          "low": 10,
+          "high": 40
+        }
+      },
+      {
+        "platform": "reddit",
+        "url": "https://www.reddit.com/r/ClaudeAI/comments/1s7fcjf/claude_usage_limits_discussion_megathread_ongoing/",
+        "asOf": "2026-03~07",
+        "claim": "Ongoing megathread: limits tightened Mar–Apr 2026; single prompts can eat large % of session; Max 20x can die in a day under heavy agent use.",
+        "metric": null
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/kevkeysr/status/2070634304686924226",
+        "asOf": "2026-06-26",
+        "claim": "Pro user: two prompts jumped 20%→100% of current 5h session; first message after reset can jump to ~30%.",
+        "metric": null
+      }
+    ],
+    "claude_max_5x": [
+      {
+        "platform": "reddit",
+        "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+        "asOf": "2026-07",
+        "claim": "Max 5x ~50–200 prompts/5h; ~140–280 Sonnet-hours/week + ~15–35 Opus-hours/week.",
+        "metric": {
+          "unit": "prompts_per_5h",
+          "low": 50,
+          "high": 200
+        }
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/luongnv89/status/2075123267287777381",
+        "asOf": "2026-07-09",
+        "claim": "Fable 5 xHigh on Max 5x: 20% of 5h usage in <1 min with 9 sub-agents; 7%→60% in <3 min. Confirms multi-agent Fable burns extremely fast.",
+        "metric": {
+          "unit": "percent_of_5h_window",
+          "note": "60% in ~3 min multi-agent"
+        }
+      },
+      {
+        "platform": "web_community",
+        "url": "https://www.ssdnodes.com/blog/claude-code-pricing-in-2026-every-plan-explained-pro-max-api-teams/",
+        "asOf": "2026-03",
+        "claim": "Alternate community table: Pro ~44k tokens/5h window, Max5x ~88k, Max20x ~220k (different metering than ACP coding-plan totals — treat as lower-bound window token guess).",
+        "metric": {
+          "unit": "tokens_per_5h",
+          "pro": 44000,
+          "max5x": 88000,
+          "max20x": 220000
+        }
+      }
+    ],
+    "claude_max_20x": [
+      {
+        "platform": "x",
+        "url": "https://x.com/Deepusleepy/status/2079911639026221488",
+        "asOf": "2026-07-22",
+        "claim": "Burned entire Claude Max 20x WEEKLY limit in ~1 day ≈ 2.46B tokens (~.8k API-equivalent). Implies weekly hard pool ~2.46e9 tokens under heavy use.",
+        "metric": {
+          "unit": "tokens_per_week_full_burn",
+          "value": 2460000000
+        }
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/jeeacheff/status/2082565802213916982",
+        "asOf": "2026-07-29",
+        "claim": "Max 20x weekly usage already maxed; user starved for tokens mid-week.",
+        "metric": null
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/OsySharp/status/2082068840356200574",
+        "asOf": "2026-07-28",
+        "claim": "Opus 5 uses fewer tokens than 4.8 for same work for this user — Max 20x may last the week.",
+        "metric": null
+      },
+      {
+        "platform": "reddit",
+        "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
+        "asOf": "2026-07",
+        "claim": "Max 20x ~200–800+ prompts/5h; 240–480 Sonnet-hours/week + 24–40 Opus-hours/week.",
+        "metric": {
+          "unit": "prompts_per_5h",
+          "low": 200,
+          "high": 800
+        }
+      }
+    ],
+    "chatgpt_plus": [
+      {
+        "platform": "github_community",
+        "url": "https://github.com/mahonzhan/awesome-coding-plan",
+        "asOf": "2026-07-30",
+        "claim": "Codex gpt-5.6-sol on Plus: mo ~6.16亿 tokens, week ~1.54亿.",
+        "metric": {
+          "unit": "tokens_per_month",
+          "value": 616000000
+        }
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/grok/status/2082210698575093832",
+        "asOf": "2026-07-28",
+        "claim": "ChatGPT Plus chat/Agent path (not Codex quota) can show multi-billion token totals in some agent setups — separate from Codex weekly pool.",
+        "metric": null
+      }
+    ],
+    "chatgpt_pro_5x": [
+      {
+        "platform": "x",
+        "url": "https://x.com/navinsharmacse/status/2082697148647477364",
+        "asOf": "2026-07-30",
+        "claim": "Codex two sessions overnight ~587.5M tokens ≈ 50% of weekly limit → weekly pool ~1.17B tokens for that Pro-tier Codex account.",
+        "metric": {
+          "unit": "tokens_per_week_estimate",
+          "value": 1175000000,
+          "from": "587.5M is ~50% weekly"
+        }
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/IND_is_Here/status/2082538459449733357",
+        "asOf": "2026-07-29",
+        "claim": "Codex drank 58M tokens with limited use; 60% remaining until weekly reset date.",
+        "metric": {
+          "unit": "tokens_snapshot",
+          "value": 58000000,
+          "remainingPct": 60
+        }
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/crazycloudccc/status/2082324228570046610",
+        "asOf": "2026-07-29",
+        "claim": "CN user: Codex reset cards wasted ~50% twice ≈ full Pro 5x weekly quota wasted (several 亿 tokens). Mentions 5h limits returning.",
+        "metric": null
+      }
+    ],
+    "chatgpt_pro_20x": [
+      {
+        "platform": "x",
+        "url": "https://x.com/tak_ltc/status/2082475833562914946",
+        "asOf": "2026-07-29",
+        "claim": "CN discussion: Codex 20x can do 100+亿 tokens/month class usage vs Kimi coding plans feeling too small.",
+        "metric": {
+          "unit": "tokens_per_month_community_claim",
+          "value": 10000000000,
+          "note": "order-of-magnitude claim"
+        }
+      }
+    ],
+    "kimi_allegretto_cn": [
+      {
+        "platform": "github_community",
+        "url": "https://github.com/mahonzhan/awesome-coding-plan",
+        "asOf": "2026-07-30",
+        "claim": "Kimi Code Allegretto Code-pool ~14.28亿 tokens/mo (ACP). Table historically labeled kimi-k2.5; current Code model is K2.7 Code; membership flagship is K3. Also notes 429/TPS issues.",
+        "metric": {
+          "unit": "tokens_per_month",
+          "value": 1428000000
+        },
+        "correctedModelIds": [
+          "kimi-k2.7-code",
+          "kimi-k3"
+        ]
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/tak_ltc/status/2082475833562914946",
+        "asOf": "2026-07-29",
+        "claim": "Kimi current plan quotas feel too low vs Codex 20x 100+亿/mo class; need more coding-plan tokens.",
+        "metric": null
+      }
+    ],
+    "perplexity_pro": [
+      {
+        "platform": "reddit",
+        "url": "https://www.reddit.com/r/perplexity_ai/comments/1r1xg6i/notes_on_the_new_limits_for_perplexity_pro/",
+        "asOf": "2026",
+        "claim": "remaining_pro often ~600 (rolling); deep research much tighter (e.g. remaining_research single digits / monthly style caps reported).",
+        "metric": {
+          "unit": "pro_searches_rolling",
+          "value": 600
+        }
+      },
+      {
+        "platform": "reddit",
+        "url": "https://www.androidauthority.com/perplexity-pro-advanced-ai-limits-reduced-3667942/",
+        "asOf": "2026-05",
+        "claim": "Users report tighter advanced-model weekly limits in 2026; some claim ~100–150 advanced queries/week class.",
+        "metric": null
+      }
+    ],
+    "supergrok": [
+      {
+        "platform": "web_community",
+        "url": "https://suprmind.ai/hub/grok/pricing/",
+        "asOf": "2026-07",
+        "claim": "SuperGrok ~/mo higher limits / frontier models; usage described via rate windows not public monthly token meters.",
+        "metric": null
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/matt_kaschel/status/2082385174503866802",
+        "asOf": "2026-07-29",
+        "claim": "Grok 4.5 described as very token-efficient vs other stacks in multi-agent orchestration comparisons.",
+        "metric": null
+      }
+    ],
+    "cursor_pro": [
+      {
+        "platform": "github_community",
+        "url": "https://github.com/mahonzhan/awesome-coding-plan",
+        "asOf": "2026-07-30",
+        "claim": "Cursor Pro =  API usage included (+ more on Auto/Composer). Value-limited not pure token pool.",
+        "metric": {
+          "unit": "usd_api_value",
+          "value": 20
+        }
+      }
+    ]
+  },
+  "synthesizedHighlights": [
+    {
+      "topic": "Claude Max 20x weekly",
+      "value": "~2.46B tokens full weekly burn (X 2026-07-22)",
+      "impact": "monthly recommender mid ~9.84B not 31B"
+    },
+    {
+      "topic": "Fable multi-agent",
+      "value": "majority of Max5x 5h window in minutes (X 2026-07-09)",
+      "impact": "relativeBurn keeps Fable effective capacity lower"
+    },
+    {
+      "topic": "Codex Pro weekly",
+      "value": "~1.17B tokens/week if 587.5M=50% (X 2026-07-30)",
+      "impact": "Pro 5x monthly blend ~3.9B"
+    },
+    {
+      "topic": "Opus 5 efficiency",
+      "value": "user report fewer tokens than 4.8 for same work (X 2026-07-28)",
+      "impact": "Opus5 mo may exceed 4.8 slightly — still low conf"
+    },
+    {
+      "topic": "Perplexity Pro",
+      "value": "~600 rolling Pro searches; deep research tight (Reddit)",
+      "impact": "token proxy remains search-based"
+    }
+  ]
+}
