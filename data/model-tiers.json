@@ -1,10 +1,9 @@
 {
-  "schemaVersion": "0.2",
-  "lastUpdatedAt": "2026-07-01",
+  "schemaVersion": "0.4.1",
+  "lastUpdatedAt": "2026-07-30",
   "notes": [
-    "Capability key model tier assignments for v0.2 AI intelligence capability awareness.",
-    "Intelligence tiers: S (premium / 100%), A (high-end / 85%), B (mainstream / 45%), C (entry-level / 15%), D (negligible / 0%).",
-    "Every planId in this file must match an id from plans.json or api-options.json."
+    "S/A/B/C/D from aligned plan scores (S≥90, A≥80, B≥65, C≥45).",
+    "v0.4.1: resynced to original dataset score scale after unified-matrix remap was too compressed at 95–100."
   ],
   "tiers": [
     {
@@ -16,32 +15,32 @@
         "codeReview": "C",
         "research": "B"
       },
-      "evidenceLevel": "high",
-      "notes": "Free plan is useful for light tasks but should not be actively recommended as a new paid-combo filler."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "chatgpt_go_us",
       "tierByCapability": {
-        "agentCoding": "B",
+        "agentCoding": "C",
         "backend": "B",
         "debugging": "B",
         "codeReview": "B",
-        "research": "B"
+        "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Lower paid ChatGPT tier."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "chatgpt_plus",
       "tierByCapability": {
         "agentCoding": "A",
         "backend": "S",
-        "debugging": "S",
+        "debugging": "A",
         "codeReview": "A",
         "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Strong general reasoning and research subscription."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "chatgpt_pro_5x",
@@ -52,8 +51,8 @@
         "codeReview": "S",
         "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "High-reasoning ChatGPT Pro tier, lower quota than Pro 20x."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "chatgpt_pro_20x",
@@ -64,8 +63,8 @@
         "codeReview": "S",
         "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "High-reasoning ChatGPT Pro tier with larger quota."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "claude_free",
@@ -74,10 +73,10 @@
         "backend": "C",
         "debugging": "C",
         "codeReview": "C",
-        "research": "C"
+        "research": "B"
       },
-      "evidenceLevel": "high",
-      "notes": "Highly restricted free tier."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "claude_pro",
@@ -86,10 +85,10 @@
         "backend": "S",
         "debugging": "S",
         "codeReview": "S",
-        "research": "A"
+        "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Strong coding and agent workflow subscription."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "claude_max_5x",
@@ -98,10 +97,10 @@
         "backend": "S",
         "debugging": "S",
         "codeReview": "S",
-        "research": "A"
+        "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Same high-intelligence class as Claude Pro with larger quota."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "claude_max_20x",
@@ -110,10 +109,10 @@
         "backend": "S",
         "debugging": "S",
         "codeReview": "S",
-        "research": "A"
+        "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Same high-intelligence class as Claude Pro with much larger quota."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "google_ai_plus_us",
@@ -125,7 +124,7 @@
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Lower Google AI paid tier."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "google_ai_pro_us",
@@ -133,11 +132,11 @@
         "agentCoding": "A",
         "backend": "A",
         "debugging": "A",
-        "codeReview": "A",
+        "codeReview": "B",
         "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Strong research and context-oriented tier."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "google_ai_pro_jp",
@@ -148,32 +147,32 @@
         "codeReview": "A",
         "research": "S"
       },
-      "evidenceLevel": "high",
-      "notes": "Japan Google AI Pro entry."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "google_ai_ultra_5x_us",
       "tierByCapability": {
-        "agentCoding": "S",
-        "backend": "S",
-        "debugging": "S",
-        "codeReview": "S",
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
         "research": "S"
       },
       "evidenceLevel": "medium",
-      "notes": "Premium Google AI tier with higher quota."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "google_ai_ultra_20x_us",
       "tierByCapability": {
-        "agentCoding": "S",
-        "backend": "S",
-        "debugging": "S",
-        "codeReview": "S",
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
         "research": "S"
       },
       "evidenceLevel": "medium",
-      "notes": "Premium Google AI tier with much higher quota."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_hobby",
@@ -185,7 +184,7 @@
         "research": "D"
       },
       "evidenceLevel": "medium",
-      "notes": "Free / hobby coding tier."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_pro",
@@ -194,10 +193,10 @@
         "backend": "A",
         "debugging": "S",
         "codeReview": "A",
-        "research": "B"
+        "research": "C"
       },
-      "evidenceLevel": "high",
-      "notes": "IDE agent workflow using strong coding models."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_pro_plus",
@@ -206,22 +205,22 @@
         "backend": "A",
         "debugging": "S",
         "codeReview": "A",
-        "research": "B"
+        "research": "C"
       },
-      "evidenceLevel": "high",
-      "notes": "Same model class as Cursor Pro with larger quota."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_ultra",
       "tierByCapability": {
         "agentCoding": "S",
-        "backend": "S",
+        "backend": "A",
         "debugging": "S",
-        "codeReview": "S",
-        "research": "A"
+        "codeReview": "A",
+        "research": "C"
       },
-      "evidenceLevel": "high",
-      "notes": "Premium IDE agent tier."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_teams",
@@ -250,14 +249,14 @@
     {
       "planId": "opencode_go_regular",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
         "codeReview": "B",
-        "research": "C"
+        "research": "B"
       },
       "evidenceLevel": "medium",
-      "notes": "Value developer subscription using standard models."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_adagio_cn",
@@ -269,31 +268,31 @@
         "research": "B"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi free tier with small practical quota."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_andante_cn",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
         "codeReview": "B",
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi 49 CNY subscription."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_moderato_cn",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi 99 CNY subscription."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_allegretto_cn",
@@ -305,106 +304,22 @@
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi 199 CNY subscription with Kimi 2.7 Code class; agent coding treated as same tier as Cursor Pro Composer 2.5."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_allegro_cn",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi 699 CNY subscription, large quota."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "minimax_token_plus_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Token-heavy plan; intelligence treated as mainstream."
-    },
-    {
-      "planId": "minimax_token_max_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Token-heavy plan; intelligence treated as mainstream."
-    },
-    {
-      "planId": "minimax_token_ultra_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Token-heavy plan; intelligence treated as mainstream."
-    },
-    {
-      "planId": "minimax_token_plus_global",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Global Token Plan Plus."
-    },
-    {
-      "planId": "minimax_token_max_global",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Global Token Plan Max."
-    },
-    {
-      "planId": "minimax_token_ultra_global",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Global Token Plan Ultra."
-    },
-    {
-      "planId": "glm_coding_lite_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "C"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Entry GLM Coding subscription."
-    },
-    {
-      "planId": "glm_coding_pro_cn",
       "tierByCapability": {
         "agentCoding": "A",
         "backend": "A",
@@ -413,7 +328,91 @@
         "research": "B"
       },
       "evidenceLevel": "medium",
-      "notes": "Main GLM Coding subscription."
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_token_max_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_token_ultra_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_token_plus_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_token_max_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_token_ultra_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "glm_coding_lite_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "glm_coding_pro_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "glm_coding_max_cn",
@@ -425,7 +424,7 @@
         "research": "B"
       },
       "evidenceLevel": "medium",
-      "notes": "Higher GLM Coding subscription."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "ollama_free",
@@ -434,34 +433,34 @@
         "backend": "C",
         "debugging": "C",
         "codeReview": "C",
-        "research": "C"
+        "research": "D"
       },
-      "evidenceLevel": "low",
-      "notes": "Local model quality depends on selected local model and hardware."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "ollama_pro",
       "tierByCapability": {
-        "agentCoding": "B",
+        "agentCoding": "C",
         "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "C"
       },
-      "evidenceLevel": "low",
-      "notes": "Local model quality depends on selected local model and hardware."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "ollama_max",
       "tierByCapability": {
-        "agentCoding": "B",
+        "agentCoding": "C",
         "backend": "B",
         "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
+        "codeReview": "C",
+        "research": "C"
       },
-      "evidenceLevel": "low",
-      "notes": "Local model quality depends on selected local model and hardware."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "openrouter_api",
@@ -473,58 +472,118 @@
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Aggregator API; actual tier depends on selected routed model."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "deepseek_v4_flash_api_cn",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
       },
-      "evidenceLevel": "high",
-      "notes": "Cheap flash API for budget filling."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "deepseek_v4_pro_api_cn",
       "tierByCapability": {
-        "agentCoding": "A",
-        "backend": "S",
-        "debugging": "S",
+        "agentCoding": "B",
+        "backend": "A",
+        "debugging": "A",
         "codeReview": "A",
         "research": "A"
       },
-      "evidenceLevel": "high",
-      "notes": "Higher reasoning DeepSeek API."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "deepseek_v4_flash_api_global",
       "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
       },
-      "evidenceLevel": "high",
-      "notes": "Global flash API."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "deepseek_v4_pro_api_global",
       "tierByCapability": {
-        "agentCoding": "A",
-        "backend": "S",
-        "debugging": "S",
+        "agentCoding": "B",
+        "backend": "A",
+        "debugging": "A",
         "codeReview": "A",
         "research": "A"
       },
-      "evidenceLevel": "high",
-      "notes": "Global higher reasoning DeepSeek API."
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "glm_5_2_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "glm_5_1_short_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "glm_5_1_long_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "minimax_api_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_api_cn",
       "tierByCapability": {
         "agentCoding": "A",
         "backend": "A",
@@ -533,79 +592,259 @@
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Higher intelligence GLM API."
-    },
-    {
-      "planId": "glm_5_1_short_api_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Lower cost GLM API."
-    },
-    {
-      "planId": "glm_5_1_long_api_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "A"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Long-context GLM API."
-    },
-    {
-      "planId": "minimax_api_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "MiniMax API as token/value supplement."
-    },
-    {
-      "planId": "minimax_api_global",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "B"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Global MiniMax API as token/value supplement."
-    },
-    {
-      "planId": "kimi_api_cn",
-      "tierByCapability": {
-        "agentCoding": "B",
-        "backend": "B",
-        "debugging": "B",
-        "codeReview": "B",
-        "research": "A"
-      },
-      "evidenceLevel": "medium",
-      "notes": "Kimi API with good context retention for research."
+      "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "kimi_k27_code_api_cn",
       "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "grok_free",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "B",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "B"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "supergrok_lite",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "A",
+        "debugging": "B",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "supergrok",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "supergrok_heavy",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "perplexity_free",
+      "tierByCapability": {
+        "agentCoding": "D",
+        "backend": "C",
+        "debugging": "C",
+        "codeReview": "D",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "perplexity_pro",
+      "tierByCapability": {
+        "agentCoding": "C",
+        "backend": "B",
+        "debugging": "C",
+        "codeReview": "C",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "perplexity_max",
+      "tierByCapability": {
         "agentCoding": "B",
         "backend": "B",
         "debugging": "B",
         "codeReview": "B",
-        "research": "B"
+        "research": "S"
       },
       "evidenceLevel": "medium",
-      "notes": "Kimi code API, treated as mainstream intelligence."
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_moderato_global",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_allegretto_global",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_allegro_global",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_vivace_global",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "openai_gpt56_sol_api",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "openai_gpt56_terra_api",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "openai_gpt56_luna_api",
+      "tierByCapability": {
+        "agentCoding": "B",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "claude_opus_5_api",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "claude_opus_48_api",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "claude_sonnet_5_api",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "S",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_k3_api_global",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "kimi_k3_api_cn",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "claude_fable_5_api",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Aligned to HEAD score scale v0.4.1"
     }
   ]
 }

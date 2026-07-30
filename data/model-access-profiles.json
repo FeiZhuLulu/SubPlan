@@ -1,114 +1,230 @@
 {
-  "schemaVersion": "0.2.1",
-  "lastUpdatedAt": "2026-07-01",
+  "schemaVersion": "0.4.5",
+  "lastUpdatedAt": "2026-07-30",
   "notes": [
-    "Plan-level model access profiles used to estimate high-intelligence coverage.",
-    "S means frontier/top-tier for the capability; A means advanced but not the top frontier; B/C/D are progressively weaker for high-intelligence demand.",
-    "quotaMTokens is an estimated monthly workload-equivalent capacity for that model pool inside the plan, not an official quota."
+    "Plan-level model access for high-intelligence coverage.",
+    "K3 coding = S (slightly below Sol / Fable 5).",
+    "Fable 5: Max included ~50% limits; Pro via usage credits; not Sol Pro.",
+    "v0.4.3: model quotaMTokens prefer per-model community monthly estimates; Fable/Sonnet adjusted by task burn vs Opus 4.8."
   ],
   "profiles": [
     {
       "planId": "chatgpt_plus",
       "models": [
         {
-          "modelId": "gpt-5.5-plus",
-          "label": "GPT 5.5级模型",
-          "quotaShare": 1,
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "S"
-          }
+          },
+          "quotaMTokens": 616
         }
       ],
-      "notes": "Treat Plus as a frontier general-purpose model pool, bounded by observed workload quota."
+      "notes": "ChatGPT/Codex path uses Sol (and Terra/Luna in Work/Codex). Sol Pro excluded from scoring — not in Codex."
     },
     {
       "planId": "chatgpt_pro_5x",
       "models": [
         {
-          "modelId": "gpt-5.5-pro",
-          "label": "GPT 5.5 Pro级模型",
-          "quotaShare": 1,
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol (higher effort/quota)",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "S"
-          }
+          },
+          "quotaMTokens": 3890
         }
-      ]
+      ],
+      "notes": "Same Sol class as Plus with more high-effort quota. No Sol."
     },
     {
       "planId": "chatgpt_pro_20x",
       "models": [
         {
-          "modelId": "gpt-5.5-pro",
-          "label": "GPT 5.5 Pro级模型",
-          "quotaShare": 1,
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol (higher effort/quota)",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "S"
-          }
+          },
+          "quotaMTokens": 12320
         }
-      ]
+      ],
+      "notes": "Same Sol class as Plus with much more high-effort quota. No Sol."
     },
     {
       "planId": "claude_pro",
       "models": [
         {
-          "modelId": "opus-4.7-pro",
-          "label": "Opus 4.7级模型",
-          "quotaShare": 1,
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "A"
-          }
+          },
+          "quotaMTokens": 1588
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "quotaMTokens": 1588
+        },
+        {
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5 (usage credits)",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          },
+          "notes": "Pro access to Fable is via usage credits, not full weekly pool inclusion like Max.",
+          "quotaMTokens": 918
+        },
+        {
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5",
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "quotaMTokens": 2996
         }
-      ]
+      ],
+      "notes": "Pro: Opus 5/4.8 main pool + Sonnet 5. Fable 5 available via usage credits (not full Max-style inclusion)."
     },
     {
       "planId": "claude_max_5x",
       "models": [
         {
-          "modelId": "opus-4.8-max",
-          "label": "Opus 4.8级模型",
-          "quotaShare": 1,
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          },
+          "notes": "Max includes Fable 5 at ~50% of plan limits (permanent from 2026-07-20).",
+          "quotaMTokens": 1422
+        },
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "A"
-          }
+          },
+          "quotaMTokens": 2460
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "quotaMTokens": 2460
+        },
+        {
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5",
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "quotaMTokens": 4642
         }
-      ]
+      ],
+      "notes": "Max: Fable 5 included (~50% limits) + Opus 5/4.8. Fable AA Intelligence ~60, coding-agent ~77, SWE ~95%."
     },
     {
       "planId": "claude_max_20x",
       "models": [
         {
-          "modelId": "opus-4.8-max",
-          "label": "Opus 4.8级模型",
-          "quotaShare": 1,
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          },
+          "quotaMTokens": 5688
+        },
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5",
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
             "research": "A"
-          }
+          },
+          "quotaMTokens": 9840
+        },
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "quotaMTokens": 9840
+        },
+        {
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5",
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "quotaMTokens": 59925
         }
-      ]
+      ],
+      "notes": "Max 20x: same Fable/Opus mix, larger quota."
     },
     {
       "planId": "cursor_pro",
@@ -138,7 +254,8 @@
             "research": "B"
           }
         }
-      ]
+      ],
+      "notes": "Premium pool includes latest GPT / Claude Opus / Gemini frontier models subject to Cursor routing; Composer remains mid pool."
     },
     {
       "planId": "cursor_pro_plus",
@@ -202,9 +319,21 @@
       "planId": "kimi_moderato_cn",
       "models": [
         {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "quotaMTokens": 336,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        },
+        {
           "modelId": "kimi-k2.6",
-          "label": "Kimi 2.6",
-          "quotaShare": 1,
+          "label": "Kimi K2.6",
+          "quotaShare": 0.35,
           "tierByCapability": {
             "agentCoding": "B",
             "backend": "B",
@@ -213,25 +342,39 @@
             "research": "A"
           }
         }
-      ]
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
     },
     {
       "planId": "kimi_allegretto_cn",
       "models": [
         {
-          "modelId": "kimi-k2.7-code",
-          "label": "Kimi 2.7 Code",
-          "quotaShare": 1,
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "quotaMTokens": 1428,
           "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
-            "codeReview": "B",
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
             "research": "A"
+          }
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "quotaMTokens": 1428,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
           },
-          "notes": "Strong coding/agent value, but not counted as top frontier high-intelligence coverage."
+          "notes": "Current Code path (not K2.5)."
         }
-      ]
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
     },
     {
       "planId": "opencode_go_regular",
@@ -412,6 +555,457 @@
           }
         }
       ]
+    },
+    {
+      "planId": "kimi_allegro_cn",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3 (1M)",
+          "quotaMTokens": 4284,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "quotaMTokens": 2354,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+    },
+    {
+      "planId": "supergrok",
+      "models": [
+        {
+          "modelId": "grok-4.5",
+          "label": "Grok 4.5 / 4.x",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Real-time research S; coding A (AA coding-agent competitive, SWE-bench below Sol/Opus5)."
+    },
+    {
+      "planId": "supergrok_heavy",
+      "models": [
+        {
+          "modelId": "grok-4.5",
+          "label": "Grok 4 Heavy / multi-agent",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Heavy multi-agent can reach S agentCoding for hard tasks."
+    },
+    {
+      "planId": "supergrok_lite",
+      "models": [
+        {
+          "modelId": "grok-4",
+          "label": "Grok 4",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Lite limits keep effective coding at B."
+    },
+    {
+      "planId": "perplexity_pro",
+      "models": [
+        {
+          "modelId": "perplexity-research-pool",
+          "label": "Perplexity multi-model research pool",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "C",
+            "backend": "C",
+            "debugging": "C",
+            "codeReview": "C",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Pro Search / Deep Research; routes across frontier models inside product."
+    },
+    {
+      "planId": "perplexity_max",
+      "models": [
+        {
+          "modelId": "perplexity-computer",
+          "label": "Perplexity Computer + research",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Max unlocks Computer / unlimited-style research."
+    },
+    {
+      "planId": "kimi_moderato_global",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "quotaMTokens": 336,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+    },
+    {
+      "planId": "kimi_allegretto_global",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3",
+          "quotaMTokens": 1428,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        },
+        {
+          "modelId": "kimi-k2.7-code",
+          "label": "Kimi K2.7 Code",
+          "quotaMTokens": 1428,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        }
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+    },
+    {
+      "planId": "kimi_allegro_global",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3 (1M)",
+          "quotaMTokens": 4284,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+    },
+    {
+      "planId": "kimi_vivace_global",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3 (1M)",
+          "quotaMTokens": 6000,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+    },
+    {
+      "planId": "openai_gpt56_sol_api",
+      "models": [
+        {
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": null
+    },
+    {
+      "planId": "claude_opus_5_api",
+      "models": [
+        {
+          "modelId": "claude-opus-5",
+          "label": "Claude Opus 5 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": null
+    },
+    {
+      "planId": "claude_opus_48_api",
+      "models": [
+        {
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": null
+    },
+    {
+      "planId": "kimi_k3_api_global",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "K3 API: coding S (not quite Sol Codex / Fable ceiling)."
+    },
+    {
+      "planId": "kimi_k3_api_cn",
+      "models": [
+        {
+          "modelId": "kimi-k3",
+          "label": "Kimi K3 API CN",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Same K3 model as GLOBAL."
+    },
+    {
+      "planId": "google_ai_plus_us",
+      "models": [
+        {
+          "modelId": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Plus: workhorse Gemini 3.6 Flash (GA 2026-07-21)."
+    },
+    {
+      "planId": "google_ai_pro_us",
+      "models": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "label": "Gemini 3.1 Pro",
+          "quotaShare": 0.55,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        },
+        {
+          "modelId": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "quotaShare": 0.45,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Pro: 3.1 Pro for hard/research + 3.6 Flash as efficient workhorse."
+    },
+    {
+      "planId": "google_ai_pro_jp",
+      "models": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "label": "Gemini 3.1 Pro",
+          "quotaShare": 0.55,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        },
+        {
+          "modelId": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "quotaShare": 0.45,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "JP Pro same model mix as US Pro."
+    },
+    {
+      "planId": "google_ai_ultra_5x_us",
+      "models": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "label": "Gemini 3.1 Pro / Deep Think",
+          "quotaShare": 0.7,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        },
+        {
+          "modelId": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "quotaShare": 0.3,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Ultra: highest Pro/Deep Think access + 3.6 Flash volume."
+    },
+    {
+      "planId": "google_ai_ultra_20x_us",
+      "models": [
+        {
+          "modelId": "gemini-3.1-pro",
+          "label": "Gemini 3.1 Pro / Deep Think",
+          "quotaShare": 0.75,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "S"
+          }
+        },
+        {
+          "modelId": "gemini-3.6-flash",
+          "label": "Gemini 3.6 Flash",
+          "quotaShare": 0.25,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Ultra 20x same model class, larger quota."
+    },
+    {
+      "planId": "claude_fable_5_api",
+      "models": [
+        {
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Metered Fable 5."
     }
-  ]
+  ],
+  "lastCheckedAt": "2026-07-30"
 }

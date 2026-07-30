@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.1.1",
-  "lastUpdatedAt": "2026-06-30",
+  "schemaVersion": "0.3.0",
+  "lastUpdatedAt": "2026-07-30",
   "planRelations": [
     {
       "planA": "chatgpt_plus",
@@ -18,7 +18,7 @@
     },
     {
       "planA": "chatgpt_plus",
-      "planB": "gemini_ai_plus",
+      "planB": "google_ai_pro_us",
       "overlapScore": 70,
       "complementScore": 35,
       "explanation": "两者都覆盖通用问答、多模态和写作，重叠较高。"
@@ -38,7 +38,7 @@
       "explanation": "Claude Pro 提供稳定的 Pro 体验，OpenRouter API 可作为灵活的跑量补充。"
     },
     {
-      "planA": "gemini_ai_plus",
+      "planA": "google_ai_pro_us",
       "planB": "cursor_pro",
       "overlapScore": 35,
       "complementScore": 85,
@@ -85,6 +85,76 @@
       "overlapScore": 50,
       "complementScore": 65,
       "explanation": "Claude Pro 代码和推理强，Perplexity Pro 搜索研究强，组合适合研究型用户。"
+    },
+    {
+      "planA": "supergrok",
+      "planB": "chatgpt_plus",
+      "overlapScore": 70,
+      "complementScore": 40,
+      "explanation": "两者均为通用前沿聊天订阅，重叠较高；Grok 实时 X/Imagine 有差异化。"
+    },
+    {
+      "planA": "supergrok",
+      "planB": "claude_pro",
+      "overlapScore": 65,
+      "complementScore": 45,
+      "explanation": "通用推理重叠；Claude 更偏深度代码/写作，Grok 更偏实时信息与多模态生成。"
+    },
+    {
+      "planA": "supergrok",
+      "planB": "cursor_pro",
+      "overlapScore": 35,
+      "complementScore": 85,
+      "explanation": "Grok 通用助手 + Cursor IDE 执行，互补性高。"
+    },
+    {
+      "planA": "perplexity_pro",
+      "planB": "cursor_pro",
+      "overlapScore": 25,
+      "complementScore": 85,
+      "explanation": "Perplexity 强搜索研究，Cursor 强编程执行，组合好。"
+    },
+    {
+      "planA": "perplexity_pro",
+      "planB": "kimi_moderato_cn",
+      "overlapScore": 45,
+      "complementScore": 65,
+      "explanation": "研究场景有重叠；Kimi 中文 Agent 与 Perplexity 英文检索互补。"
+    },
+    {
+      "planA": "kimi_allegretto_cn",
+      "planB": "claude_pro",
+      "overlapScore": 55,
+      "complementScore": 55,
+      "explanation": "K3 与 Claude 在代码/Agent 上有重叠，但中文办公 Agent 与 Claude 英文深度推理仍可互补。"
+    },
+    {
+      "planA": "kimi_k3_api_global",
+      "planB": "claude_opus_5_api",
+      "overlapScore": 60,
+      "complementScore": 50,
+      "explanation": "两者都是前沿 API；可按任务分流，但能力面重叠不低。"
+    },
+    {
+      "planA": "openai_gpt56_sol_api",
+      "planB": "claude_opus_5_api",
+      "overlapScore": 70,
+      "complementScore": 40,
+      "explanation": "双前沿 API，重叠高；通常二选一作为主力，另一作补充。"
+    },
+    {
+      "planA": "supergrok",
+      "planB": "perplexity_pro",
+      "overlapScore": 55,
+      "complementScore": 55,
+      "explanation": "都强实时信息；Perplexity 引用研究更系统，Grok 生成/多模态更强。"
+    },
+    {
+      "planA": "kimi_moderato_global",
+      "planB": "chatgpt_plus",
+      "overlapScore": 55,
+      "complementScore": 55,
+      "explanation": "Kimi GLOBAL 与 ChatGPT Plus 通用能力重叠，中文 Agent 与 GPT 生态可互补。"
     }
   ]
 }

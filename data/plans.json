@@ -1,14 +1,14 @@
 {
-  "schemaVersion": "0.1.1",
-  "lastUpdatedAt": "2026-06-30",
+  "schemaVersion": "0.3.2",
+  "lastUpdatedAt": "2026-07-30",
   "notes": [
-    "v0.1.1 price dataset for AI subscription recommender.",
-    "Only stable official / high-quality third-party channels are included.",
-    "Special channels, shared accounts, day passes, regional arbitrage and temporary reseller prices are excluded.",
+    "v0.3.0 price + model dataset for AI subscription recommender (2026-07 refresh).",
+    "Includes frontier models: GPT-5.6 Sol/Terra/Luna (Codex; no Sol Pro), Claude Opus 5 / Opus 4.8 / Sonnet 5, Gemini 3.6 Flash / 3.1 Pro, Kimi K3, Grok 4.x, DeepSeek V4.",
+    "New subscriptions: SuperGrok Lite/Pro/Heavy, Perplexity Pro/Max, Kimi GLOBAL membership tiers.",
+    "Regional App Store IAP prices live in regional-prices.json (source: appstoreprice.org). Web/direct prices remain primary recommendation baseline.",
+    "Only stable official / high-quality channels are included; shared accounts and temporary reseller prices excluded.",
     "For China-facing recommendation, prefer CN prices where available; otherwise use US/GLOBAL price.",
-    "Google AI currently only includes US prices; Japan prices intentionally left blank.",
-    "Kimi currently uses CN official pricing only; non-CN pricing is not included.",
-    "Cache hit rate assumptions and text workload capacity estimates belong in quotas.json, not in this price-only file."
+    "App Store regional list prices are often higher than web billing due to platform fees (e.g. Claude Max IAP)."
   ],
   "defaults": {
     "recommendationCurrency": "CNY",
@@ -50,7 +50,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://chatgpt.com/pricing/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Free personal tier."
     },
@@ -71,7 +71,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://openai.com/index/introducing-chatgpt-go/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "US reference price. Some markets may have localized prices."
     },
@@ -92,9 +92,9 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
-      "notes": "Official help page states ChatGPT Plus is $20/month."
+      "notes": "Official help page states ChatGPT Plus is $20/month. As of 2026-07, Plus/Pro include GPT-5.6 family access (Sol for Plus+; Sol on Pro tiers)."
     },
     {
       "id": "chatgpt_pro_5x",
@@ -113,10 +113,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "5x Plus",
-      "notes": "Lower Pro tier. Official help page describes roughly 5x Plus usage."
+      "notes": "Lower Pro tier. Official help page describes roughly 5x Plus usage. As of 2026-07, Plus/Pro include GPT-5.6 family access (Sol for Plus+; Sol on Pro tiers)."
     },
     {
       "id": "chatgpt_pro_20x",
@@ -135,10 +135,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "20x Plus",
-      "notes": "Higher Pro tier. Official help page describes roughly 20x Plus usage."
+      "notes": "Higher Pro tier. Official help page describes roughly 20x Plus usage. As of 2026-07, Plus/Pro include GPT-5.6 family access (Sol for Plus+; Sol on Pro tiers)."
     },
     {
       "id": "claude_free",
@@ -157,7 +157,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://claude.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Free Claude plan."
     },
@@ -179,7 +179,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "discountPrices": [
         {
@@ -190,7 +190,7 @@
           "discountLabel": "$200/year, about $17/month"
         }
       ],
-      "notes": "Claude Pro includes Claude Code access."
+      "notes": "Claude Pro includes Claude Code. Model pool: Opus 5 / Opus 4.8 / Sonnet 5; Fable 5 via usage credits (not full weekly inclusion). App Store IAP may exceed web price."
     },
     {
       "id": "claude_max_5x",
@@ -210,10 +210,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "5x Pro capacity per session",
-      "notes": "Max lower tier."
+      "notes": "Max tier. From 2026-07-20 Fable 5 is permanently included on Max (~50% of limits) plus Opus 5/4.8. App Store IAP may exceed web price."
     },
     {
       "id": "claude_max_20x",
@@ -233,10 +233,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "20x Pro capacity per session",
-      "notes": "Max higher tier."
+      "notes": "Max tier. From 2026-07-20 Fable 5 is permanently included on Max (~50% of limits) plus Opus 5/4.8. App Store IAP may exceed web price."
     },
     {
       "id": "google_ai_plus_us",
@@ -256,9 +256,9 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://one.google.com/about/google-ai-plans/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
-      "notes": "US pricing only. Regional prices not included in v0.1.1."
+      "notes": "US pricing only. Regional prices not included in v0.1.1. Gemini app currently advertises Gemini 3.6 Flash (app free/workhorse, GA 2026-07-21) + Gemini 3.1 Pro / Deep Think on Pro/Ultra."
     },
     {
       "id": "google_ai_pro_us",
@@ -278,9 +278,9 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://one.google.com/about/google-ai-plans/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
-      "notes": "US pricing only. Regional prices not included in v0.1.1."
+      "notes": "US pricing only. Regional prices not included in v0.1.1. Gemini app currently advertises Gemini 3.6 Flash (app free/workhorse, GA 2026-07-21) + Gemini 3.1 Pro / Deep Think on Pro/Ultra."
     },
     {
       "id": "google_ai_ultra_5x_us",
@@ -300,10 +300,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://gemini.google/subscriptions/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "5x",
-      "notes": "US pricing only."
+      "notes": "US pricing only. Gemini app currently advertises Gemini 3.6 Flash (app free/workhorse, GA 2026-07-21) + Gemini 3.1 Pro / Deep Think on Pro/Ultra."
     },
     {
       "id": "google_ai_ultra_20x_us",
@@ -323,10 +323,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://gemini.google/subscriptions/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "20x",
-      "notes": "US pricing only."
+      "notes": "US pricing only. Gemini app currently advertises Gemini 3.6 Flash (app free/workhorse, GA 2026-07-21) + Gemini 3.1 Pro / Deep Think on Pro/Ultra."
     },
     {
       "id": "google_ai_pro_jp",
@@ -340,15 +340,15 @@
         "mobile_app",
         "office_suite"
       ],
-      "originalPrice": null,
+      "originalPrice": 2900,
       "originalCurrency": "JPY",
       "billingCycle": "monthly",
-      "priceStatus": "intentionally_blank",
-      "sourceStatus": "pending_manual_url",
-      "sourceUrl": null,
-      "lastCheckedAt": "2026-06-30",
-      "enabledForRecommendation": false,
-      "notes": "Japan pricing intentionally left blank for v0.1.1."
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6477489729",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "App Store JP list price for Google AI Pro (5 TB) monthly: ¥2,900. Cross-checked via appstoreprice.org on 2026-07-30."
     },
     {
       "id": "cursor_hobby",
@@ -367,7 +367,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://cursor.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Free plan."
     },
@@ -388,7 +388,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://cursor.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Entry-level plan with access to premium models, unlimited Tab completions, and more."
     },
@@ -409,7 +409,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://cursor.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "3x Pro",
       "notes": "User-provided official pricing screenshot confirms $60/month."
@@ -431,7 +431,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://cursor.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "20x Pro",
       "notes": "User-provided official pricing screenshot confirms $200/month."
@@ -453,7 +453,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://cursor.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "notes": "Team plan. Not used in v0.1 personal recommendation."
     },
@@ -474,7 +474,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://opencode.ai/go",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": false,
       "notes": "Introductory first-month price. Use regular price for long-term recommendation."
     },
@@ -495,7 +495,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://opencode.ai/go",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Regular recurring price after first month."
     },
@@ -518,10 +518,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "kimiCodeMultiplier": null,
-      "notes": "Official Adagio free tier."
+      "notes": "Official Adagio free tier. K3 and K3 swarm draw from the shared membership quota pool (official help center 2026-07)."
     },
     {
       "id": "kimi_andante_cn",
@@ -542,10 +542,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "kimiCodeMultiplier": "1x",
-      "notes": "Official Andante tier. Kimi Code 1x."
+      "notes": "Official Andante tier. Kimi Code 1x. K3 and K3 swarm draw from the shared membership quota pool (official help center 2026-07)."
     },
     {
       "id": "kimi_moderato_cn",
@@ -566,10 +566,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "kimiCodeMultiplier": "4x",
-      "notes": "Official Moderato tier. Kimi Code 4x."
+      "notes": "Official Moderato tier. Kimi Code 4x. K3 and K3 swarm draw from the shared membership quota pool (official help center 2026-07)."
     },
     {
       "id": "kimi_allegretto_cn",
@@ -590,10 +590,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "kimiCodeMultiplier": "20x",
-      "notes": "Official Allegretto tier. Kimi Code 20x."
+      "notes": "Official Allegretto tier. Kimi Code 20x. K3 and K3 swarm draw from the shared membership quota pool (official help center 2026-07)."
     },
     {
       "id": "kimi_allegro_cn",
@@ -614,10 +614,10 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/zh-cn/help/membership/membership-pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "kimiCodeMultiplier": "60x",
-      "notes": "Official Allegro tier. Kimi Code 60x."
+      "notes": "Official Allegro tier. Kimi Code 60x. K3 and K3 swarm draw from the shared membership quota pool (official help center 2026-07)."
     },
     {
       "id": "minimax_token_plus_cn",
@@ -638,7 +638,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://platform.minimax.io/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "officialTokenUsageLabel": "约 6 亿+ token M3 用量",
       "agentConcurrencyLabel": "3-4 agents",
@@ -663,7 +663,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://platform.minimax.io/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "officialTokenUsageLabel": "约 18 亿+ token M3 用量",
       "agentConcurrencyLabel": "4-5 agents",
@@ -688,7 +688,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://platform.minimax.io/",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "officialTokenUsageLabel": "约 71 亿+ token M3 用量",
       "agentConcurrencyLabel": "6-7 agents",
@@ -713,7 +713,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Global Token Plan price."
     },
@@ -736,7 +736,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Global Token Plan price."
     },
@@ -759,7 +759,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.minimax.io/docs/token-plan/intro",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Global Token Plan price."
     },
@@ -780,7 +780,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/glm-coding",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "Lite base quota",
       "discountPrices": [
@@ -811,7 +811,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/glm-coding",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "5x Lite quota + Lite full benefits",
       "discountPrices": [
@@ -842,7 +842,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/glm-coding",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "usageMultiplierLabel": "20x Lite quota + Pro full benefits",
       "discountPrices": [
@@ -875,7 +875,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://ollama.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Local option. Not directly comparable to fixed cloud subscription."
     },
@@ -898,7 +898,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://ollama.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "discountPrices": [
         {
@@ -930,9 +930,268 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://ollama.com/pricing",
-      "lastCheckedAt": "2026-06-30",
+      "lastCheckedAt": "2026-07-30",
       "enabledForRecommendation": true,
       "notes": "Max cloud usage tier."
+    },
+    {
+      "id": "grok_free",
+      "provider": "xAI",
+      "name": "Grok Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://grok.com/",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "Free Grok on web/apps with rate limits. Also available via X free tier."
+    },
+    {
+      "id": "supergrok_lite",
+      "provider": "xAI",
+      "name": "SuperGrok Lite",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 10,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6670324846",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "US App Store $10/mo. Entry SuperGrok tier with raised limits vs free."
+    },
+    {
+      "id": "supergrok",
+      "provider": "xAI",
+      "name": "SuperGrok",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 30,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://x.ai/grok",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 25,
+          "totalPrice": 300,
+          "currency": "USD",
+          "discountLabel": "$300/year, about $25/month"
+        }
+      ],
+      "notes": "Standalone SuperGrok $30/mo (App Store US $30). Higher limits, frontier Grok 4.x, Imagine, multi-agent. X Premium+ is a separate bundle path."
+    },
+    {
+      "id": "supergrok_heavy",
+      "provider": "xAI",
+      "name": "SuperGrok Heavy",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 300,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6670324846",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "Heavy / multi-agent",
+      "notes": "Top consumer tier (~$300/mo App Store US). Highest Grok 4 Heavy / multi-agent access. Occasional promo first-months reported; use full price for long-term recs."
+    },
+    {
+      "id": "perplexity_free",
+      "provider": "Perplexity",
+      "name": "Perplexity Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.perplexity.ai/hub/pricing",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "Free search with limited weekly usage."
+    },
+    {
+      "id": "perplexity_pro",
+      "provider": "Perplexity",
+      "name": "Perplexity Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.perplexity.ai/pro",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 16.67,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year, about $16.67/month"
+        }
+      ],
+      "notes": "Pro Search / Deep Research / Labs. Strong research subscription. Multi-model access (OpenAI/Anthropic/etc.) inside product limits."
+    },
+    {
+      "id": "perplexity_max",
+      "provider": "Perplexity",
+      "name": "Perplexity Max",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.perplexity.ai/max",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "Max / Computer",
+      "notes": "Power-user tier (~$200/mo; annual ~$167/mo listed on marketing). Unlimited-style usage, Perplexity Computer, priority features."
+    },
+    {
+      "id": "kimi_moderato_global",
+      "provider": "Kimi",
+      "name": "Kimi Moderato",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 19,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6474233312",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "International membership Moderato $19/mo (App Store). Annual ~$15/mo effective on official membership page. Includes K3 shared quota pool."
+    },
+    {
+      "id": "kimi_allegretto_global",
+      "provider": "Kimi",
+      "name": "Kimi Allegretto",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 39,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6474233312",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "International Allegretto $39/mo (App Store). Higher agent concurrency and K3 quota."
+    },
+    {
+      "id": "kimi_allegro_global",
+      "provider": "Kimi",
+      "name": "Kimi Allegro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6474233312",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "International Allegro $99/mo. K3 extra-long chat (up to 1M) on higher tiers."
+    },
+    {
+      "id": "kimi_vivace_global",
+      "provider": "Kimi",
+      "name": "Kimi Vivace",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "agent_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "cli",
+        "ide_plugin"
+      ],
+      "originalPrice": 199,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_app_store",
+      "sourceStatus": "appstoreprice_org",
+      "sourceUrl": "https://appstoreprice.org/zh/apps/6474233312",
+      "lastCheckedAt": "2026-07-30",
+      "enabledForRecommendation": true,
+      "notes": "International top tier Vivace $199/mo. Max agent + K3 long-context capacity."
     }
   ],
   "normalizationNotes": [

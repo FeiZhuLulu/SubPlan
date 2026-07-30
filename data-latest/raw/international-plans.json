@@ -1,0 +1,938 @@
+{
+  "schemaVersion": "0.2.0",
+  "lastUpdatedAt": "2026-07-12",
+  "source": "official_web_collection",
+  "notes": [
+    "International AI subscription price collection focused on individual/consumer tiers.",
+    "Verified official prices are sourced from the provider's official pricing/help pages fetched on 2026-07-12.",
+    "Prices marked 'estimated' could not be directly verified from an official page (site blocked or price not rendered) and are inferred from reputable tech reporting; they should be re-verified before merging into production data.",
+    "Regional prices outside the US are not included unless explicitly stated; global USD prices reflect the standard US/global list price.",
+    "API options use per-1M-token metered pricing and require the user to accept API billing.",
+    "Anthropic prompt-caching 'Read' price is mapped to inputCacheHit; the separate 'Write' price is noted in the plan notes because the schema does not have a cache-write field."
+  ],
+  "plans": [
+    {
+      "id": "chatgpt_free",
+      "provider": "OpenAI",
+      "name": "ChatGPT Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openai.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free personal tier with limited access to GPT-5.5 Instant and capped messages/uploads."
+    },
+    {
+      "id": "chatgpt_go_us",
+      "provider": "OpenAI",
+      "name": "ChatGPT Go",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 8,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://openai.com/index/introducing-chatgpt-go/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "US reference price. Go pricing is localized in some markets; the official announcement lists $8 USD/month for the US."
+    },
+    {
+      "id": "chatgpt_plus",
+      "provider": "OpenAI",
+      "name": "ChatGPT Plus",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "$20/month billed monthly. Annual billing is not available for Plus."
+    },
+    {
+      "id": "chatgpt_pro_5x",
+      "provider": "OpenAI",
+      "name": "ChatGPT Pro 5x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Plus",
+      "notes": "Lower Pro tier. Official help page states Pro $100 unlocks 5x higher usage than Plus."
+    },
+    {
+      "id": "chatgpt_pro_20x",
+      "provider": "OpenAI",
+      "name": "ChatGPT Pro 20x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Plus",
+      "notes": "Higher Pro tier. Official help page states Pro $200 unlocks 20x usage than Plus."
+    },
+    {
+      "id": "claude_free",
+      "provider": "Anthropic",
+      "name": "Claude Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "desktop_app",
+        "cli"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free Claude plan with web, mobile, desktop and CLI access."
+    },
+    {
+      "id": "claude_pro",
+      "provider": "Anthropic",
+      "name": "Claude Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "desktop_app",
+        "cli"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 17,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year, about $17/month"
+        }
+      ],
+      "notes": "$20/month billed monthly, or $200/year (about $17/month). Includes Claude Code, Claude Cowork, Claude Design and Claude Science."
+    },
+    {
+      "id": "claude_max_5x",
+      "provider": "Anthropic",
+      "name": "Claude Max 5x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "desktop_app",
+        "cli"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Pro",
+      "notes": "Max lower tier with 5x more usage than Pro. Annual billing available."
+    },
+    {
+      "id": "claude_max_20x",
+      "provider": "Anthropic",
+      "name": "Claude Max 20x",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "desktop_app",
+        "cli"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Pro",
+      "notes": "Max higher tier with 20x more usage than Pro. Annual billing available."
+    },
+    {
+      "id": "google_ai_plus_us",
+      "provider": "Google",
+      "name": "Google AI Plus",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 7.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "US pricing inferred from tech reporting; official Google pricing page could not be fetched directly. Includes 200 GB storage and limited Gemini 3.1 Pro access."
+    },
+    {
+      "id": "google_ai_pro_us",
+      "provider": "Google",
+      "name": "Google AI Pro",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 19.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://one.google.com/about/google-ai-plans/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "US pricing inferred from tech reporting; official Google pricing page could not be fetched directly. Includes 2 TB storage, Workspace integration and full Gemini 3.1 Pro access."
+    },
+    {
+      "id": "google_ai_ultra_5x_us",
+      "provider": "Google",
+      "name": "Google AI Ultra 5x",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 99.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "5x Pro",
+      "notes": "New $100/month AI Ultra tier confirmed on the official Google blog. Includes 20 TB storage and 5x higher usage limits than Pro. US only for some features (Gemini Spark)."
+    },
+    {
+      "id": "google_ai_ultra_20x_us",
+      "provider": "Google",
+      "name": "Google AI Ultra 20x",
+      "region": "US",
+      "recommendationRole": "primary_subscription",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 199.99,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/google-one/google-ai-subscriptions/",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Pro",
+      "notes": "Top AI Ultra tier; official Google blog confirmed the price reduction from $249.99 to $199.99 with the same 20x Pro usage limits and 30 TB storage."
+    },
+    {
+      "id": "cursor_hobby",
+      "provider": "Cursor",
+      "name": "Cursor Hobby",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free plan with limited Agent requests and Tab completions."
+    },
+    {
+      "id": "cursor_pro",
+      "provider": "Cursor",
+      "name": "Cursor Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Individual plan entry tier. Official pricing page shows $20/month and includes unlimited Tab completions plus a premium usage allowance."
+    },
+    {
+      "id": "cursor_pro_plus",
+      "provider": "Cursor",
+      "name": "Cursor Pro+",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 60,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "3x Pro",
+      "notes": "Pro+ is listed on the official pricing page but the exact price is not rendered in the fetched text; $60/month is consistently reported by third-party coverage and matches the historical price. Re-verify before merging."
+    },
+    {
+      "id": "cursor_ultra",
+      "provider": "Cursor",
+      "name": "Cursor Ultra",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 200,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "usageMultiplierLabel": "20x Pro",
+      "notes": "Ultra is listed on the official pricing page but the exact price is not rendered in the fetched text; $200/month is consistently reported by third-party coverage. Re-verify before merging."
+    },
+    {
+      "id": "cursor_teams",
+      "provider": "Cursor",
+      "name": "Cursor Teams",
+      "region": "GLOBAL",
+      "recommendationRole": "team_plan",
+      "category": "coding_subscription",
+      "accessModes": [
+        "desktop_app",
+        "ide_plugin"
+      ],
+      "originalPrice": 40,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly_per_user",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://cursor.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": false,
+      "notes": "Team plan at $40/user/month. Not used for individual recommendation."
+    },
+    {
+      "id": "github_copilot_free",
+      "provider": "GitHub",
+      "name": "GitHub Copilot Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "ide_plugin",
+        "cli",
+        "web_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/features/copilot/plans",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free tier for individual developers with limited completions and chat/agent usage."
+    },
+    {
+      "id": "github_copilot_pro",
+      "provider": "GitHub",
+      "name": "GitHub Copilot Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "ide_plugin",
+        "cli",
+        "web_app"
+      ],
+      "originalPrice": 10,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly_per_user",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/features/copilot/plans",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "$10/user/month. Includes $15/month in GitHub AI Credits ($10 base + $5 flex). New sign-ups are being gradually enabled."
+    },
+    {
+      "id": "github_copilot_pro_plus",
+      "provider": "GitHub",
+      "name": "GitHub Copilot Pro+",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "ide_plugin",
+        "cli",
+        "web_app"
+      ],
+      "originalPrice": 39,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly_per_user",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/features/copilot/plans",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "$39/user/month. Includes $70/month in GitHub AI Credits ($39 base + $31 flex). New sign-ups are being gradually enabled."
+    },
+    {
+      "id": "github_copilot_max",
+      "provider": "GitHub",
+      "name": "GitHub Copilot Max",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "coding_subscription",
+      "accessModes": [
+        "ide_plugin",
+        "cli",
+        "web_app"
+      ],
+      "originalPrice": 100,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly_per_user",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://github.com/features/copilot/plans",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "$100/user/month. Includes $200/month in GitHub AI Credits ($100 base + $100 flex) for sustained, high-volume agent workflows."
+    },
+    {
+      "id": "perplexity_free",
+      "provider": "Perplexity",
+      "name": "Perplexity Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "estimated",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://www.perplexity.ai/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free tier with limited Pro Search queries. Official pricing page could not be fetched; basic tier existence is confirmed from the Perplexity homepage."
+    },
+    {
+      "id": "perplexity_pro",
+      "provider": "Perplexity",
+      "name": "Perplexity Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://www.perplexity.ai/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 16.67,
+          "totalPrice": 200,
+          "currency": "USD",
+          "discountLabel": "$200/year, about $16.67/month (~17% savings)"
+        }
+      ],
+      "notes": "$20/month or $200/year. Price inferred from multiple tech reports; official pricing page could not be fetched directly."
+    },
+    {
+      "id": "grok_free",
+      "provider": "xAI",
+      "name": "Grok Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://grok.com",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free tier with limited Grok access. Confirmed on official Grok homepage."
+    },
+    {
+      "id": "grok_supergrok_lite",
+      "provider": "xAI",
+      "name": "SuperGrok Lite",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 10,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://grok.com",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Budget standalone tier reportedly launched March 2026. Price and details inferred from tech reporting; not directly visible on the fetched official homepage."
+    },
+    {
+      "id": "grok_supergrok",
+      "provider": "xAI",
+      "name": "SuperGrok",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 30,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://grok.com",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "discountPrices": [
+        {
+          "billingCycle": "annual",
+          "displayMonthlyPrice": 25,
+          "totalPrice": 300,
+          "currency": "USD",
+          "discountLabel": "$300/year, about $25/month (~16% savings)"
+        }
+      ],
+      "notes": "$30/month or $300/year. Price inferred from tech reports; official Grok homepage mentions SuperGrok but does not render pricing in fetched text."
+    },
+    {
+      "id": "grok_supergrok_heavy",
+      "provider": "xAI",
+      "name": "SuperGrok Heavy",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app"
+      ],
+      "originalPrice": 300,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://grok.com",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Top consumer tier with maximum limits and Grok Heavy model access. Price inferred from tech reports; re-verify before merging."
+    },
+    {
+      "id": "microsoft_copilot_free",
+      "provider": "Microsoft",
+      "name": "Microsoft Copilot Free",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 0,
+      "originalCurrency": "USD",
+      "billingCycle": "free",
+      "priceStatus": "estimated",
+      "sourceStatus": "pending_manual_url",
+      "sourceUrl": "https://www.microsoft.com/en-us/microsoft-copilot",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "Free consumer tier with basic Copilot access in Edge, Windows and the web. Official consumer pricing page could not be fetched."
+    },
+    {
+      "id": "microsoft_copilot_pro",
+      "provider": "Microsoft",
+      "name": "Microsoft Copilot Pro",
+      "region": "GLOBAL",
+      "recommendationRole": "primary_subscription",
+      "category": "chat_subscription",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 20,
+      "originalCurrency": "USD",
+      "billingCycle": "monthly",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://www.microsoft.com/en-us/microsoft-copilot/personal-copilot-pro",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "notes": "$20/month consumer Pro tier. Price inferred from multiple tech reports; official consumer Copilot Pro page returned 404 and could not be fetched."
+    },
+    {
+      "id": "microsoft_m365_premium_us",
+      "provider": "Microsoft",
+      "name": "Microsoft 365 Premium",
+      "region": "US",
+      "recommendationRole": "bundle",
+      "category": "bundle",
+      "accessModes": [
+        "web_app",
+        "mobile_app",
+        "office_suite"
+      ],
+      "originalPrice": 199,
+      "originalCurrency": "USD",
+      "billingCycle": "annual",
+      "priceStatus": "estimated",
+      "sourceStatus": "community_dataset",
+      "sourceUrl": "https://support.microsoft.com/en-us/account-billing/copilot-pro-subscription",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": false,
+      "notes": "$199/year (~$16.58/month) bundle including Microsoft 365 apps, 6 TB storage and Premium Copilot AI. Price inferred from tech reports; official page could not be fetched."
+    }
+  ],
+  "apiOptions": [
+    {
+      "id": "openai_api_gpt_4_1",
+      "provider": "OpenAI",
+      "name": "OpenAI API - GPT-4.1",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.openai.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 2,
+        "output": 8
+      },
+      "notes": "Per-1M-token pricing. Cached input price applies when prompt caching is hit.",
+      "originalPrice": null
+    },
+    {
+      "id": "openai_api_gpt_4o",
+      "provider": "OpenAI",
+      "name": "OpenAI API - GPT-4o",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.openai.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 1.25,
+        "inputCacheMiss": 2.5,
+        "output": 10
+      },
+      "notes": "Per-1M-token pricing. GPT-4o is the multimodal flagship model.",
+      "originalPrice": null
+    },
+    {
+      "id": "openai_api_o3",
+      "provider": "OpenAI",
+      "name": "OpenAI API - o3",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.openai.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 2,
+        "output": 8
+      },
+      "notes": "Per-1M-token pricing. Reasoning model; reasoning tokens are billed as output.",
+      "originalPrice": null
+    },
+    {
+      "id": "openai_api_o4_mini",
+      "provider": "OpenAI",
+      "name": "OpenAI API - o4-mini",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://platform.openai.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.275,
+        "inputCacheMiss": 1.1,
+        "output": 4.4
+      },
+      "notes": "Per-1M-token pricing. Smaller, faster reasoning model.",
+      "originalPrice": null
+    },
+    {
+      "id": "anthropic_api_fable_5",
+      "provider": "Anthropic",
+      "name": "Claude API - Fable 5",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 1,
+        "inputCacheMiss": 10,
+        "output": 50
+      },
+      "notes": "Per-1M-token pricing. inputCacheMiss = standard input; inputCacheHit = prompt-caching read rate. Prompt-caching write is $12.50/MTok (not represented in schema).",
+      "originalPrice": null
+    },
+    {
+      "id": "anthropic_api_opus_4_8",
+      "provider": "Anthropic",
+      "name": "Claude API - Opus 4.8",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 5,
+        "output": 25
+      },
+      "notes": "Per-1M-token pricing. inputCacheMiss = standard input; inputCacheHit = prompt-caching read rate. Prompt-caching write is $6.25/MTok.",
+      "originalPrice": null
+    },
+    {
+      "id": "anthropic_api_sonnet_5",
+      "provider": "Anthropic",
+      "name": "Claude API - Sonnet 5",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.2,
+        "inputCacheMiss": 2,
+        "output": 10
+      },
+      "notes": "Introductory pricing of $2/$10 per million input/output tokens through August 31, 2026; standard pricing will be $3/$15 thereafter. inputCacheMiss = standard input; inputCacheHit = prompt-caching read rate. Prompt-caching write is $2.50/MTok.",
+      "originalPrice": null
+    },
+    {
+      "id": "anthropic_api_haiku_4_5",
+      "provider": "Anthropic",
+      "name": "Claude API - Haiku 4.5",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "cloud_model",
+      "accessModes": [
+        "api"
+      ],
+      "pricingModel": "metered",
+      "originalCurrency": "USD",
+      "billingCycle": "pay_as_you_go",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://www.anthropic.com/pricing",
+      "lastCheckedAt": "2026-07-12",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.1,
+        "inputCacheMiss": 1,
+        "output": 5
+      },
+      "notes": "Fastest, most cost-efficient Claude model. inputCacheMiss = standard input; inputCacheHit = prompt-caching read rate. Prompt-caching write is $1.25/MTok.",
+      "originalPrice": null
+    }
+  ]
+}

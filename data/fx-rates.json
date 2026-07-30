@@ -1,38 +1,44 @@
 {
-  "schemaVersion": "0.1.1",
-  "lastUpdatedAt": "2026-06-30",
+  "schemaVersion": "0.3.0",
+  "lastUpdatedAt": "2026-07-30",
   "baseCurrency": "CNY",
-  "status": "manual_mid_market_estimate",
+  "status": "manual_mid_market_estimate_refreshed",
   "rates": [
     {
       "currency": "CNY",
       "rateToCny": 1,
       "source": "identity",
-      "asOf": "2026-06-30"
+      "asOf": "2026-07-30"
     },
     {
       "currency": "USD",
-      "rateToCny": 6.798,
-      "source": "manual_from_public_mid_market_sources",
-      "asOf": "2026-06-30"
+      "rateToCny": 6.78,
+      "source": "appstoreprice_embedded_mid_market_2026-07-30",
+      "asOf": "2026-07-30"
     },
     {
       "currency": "JPY",
-      "rateToCny": 0.0419,
-      "source": "manual_from_public_mid_market_sources",
-      "asOf": "2026-06-30"
+      "rateToCny": 0.0414,
+      "source": "derived_from_appstoreprice_jpy_cny_pairs_2026-07-30",
+      "asOf": "2026-07-30"
     },
     {
       "currency": "EUR",
-      "rateToCny": 7.95,
-      "source": "manual_placeholder_not_used_by_v0.1_plans",
-      "asOf": "2026-06-30"
+      "rateToCny": 7.71,
+      "source": "derived_from_appstoreprice_eur_cny_pairs_2026-07-30",
+      "asOf": "2026-07-30"
+    },
+    {
+      "currency": "GBP",
+      "rateToCny": 9.01,
+      "source": "derived_from_appstoreprice_gbp_cny_pairs_2026-07-30",
+      "asOf": "2026-07-30"
     }
   ],
   "notes": [
-    "Manual mid-market estimates for v0.1 recommendation comparisons, not payment settlement rates.",
-    "USD/CNY uses late-June 2026 public mid-market range around 6.79-6.80.",
-    "JPY/CNY uses late-June 2026 public mid-market range around 0.0419-0.0420.",
-    "Refresh before production release or display an exchange-rate timestamp in the UI."
+    "Mid-market style estimates for recommendation comparisons, not payment settlement rates.",
+    "2026-07-30 refresh aligned roughly with appstoreprice.org embedded FX (USD/CNY ≈ 6.78).",
+    "JPY/CNY ≈ 0.0414 from JP App Store list pairs (e.g. ChatGPT Plus ¥3000 ≈ ¥124.12 CNY).",
+    "Full multi-currency App Store matrices are in regional-prices.json with source-side CNY conversion."
   ]
 }

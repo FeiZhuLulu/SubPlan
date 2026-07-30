@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.1.2",
-  "lastUpdatedAt": "2026-06-30",
+  "schemaVersion": "0.4.1",
+  "lastUpdatedAt": "2026-07-30",
   "capabilityKeys": [
     "frontend",
     "backend",
@@ -16,80 +16,81 @@
     "ecosystem"
   ],
   "notes": [
-    "Final plan-level capability scores for recommender runtime.",
-    "Scores are 0-100 and intentionally separate from price, quota, payment friction and region availability.",
-    "These scores are manually curated from model evidence, plan-model access, product workflow fit and known plan limitations.",
-    "Quota differences between tiers should be handled by quotas.json, not by inflating capability scores."
+    "Plan-level 0–100 capability scores.",
+    "v0.4.1 ALIGNED TO ORIGINAL DATASET SCALE (git HEAD scores.json).",
+    "Model upgrades (GPT-5.6 Sol, Claude Fable/Opus5, Kimi K3, Gemini 3.6 Flash, Grok, Perplexity) applied as modest deltas on HEAD bases — not a 95–100 remap.",
+    "Unified benchmark matrix in model-benchmarks.json remains the relative evidence source; plan scores stay comparable to Cursor/GLM/DeepSeek rows.",
+    "Sol Pro excluded. Gemini 3.6 Flash not Gemini 3 Flash. K3 coding treated as S-class relative to Sol/Fable, absolute numbers on dataset scale."
   ],
   "planCapabilityScores": [
     {
       "planId": "chatgpt_free",
       "scores": {
         "frontend": 55,
-        "backend": 60,
-        "agentCoding": 45,
+        "backend": 61,
+        "agentCoding": 47,
         "debugging": 58,
         "codeReview": 55,
         "chineseWriting": 72,
         "englishWriting": 76,
-        "research": 70,
-        "chat": 82,
+        "research": 71,
+        "chat": 83,
         "imageGeneration": 65,
         "multimodal": 65,
         "ecosystem": 75
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Free tier model access is dynamic; conservative fallback score."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Light refresh; free tier still limited."
     },
     {
       "planId": "chatgpt_go_us",
       "scores": {
         "frontend": 68,
-        "backend": 76,
-        "agentCoding": 62,
+        "backend": 77,
+        "agentCoding": 64,
         "debugging": 74,
         "codeReview": 72,
         "chineseWriting": 78,
         "englishWriting": 82,
-        "research": 82,
+        "research": 83,
         "chat": 88,
         "imageGeneration": 78,
         "multimodal": 78,
         "ecosystem": 84
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Go entitlement can vary by market; score sits below Plus."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Light refresh on HEAD Go scores."
     },
     {
       "planId": "chatgpt_plus",
       "scores": {
-        "frontend": 80,
-        "backend": 88,
-        "agentCoding": 82,
-        "debugging": 86,
-        "codeReview": 84,
+        "frontend": 82,
+        "backend": 91,
+        "agentCoding": 88,
+        "debugging": 89,
+        "codeReview": 87,
         "chineseWriting": 86,
         "englishWriting": 90,
-        "research": 92,
+        "research": 93,
         "chat": 95,
         "imageGeneration": 94,
-        "multimodal": 94,
+        "multimodal": 95,
         "ecosystem": 94
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD base + GPT-5.6 Sol (unified rank ~Sol). Scale aligned to original dataset."
     },
     {
       "planId": "chatgpt_pro_5x",
       "scores": {
         "frontend": 86,
-        "backend": 94,
-        "agentCoding": 92,
-        "debugging": 92,
-        "codeReview": 90,
+        "backend": 95,
+        "agentCoding": 94,
+        "debugging": 93,
+        "codeReview": 91,
         "chineseWriting": 88,
         "englishWriting": 94,
         "research": 95,
@@ -99,17 +100,17 @@
         "ecosystem": 98
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD Pro base + Sol higher-effort quota (not Sol Pro). Dataset scale."
     },
     {
       "planId": "chatgpt_pro_20x",
       "scores": {
         "frontend": 86,
-        "backend": 94,
-        "agentCoding": 92,
-        "debugging": 92,
-        "codeReview": 90,
+        "backend": 95,
+        "agentCoding": 94,
+        "debugging": 93,
+        "codeReview": 91,
         "chineseWriting": 88,
         "englishWriting": 94,
         "research": 95,
@@ -119,168 +120,188 @@
         "ecosystem": 98
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD Pro base + Sol higher-effort quota (not Sol Pro). Dataset scale."
     },
     {
       "planId": "claude_free",
       "scores": {
         "frontend": 55,
         "backend": 60,
-        "agentCoding": 48,
+        "agentCoding": 49,
         "debugging": 60,
         "codeReview": 64,
         "chineseWriting": 68,
         "englishWriting": 78,
-        "research": 70,
+        "research": 71,
         "chat": 78,
         "imageGeneration": 0,
         "multimodal": 55,
         "ecosystem": 68
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Light refresh."
     },
     {
       "planId": "claude_pro",
       "scores": {
-        "frontend": 84,
-        "backend": 88,
-        "agentCoding": 86,
-        "debugging": 88,
-        "codeReview": 90,
+        "frontend": 88,
+        "backend": 91,
+        "agentCoding": 90,
+        "debugging": 91,
+        "codeReview": 93,
         "chineseWriting": 78,
-        "englishWriting": 92,
-        "research": 88,
+        "englishWriting": 93,
+        "research": 90,
         "chat": 90,
         "imageGeneration": 0,
         "multimodal": 78,
         "ecosystem": 88
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + Opus 5/4.8 main, Fable via credits. Dataset scale (not 95–100 remap)."
     },
     {
       "planId": "claude_max_5x",
       "scores": {
-        "frontend": 92,
-        "backend": 94,
-        "agentCoding": 90,
-        "debugging": 94,
-        "codeReview": 94,
+        "frontend": 94,
+        "backend": 96,
+        "agentCoding": 94,
+        "debugging": 96,
+        "codeReview": 96,
         "chineseWriting": 80,
-        "englishWriting": 94,
-        "research": 92,
+        "englishWriting": 95,
+        "research": 94,
         "chat": 93,
         "imageGeneration": 0,
         "multimodal": 82,
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + Fable 5 (~50% limits) + Opus 5. Dataset scale."
     },
     {
       "planId": "claude_max_20x",
       "scores": {
-        "frontend": 92,
-        "backend": 94,
-        "agentCoding": 90,
-        "debugging": 94,
-        "codeReview": 94,
+        "frontend": 94,
+        "backend": 96,
+        "agentCoding": 94,
+        "debugging": 96,
+        "codeReview": 96,
         "chineseWriting": 80,
-        "englishWriting": 94,
-        "research": 92,
+        "englishWriting": 95,
+        "research": 94,
         "chat": 93,
         "imageGeneration": 0,
         "multimodal": 82,
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + Fable 5 + Opus 5. Same class as Max 5x; quota differs."
     },
     {
       "planId": "google_ai_plus_us",
       "scores": {
-        "frontend": 62,
-        "backend": 68,
-        "agentCoding": 58,
-        "debugging": 66,
-        "codeReview": 62,
+        "frontend": 68,
+        "backend": 73,
+        "agentCoding": 66,
+        "debugging": 71,
+        "codeReview": 66,
         "chineseWriting": 75,
         "englishWriting": 80,
-        "research": 82,
-        "chat": 84,
-        "imageGeneration": 82,
-        "multimodal": 86,
+        "research": 84,
+        "chat": 86,
+        "imageGeneration": 86,
+        "multimodal": 90,
         "ecosystem": 88
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + Gemini 3.6 Flash (GA 2026-07-21), not Gemini 3 Flash."
     },
     {
       "planId": "google_ai_pro_us",
       "scores": {
-        "frontend": 78,
-        "backend": 82,
-        "agentCoding": 78,
-        "debugging": 80,
-        "codeReview": 76,
+        "frontend": 81,
+        "backend": 85,
+        "agentCoding": 82,
+        "debugging": 83,
+        "codeReview": 79,
         "chineseWriting": 80,
         "englishWriting": 86,
-        "research": 94,
+        "research": 95,
         "chat": 90,
         "imageGeneration": 90,
-        "multimodal": 95,
+        "multimodal": 96,
         "ecosystem": 95
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + 3.1 Pro research + 3.6 Flash volume."
     },
     {
       "planId": "google_ai_ultra_5x_us",
       "scores": {
         "frontend": 82,
-        "backend": 86,
-        "agentCoding": 82,
-        "debugging": 84,
-        "codeReview": 80,
+        "backend": 89,
+        "agentCoding": 87,
+        "debugging": 87,
+        "codeReview": 83,
         "chineseWriting": 82,
         "englishWriting": 88,
-        "research": 96,
+        "research": 97,
         "chat": 92,
         "imageGeneration": 94,
-        "multimodal": 97,
+        "multimodal": 98,
         "ecosystem": 97
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + Deep Think / highest Pro + 3.6 Flash."
     },
     {
       "planId": "google_ai_ultra_20x_us",
       "scores": {
         "frontend": 82,
-        "backend": 86,
-        "agentCoding": 82,
-        "debugging": 84,
-        "codeReview": 80,
+        "backend": 89,
+        "agentCoding": 87,
+        "debugging": 87,
+        "codeReview": 83,
         "chineseWriting": 82,
         "englishWriting": 88,
-        "research": 96,
+        "research": 97,
         "chat": 92,
         "imageGeneration": 94,
-        "multimodal": 97,
+        "multimodal": 98,
         "ecosystem": 97
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD Ultra base + model refresh."
+    },
+    {
+      "planId": "google_ai_pro_jp",
+      "scores": {
+        "frontend": 84,
+        "backend": 88,
+        "agentCoding": 86,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 80,
+        "englishWriting": 86,
+        "research": 96,
+        "chat": 90,
+        "imageGeneration": 90,
+        "multimodal": 97,
+        "ecosystem": 95
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Mirrors US Pro capability (HEAD+3.1 Pro/3.6 Flash); JP price only differs."
     },
     {
       "planId": "cursor_hobby",
@@ -299,8 +320,8 @@
         "ecosystem": 72
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "cursor_pro",
@@ -319,8 +340,8 @@
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "cursor_pro_plus",
@@ -339,8 +360,8 @@
         "ecosystem": 93
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "cursor_ultra",
@@ -359,8 +380,8 @@
         "ecosystem": 93
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "opencode_go_regular",
@@ -379,108 +400,108 @@
         "ecosystem": 78
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "kimi_adagio_cn",
       "scores": {
         "frontend": 62,
         "backend": 64,
-        "agentCoding": 62,
+        "agentCoding": 64,
         "debugging": 62,
         "codeReview": 58,
-        "chineseWriting": 86,
+        "chineseWriting": 87,
         "englishWriting": 62,
-        "research": 70,
+        "research": 72,
         "chat": 78,
         "imageGeneration": 0,
-        "multimodal": 65,
+        "multimodal": 68,
         "ecosystem": 70
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Free tier light K3 exposure."
     },
     {
       "planId": "kimi_andante_cn",
       "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 86,
-        "debugging": 82,
+        "frontend": 85,
+        "backend": 84,
+        "agentCoding": 89,
+        "debugging": 84,
         "codeReview": 78,
-        "chineseWriting": 92,
+        "chineseWriting": 94,
         "englishWriting": 72,
-        "research": 78,
+        "research": 82,
         "chat": 84,
         "imageGeneration": 0,
-        "multimodal": 75,
+        "multimodal": 79,
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + limited K3 share."
     },
     {
       "planId": "kimi_moderato_cn",
       "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 86,
-        "debugging": 82,
-        "codeReview": 78,
-        "chineseWriting": 92,
+        "frontend": 88,
+        "backend": 86,
+        "agentCoding": 90,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 94,
         "englishWriting": 72,
-        "research": 78,
-        "chat": 84,
+        "research": 86,
+        "chat": 87,
         "imageGeneration": 0,
-        "multimodal": 75,
+        "multimodal": 81,
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD + K3 pool. Unified rank: K3 coding S but below Sol/Fable; absolute scale = HEAD+delta."
     },
     {
       "planId": "kimi_allegretto_cn",
       "scores": {
         "frontend": 92,
-        "backend": 86,
-        "agentCoding": 94,
-        "debugging": 90,
-        "codeReview": 86,
-        "chineseWriting": 92,
+        "backend": 89,
+        "agentCoding": 95,
+        "debugging": 93,
+        "codeReview": 89,
+        "chineseWriting": 94,
         "englishWriting": 72,
-        "research": 78,
-        "chat": 84,
+        "research": 86,
+        "chat": 87,
         "imageGeneration": 0,
-        "multimodal": 75,
+        "multimodal": 79,
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Kimi 199 includes Kimi 2.7 Code class; agent coding treated as same tier as Cursor Pro Composer 2.5 per v0.2 calibration."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "HEAD Allegretto already strong coding; +K3 research/multimodal. Keep dataset scale."
     },
     {
       "planId": "kimi_allegro_cn",
       "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 86,
-        "debugging": 82,
-        "codeReview": 78,
-        "chineseWriting": 92,
+        "frontend": 93,
+        "backend": 91,
+        "agentCoding": 96,
+        "debugging": 94,
+        "codeReview": 90,
+        "chineseWriting": 95,
         "englishWriting": 72,
-        "research": 78,
-        "chat": 84,
+        "research": 89,
+        "chat": 89,
         "imageGeneration": 0,
-        "multimodal": 75,
+        "multimodal": 81,
         "ecosystem": 82
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "CN Allegro above Allegretto (HEAD allegro row was misaligned/duplicated moderato). K3 long-context/swarm. Dataset scale."
     },
     {
       "planId": "minimax_token_plus_cn",
@@ -499,8 +520,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "minimax_token_max_cn",
@@ -519,8 +540,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "minimax_token_ultra_cn",
@@ -539,8 +560,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "minimax_token_plus_global",
@@ -559,8 +580,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "minimax_token_max_global",
@@ -579,8 +600,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "minimax_token_ultra_global",
@@ -599,8 +620,8 @@
         "ecosystem": 80
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "glm_coding_lite_cn",
@@ -619,8 +640,8 @@
         "ecosystem": 78
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "glm_coding_pro_cn",
@@ -639,8 +660,8 @@
         "ecosystem": 78
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "glm_coding_max_cn",
@@ -659,248 +680,8 @@
         "ecosystem": 78
       },
       "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": ""
-    },
-    {
-      "planId": "openrouter_api",
-      "scores": {
-        "frontend": 84,
-        "backend": 86,
-        "agentCoding": 86,
-        "debugging": 84,
-        "codeReview": 82,
-        "chineseWriting": 90,
-        "englishWriting": 86,
-        "research": 86,
-        "chat": 86,
-        "imageGeneration": 0,
-        "multimodal": 70,
-        "ecosystem": 85
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Aggregator API; actual quality depends on selected model."
-    },
-    {
-      "planId": "deepseek_v4_flash_api_cn",
-      "scores": {
-        "frontend": 82,
-        "backend": 84,
-        "agentCoding": 82,
-        "debugging": 84,
-        "codeReview": 82,
-        "chineseWriting": 96,
-        "englishWriting": 80,
-        "research": 84,
-        "chat": 88,
-        "imageGeneration": 0,
-        "multimodal": 60,
-        "ecosystem": 72
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Chinese writing adjusted to first-tier per v0.2 user reference; cheap API supplement."
-    },
-    {
-      "planId": "deepseek_v4_pro_api_cn",
-      "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 76,
-        "debugging": 88,
-        "codeReview": 80,
-        "chineseWriting": 96,
-        "englishWriting": 82,
-        "research": 82,
-        "chat": 90,
-        "imageGeneration": 0,
-        "multimodal": 65,
-        "ecosystem": 74
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Calibrated as a low-cost API supplement: strong Chinese writing and debugging, but not a primary backend/agent-coding subscription."
-    },
-    {
-      "planId": "deepseek_v4_flash_api_global",
-      "scores": {
-        "frontend": 82,
-        "backend": 84,
-        "agentCoding": 82,
-        "debugging": 84,
-        "codeReview": 82,
-        "chineseWriting": 96,
-        "englishWriting": 80,
-        "research": 84,
-        "chat": 88,
-        "imageGeneration": 0,
-        "multimodal": 60,
-        "ecosystem": 72
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Global DeepSeek flash API; same capability estimate as CN entry."
-    },
-    {
-      "planId": "deepseek_v4_pro_api_global",
-      "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 76,
-        "debugging": 88,
-        "codeReview": 80,
-        "chineseWriting": 96,
-        "englishWriting": 82,
-        "research": 82,
-        "chat": 90,
-        "imageGeneration": 0,
-        "multimodal": 65,
-        "ecosystem": 74
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Global DeepSeek pro API; same calibrated supplement profile as CN entry."
-    },
-    {
-      "planId": "glm_5_2_api_cn",
-      "scores": {
-        "frontend": 88,
-        "backend": 88,
-        "agentCoding": 88,
-        "debugging": 86,
-        "codeReview": 84,
-        "chineseWriting": 86,
-        "englishWriting": 74,
-        "research": 82,
-        "chat": 84,
-        "imageGeneration": 0,
-        "multimodal": 45,
-        "ecosystem": 78
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "GLM 5.2 API estimate."
-    },
-    {
-      "planId": "glm_5_1_short_api_cn",
-      "scores": {
-        "frontend": 84,
-        "backend": 84,
-        "agentCoding": 84,
-        "debugging": 84,
-        "codeReview": 80,
-        "chineseWriting": 84,
-        "englishWriting": 72,
-        "research": 78,
-        "chat": 82,
-        "imageGeneration": 0,
-        "multimodal": 40,
-        "ecosystem": 76
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "GLM 5.1 short-context API estimate."
-    },
-    {
-      "planId": "glm_5_1_long_api_cn",
-      "scores": {
-        "frontend": 84,
-        "backend": 84,
-        "agentCoding": 84,
-        "debugging": 84,
-        "codeReview": 80,
-        "chineseWriting": 84,
-        "englishWriting": 72,
-        "research": 82,
-        "chat": 82,
-        "imageGeneration": 0,
-        "multimodal": 40,
-        "ecosystem": 76
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "GLM 5.1 long-context API estimate."
-    },
-    {
-      "planId": "minimax_api_cn",
-      "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 82,
-        "debugging": 82,
-        "codeReview": 78,
-        "chineseWriting": 82,
-        "englishWriting": 78,
-        "research": 78,
-        "chat": 84,
-        "imageGeneration": 0,
-        "multimodal": 82,
-        "ecosystem": 76
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "MiniMax API estimate."
-    },
-    {
-      "planId": "minimax_api_global",
-      "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 82,
-        "debugging": 82,
-        "codeReview": 78,
-        "chineseWriting": 82,
-        "englishWriting": 78,
-        "research": 78,
-        "chat": 84,
-        "imageGeneration": 0,
-        "multimodal": 82,
-        "ecosystem": 76
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Global MiniMax API estimate."
-    },
-    {
-      "planId": "kimi_api_cn",
-      "scores": {
-        "frontend": 82,
-        "backend": 82,
-        "agentCoding": 84,
-        "debugging": 82,
-        "codeReview": 78,
-        "chineseWriting": 88,
-        "englishWriting": 74,
-        "research": 82,
-        "chat": 84,
-        "imageGeneration": 0,
-        "multimodal": 75,
-        "ecosystem": 78
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Kimi API estimate."
-    },
-    {
-      "planId": "kimi_k27_code_api_cn",
-      "scores": {
-        "frontend": 84,
-        "backend": 84,
-        "agentCoding": 86,
-        "debugging": 84,
-        "codeReview": 80,
-        "chineseWriting": 88,
-        "englishWriting": 74,
-        "research": 80,
-        "chat": 84,
-        "imageGeneration": 0,
-        "multimodal": 75,
-        "ecosystem": 78
-      },
-      "scoreConfidence": "medium",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Kimi K2.7 code API estimate."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "ollama_free",
@@ -919,8 +700,8 @@
         "ecosystem": 70
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Local model quality depends on user hardware and selected model; score is a workflow placeholder."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Local model quality depends on user hardware and selected model; score is a workflow placeholder. Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "ollama_pro",
@@ -939,8 +720,8 @@
         "ecosystem": 75
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions. Preserved from dataset HEAD scale (v0.4.1 align)."
     },
     {
       "planId": "ollama_max",
@@ -959,8 +740,648 @@
         "ecosystem": 78
       },
       "scoreConfidence": "low",
-      "scoreBasis": "manual_curated_from_model_evidence_and_product_workflow",
-      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions."
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Local/cloud workflow placeholder; not directly comparable to hosted frontier subscriptions. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "grok_free",
+      "scores": {
+        "frontend": 55,
+        "backend": 66,
+        "agentCoding": 55,
+        "debugging": 58,
+        "codeReview": 55,
+        "chineseWriting": 67,
+        "englishWriting": 80,
+        "research": 77,
+        "chat": 85,
+        "imageGeneration": 80,
+        "multimodal": 75,
+        "ecosystem": 70
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Analog to free chat tier + Grok Imagine; dataset scale."
+    },
+    {
+      "planId": "supergrok_lite",
+      "scores": {
+        "frontend": 68,
+        "backend": 81,
+        "agentCoding": 72,
+        "debugging": 78,
+        "codeReview": 72,
+        "chineseWriting": 74,
+        "englishWriting": 82,
+        "research": 89,
+        "chat": 92,
+        "imageGeneration": 90,
+        "multimodal": 86,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Between Go and Plus; SuperGrok Lite. Dataset scale."
+    },
+    {
+      "planId": "supergrok",
+      "scores": {
+        "frontend": 82,
+        "backend": 89,
+        "agentCoding": 90,
+        "debugging": 88,
+        "codeReview": 86,
+        "chineseWriting": 78,
+        "englishWriting": 90,
+        "research": 95,
+        "chat": 94,
+        "imageGeneration": 96,
+        "multimodal": 95,
+        "ecosystem": 84
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Peer ChatGPT Plus (HEAD) then Grok 4.5 profile: research/Imagine strong, coding a step under Sol."
+    },
+    {
+      "planId": "supergrok_heavy",
+      "scores": {
+        "frontend": 86,
+        "backend": 92,
+        "agentCoding": 92,
+        "debugging": 93,
+        "codeReview": 91,
+        "chineseWriting": 80,
+        "englishWriting": 94,
+        "research": 95,
+        "chat": 95,
+        "imageGeneration": 96,
+        "multimodal": 95,
+        "ecosystem": 86
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Peer Pro-class quota; Heavy multi-agent. Dataset scale."
+    },
+    {
+      "planId": "perplexity_free",
+      "scores": {
+        "frontend": 43,
+        "backend": 49,
+        "agentCoding": 37,
+        "debugging": 46,
+        "codeReview": 43,
+        "chineseWriting": 72,
+        "englishWriting": 76,
+        "research": 81,
+        "chat": 78,
+        "imageGeneration": 25,
+        "multimodal": 50,
+        "ecosystem": 60
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Search-first free; low coding. Dataset scale."
+    },
+    {
+      "planId": "perplexity_pro",
+      "scores": {
+        "frontend": 61,
+        "backend": 65,
+        "agentCoding": 60,
+        "debugging": 61,
+        "codeReview": 57,
+        "chineseWriting": 78,
+        "englishWriting": 86,
+        "research": 99,
+        "chat": 90,
+        "imageGeneration": 60,
+        "multimodal": 76,
+        "ecosystem": 81
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Research S product; coding not a focus. Anchored to HEAD Google Pro research band."
+    },
+    {
+      "planId": "perplexity_max",
+      "scores": {
+        "frontend": 66,
+        "backend": 73,
+        "agentCoding": 69,
+        "debugging": 69,
+        "codeReview": 65,
+        "chineseWriting": 82,
+        "englishWriting": 88,
+        "research": 99,
+        "chat": 92,
+        "imageGeneration": 66,
+        "multimodal": 80,
+        "ecosystem": 85
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Max/Computer research peak; coding still secondary. Dataset scale."
+    },
+    {
+      "planId": "kimi_moderato_global",
+      "scores": {
+        "frontend": 88,
+        "backend": 86,
+        "agentCoding": 90,
+        "debugging": 86,
+        "codeReview": 82,
+        "chineseWriting": 93,
+        "englishWriting": 74,
+        "research": 86,
+        "chat": 87,
+        "imageGeneration": 0,
+        "multimodal": 81,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLOBAL Moderato ≈ CN Moderato capability (K3). Dataset scale."
+    },
+    {
+      "planId": "kimi_allegretto_global",
+      "scores": {
+        "frontend": 92,
+        "backend": 89,
+        "agentCoding": 95,
+        "debugging": 93,
+        "codeReview": 89,
+        "chineseWriting": 93,
+        "englishWriting": 74,
+        "research": 86,
+        "chat": 87,
+        "imageGeneration": 0,
+        "multimodal": 79,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLOBAL Allegretto ≈ CN Allegretto (K3). Dataset scale."
+    },
+    {
+      "planId": "kimi_allegro_global",
+      "scores": {
+        "frontend": 93,
+        "backend": 91,
+        "agentCoding": 96,
+        "debugging": 94,
+        "codeReview": 90,
+        "chineseWriting": 94,
+        "englishWriting": 74,
+        "research": 89,
+        "chat": 89,
+        "imageGeneration": 0,
+        "multimodal": 81,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLOBAL Allegro ≈ CN Allegro. Dataset scale."
+    },
+    {
+      "planId": "kimi_vivace_global",
+      "scores": {
+        "frontend": 93,
+        "backend": 92,
+        "agentCoding": 97,
+        "debugging": 94,
+        "codeReview": 90,
+        "chineseWriting": 95,
+        "englishWriting": 75,
+        "research": 91,
+        "chat": 89,
+        "imageGeneration": 0,
+        "multimodal": 81,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Top GLOBAL above Allegro. Dataset scale."
+    },
+    {
+      "planId": "openrouter_api",
+      "scores": {
+        "frontend": 84,
+        "backend": 86,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 90,
+        "englishWriting": 86,
+        "research": 86,
+        "chat": 86,
+        "imageGeneration": 0,
+        "multimodal": 70,
+        "ecosystem": 85
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Aggregator API; actual quality depends on selected model. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 84,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 96,
+        "englishWriting": 80,
+        "research": 84,
+        "chat": 88,
+        "imageGeneration": 0,
+        "multimodal": 60,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Chinese writing adjusted to first-tier per v0.2 user reference; cheap API supplement. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 76,
+        "debugging": 88,
+        "codeReview": 80,
+        "chineseWriting": 96,
+        "englishWriting": 82,
+        "research": 82,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 65,
+        "ecosystem": 74
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Calibrated as a low-cost API supplement: strong Chinese writing and debugging, but not a primary backend/agent-coding subscription. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "deepseek_v4_flash_api_global",
+      "scores": {
+        "frontend": 82,
+        "backend": 84,
+        "agentCoding": 82,
+        "debugging": 84,
+        "codeReview": 82,
+        "chineseWriting": 96,
+        "englishWriting": 80,
+        "research": 84,
+        "chat": 88,
+        "imageGeneration": 0,
+        "multimodal": 60,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Global DeepSeek flash API; same capability estimate as CN entry. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "deepseek_v4_pro_api_global",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 76,
+        "debugging": 88,
+        "codeReview": 80,
+        "chineseWriting": 96,
+        "englishWriting": 82,
+        "research": 82,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 65,
+        "ecosystem": 74
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Global DeepSeek pro API; same calibrated supplement profile as CN entry. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "glm_5_2_api_cn",
+      "scores": {
+        "frontend": 88,
+        "backend": 88,
+        "agentCoding": 88,
+        "debugging": 86,
+        "codeReview": 84,
+        "chineseWriting": 86,
+        "englishWriting": 74,
+        "research": 82,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 45,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLM 5.2 API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "glm_5_1_short_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 84,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 78,
+        "chat": 82,
+        "imageGeneration": 0,
+        "multimodal": 40,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLM 5.1 short-context API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "glm_5_1_long_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 84,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 84,
+        "englishWriting": 72,
+        "research": 82,
+        "chat": 82,
+        "imageGeneration": 0,
+        "multimodal": 40,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "GLM 5.1 long-context API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "minimax_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 82,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 82,
+        "englishWriting": 78,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "MiniMax API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "minimax_api_global",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 82,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 82,
+        "englishWriting": 78,
+        "research": 78,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 76
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Global MiniMax API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "kimi_api_cn",
+      "scores": {
+        "frontend": 82,
+        "backend": 82,
+        "agentCoding": 84,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 88,
+        "englishWriting": 74,
+        "research": 82,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Kimi API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "kimi_k27_code_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 86,
+        "debugging": 84,
+        "codeReview": 80,
+        "chineseWriting": 88,
+        "englishWriting": 74,
+        "research": 80,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 75,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Kimi K2.7 code API estimate. Preserved from dataset HEAD scale (v0.4.1 align)."
+    },
+    {
+      "planId": "openai_gpt56_sol_api",
+      "scores": {
+        "frontend": 86,
+        "backend": 95,
+        "agentCoding": 94,
+        "debugging": 93,
+        "codeReview": 91,
+        "chineseWriting": 88,
+        "englishWriting": 94,
+        "research": 95,
+        "chat": 94,
+        "imageGeneration": 45,
+        "multimodal": 91,
+        "ecosystem": 94
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Sol API ≈ Pro-class coding (HEAD Pro + Sol). No image product."
+    },
+    {
+      "planId": "openai_gpt56_terra_api",
+      "scores": {
+        "frontend": 82,
+        "backend": 89,
+        "agentCoding": 86,
+        "debugging": 89,
+        "codeReview": 87,
+        "chineseWriting": 86,
+        "englishWriting": 90,
+        "research": 91,
+        "chat": 95,
+        "imageGeneration": 44,
+        "multimodal": 87,
+        "ecosystem": 94
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Terra between Luna and Sol on unified rank; absolute ≈ Plus band."
+    },
+    {
+      "planId": "openai_gpt56_luna_api",
+      "scores": {
+        "frontend": 68,
+        "backend": 83,
+        "agentCoding": 72,
+        "debugging": 80,
+        "codeReview": 78,
+        "chineseWriting": 78,
+        "englishWriting": 82,
+        "research": 85,
+        "chat": 88,
+        "imageGeneration": 28,
+        "multimodal": 78,
+        "ecosystem": 84
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Luna value tier; SWE strong but below Sol. Dataset scale."
+    },
+    {
+      "planId": "claude_opus_5_api",
+      "scores": {
+        "frontend": 94,
+        "backend": 96,
+        "agentCoding": 94,
+        "debugging": 96,
+        "codeReview": 96,
+        "chineseWriting": 80,
+        "englishWriting": 95,
+        "research": 95,
+        "chat": 94,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 92
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Opus 5 API ≈ Max coding band (HEAD Max + Fable/Opus refresh)."
+    },
+    {
+      "planId": "claude_opus_48_api",
+      "scores": {
+        "frontend": 88,
+        "backend": 93,
+        "agentCoding": 92,
+        "debugging": 93,
+        "codeReview": 95,
+        "chineseWriting": 78,
+        "englishWriting": 93,
+        "research": 90,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 78,
+        "ecosystem": 88
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Opus 4.8 API slightly under Opus 5 / Fable ceiling."
+    },
+    {
+      "planId": "claude_sonnet_5_api",
+      "scores": {
+        "frontend": 88,
+        "backend": 88,
+        "agentCoding": 86,
+        "debugging": 88,
+        "codeReview": 90,
+        "chineseWriting": 78,
+        "englishWriting": 93,
+        "research": 88,
+        "chat": 90,
+        "imageGeneration": 0,
+        "multimodal": 78,
+        "ecosystem": 88
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Sonnet 5 workhorse under Opus/Fable. Dataset scale."
+    },
+    {
+      "planId": "kimi_k3_api_global",
+      "scores": {
+        "frontend": 92,
+        "backend": 89,
+        "agentCoding": 95,
+        "debugging": 93,
+        "codeReview": 89,
+        "chineseWriting": 95,
+        "englishWriting": 72,
+        "research": 90,
+        "chat": 87,
+        "imageGeneration": 0,
+        "multimodal": 81,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "K3 API coding S on unified rank, absolute ≈ Allegretto band (HEAD scale)."
+    },
+    {
+      "planId": "kimi_k3_api_cn",
+      "scores": {
+        "frontend": 92,
+        "backend": 89,
+        "agentCoding": 95,
+        "debugging": 93,
+        "codeReview": 89,
+        "chineseWriting": 96,
+        "englishWriting": 72,
+        "research": 90,
+        "chat": 87,
+        "imageGeneration": 0,
+        "multimodal": 81,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Same K3 model as GLOBAL; CN price estimated."
+    },
+    {
+      "planId": "claude_fable_5_api",
+      "scores": {
+        "frontend": 94,
+        "backend": 96,
+        "agentCoding": 95,
+        "debugging": 96,
+        "codeReview": 96,
+        "chineseWriting": 80,
+        "englishWriting": 97,
+        "research": 96,
+        "chat": 93,
+        "imageGeneration": 0,
+        "multimodal": 82,
+        "ecosystem": 92
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "head_scale_aligned_v0.4.1",
+      "notes": "Fable 5 API: unified rank ≈ Sol, intelligence slightly above Sol. Dataset scale."
     }
   ]
 }
