@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "0.4.7",
+  "lastUpdatedAt": "2026-07-30",
+  "source": "https://arena.ai/leaderboard/code",
+  "boards": {
+    "frontendCodeArena": {
+      "title": "Frontend Code Arena",
+      "asOf": "from user screenshot HNXpi8UaIAAM6Ag.jpg",
+      "imagePath": "E:\\图片\\HNXpi8UaIAAM6Ag.jpg",
+      "scoreType": "Arena Score",
+      "headline": "Kimi-K3 Ranked #1",
+      "primaryFor": "frontend",
+      "rows": [
+        {
+          "rank": 1,
+          "modelId": "kimi-k3",
+          "label": "Kimi-K3",
+          "score": 1679
+        },
+        {
+          "rank": 2,
+          "modelId": "claude-fable-5",
+          "label": "Claude Fable 5",
+          "score": 1631
+        },
+        {
+          "rank": 3,
+          "modelId": "gpt-5.6-sol",
+          "label": "GPT-5.6 Sol (xHigh)",
+          "score": 1618
+        },
+        {
+          "rank": 4,
+          "modelId": "glm-5.2",
+          "label": "GLM-5.2 (Max)",
+          "score": 1587
+        },
+        {
+          "rank": 5,
+          "modelId": "claude-opus-4.8",
+          "label": "Claude Opus 4.8 (Thinking)",
+          "score": 1562
+        },
+        {
+          "rank": 6,
+          "modelId": "grok-4.5",
+          "label": "Grok-4.5",
+          "score": 1558
+        },
+        {
+          "rank": 7,
+          "modelId": "claude-opus-4.7-thinking",
+          "label": "Claude Opus 4.7 (Thinking)",
+          "score": 1558
+        },
+        {
+          "rank": 8,
+          "modelId": "claude-opus-4.7",
+          "label": "Claude Opus 4.7",
+          "score": 1555
+        },
+        {
+          "rank": 9,
+          "modelId": "claude-opus-4.6-thinking",
+          "label": "Claude Opus 4.6 (Thinking)",
+          "score": 1542
+        },
+        {
+          "rank": 10,
+          "modelId": "claude-sonnet-5",
+          "label": "Claude Sonnet 5 (High)",
+          "score": 1542
+        },
+        {
+          "rank": 11,
+          "modelId": "muse-spark-1.1",
+          "label": "Muse Spark 1.1",
+          "score": 1538
+        },
+        {
+          "rank": 12,
+          "modelId": "claude-opus-4.6",
+          "label": "Claude Opus 4.6",
+          "score": 1536
+        },
+        {
+          "rank": 13,
+          "modelId": "claude-opus-4.8-base",
+          "label": "Claude Opus 4.8",
+          "score": 1534
+        },
+        {
+          "rank": 14,
+          "modelId": "seed-2.1-pro",
+          "label": "Seed-2.1 Pro",
+          "score": 1534
+        },
+        {
+          "rank": 15,
+          "modelId": "glm-5.1",
+          "label": "GLM-5.1",
+          "score": 1526
+        },
+        {
+          "rank": 16,
+          "modelId": "claude-sonnet-4.6",
+          "label": "Claude Sonnet 4.6",
+          "score": 1522
+        },
+        {
+          "rank": 17,
+          "modelId": "qwen-3.7-max",
+          "label": "Qwen-3.7 Max",
+          "score": 1516
+        },
+        {
+          "rank": 18,
+          "modelId": "kimi-k2.6",
+          "label": "Kimi-K2.6",
+          "score": 1515
+        },
+        {
+          "rank": 19,
+          "modelId": "gpt-5.5",
+          "label": "GPT-5.5 (xHigh)",
+          "score": 1504
+        },
+        {
+          "rank": 20,
+          "modelId": "minimax-m3",
+          "label": "MiniMax-M3",
+          "score": 1493
+        }
+      ],
+      "notes": "PRIMARY board for SubPlan frontend. Transcribed from official Arena chart screenshot provided by user."
+    }
+  },
+  "notes": [
+    "Frontend PRIMARY = Frontend Code Arena scores in this file.",
+    "WebDev Overall is a different board — do not use for frontend."
+  ]
+}

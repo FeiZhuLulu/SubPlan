@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.5",
+  "schemaVersion": "0.4.6",
   "lastUpdatedAt": "2026-07-30",
   "defaults": {
     "cacheHitRateScenarios": [
@@ -22,14 +22,12 @@
     "defaultScenario": "agent_cached_workflow"
   },
   "notes": [
+    "v0.4.6: Grok Build metrics (AA Coding Agent 76, ~1.9M tok/task) for SuperGrok plans; frontend scoring uses Arena ranks separately in scores/model-benchmarks.",
     "v0.4.5: Kimi models corrected — K3 + K2.7 Code + K2.6. K2.5 is historical ACP measurement label only, not current product.",
     "v0.4.4: multi-community supplement (Reddit, X, search-visible V2EX/linux.do discussions) + per-model ACP meters.",
     "Unit: tokens (estimatedMonthlyTokens); MToken=1e6 tokens for algorithm field.",
     "Claude Max 20x monthly for recommender now ~9.84B tokens (X weekly full burn 2.46B×4), not ACP×20 alone.",
-    "ChatGPT Pro 5x blended ACP×5 and X weekly half-burn estimate.",
-    "See data/community-usage-reports.json for platform-level citations.",
-    "Still not official hard caps; windows bind first.",
-    "Unit: estimatedMonthlyTokens raw tokens; MToken=1e6. Per-model in modelUsage[]. Multi-community reports in community-usage-reports.json."
+    "ChatGPT Pro 5x blended ACP×5 and X weekly half-burn estimate."
   ],
   "quotas": [
     {
@@ -1726,25 +1724,41 @@
     },
     {
       "planId": "supergrok_lite",
-      "estimatedTextWorkloadCapacityMTokens": 120,
-      "quotaBasis": "community_tier_relative_to_supergrok",
+      "estimatedTextWorkloadCapacityMTokens": 150,
+      "quotaBasis": "lite_fraction_of_supergrok_build",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "community_estimate_v0.4.2",
-      "notes": "Lite between free and SuperGrok. No public token meter; ~half of SuperGrok practical estimate.",
-      "estimatedMonthlyTokens": 120000000
+      "source": "aa_grok_build_2026_07",
+      "notes": "Lite SuperGrok + limited Grok Build headroom.",
+      "estimatedMonthlyTokens": 150000000,
+      "primaryModelId": "grok-4.5",
+      "codingHarness": "Grok Build",
+      "lastCheckedAt": "2026-07-30",
+      "modelUsage": [
+        {
+          "modelId": "grok-4.5",
+          "label": "Grok 4.5 (Grok Build limited)",
+          "harness": "Grok Build",
+          "aaCodingAgentIndex": 76,
+          "avgTokensPerCodingAgentTask": 1900000,
+          "estimatedMonthlyTokens": 150000000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "notes": "Lite may have reduced Build limits vs full SuperGrok."
+        }
+      ]
     },
     {
       "planId": "supergrok",
-      "estimatedTextWorkloadCapacityMTokens": 280,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
-      "quotaConfidence": "low",
+      "estimatedTextWorkloadCapacityMTokens": 400,
+      "quotaBasis": "grok_build_token_efficiency_community_proxy",
+      "quotaConfidence": "medium",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
-      "estimatedMonthlyTokens": 280000000,
+      "source": "aa_grok_build_2026_07",
+      "notes": "SuperGrok coding path = Grok Build + Grok 4.5. Monthly token proxy raised vs earlier guess because Build is efficient (more tasks per token) but still rate-window limited. Not official monthly token cap.",
+      "estimatedMonthlyTokens": 400000000,
       "additionalSources": [
         {
           "sourceId": "supergrok_pricing_guides",
@@ -1759,44 +1773,66 @@
       "modelUsage": [
         {
           "modelId": "grok-4.5",
-          "label": "Grok 4.5",
-          "estimatedMonthlyTokens": null,
+          "label": "Grok 4.5 (Grok Build)",
+          "harness": "Grok Build",
+          "aaCodingAgentIndex": 76,
+          "avgTokensPerCodingAgentTask": 1900000,
+          "costPerTaskUsd": 2.49,
+          "estimatedMonthlyTokens": 400000000,
           "relativeBurn": 1,
-          "taskBurnTokens": 1005853,
-          "confidence": "low",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Task burn ~1.01M (similar to Sol) on sample; monthly still rate-window limited — no ACP mo row for SuperGrok",
-          "estimatedMonthlyMTokens": null,
-          "tokenizerRatioVsGpt54": 0.9996
+          "confidence": "medium",
+          "source": "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+          "notes": "Grok Build harness. ~1.9M tokens/task on AA Coding Agent Index vs Fable Claude Code ~7.2M and GPT-5.5 Codex ~6.2M — much more token-efficient. Score 76 (near Fable 77 / GPT-5.5 76). SuperGrok includes Grok Build."
         }
       ],
       "communityReports": [
         {
-          "platform": "web_community",
-          "url": "https://suprmind.ai/hub/grok/pricing/",
-          "asOf": "2026-07",
-          "claim": "SuperGrok ~/mo higher limits / frontier models; usage described via rate windows not public monthly token meters.",
-          "metric": null
+          "platform": "artificial_analysis",
+          "url": "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
+          "asOf": "2026-07-08",
+          "claim": "Grok 4.5 in Grok Build: Coding Agent Index 76; 1.9M avg tokens/task; .49/task.",
+          "metric": {
+            "unit": "aa_coding_agent_index",
+            "value": 76,
+            "avgTokensPerTask": 1900000
+          }
         },
         {
-          "platform": "x",
-          "url": "https://x.com/matt_kaschel/status/2082385174503866802",
-          "asOf": "2026-07-29",
-          "claim": "Grok 4.5 described as very token-efficient vs other stacks in multi-agent orchestration comparisons.",
+          "platform": "xai_official",
+          "url": "https://x.ai/news/grok-4-5",
+          "asOf": "2026-07",
+          "claim": "Grok 4.5 default in Grok Build; ~2× token efficiency vs leading models on comparable tasks; API / per MTok.",
           "metric": null
         }
-      ]
+      ],
+      "codingHarness": "Grok Build"
     },
     {
       "planId": "supergrok_heavy",
-      "estimatedTextWorkloadCapacityMTokens": 1800,
-      "quotaBasis": "community_price_and_tier_relative",
+      "estimatedTextWorkloadCapacityMTokens": 2000,
+      "quotaBasis": "heavy_mult_on_supergrok_build",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "community_estimate_v0.4.2",
-      "notes": "Heavy multi-agent; community positions as ~order-of-magnitude above SuperGrok. Token proxy only.",
-      "estimatedMonthlyTokens": 1800000000
+      "source": "aa_grok_build_2026_07",
+      "notes": "SuperGrok Heavy: fuller Grok Build multi-agent. Monthly token proxy ~5× SuperGrok practical estimate.",
+      "estimatedMonthlyTokens": 2000000000,
+      "primaryModelId": "grok-4.5",
+      "codingHarness": "Grok Build",
+      "lastCheckedAt": "2026-07-30",
+      "modelUsage": [
+        {
+          "modelId": "grok-4.5",
+          "label": "Grok 4.5 / Heavy multi-agent (Grok Build)",
+          "harness": "Grok Build",
+          "aaCodingAgentIndex": 76,
+          "avgTokensPerCodingAgentTask": 1900000,
+          "relativeBurn": 1,
+          "estimatedMonthlyTokens": 2000000000,
+          "confidence": "low",
+          "notes": "Heavy multi-agent Build; higher rate limits. Token efficiency same model class as SuperGrok."
+        }
+      ]
     },
     {
       "planId": "perplexity_free",

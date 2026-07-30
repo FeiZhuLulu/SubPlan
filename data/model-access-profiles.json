@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.4.5",
+  "schemaVersion": "0.4.6",
   "lastUpdatedAt": "2026-07-30",
   "notes": [
     "Plan-level model access for high-intelligence coverage.",
@@ -343,7 +343,7 @@
           }
         }
       ],
-      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model. Frontend primary evidence: Arena Fullstack #1 (K3)."
     },
     {
       "planId": "kimi_allegretto_cn",
@@ -374,7 +374,7 @@
           "notes": "Current Code path (not K2.5)."
         }
       ],
-      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model. Frontend primary evidence: Arena Fullstack #1 (K3)."
     },
     {
       "planId": "opencode_go_regular",
@@ -584,51 +584,53 @@
           }
         }
       ],
-      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model. Frontend primary evidence: Arena Fullstack #1 (K3)."
     },
     {
       "planId": "supergrok",
       "models": [
         {
           "modelId": "grok-4.5",
-          "label": "Grok 4.5 / 4.x",
-          "quotaShare": 1,
+          "label": "Grok 4.5 via Grok Build",
+          "quotaMTokens": 400,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
             "debugging": "A",
             "codeReview": "A",
             "research": "S"
-          }
+          },
+          "notes": "Grok Build harness: AA Coding Agent 76, ~1.9M tokens/task (efficient). Frontend not Arena top-3."
         }
       ],
-      "notes": "Real-time research S; coding A (AA coding-agent competitive, SWE-bench below Sol/Opus5)."
+      "notes": "SuperGrok includes Grok Build CLI. Coding path = Grok Build, not web chat only."
     },
     {
       "planId": "supergrok_heavy",
       "models": [
         {
           "modelId": "grok-4.5",
-          "label": "Grok 4 Heavy / multi-agent",
-          "quotaShare": 1,
+          "label": "Grok 4.5 Heavy / multi-agent Grok Build",
+          "quotaMTokens": 2000,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "A",
             "debugging": "A",
             "codeReview": "A",
             "research": "S"
-          }
+          },
+          "notes": "Fuller multi-agent Build limits."
         }
       ],
-      "notes": "Heavy multi-agent can reach S agentCoding for hard tasks."
+      "notes": "Heavy Grok Build multi-agent."
     },
     {
       "planId": "supergrok_lite",
       "models": [
         {
-          "modelId": "grok-4",
-          "label": "Grok 4",
-          "quotaShare": 1,
+          "modelId": "grok-4.5",
+          "label": "Grok 4.5 (limited Grok Build)",
+          "quotaMTokens": 150,
           "tierByCapability": {
             "agentCoding": "B",
             "backend": "B",
@@ -638,7 +640,7 @@
           }
         }
       ],
-      "notes": "Lite limits keep effective coding at B."
+      "notes": "Lite Build headroom."
     },
     {
       "planId": "perplexity_pro",
@@ -722,7 +724,7 @@
           }
         }
       ],
-      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model. Frontend primary evidence: Arena Fullstack #1 (K3)."
     },
     {
       "planId": "kimi_allegro_global",
@@ -758,7 +760,7 @@
           }
         }
       ],
-      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model."
+      "notes": "Current: K3 + K2.7 Code (coding). K2.5 is not a current model. Frontend primary evidence: Arena Fullstack #1 (K3)."
     },
     {
       "planId": "openai_gpt56_sol_api",
