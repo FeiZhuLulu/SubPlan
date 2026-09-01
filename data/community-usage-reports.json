@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.4.6",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.7",
+  "lastUpdatedAt": "2026-09-01",
   "purpose": "Multi-community usage observations (tokens) to supplement awesome-coding-plan per-model meters.",
   "platforms": [
     "reddit",
@@ -10,22 +10,22 @@
     "github_community"
   ],
   "notes": [
-    "linux.do / v2ex pages often block scrapers or require login; claims below use public search snippets + X/Reddit posts that are fetchable.",
-    "Prefer raw token numbers when users publish them; otherwise keep as qualitative.",
-    "Weekly windows often bind before calendar-month totals (esp. Claude Max / Codex).",
-    "2026-07-30 correction: do not treat kimi-k2.5 as a current model. ACP rows that say k2.5 are historical measurement labels; product is K2.7 Code + K3."
+    "ACP HEAD 2026-08-19: table tokens unchanged since 2026-07-30. Promo date text updated; measured quotas did not.",
+    "2026-09-01: dropped X navinsharmacse/2082697148647477364 (404). Do not reuse the 587.5M ≈ 50% weekly estimate.",
+    "Reddit / linux.do HTML blocked this pass. Only ACP + refetchable X + official pages were treated as verified.",
+    "MiniMax ACP Plus 24亿 is author-marked stale. Official Plus label is ~6亿+ M3.",
+    "Cursor / SuperGrok / Google AI still have no public monthly token caps."
   ],
   "reports": {
     "claude_pro": [
       {
-        "platform": "reddit",
-        "url": "https://www.reddit.com/r/ClaudeAI/comments/1rmq2mw/claude_code_usage_limits_explained_2026_edition/",
-        "asOf": "2026-07",
-        "claim": "Pro ~10–40 prompts per 5h; ~40–80 Sonnet-hours/week and ~10–40 Opus-hours/week (community summary).",
+        "platform": "github_community",
+        "url": "https://github.com/mahonzhan/awesome-coding-plan",
+        "asOf": "2026-08-19",
+        "claim": "ACP HEAD: Claude Code opus-4.8 14360/15.88亿 per month. Tokens unchanged since 2026-07-30.",
         "metric": {
-          "unit": "prompts_per_5h",
-          "low": 10,
-          "high": 40
+          "unit": "tokens_per_month",
+          "value": 1588000000
         }
       },
       {
@@ -119,8 +119,8 @@
       {
         "platform": "github_community",
         "url": "https://github.com/mahonzhan/awesome-coding-plan",
-        "asOf": "2026-07-30",
-        "claim": "Codex gpt-5.6-sol on Plus: mo ~6.16亿 tokens, week ~1.54亿.",
+        "asOf": "2026-08-19",
+        "claim": "ACP HEAD: Codex gpt-5.6-sol on Plus still week 1.54亿 / month 6.16亿. Tokens unchanged since 2026-07-30.",
         "metric": {
           "unit": "tokens_per_month",
           "value": 616000000
@@ -135,17 +135,6 @@
       }
     ],
     "chatgpt_pro_5x": [
-      {
-        "platform": "x",
-        "url": "https://x.com/navinsharmacse/status/2082697148647477364",
-        "asOf": "2026-07-30",
-        "claim": "Codex two sessions overnight ~587.5M tokens ≈ 50% of weekly limit → weekly pool ~1.17B tokens for that Pro-tier Codex account.",
-        "metric": {
-          "unit": "tokens_per_week_estimate",
-          "value": 1175000000,
-          "from": "587.5M is ~50% weekly"
-        }
-      },
       {
         "platform": "x",
         "url": "https://x.com/IND_is_Here/status/2082538459449733357",
@@ -247,6 +236,71 @@
           "value": 20
         }
       }
+    ],
+    "minimax_token_plus_cn": [
+      {
+        "platform": "github_community",
+        "url": "https://github.com/mahonzhan/awesome-coding-plan",
+        "asOf": "2026-08-19",
+        "claim": "ACP Plus m2.7 54400/24亿 is explicitly stale (plan changed). Official CN label is ~6亿+ M3.",
+        "metric": {
+          "unit": "tokens_per_month",
+          "value": 600000000
+        },
+        "supersededMetric": {
+          "unit": "tokens_per_month",
+          "value": 2400000000,
+          "note": "stale ACP row"
+        }
+      }
+    ],
+    "aliyun_coding_pro_cn": [
+      {
+        "platform": "official",
+        "url": "https://help.aliyun.com/zh/model-studio/coding-plan",
+        "asOf": "2026-09-01",
+        "claim": "Official Pro: 6000 req/5h, 45000/week, 90000/month. Token proxy uses ACP Lite ~34k tok/req.",
+        "metric": {
+          "unit": "requests_per_month",
+          "value": 90000
+        }
+      }
+    ],
+    "opencode_go_regular": [
+      {
+        "platform": "official",
+        "url": "https://opencode.ai/go",
+        "asOf": "2026-09-01",
+        "claim": "Official $10/mo. ACP value limits $12/5h, $30/week, $60/month. 5h request card lists Grok 4.6 at 169 req.",
+        "metric": {
+          "unit": "usd_monthly_value",
+          "value": 60
+        }
+      }
+    ],
+    "glm_coding_pro_cn": [
+      {
+        "platform": "official",
+        "url": "https://www.bigmodel.cn/glm-coding",
+        "asOf": "2026-09-01",
+        "claim": "New-customer Pro list ¥538/mo (display ¥430.4). Points 12,000/5h + 60,000/week. V2 ¥149 is grandfathered only.",
+        "metric": {
+          "unit": "points_per_week",
+          "value": 60000
+        }
+      }
+    ],
+    "supergrok_plus": [
+      {
+        "platform": "official",
+        "url": "https://x.ai/pricing",
+        "asOf": "2026-09-01",
+        "claim": "Official SuperGrok Plus $100/mo. Higher usage, 1080p video, peak priority. No token number published.",
+        "metric": {
+          "unit": "usd_per_month",
+          "value": 100
+        }
+      }
     ]
   },
   "synthesizedHighlights": [
@@ -259,11 +313,6 @@
       "topic": "Fable multi-agent",
       "value": "majority of Max5x 5h window in minutes (X 2026-07-09)",
       "impact": "relativeBurn keeps Fable effective capacity lower"
-    },
-    {
-      "topic": "Codex Pro weekly",
-      "value": "~1.17B tokens/week if 587.5M=50% (X 2026-07-30)",
-      "impact": "Pro 5x monthly blend ~3.9B"
     },
     {
       "topic": "Opus 5 efficiency",
@@ -284,6 +333,11 @@
       "topic": "Arena Frontend",
       "value": "K3 #1, Sol #2, Fable #3 (Code Arena Fullstack reports)",
       "impact": "frontend scores re-anchored"
+    },
+    {
+      "topic": "ACP 2026-08-19",
+      "value": "Table tokens unchanged after 2026-07-30; MiniMax Plus 24亿 marked stale",
+      "impact": "Keep Claude/Kimi/GLM/Codex-Sol meters; cut MiniMax Plus plan quota to 600 MTok"
     }
   ]
 }

@@ -1,11 +1,14 @@
 {
-  "schemaVersion": "0.4.6",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.7",
+  "lastUpdatedAt": "2026-09-01",
   "notes": [
+    "v0.4.9 (2026-09-01): Aliyun Coding Plan Pro added. OpenCode Go pool refreshed from official 5h request card.",
     "Plan-level model access for high-intelligence coverage.",
-    "K3 coding = S (slightly below Sol / Fable 5).",
-    "Fable 5: Max included ~50% limits; Pro via usage credits; not Sol Pro.",
-    "v0.4.3: model quotaMTokens prefer per-model community monthly estimates; Fable/Sonnet adjusted by task burn vs Opus 4.8."
+    "v0.4.8 (2026-09-01): ChatGPT splits Sol (scarce S) vs Luna (large B volume). Official credit ratio Luna 20x Sol input.",
+    "Plan-level model access for high-intelligence coverage.",
+    "v0.4.7 (2026-09-01): Grok 4.6 is the included Cursor / SuperGrok flagship; Gemini 3.7 Flash is the Google workhorse; GLM-5.3 is on Coding Plan.",
+    "Cursor Other Models (Claude/GPT/Gemini) remain a separate dollar-limited pool.",
+    "K3 coding = S (slightly below Sol / Fable 5). GLM-5.3 AA 60 = K3 class."
   ],
   "profiles": [
     {
@@ -14,6 +17,7 @@
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol",
+          "quotaMTokens": 616,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
@@ -21,10 +25,38 @@
             "codeReview": "S",
             "research": "S"
           },
-          "quotaMTokens": 616
+          "notes": "High-intelligence / Codex-Sol observed cap. Not the volume path."
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra",
+          "quotaMTokens": 1232,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "Official ~2x Sol messages / ~2x Sol input credits."
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "quotaMTokens": 12320,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S",
+            "englishWriting": "A"
+          },
+          "notes": "Official ~20x Sol input credits (5 vs 100) and ~25x Plus message range vs Sol."
         }
       ],
-      "notes": "ChatGPT/Codex path uses Sol (and Terra/Luna in Work/Codex). Sol Pro excluded from scoring — not in Codex."
+      "notes": "Plus: Sol Medium/High in chat; Work/Codex can pick Sol/Terra/Luna. Luna is the high-volume included path. Sol Pro / Extra High not included."
     },
     {
       "planId": "chatgpt_pro_5x",
@@ -32,6 +64,7 @@
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol (higher effort/quota)",
+          "quotaMTokens": 3890,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
@@ -39,10 +72,38 @@
             "codeReview": "S",
             "research": "S"
           },
-          "quotaMTokens": 3890
+          "notes": "High-intelligence / Codex-Sol observed cap. Not the volume path."
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra",
+          "quotaMTokens": 7780,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "Official ~2x Sol messages / ~2x Sol input credits."
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "quotaMTokens": 77800,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S",
+            "englishWriting": "A"
+          },
+          "notes": "Official ~20x Sol input credits (5 vs 100) and ~25x Plus message range vs Sol."
         }
       ],
-      "notes": "Same Sol class as Plus with more high-effort quota. No Sol."
+      "notes": "Pro 5x: Extra High + Sol Pro. Same Sol/Terra/Luna mix at ~5x Plus credits. Luna remains the volume path."
     },
     {
       "planId": "chatgpt_pro_20x",
@@ -50,6 +111,7 @@
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol (higher effort/quota)",
+          "quotaMTokens": 12320,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
@@ -57,10 +119,38 @@
             "codeReview": "S",
             "research": "S"
           },
-          "quotaMTokens": 12320
+          "notes": "High-intelligence / Codex-Sol observed cap. Not the volume path."
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra",
+          "quotaMTokens": 24640,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "Official ~2x Sol messages / ~2x Sol input credits."
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "quotaMTokens": 246400,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S",
+            "englishWriting": "A"
+          },
+          "notes": "Official ~20x Sol input credits (5 vs 100) and ~25x Plus message range vs Sol."
         }
       ],
-      "notes": "Same Sol class as Plus with much more high-effort quota. No Sol."
+      "notes": "Pro 20x: same model mix, ~20x Plus credits. Luna remains the volume path."
     },
     {
       "planId": "claude_pro",
@@ -230,8 +320,33 @@
       "planId": "cursor_pro",
       "models": [
         {
-          "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus 高级模型池",
+          "modelId": "grok-4.6",
+          "label": "Cursor Grok 4.6",
+          "quotaShare": 0.55,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          },
+          "notes": "Included Cursor Models pool. Jointly trained by Cursor and SpaceXAI. AA Intelligence 61."
+        },
+        {
+          "modelId": "composer-2.5",
+          "label": "Composer 2.5",
+          "quotaShare": 0.3,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "other-models-cursor-pool",
+          "label": "Other Models（Claude / GPT / Gemini API 价）",
           "quotaMTokens": 160,
           "tierByCapability": {
             "agentCoding": "S",
@@ -240,42 +355,31 @@
             "codeReview": "S",
             "research": "A"
           },
-          "notes": "Represents limited premium model usage inside the Cursor Pro value pool."
-        },
-        {
-          "modelId": "composer-2.5",
-          "label": "Composer 2.5",
-          "quotaShare": 0.78,
-          "tierByCapability": {
-            "agentCoding": "A",
-            "backend": "A",
-            "debugging": "A",
-            "codeReview": "A",
-            "research": "B"
-          }
+          "notes": "Third-party pool billed at provider API rates. Pro $20 / Pro+ $70 / Ultra $400 included."
         }
       ],
-      "notes": "Premium pool includes latest GPT / Claude Opus / Gemini frontier models subject to Cursor routing; Composer remains mid pool."
+      "notes": "Cursor Models (Grok 4.6 / 4.5 / Composer 2.5) are the generous included pool. Other Models are a separate dollar cap."
     },
     {
       "planId": "cursor_pro_plus",
       "models": [
         {
-          "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus 高级模型池",
-          "quotaMTokens": 480,
+          "modelId": "grok-4.6",
+          "label": "Cursor Grok 4.6",
+          "quotaShare": 0.55,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
-            "research": "A"
-          }
+            "research": "S"
+          },
+          "notes": "Included Cursor Models pool. Jointly trained by Cursor and SpaceXAI. AA Intelligence 61."
         },
         {
           "modelId": "composer-2.5",
           "label": "Composer 2.5",
-          "quotaShare": 0.78,
+          "quotaShare": 0.3,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
@@ -283,28 +387,43 @@
             "codeReview": "A",
             "research": "B"
           }
+        },
+        {
+          "modelId": "other-models-cursor-pool",
+          "label": "Other Models（Claude / GPT / Gemini API 价）",
+          "quotaMTokens": 560,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "notes": "Third-party pool billed at provider API rates. Pro $20 / Pro+ $70 / Ultra $400 included."
         }
-      ]
+      ],
+      "notes": "Cursor Models (Grok 4.6 / 4.5 / Composer 2.5) are the generous included pool. Other Models are a separate dollar cap."
     },
     {
       "planId": "cursor_ultra",
       "models": [
         {
-          "modelId": "gpt-opus-cursor-pool",
-          "label": "GPT / Opus 高级模型池",
-          "quotaMTokens": 1600,
+          "modelId": "grok-4.6",
+          "label": "Cursor Grok 4.6",
+          "quotaShare": 0.55,
           "tierByCapability": {
             "agentCoding": "S",
             "backend": "S",
             "debugging": "S",
             "codeReview": "S",
-            "research": "A"
-          }
+            "research": "S"
+          },
+          "notes": "Included Cursor Models pool. Jointly trained by Cursor and SpaceXAI. AA Intelligence 61."
         },
         {
           "modelId": "composer-2.5",
           "label": "Composer 2.5",
-          "quotaShare": 0.85,
+          "quotaShare": 0.3,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
@@ -312,8 +431,22 @@
             "codeReview": "A",
             "research": "B"
           }
+        },
+        {
+          "modelId": "other-models-cursor-pool",
+          "label": "Other Models（Claude / GPT / Gemini API 价）",
+          "quotaMTokens": 3200,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "A"
+          },
+          "notes": "Third-party pool billed at provider API rates. Pro $20 / Pro+ $70 / Ultra $400 included."
         }
-      ]
+      ],
+      "notes": "Cursor Models (Grok 4.6 / 4.5 / Composer 2.5) are the generous included pool. Other Models are a separate dollar cap."
     },
     {
       "planId": "kimi_moderato_cn",
@@ -380,45 +513,72 @@
       "planId": "opencode_go_regular",
       "models": [
         {
-          "modelId": "glm-5.2",
-          "label": "GLM 5.2",
-          "quotaMTokens": 227.3,
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 (scarce on Go)",
+          "quotaMTokens": 80,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          },
+          "notes": "Official ~169 req/5h. High-intel but small slice of the $60 pool."
+        },
+        {
+          "modelId": "glm-5.3-flash",
+          "label": "GLM-5.3-Flash (2× promo)",
+          "quotaMTokens": 400,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "B",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "B"
+          }
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "quotaMTokens": 400,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S"
+          }
+        },
+        {
+          "modelId": "minimax-m3",
+          "label": "MiniMax M3",
+          "quotaMTokens": 300,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
             "debugging": "A",
             "codeReview": "A",
-            "research": "B"
+            "research": "A",
+            "multimodal": "A"
           }
         },
         {
-          "modelId": "kimi-k2.7-code",
-          "label": "Kimi 2.7 Code",
-          "quotaMTokens": 518.6,
+          "modelId": "qwen3.7-plus",
+          "label": "Qwen3.7 Plus",
+          "quotaMTokens": 300,
           "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
-            "codeReview": "B",
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
             "research": "A"
           }
         },
         {
-          "modelId": "mimo-v2.5-pro",
-          "label": "MiMo v2.5 Pro",
-          "quotaMTokens": 1419.6,
-          "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
-            "codeReview": "B",
-            "research": "B"
-          }
-        },
-        {
-          "modelId": "deepseek-v4-pro",
-          "label": "DeepSeek v4 Pro",
-          "quotaMTokens": 700,
+          "modelId": "deepseek-v4-flash",
+          "label": "DeepSeek V4 Flash",
+          "quotaMTokens": 400,
           "tierByCapability": {
             "agentCoding": "B",
             "backend": "B",
@@ -428,65 +588,69 @@
           }
         }
       ],
-      "notes": "Uses official OpenCode Go model-specific workload profiles where available."
+      "notes": "2026-09-01 official Go 5h request card. Grok 4.6 is S but scarce. Luna / Flash / DeepSeek Flash are B volume. Plan textQuota 600 caps each pool."
     },
     {
       "planId": "glm_coding_pro_cn",
       "models": [
         {
+          "modelId": "glm-5.3",
+          "label": "GLM 5.3",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "S",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "AA Intelligence 60, K3 class. Available on all GLM Coding Plan tiers.",
+          "quotaShare": 0.7
+        },
+        {
           "modelId": "glm-5.2",
           "label": "GLM 5.2",
-          "quotaShare": 0.65,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
             "debugging": "A",
             "codeReview": "A",
-            "research": "B"
-          }
-        },
-        {
-          "modelId": "glm-5.1",
-          "label": "GLM 5.1",
-          "quotaShare": 0.35,
-          "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
-            "codeReview": "B",
-            "research": "B"
-          }
+            "research": "A"
+          },
+          "quotaShare": 0.3
         }
-      ]
+      ],
+      "notes": "Pro: GLM-5.3 primary + 5.2 volume."
     },
     {
       "planId": "glm_coding_max_cn",
       "models": [
         {
+          "modelId": "glm-5.3",
+          "label": "GLM 5.3",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "S",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "AA Intelligence 60, K3 class. Available on all GLM Coding Plan tiers.",
+          "quotaShare": 0.75
+        },
+        {
           "modelId": "glm-5.2",
           "label": "GLM 5.2",
-          "quotaShare": 0.7,
           "tierByCapability": {
             "agentCoding": "A",
             "backend": "A",
             "debugging": "A",
             "codeReview": "A",
-            "research": "B"
-          }
-        },
-        {
-          "modelId": "glm-5.1",
-          "label": "GLM 5.1",
-          "quotaShare": 0.3,
-          "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
-            "codeReview": "B",
-            "research": "B"
-          }
+            "research": "A"
+          },
+          "quotaShare": 0.25
         }
-      ]
+      ],
+      "notes": "Max: GLM-5.3 primary + 5.2 volume."
     },
     {
       "planId": "glm_5_2_api_cn",
@@ -590,36 +754,36 @@
       "planId": "supergrok",
       "models": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 via Grok Build",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 via Grok Build",
           "quotaMTokens": 400,
           "tierByCapability": {
-            "agentCoding": "A",
-            "backend": "A",
-            "debugging": "A",
-            "codeReview": "A",
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
             "research": "S"
           },
-          "notes": "Grok Build harness: AA Coding Agent 76, ~1.9M tokens/task (efficient). Frontend not Arena top-3."
+          "notes": "AA Intelligence 61, ties GPT-5.6 Sol. Official evals: GDPVal-AA 1753, CursorBench 69.9%."
         }
       ],
-      "notes": "SuperGrok includes Grok Build CLI. Coding path = Grok Build, not web chat only."
+      "notes": "SuperGrok includes Grok 4.6 + Grok Build CLI. Coding path = Grok Build."
     },
     {
       "planId": "supergrok_heavy",
       "models": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 Heavy / multi-agent Grok Build",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 Heavy / multi-agent Grok Build",
           "quotaMTokens": 2000,
           "tierByCapability": {
             "agentCoding": "S",
-            "backend": "A",
-            "debugging": "A",
-            "codeReview": "A",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
             "research": "S"
           },
-          "notes": "Fuller multi-agent Build limits."
+          "notes": "Fuller multi-agent Build limits on the same 4.6 class."
         }
       ],
       "notes": "Heavy Grok Build multi-agent."
@@ -628,19 +792,19 @@
       "planId": "supergrok_lite",
       "models": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 (limited Grok Build)",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 (limited Grok Build)",
           "quotaMTokens": 150,
           "tierByCapability": {
-            "agentCoding": "B",
-            "backend": "B",
-            "debugging": "B",
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
             "codeReview": "B",
             "research": "A"
           }
         }
       ],
-      "notes": "Lite Build headroom."
+      "notes": "Lite Build headroom. Same 4.6 class, tighter rate windows."
     },
     {
       "planId": "perplexity_pro",
@@ -856,8 +1020,8 @@
       "planId": "google_ai_plus_us",
       "models": [
         {
-          "modelId": "gemini-3.6-flash",
-          "label": "Gemini 3.6 Flash",
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
           "quotaShare": 1,
           "tierByCapability": {
             "agentCoding": "A",
@@ -865,10 +1029,11 @@
             "debugging": "A",
             "codeReview": "B",
             "research": "A"
-          }
+          },
+          "notes": "Current Spark / workhorse (2026-08-13). Introductory API $0.75 / $3.75."
         }
       ],
-      "notes": "Plus: workhorse Gemini 3.6 Flash (GA 2026-07-21)."
+      "notes": "Plus: workhorse Gemini 3.7 Flash. Pro-class access remains limited."
     },
     {
       "planId": "google_ai_pro_us",
@@ -886,8 +1051,8 @@
           }
         },
         {
-          "modelId": "gemini-3.6-flash",
-          "label": "Gemini 3.6 Flash",
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
           "quotaShare": 0.45,
           "tierByCapability": {
             "agentCoding": "A",
@@ -895,10 +1060,11 @@
             "debugging": "A",
             "codeReview": "B",
             "research": "A"
-          }
+          },
+          "notes": "Current Spark / workhorse (2026-08-13). Introductory API $0.75 / $3.75."
         }
       ],
-      "notes": "Pro: 3.1 Pro for hard/research + 3.6 Flash as efficient workhorse."
+      "notes": "Pro: 3.1 Pro for hard/research + 3.7 Flash as efficient workhorse / Spark."
     },
     {
       "planId": "google_ai_pro_jp",
@@ -916,8 +1082,8 @@
           }
         },
         {
-          "modelId": "gemini-3.6-flash",
-          "label": "Gemini 3.6 Flash",
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
           "quotaShare": 0.45,
           "tierByCapability": {
             "agentCoding": "A",
@@ -925,7 +1091,8 @@
             "debugging": "A",
             "codeReview": "B",
             "research": "A"
-          }
+          },
+          "notes": "Current Spark / workhorse (2026-08-13). Introductory API $0.75 / $3.75."
         }
       ],
       "notes": "JP Pro same model mix as US Pro."
@@ -946,8 +1113,8 @@
           }
         },
         {
-          "modelId": "gemini-3.6-flash",
-          "label": "Gemini 3.6 Flash",
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
           "quotaShare": 0.3,
           "tierByCapability": {
             "agentCoding": "A",
@@ -955,10 +1122,11 @@
             "debugging": "A",
             "codeReview": "B",
             "research": "A"
-          }
+          },
+          "notes": "Current Spark / workhorse (2026-08-13). Introductory API $0.75 / $3.75."
         }
       ],
-      "notes": "Ultra: highest Pro/Deep Think access + 3.6 Flash volume."
+      "notes": "Ultra: highest Pro/Deep Think access + 3.7 Flash volume."
     },
     {
       "planId": "google_ai_ultra_20x_us",
@@ -976,8 +1144,8 @@
           }
         },
         {
-          "modelId": "gemini-3.6-flash",
-          "label": "Gemini 3.6 Flash",
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash",
           "quotaShare": 0.25,
           "tierByCapability": {
             "agentCoding": "A",
@@ -985,7 +1153,8 @@
             "debugging": "A",
             "codeReview": "B",
             "research": "A"
-          }
+          },
+          "notes": "Current Spark / workhorse (2026-08-13). Introductory API $0.75 / $3.75."
         }
       ],
       "notes": "Ultra 20x same model class, larger quota."
@@ -1007,7 +1176,299 @@
         }
       ],
       "notes": "Metered Fable 5."
+    },
+    {
+      "planId": "glm_coding_lite_cn",
+      "models": [
+        {
+          "modelId": "glm-5.3",
+          "label": "GLM 5.3",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "S",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "AA Intelligence 60, K3 class. Available on all GLM Coding Plan tiers.",
+          "quotaShare": 0.6
+        },
+        {
+          "modelId": "glm-5.2",
+          "label": "GLM 5.2",
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "quotaShare": 0.4
+        }
+      ],
+      "notes": "Lite now includes GLM-5.3; same model class as Pro/Max, smaller prompt pool."
+    },
+    {
+      "planId": "glm_5_3_api_cn",
+      "models": [
+        {
+          "modelId": "glm-5.3",
+          "label": "GLM 5.3 API",
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "A",
+            "debugging": "S",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "AA Intelligence 60, K3 class. Available on all GLM Coding Plan tiers.",
+          "quotaShare": 1
+        }
+      ],
+      "notes": "Metered GLM-5.3."
+    },
+    {
+      "planId": "grok_46_api",
+      "models": [
+        {
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Metered Grok 4.6."
+    },
+    {
+      "planId": "gemini_37_flash_api",
+      "models": [
+        {
+          "modelId": "gemini-3.7-flash",
+          "label": "Gemini 3.7 Flash API",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          }
+        }
+      ],
+      "notes": "Metered 3.7 Flash."
+    },
+    {
+      "planId": "chatgpt_free",
+      "models": [
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna (unlimited everyday text)",
+          "quotaShare": 1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S",
+            "englishWriting": "A"
+          }
+        }
+      ],
+      "notes": "Free default is Luna. Everyday text unlimited; Codex is Terra-only and still limited. No Sol."
+    },
+    {
+      "planId": "chatgpt_go_us",
+      "models": [
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna (unlimited everyday text)",
+          "quotaShare": 0.75,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "S",
+            "englishWriting": "A"
+          }
+        },
+        {
+          "modelId": "gpt-5.6-terra",
+          "label": "GPT-5.6 Terra (Codex)",
+          "quotaShare": 0.25,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A"
+          },
+          "notes": "Official: Codex on Free/Go is Terra, not Sol."
+        }
+      ],
+      "notes": "Go: unlimited Luna text + higher tool limits than Free. Codex = Terra. No Sol."
+    },
+    {
+      "planId": "aliyun_coding_pro_cn",
+      "models": [
+        {
+          "modelId": "qwen3.7-plus",
+          "label": "Qwen3.7 Plus (recommended)",
+          "quotaShare": 0.55,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A",
+            "chat": "A",
+            "chineseWriting": "A"
+          }
+        },
+        {
+          "modelId": "qwen3.6-plus",
+          "label": "Qwen3.6 Plus",
+          "quotaShare": 0.2,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "A"
+          }
+        },
+        {
+          "modelId": "glm-5",
+          "label": "GLM-5 (plan pin, not 5.3)",
+          "quotaShare": 0.15,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          },
+          "notes": "Official pin is glm-5, not GLM-5.3."
+        },
+        {
+          "modelId": "minimax-m2.5",
+          "label": "MiniMax M2.5",
+          "quotaShare": 0.1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ],
+      "notes": "Official exact versions only. Do not treat this SKU as Qwen 3.8 Max or GLM-5.3 access."
+    },
+    {
+      "planId": "aliyun_coding_pro_global",
+      "models": [
+        {
+          "modelId": "qwen3.7-plus",
+          "label": "Qwen3.7 Plus (recommended)",
+          "quotaShare": 0.55,
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "A",
+            "research": "A",
+            "chat": "A",
+            "chineseWriting": "A"
+          }
+        },
+        {
+          "modelId": "qwen3.6-plus",
+          "label": "Qwen3.6 Plus",
+          "quotaShare": 0.2,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B",
+            "chat": "A"
+          }
+        },
+        {
+          "modelId": "glm-5",
+          "label": "GLM-5 (plan pin, not 5.3)",
+          "quotaShare": 0.15,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          },
+          "notes": "Official pin is glm-5, not GLM-5.3."
+        },
+        {
+          "modelId": "minimax-m2.5",
+          "label": "MiniMax M2.5",
+          "quotaShare": 0.1,
+          "tierByCapability": {
+            "agentCoding": "B",
+            "backend": "B",
+            "debugging": "B",
+            "codeReview": "B",
+            "research": "B"
+          }
+        }
+      ],
+      "notes": "Official exact versions only. Do not treat this SKU as Qwen 3.8 Max or GLM-5.3 access."
+    },
+    {
+      "planId": "supergrok_plus",
+      "models": [
+        {
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 via Grok Build",
+          "quotaMTokens": 1000,
+          "tierByCapability": {
+            "agentCoding": "S",
+            "backend": "S",
+            "debugging": "S",
+            "codeReview": "S",
+            "research": "S"
+          }
+        }
+      ],
+      "notes": "Official Plus: more usage than $30 SuperGrok on the same 4.6 class."
+    },
+    {
+      "planId": "glm_5_3_flash_api_cn",
+      "models": [
+        {
+          "modelId": "glm-5.3-flash",
+          "label": "GLM-5.3-Flash API",
+          "tierByCapability": {
+            "agentCoding": "A",
+            "backend": "A",
+            "debugging": "A",
+            "codeReview": "B",
+            "research": "A"
+          },
+          "notes": "Official Flash sibling of GLM-5.3. Volume path, not S.",
+          "quotaShare": 1
+        }
+      ],
+      "notes": "Metered GLM-5.3-Flash. Do not inherit full 5.3 scores."
     }
   ],
-  "lastCheckedAt": "2026-07-30"
+  "lastCheckedAt": "2026-09-01"
 }

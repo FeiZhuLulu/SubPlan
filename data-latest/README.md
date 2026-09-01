@@ -36,13 +36,20 @@ data-latest/
 
 ## 脚本
 
+可复用（下次刷新直接跑或当模板）：
+
 ```bash
-# 从 appstoreprice.org 抓取 App Store 地区价 → data/regional-prices.json
+# App Store 地区价 → data/regional-prices.json
 node data-latest/scripts/scrape-appstore-prices.mjs
 
-# 应用模型/订阅/评分等批量刷新（可按需再改后重跑）
-node data-latest/scripts/apply-data-update-2026-07.mjs
+# 推荐引擎冒烟
+npx tsx data-latest/scripts/smoke-recommend.mts
+
+# 批量写回 data/ 的模板（复制后改日期和变更；不要原样重跑旧批次）
+# data-latest/scripts/apply-data-update-2026-07.mjs
 ```
+
+一次性 `apply-*-2026-09*.mjs` 补丁不入库：结果已经在 `data/`。下次对照官网新写一份 dated 脚本，不要重跑旧 apply（会把更新的字段盖回旧快照）。
 
 ## 数据来源原则
 

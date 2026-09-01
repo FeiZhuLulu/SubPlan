@@ -1,10 +1,10 @@
 {
-  "schemaVersion": "0.3.2",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.3.4",
+  "lastUpdatedAt": "2026-09-01",
   "notes": [
-    "API options are supplementary only. They should not compete as core subscription recommendations unless user explicitly accepts API billing.",
-    "Metered API options do not have fixed monthly quotas. Estimate usable MTokens dynamically from available API budget and selected model price.",
-    "v0.1.1 default cache hit rate assumption is 95% for text workload cost estimation."
+    "API options are supplementary only unless the user accepts API billing.",
+    "v0.3.4: DeepSeek official peak/off-peak from 2026-08-17. Claude Sonnet 5 $2/$10 became standard (Sept 1 hike cancelled). GPT-5.6 short prices unchanged.",
+    "Qwen 3.8 Max has no first-party personal subscription SKU in this catalog."
   ],
   "defaults": {
     "defaultCacheHitRateAssumption": 0.95,
@@ -26,7 +26,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://openrouter.ai/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "creditPurchaseFee": {
@@ -35,7 +35,7 @@
         "minimum": 0.8,
         "currency": "USD"
       },
-      "notes": "Per-model token pricing. No fixed monthly quota."
+      "notes": "Per-model token pricing. Rechecked 2026-09-01: still no fixed monthly quota. Some models remain limited-free (50 req/day class)."
     },
     {
       "id": "deepseek_v4_flash_api_cn",
@@ -48,21 +48,21 @@
         "api"
       ],
       "originalCurrency": "CNY",
-      "priceStatus": "verified_by_manual_official_screenshot",
-      "sourceStatus": "official_page_manual_screenshot",
-      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
       "maxOutputTokens": 384000,
       "concurrencyLimit": 2500,
       "pricesPerMToken": {
-        "inputCacheHit": 0.02,
-        "inputCacheMiss": 1,
-        "output": 2
+        "inputCacheHit": 0.1,
+        "inputCacheMiss": 3,
+        "output": 9
       },
-      "notes": "China CNY price from user-provided official screenshot."
+      "notes": "Official peak CNY/1M (2026-08-17): cache 0.10 / input 3.0 / output 9.0. Off-peak is half (0.05 / 1.5 / 4.5). Peak = weekdays 09:00–12:00 and 14:00–18:00 Beijing. Model snapshot DeepSeek-V4-Flash-0731. Stored peak as conservative budget rate."
     },
     {
       "id": "deepseek_v4_pro_api_cn",
@@ -75,21 +75,21 @@
         "api"
       ],
       "originalCurrency": "CNY",
-      "priceStatus": "verified_by_manual_official_screenshot",
-      "sourceStatus": "official_page_manual_screenshot",
-      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
       "maxOutputTokens": 384000,
       "concurrencyLimit": 500,
       "pricesPerMToken": {
-        "inputCacheHit": 0.025,
-        "inputCacheMiss": 3,
-        "output": 6
+        "inputCacheHit": 0.3,
+        "inputCacheMiss": 9,
+        "output": 27
       },
-      "notes": "China CNY price from user-provided official screenshot."
+      "notes": "Official peak CNY/1M (2026-08-17): cache 0.30 / input 9.0 / output 27.0. Off-peak half (0.15 / 4.5 / 13.5). Model snapshot DeepSeek-V4-Pro-0813. Stored peak as conservative budget rate."
     },
     {
       "id": "deepseek_v4_flash_api_global",
@@ -104,18 +104,18 @@
       "originalCurrency": "USD",
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
-      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
       "maxOutputTokens": 384000,
       "pricesPerMToken": {
-        "inputCacheHit": 0.0028,
-        "inputCacheMiss": 0.14,
-        "output": 0.28
+        "inputCacheHit": 0.014,
+        "inputCacheMiss": 0.44,
+        "output": 1.32
       },
-      "notes": "Global USD API pricing."
+      "notes": "Official EN peak USD/1M (2026-09-01, trailing-slash pricing page): cache $0.014 / input $0.44 / output $1.32. Off-peak half ($0.007 / $0.22 / $0.66). Peak UTC weekdays 01:00–04:00 and 06:00–10:00."
     },
     {
       "id": "deepseek_v4_pro_api_global",
@@ -130,18 +130,18 @@
       "originalCurrency": "USD",
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
-      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "sourceUrl": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
       "maxOutputTokens": 384000,
       "pricesPerMToken": {
-        "inputCacheHit": 0.003625,
-        "inputCacheMiss": 0.435,
-        "output": 0.87
+        "inputCacheHit": 0.044,
+        "inputCacheMiss": 1.32,
+        "output": 3.96
       },
-      "notes": "Global USD API pricing."
+      "notes": "Official EN peak USD/1M: cache $0.044 / input $1.32 / output $3.96. Off-peak half ($0.022 / $0.66 / $1.98). Model snapshot DeepSeek-V4-Pro-0813."
     },
     {
       "id": "glm_5_2_api_cn",
@@ -157,7 +157,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "contextTokens": 1000000,
@@ -184,7 +184,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "inputLengthCondition": "[0, 32)",
@@ -210,7 +210,7 @@
       "priceStatus": "verified_by_manual_official_screenshot",
       "sourceStatus": "official_page_manual_screenshot",
       "sourceUrl": "https://bigmodel.cn/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "inputLengthCondition": "[32+]",
@@ -236,7 +236,7 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://platform.minimax.io/",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder. Collect detailed CN API pricing before enabling."
@@ -255,7 +255,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder for global MiniMax PAYG API. Add per-model pricing before enabling."
@@ -274,7 +274,7 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://platform.moonshot.cn/",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "Placeholder. Do not combine Kimi API quota with Kimi membership quota unless explicitly verified."
@@ -293,7 +293,7 @@
       "priceStatus": "pending_detailed_collection",
       "sourceStatus": "pending_manual_url",
       "sourceUrl": "https://www.kimi.com/zh-cn/resources/kimi-k2-7-code-pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": false,
       "requiresUserAcceptsApiBilling": true,
       "notes": "K2.7 Code GLOBAL reference is about $0.95/$4 per MTok; CN detailed price still pending. Keep disabled until CN verified."
@@ -313,15 +313,15 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://developers.openai.com/api/docs/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
-        "inputCacheHit": 0.5,
-        "inputCacheMiss": 5,
-        "output": 30
+        "inputCacheHit": 0.4,
+        "inputCacheMiss": 4,
+        "output": 20
       },
-      "notes": "Flagship GPT-5.6 Sol. Cache hit ~10% of uncached input."
+      "notes": "Official Standard short-context: $4 / $0.40 cached / $20 output per 1M. Promo at least through 2026-11-21 (was $5 / $30). Long context (>272K input) is 2x input / 1.5x output. Fast mode is 2x. https://developers.openai.com/api/docs/pricing"
     },
     {
       "id": "openai_gpt56_terra_api",
@@ -338,15 +338,15 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://developers.openai.com/api/docs/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
-        "inputCacheHit": 0.25,
-        "inputCacheMiss": 2.5,
-        "output": 15
+        "inputCacheHit": 0.2,
+        "inputCacheMiss": 2,
+        "output": 12
       },
-      "notes": "Mid-tier GPT-5.6 Terra."
+      "notes": "Official Standard short-context: $2 / $0.20 cached / $12 output per 1M. Long context 2x input / 1.5x output. https://developers.openai.com/api/docs/pricing"
     },
     {
       "id": "openai_gpt56_luna_api",
@@ -363,15 +363,15 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://developers.openai.com/api/docs/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
-        "inputCacheHit": 0.1,
-        "inputCacheMiss": 1,
-        "output": 6
+        "inputCacheHit": 0.02,
+        "inputCacheMiss": 0.2,
+        "output": 1.2
       },
-      "notes": "Lower-cost GPT-5.6 Luna."
+      "notes": "Official Standard short-context: $0.20 / $0.02 cached / $1.20 output per 1M. Long context 2x input / 1.5x output. High-volume / cost-sensitive path. https://developers.openai.com/api/docs/pricing"
     },
     {
       "id": "claude_opus_5_api",
@@ -388,7 +388,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
@@ -396,7 +396,7 @@
         "inputCacheMiss": 5,
         "output": 25
       },
-      "notes": "Claude Opus 5 standard pricing $5/$25 per MTok. Fast mode is $10/$50."
+      "notes": "Claude Opus 5 standard pricing $5/$25 per MTok. Fast mode is $10/$50. Rechecked 2026-09-01 official Anthropic pricing page: list rates unchanged."
     },
     {
       "id": "claude_opus_48_api",
@@ -413,7 +413,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
@@ -421,7 +421,7 @@
         "inputCacheMiss": 5,
         "output": 25
       },
-      "notes": "Claude Opus 4.8 $5/$25 per MTok. Fast mode $10/$50."
+      "notes": "Claude Opus 4.8 $5/$25 per MTok. Fast mode $10/$50. Rechecked 2026-09-01 official Anthropic pricing page: list rates unchanged."
     },
     {
       "id": "claude_sonnet_5_api",
@@ -438,7 +438,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
@@ -446,7 +446,7 @@
         "inputCacheMiss": 2,
         "output": 10
       },
-      "notes": "Introductory Sonnet 5 pricing $2/$10 through 2026-08-31; standard becomes $3/$15 from 2026-09-01."
+      "notes": "Official 2026-09-01: introductory $2/$10 became the standard price. The scheduled 2026-09-01 hike to $3/$15 will not occur. https://platform.claude.com/docs/en/about-claude/pricing"
     },
     {
       "id": "kimi_k3_api_global",
@@ -463,7 +463,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://www.kimi.com/resources/kimi-k3-pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
@@ -471,7 +471,7 @@
         "inputCacheMiss": 3,
         "output": 15
       },
-      "notes": "Kimi K3 first-party API ~$3/$15 per MTok, cache hit $0.30. 1M context. Released 2026-07-16."
+      "notes": "Official first-party ~$3/$15 per 1M, cache $0.30. Rechecked 2026-09-01 via kimi.com resources + Cursor Other Models card."
     },
     {
       "id": "kimi_k3_api_cn",
@@ -488,15 +488,15 @@
       "priceStatus": "estimated",
       "sourceStatus": "community_dataset",
       "sourceUrl": "https://platform.kimi.com/docs/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
-        "inputCacheHit": 2.1,
-        "inputCacheMiss": 21,
-        "output": 105
+        "inputCacheHit": 2,
+        "inputCacheMiss": 20,
+        "output": 100
       },
-      "notes": "CNY estimate roughly converting GLOBAL $3/$15 at ~7 CNY/USD. Prefer official CN platform page when refreshed; enable carefully."
+      "notes": "CNY 2 / 20 / 100 per 1M from community coding-plan kb (2026-09). First-party CN HTML still not captured. GLOBAL official remains $0.30 / $3 / $15."
     },
     {
       "id": "claude_fable_5_api",
@@ -513,7 +513,7 @@
       "priceStatus": "verified_official",
       "sourceStatus": "official_url_verified",
       "sourceUrl": "https://platform.claude.com/docs/en/about-claude/pricing",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "enabledForRecommendation": true,
       "requiresUserAcceptsApiBilling": true,
       "pricesPerMToken": {
@@ -521,7 +521,107 @@
         "inputCacheMiss": 10,
         "output": 50
       },
-      "notes": "Fable 5 API / per MTok (cache hit ). Top-tier intelligence; slightly above Sol on AA Intelligence Index, slightly below Sol Codex on AA coding-agent index."
+      "notes": "Fable 5 API / per MTok (cache hit ). Top-tier intelligence; slightly above Sol on AA Intelligence Index, slightly below Sol Codex on AA coding-agent index. Rechecked 2026-09-01 official Anthropic pricing page: list rates unchanged."
+    },
+    {
+      "id": "grok_46_api",
+      "provider": "xAI",
+      "name": "Grok 4.6 API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://x.ai/news/grok-4-6",
+      "lastCheckedAt": "2026-09-01",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.5,
+        "inputCacheMiss": 2,
+        "output": 6
+      },
+      "notes": "Grok 4.6 flagship API $2 / $6 per 1M; cache $0.50. Fast variant is 2x. Context 500K. AA Intelligence 61, same class as GPT-5.6 Sol."
+    },
+    {
+      "id": "gemini_37_flash_api",
+      "provider": "Google",
+      "name": "Gemini 3.7 Flash API",
+      "region": "GLOBAL",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "USD",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+      "lastCheckedAt": "2026-09-01",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "inputCacheHit": 0.075,
+        "inputCacheMiss": 0.75,
+        "output": 3.75
+      },
+      "notes": "Introductory $0.75 / $3.75 per 1M through 2026-12-31; then $1.50 / $7.50. Workhorse for coding/agents; not a new Gemini Pro flagship."
+    },
+    {
+      "id": "glm_5_3_api_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM-5.3 API",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://open.bigmodel.cn/pricing",
+      "lastCheckedAt": "2026-09-01",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 8,
+        "output": 28,
+        "cacheHit": 2
+      },
+      "notes": "Official open.bigmodel.cn/pricing 2026-09-01: GLM-5.3 ¥8 / ¥28 / cache ¥2 per 1M. Same list as GLM-5.2."
+    },
+    {
+      "id": "glm_5_3_flash_api_cn",
+      "provider": "Zhipu BigModel",
+      "name": "GLM-5.3-Flash API",
+      "region": "CN",
+      "recommendationRole": "supplementary_api",
+      "category": "api_router",
+      "pricingModel": "metered",
+      "accessModes": [
+        "api"
+      ],
+      "originalCurrency": "CNY",
+      "priceStatus": "verified_official",
+      "sourceStatus": "official_url_verified",
+      "sourceUrl": "https://open.bigmodel.cn/pricing",
+      "lastCheckedAt": "2026-09-01",
+      "enabledForRecommendation": true,
+      "requiresUserAcceptsApiBilling": true,
+      "pricesPerMToken": {
+        "input": 0.8,
+        "output": 2.8,
+        "cacheHit": 0.23
+      },
+      "notes": "Official list ¥0.8 / ¥2.8 / cache ¥0.23 per 1M. Two-week 50% promo ¥0.4 / ¥1.4 / ¥0.115 stored in notes only — recommender uses list price."
     }
   ]
 }
