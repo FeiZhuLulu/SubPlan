@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.4.8",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.9",
+  "lastUpdatedAt": "2026-09-01",
   "methodology": {
     "principle": "Unified metric set per dimension. Missing = null. Frontend primary = Arena (Code Arena Fullstack/Frontend), not ad-hoc proxies.",
     "metrics": {
@@ -12,9 +12,10 @@
         "harness": "Artificial Analysis (same eval suite for all models)",
         "sources": [
           "https://artificialanalysis.ai/",
+          "https://artificialanalysis.ai/articles/grok-4-6-benchmarks-and-analysis",
           "https://openai.com/index/gpt-5-6/"
         ],
-        "asOf": "2026-07",
+        "asOf": "2026-08",
         "role": "general_intelligence"
       },
       "swebenchVerifiedVals": {
@@ -148,6 +149,30 @@
       "title": "xAI Grok 4.5 / Grok Build",
       "url": "https://x.ai/news/grok-4-5",
       "asOf": "2026-07"
+    },
+    {
+      "id": "aa_grok46",
+      "title": "AA: Grok 4.6 returns SpaceXAI to the intelligence frontier",
+      "url": "https://artificialanalysis.ai/articles/grok-4-6-benchmarks-and-analysis",
+      "asOf": "2026-08-12"
+    },
+    {
+      "id": "grok_46_official",
+      "title": "SpaceXAI: Introducing Grok 4.6",
+      "url": "https://x.ai/news/grok-4-6",
+      "asOf": "2026-08-12"
+    },
+    {
+      "id": "gemini_37_flash",
+      "title": "Gemini 3.7 Flash",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+      "asOf": "2026-08-13"
+    },
+    {
+      "id": "aa_glm53",
+      "title": "AA: GLM-5.3 (max)",
+      "url": "https://artificialanalysis.ai/models/glm-5-3",
+      "asOf": "2026-08"
     }
   ],
   "models": [
@@ -948,6 +973,146 @@
         "codingAgentUsedInScore": false,
         "confidence": "none"
       }
+    },
+    {
+      "modelId": "grok-4.6",
+      "label": "Grok 4.6",
+      "provider": "xAI",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 61,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null,
+        "officialEvals": {
+          "gdpvalAaV2Elo": 1753,
+          "cursorBenchV32": 69.9,
+          "deepSweV11": 65.9,
+          "frontierCodeV11Extended": 61.3,
+          "terminalBenchV30": 26,
+          "aaBriefcaseElo": 1577
+        },
+        "grokBuild": {
+          "harness": "Grok Build",
+          "access": "SuperGrok / SuperGrok Heavy / Cursor Models pool / Grok 4.6 API",
+          "sources": [
+            "https://x.ai/news/grok-4-6",
+            "https://artificialanalysis.ai/articles/grok-4-6-benchmarks-and-analysis"
+          ]
+        }
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA: 61, in line with GPT-5.6 Sol (max); behind Claude Opus 5 (63) and Fable 5 (62).",
+        "swebenchVerifiedVals": "Vals Mini-SWE-agent not yet in this matrix for 4.6.",
+        "officialEvals": "Vendor table 2026-08-12 vs 4.5 / Sol Max / Fable 5 Max."
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 100,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 97,
+        "backend": 96,
+        "debugging": 96,
+        "codeReview": 94,
+        "frontend": 91,
+        "research": 100,
+        "chat": 96,
+        "englishWriting": 96,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": true,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      },
+      "harnessNotes": "Primary coding path: Grok Build and Cursor Grok 4.6. Token/cost efficient vs Sol/Opus at $2/$6."
+    },
+    {
+      "modelId": "gemini-3.7-flash",
+      "label": "Gemini 3.7 Flash",
+      "provider": "Google",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 56,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "Public August 2026 summaries place 3.7 Flash around 56 on AA Intelligence.",
+        "swebenchVerifiedVals": null
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 91.8,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 89,
+        "backend": 87,
+        "debugging": 87,
+        "codeReview": 84,
+        "frontend": 84,
+        "research": 92,
+        "chat": 90,
+        "englishWriting": 90,
+        "chineseWriting": null,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": true,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "modelId": "glm-5.3",
+      "label": "GLM 5.3",
+      "provider": "Z.ai",
+      "isProductPool": false,
+      "metrics": {
+        "aaIntelligenceIndex": 60,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "metricNotes": {
+        "aaIntelligenceIndex": "AA GLM-5.3 (max) = 60, matching Kimi K3."
+      },
+      "normalized": {
+        "aaIntelligenceIndex": 98.4,
+        "swebenchVerifiedVals": null,
+        "aaCodingAgentIndex": null
+      },
+      "derivedCapabilityScores": {
+        "agentCoding": 95,
+        "backend": 93,
+        "debugging": 93,
+        "codeReview": 91,
+        "frontend": 90,
+        "research": 98,
+        "chat": 92,
+        "englishWriting": 88,
+        "chineseWriting": 94,
+        "imageGeneration": null,
+        "multimodal": null,
+        "ecosystem": null
+      },
+      "coverage": {
+        "hasSwe": false,
+        "hasIntel": true,
+        "hasCodingAgent": false,
+        "codingAgentUsedInScore": false,
+        "confidence": "high"
+      }
     }
   ],
   "planScorePolicy": {
@@ -1011,7 +1176,7 @@
   },
   "grokBuild": {
     "product": "Grok Build",
-    "description": "xAI terminal coding agent CLI; default model Grok 4.5; included with SuperGrok / X Premium+.",
+    "description": "SpaceXAI terminal coding agent CLI; current default Grok 4.6; included with SuperGrok / X Premium+ and Cursor Models pool.",
     "metrics": {
       "grok-4.5": {
         "harness": "Grok Build",
@@ -1035,6 +1200,15 @@
           "https://artificialanalysis.ai/articles/grok-4-5-brings-spacexai-to-the-the-intelligence-frontier",
           "https://x.ai/news/grok-4-5",
           "https://composio.dev/content/grok-build-cli-vs-claude-code"
+        ]
+      },
+      "grok-4.6": {
+        "harness": "Grok Build",
+        "aaIntelligenceIndex": 61,
+        "access": "SuperGrok, SuperGrok Heavy, Cursor Grok 4.6, Grok 4.6 API",
+        "sources": [
+          "https://x.ai/news/grok-4-6",
+          "https://artificialanalysis.ai/articles/grok-4-6-benchmarks-and-analysis"
         ]
       }
     },

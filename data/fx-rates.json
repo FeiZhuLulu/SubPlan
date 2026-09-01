@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.3.0",
-  "lastUpdatedAt": "2026-07-30",
+  "lastUpdatedAt": "2026-09-01",
   "baseCurrency": "CNY",
   "status": "manual_mid_market_estimate_refreshed",
   "rates": [
@@ -39,6 +39,7 @@
     "Mid-market style estimates for recommendation comparisons, not payment settlement rates.",
     "2026-07-30 refresh aligned roughly with appstoreprice.org embedded FX (USD/CNY ≈ 6.78).",
     "JPY/CNY ≈ 0.0414 from JP App Store list pairs (e.g. ChatGPT Plus ¥3000 ≈ ¥124.12 CNY).",
-    "Full multi-currency App Store matrices are in regional-prices.json with source-side CNY conversion."
+    "Full multi-currency App Store matrices are in regional-prices.json with source-side CNY conversion.",
+    "2026-09-01: no new App Store scrape. Mid-market USD/CNY 6.78 kept for comparison only. DeepSeek GLOBAL uses the official EN peak USD table, not CNY÷FX."
   ]
 }

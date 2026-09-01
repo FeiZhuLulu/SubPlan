@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.4.6",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.7",
+  "lastUpdatedAt": "2026-09-02",
   "defaults": {
     "cacheHitRateScenarios": [
       {
@@ -22,39 +22,46 @@
     "defaultScenario": "agent_cached_workflow"
   },
   "notes": [
-    "v0.4.6: Grok Build metrics (AA Coding Agent 76, ~1.9M tok/task) for SuperGrok plans; frontend scoring uses Arena ranks separately in scores/model-benchmarks.",
-    "v0.4.5: Kimi models corrected — K3 + K2.7 Code + K2.6. K2.5 is historical ACP measurement label only, not current product.",
-    "v0.4.4: multi-community supplement (Reddit, X, search-visible V2EX/linux.do discussions) + per-model ACP meters.",
-    "Unit: tokens (estimatedMonthlyTokens); MToken=1e6 tokens for algorithm field.",
-    "Claude Max 20x monthly for recommender now ~9.84B tokens (X weekly full burn 2.46B×4), not ACP×20 alone.",
-    "ChatGPT Pro 5x blended ACP×5 and X weekly half-burn estimate."
+    "v0.4.7 (2026-09-01): ACP HEAD 2026-08-19 — table tokens unchanged vs 2026-07-30. MiniMax Plus plan-level moved to official 6亿+ (ACP 24亿 marked stale). Removed 404 X 587.5M weekly estimate.",
+    "ChatGPT Luna-equivalent plan quotas from apply-openai-luna-quota-2026-09.mjs are kept.",
+    "Claude Pro ACP opus-4.8 still 1588 MTok/mo. Max 20x monthly recommender mid remains ~9840 from X 2.46B weekly full burn.",
+    "Aliyun Coding Plan Pro token proxy 3000 MTok from ACP Lite ~34k tok/req × official 90k req/mo."
   ],
   "quotas": [
     {
       "planId": "minimax_token_plus_cn",
-      "estimatedTextWorkloadCapacityMTokens": 2400,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
+      "estimatedTextWorkloadCapacityMTokens": 600,
+      "quotaBasis": "official_m3_label_6yi_plus_acp_stale_24yi",
       "quotaConfidence": "medium",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
-      "estimatedMonthlyTokens": 2400000000,
-      "lastCheckedAt": "2026-07-30",
+      "source": "official_minimax_label_plus_acp_2026_08_19",
+      "notes": "Official CN label is 约 6亿+ M3 tokens/mo. ACP Plus 24亿/m2.7 is explicitly stale. Plan-level quota now 600 MTok so the recommender does not treat Plus as larger than Max (1800).",
+      "estimatedMonthlyTokens": 600000000,
+      "lastCheckedAt": "2026-09-01",
       "estimatedWeeklyTokens": 600000000,
       "estimatedFiveHourWindowTokens": 60000000,
-      "primaryModelId": "minimax-m2.7",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
-          "modelId": "minimax-m2.7",
-          "label": "MiniMax M2.7",
-          "estimatedMonthlyTokens": 2400000000,
+          "modelId": "minimax-m3",
+          "label": "MiniMax M3",
+          "estimatedMonthlyTokens": 600000000,
+          "estimatedMonthlyMTokens": 600,
           "relativeBurn": 1,
           "confidence": "medium",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "awesome-coding-plan MiniMax Coding Plan Plus m2.7: mo 54400/24亿 (repo notes plan may have changed)",
+          "source": "https://platform.minimaxi.com/subscribe/token-plan",
+          "notes": "Official Plus usage label ~600M+ M3."
+        },
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7 (ACP stale Plus row)",
+          "estimatedMonthlyTokens": 2400000000,
           "estimatedMonthlyMTokens": 2400,
-          "tokenizerRatioVsGpt54": 0.8923
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "ACP 24亿 — author marked the plan as changed. Kept as historical observation only."
         }
       ]
     },
@@ -66,10 +73,10 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "notes": "Official CN label 约 18亿+ M3. Rechecked 2026-09-01. ACP did not re-measure Max after the plan change.",
       "estimatedMonthlyTokens": 1800000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "minimax-m2.7",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
           "modelId": "minimax-m2.7",
@@ -90,10 +97,10 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "notes": "Official CN label 约 71亿+ M3. Rechecked 2026-09-01. ACP did not re-measure Ultra after the plan change.",
       "estimatedMonthlyTokens": 7100000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "minimax-m2.7",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
           "modelId": "minimax-m2.7",
@@ -108,29 +115,38 @@
     },
     {
       "planId": "minimax_token_plus_global",
-      "estimatedTextWorkloadCapacityMTokens": 2400,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
-      "quotaConfidence": "low",
+      "estimatedTextWorkloadCapacityMTokens": 600,
+      "quotaBasis": "official_m3_label_6yi_plus_acp_stale_24yi",
+      "quotaConfidence": "medium",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps. GLOBAL mirror.",
-      "estimatedMonthlyTokens": 2400000000,
-      "lastCheckedAt": "2026-07-30",
+      "source": "official_minimax_label_plus_acp_2026_08_19",
+      "notes": "Official CN label is 约 6亿+ M3 tokens/mo. ACP Plus 24亿/m2.7 is explicitly stale. Plan-level quota now 600 MTok so the recommender does not treat Plus as larger than Max (1800).",
+      "estimatedMonthlyTokens": 600000000,
+      "lastCheckedAt": "2026-09-01",
       "estimatedWeeklyTokens": 600000000,
       "estimatedFiveHourWindowTokens": 60000000,
-      "primaryModelId": "minimax-m2.7",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
-          "modelId": "minimax-m2.7",
-          "label": "MiniMax M2.7",
-          "estimatedMonthlyTokens": 2400000000,
+          "modelId": "minimax-m3",
+          "label": "MiniMax M3",
+          "estimatedMonthlyTokens": 600000000,
+          "estimatedMonthlyMTokens": 600,
           "relativeBurn": 1,
           "confidence": "medium",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "awesome-coding-plan MiniMax Coding Plan Plus m2.7: mo 54400/24亿 (repo notes plan may have changed)",
+          "source": "https://platform.minimaxi.com/subscribe/token-plan",
+          "notes": "Official Plus usage label ~600M+ M3."
+        },
+        {
+          "modelId": "minimax-m2.7",
+          "label": "MiniMax M2.7 (ACP stale Plus row)",
+          "estimatedMonthlyTokens": 2400000000,
           "estimatedMonthlyMTokens": 2400,
-          "tokenizerRatioVsGpt54": 0.8923
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://github.com/mahonzhan/awesome-coding-plan",
+          "notes": "ACP 24亿 — author marked the plan as changed. Kept as historical observation only."
         }
       ]
     },
@@ -142,10 +158,10 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "notes": "Official CN label 约 18亿+ M3. Rechecked 2026-09-01. ACP did not re-measure Max after the plan change.",
       "estimatedMonthlyTokens": 1800000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "minimax-m2.7",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
           "modelId": "minimax-m2.7",
@@ -166,10 +182,10 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Model-attached; Max/Ultra not separately measured in ACP table for current plan.",
+      "notes": "Official CN label 约 71亿+ M3. Rechecked 2026-09-01. ACP did not re-measure Ultra after the plan change.",
       "estimatedMonthlyTokens": 7100000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "minimax-m2.7",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "minimax-m3",
       "modelUsage": [
         {
           "modelId": "minimax-m2.7",
@@ -194,7 +210,7 @@
       "estimatedMonthlyTokens": 84000000,
       "estimatedWeeklyTokens": 21000000,
       "estimatedFiveHourWindowTokens": 15000000,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k2.7-code",
       "modelUsage": [
         {
@@ -257,7 +273,7 @@
       "estimatedMonthlyTokens": 336000000,
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -320,7 +336,7 @@
       "estimatedMonthlyTokens": 1428000000,
       "estimatedWeeklyTokens": 357000000,
       "estimatedFiveHourWindowTokens": 65000000,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -403,7 +419,7 @@
       "estimatedMonthlyTokens": 4284000000,
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -494,7 +510,7 @@
         "measuredMonthlyTokens": 80000000,
         "source": "https://github.com/mahonzhan/awesome-coding-plan"
       },
-      "lastCheckedAt": "2026-07-30"
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "cursor_pro",
@@ -504,7 +520,7 @@
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Community/user practical: Cursor Pro ~600–800 MTokens/month workload (mid 700). Value/credit limited; not a pure token counter.",
+      "notes": "Community/user practical: Cursor Pro ~600–800 MTokens/month workload (mid 700). Value/credit limited; not a pure token counter. Included Cursor Models pool is now Grok 4.6 / Composer 2.5; Other Models stay dollar-capped.",
       "billingValueUsd": 20,
       "billingEquivalentMTokens": 3.704,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -528,7 +544,7 @@
           }
         }
       ],
-      "lastCheckedAt": "2026-07-30"
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "cursor_pro_plus",
@@ -538,7 +554,7 @@
       "capacityMultiplier": "3x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Pro 700 × 3. Tokens = 2.1e9.",
+      "notes": "Pro 700 × 3. Tokens = 2.1e9. Included Cursor Models pool is now Grok 4.6 / Composer 2.5; Other Models stay dollar-capped.",
       "billingValueUsd": 60,
       "billingEquivalentMTokens": 11.111,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -549,7 +565,8 @@
           "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
         }
       ],
-      "estimatedMonthlyTokens": 2100000000
+      "estimatedMonthlyTokens": 2100000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "cursor_ultra",
@@ -559,7 +576,7 @@
       "capacityMultiplier": "20x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Pro 700 × 20. Tokens = 1.4e10.",
+      "notes": "Pro 700 × 20. Tokens = 1.4e10. Included Cursor Models pool is now Grok 4.6 / Composer 2.5; Other Models stay dollar-capped.",
       "billingValueUsd": 200,
       "billingEquivalentMTokens": 74.074,
       "billingEquivalentBasis": "plan_value_usd_divided_by_5_40_usd_per_mtoken",
@@ -570,17 +587,18 @@
           "note": "Cursor plans are value/credit limited; billing-equivalent MTokens are not direct workload capacity."
         }
       ],
-      "estimatedMonthlyTokens": 14000000000
+      "estimatedMonthlyTokens": 14000000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "chatgpt_plus",
-      "estimatedTextWorkloadCapacityMTokens": 616,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
+      "estimatedTextWorkloadCapacityMTokens": 12320,
+      "quotaBasis": "sol_observed_plus_luna_official_credit_ratio_20x",
       "quotaConfidence": "medium",
       "capacityMultiplier": "1x Plus",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps. Multi-source: ACP primary; X notes separate Chat/Agent paths can differ from Codex weekly pool.",
+      "source": "learn_chatgpt_pricing_2026_09",
+      "notes": "Official Codex/Work 5h ranges (learn.chatgpt.com/docs/pricing): Plus Sol 10–100, Terra 25–200, Luna 250–2,000 local messages. Credit card: Sol 100/10/500, Terra 50/5/300, Luna 5/0.5/30 per 1M. Luna is the high-volume path on the same shared credit pool. Free/Go everyday Luna text is unlimited (abuse guardrails); images/files/voice/tools still capped. Plan-level MTokens use Luna credit-equivalent (12320) so volume work is not capped at Sol Codex 616. High-intelligence scoring still uses Sol 616.",
       "observedCodingPlanCapacityMTokens": 616,
       "observedCodingPlanModel": "gpt-5.6-sol",
       "observedFiveHourWindowMTokens": 20,
@@ -592,48 +610,41 @@
           "note": "ChatGPT Plus Codex monthly tokens ~6.16亿"
         }
       ],
-      "estimatedMonthlyTokens": 616000000,
+      "estimatedMonthlyTokens": 12320000000,
       "estimatedWeeklyTokens": 154000000,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "gpt-5.6-sol",
       "modelUsage": [
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol (Codex)",
           "estimatedMonthlyTokens": 616000000,
-          "estimatedWeeklyTokens": 154000000,
+          "estimatedMonthlyMTokens": 616,
           "relativeBurn": 1,
-          "taskBurnTokens": 1004195,
           "confidence": "medium",
           "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "awesome-coding-plan row: ChatGPT Plus Codex gpt-5.6-sol, mo 8760/6.16亿",
-          "estimatedMonthlyMTokens": 616,
-          "tokenizerRatioVsGpt54": 1
+          "notes": "Community Plus Codex Sol ~6.16亿/mo. Still the high-intelligence meter."
         },
         {
           "modelId": "gpt-5.6-terra",
           "label": "GPT-5.6 Terra",
-          "estimatedMonthlyTokens": null,
-          "relativeBurn": 0.59,
-          "taskBurnTokens": 590028,
-          "confidence": "low",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "No monthly observation. Task-level burn ~0.59× Sol on same harness test → more tasks per plan, not a separate mo meter.",
-          "estimatedMonthlyMTokens": null,
-          "tokenizerRatioVsGpt54": 1
+          "estimatedMonthlyTokens": 1232000000,
+          "estimatedMonthlyMTokens": 1232,
+          "relativeBurn": 0.5,
+          "confidence": "medium",
+          "source": "https://learn.chatgpt.com/docs/pricing",
+          "notes": "Official ~2x Sol input credits."
         },
         {
           "modelId": "gpt-5.6-luna",
           "label": "GPT-5.6 Luna",
-          "estimatedMonthlyTokens": null,
-          "relativeBurn": 1.32,
-          "taskBurnTokens": 1321527,
-          "confidence": "low",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Task-level burn higher than Sol on that scene; monthly plan still message-window limited.",
-          "estimatedMonthlyMTokens": null,
-          "tokenizerRatioVsGpt54": 1
+          "estimatedMonthlyTokens": 12320000000,
+          "estimatedMonthlyMTokens": 12320,
+          "relativeBurn": 0.05,
+          "confidence": "medium",
+          "source": "https://learn.chatgpt.com/docs/pricing",
+          "notes": "Official 20x Sol input credits; Plus 5h local messages 250–2,000 vs Sol 10–100."
         }
       ],
       "communityReports": [
@@ -665,13 +676,13 @@
     },
     {
       "planId": "chatgpt_pro_5x",
-      "estimatedTextWorkloadCapacityMTokens": 3890,
-      "quotaBasis": "blend_acp_plus5x_and_x_weekly_half",
+      "estimatedTextWorkloadCapacityMTokens": 61600,
+      "quotaBasis": "plus_luna_equivalent_x5",
       "quotaConfidence": "medium",
       "capacityMultiplier": "5x Plus",
       "cacheHitRateAssumption": 0.95,
-      "source": "x_2026_07_30_plus_acp",
-      "notes": "Codex Pro 5x: X user 587.5M overnight ≈50% weekly → ~1.17B tokens/week. Blended with ACP Plus×5 (3.08B/mo). Model mix Sol/Terra/Luna still differs per task.",
+      "source": "learn_chatgpt_pricing_2026_09",
+      "notes": "Official Codex/Work 5h ranges (learn.chatgpt.com/docs/pricing): Plus Sol 10–100, Terra 25–200, Luna 250–2,000 local messages. Credit card: Sol 100/10/500, Terra 50/5/300, Luna 5/0.5/30 per 1M. Luna is the high-volume path on the same shared credit pool. Free/Go everyday Luna text is unlimited (abuse guardrails); images/files/voice/tools still capped. Pro 5x Luna-equivalent 61600 MTok; Sol high-intel remains 3890.",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
@@ -679,68 +690,38 @@
           "note": "Derived from Plus 6.16亿 ×5"
         }
       ],
-      "estimatedMonthlyTokens": 3890000000,
-      "estimatedWeeklyTokens": 1175000000,
+      "estimatedMonthlyTokens": 61600000000,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "gpt-5.6-sol",
       "modelUsage": [
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol",
           "estimatedMonthlyTokens": 3890000000,
+          "estimatedMonthlyMTokens": 3890,
           "relativeBurn": 1,
-          "taskBurnTokens": 1004195,
-          "confidence": "medium",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Plus Sol mo × official 5x",
-          "estimatedMonthlyMTokens": 3080,
-          "tokenizerRatioVsGpt54": 1
-        },
-        {
-          "modelId": "gpt-5.6-terra",
-          "label": "GPT-5.6 Terra",
-          "estimatedMonthlyTokens": null,
-          "relativeBurn": 0.59,
-          "taskBurnTokens": 590028,
-          "confidence": "low",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Task burn relative only",
-          "estimatedMonthlyMTokens": null,
-          "tokenizerRatioVsGpt54": 1
+          "confidence": "medium"
         },
         {
           "modelId": "gpt-5.6-luna",
           "label": "GPT-5.6 Luna",
-          "estimatedMonthlyTokens": null,
-          "relativeBurn": 1.32,
-          "taskBurnTokens": 1321527,
-          "confidence": "low",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Task burn relative only",
-          "estimatedMonthlyMTokens": null,
-          "tokenizerRatioVsGpt54": 1
+          "estimatedMonthlyTokens": 61600000000,
+          "estimatedMonthlyMTokens": 61600,
+          "relativeBurn": 0.05,
+          "confidence": "medium",
+          "source": "https://learn.chatgpt.com/docs/pricing",
+          "notes": "Official Plus Luna range ×5."
         }
       ],
       "communityMonthlyTokenRange": {
         "low": 3080000000,
         "mid": 3890000000,
-        "high": 4700000000,
+        "high": 3890000000,
         "unit": "tokens",
-        "note": "low=ACP Plus×5; high=X weekly 1.17B×4; mid=blend"
+        "note": "ACP Plus Sol 6.16亿 ×5. The 1.17B/week X estimate was dropped after the source tweet 404'd on 2026-09-01."
       },
       "communityReports": [
-        {
-          "platform": "x",
-          "url": "https://x.com/navinsharmacse/status/2082697148647477364",
-          "asOf": "2026-07-30",
-          "claim": "Codex two sessions overnight ~587.5M tokens ≈ 50% of weekly limit → weekly pool ~1.17B tokens for that Pro-tier Codex account.",
-          "metric": {
-            "unit": "tokens_per_week_estimate",
-            "value": 1175000000,
-            "from": "587.5M is ~50% weekly"
-          }
-        },
         {
           "platform": "x",
           "url": "https://x.com/IND_is_Here/status/2082538459449733357",
@@ -763,13 +744,13 @@
     },
     {
       "planId": "chatgpt_pro_20x",
-      "estimatedTextWorkloadCapacityMTokens": 12320,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
+      "estimatedTextWorkloadCapacityMTokens": 246400,
+      "quotaBasis": "plus_luna_equivalent_x20",
       "quotaConfidence": "medium",
       "capacityMultiplier": "20x Plus",
       "cacheHitRateAssumption": 0.95,
       "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Primary 123.2亿 tokens (Plus Codex 6.16亿×20). X community claims Codex 20x 100+亿/mo class — same order of magnitude.",
+      "notes": "Official Codex/Work 5h ranges (learn.chatgpt.com/docs/pricing): Plus Sol 10–100, Terra 25–200, Luna 250–2,000 local messages. Credit card: Sol 100/10/500, Terra 50/5/300, Luna 5/0.5/30 per 1M. Luna is the high-volume path on the same shared credit pool. Free/Go everyday Luna text is unlimited (abuse guardrails); images/files/voice/tools still capped. Pro 20x Luna-equivalent 246400 MTok; Sol high-intel remains 12320.",
       "additionalSources": [
         {
           "sourceId": "awesome-coding-plan",
@@ -777,23 +758,28 @@
           "note": "Derived from Plus 6.16亿 ×20"
         }
       ],
-      "estimatedMonthlyTokens": 12320000000,
+      "estimatedMonthlyTokens": 246400000000,
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "gpt-5.6-sol",
       "modelUsage": [
         {
           "modelId": "gpt-5.6-sol",
           "label": "GPT-5.6 Sol",
           "estimatedMonthlyTokens": 12320000000,
-          "relativeBurn": 1,
-          "taskBurnTokens": 1004195,
-          "confidence": "medium",
-          "source": "https://github.com/mahonzhan/awesome-coding-plan",
-          "notes": "Plus Sol mo × official 20x",
           "estimatedMonthlyMTokens": 12320,
-          "tokenizerRatioVsGpt54": 1
+          "relativeBurn": 1,
+          "confidence": "medium"
+        },
+        {
+          "modelId": "gpt-5.6-luna",
+          "label": "GPT-5.6 Luna",
+          "estimatedMonthlyTokens": 246400000000,
+          "estimatedMonthlyMTokens": 246400,
+          "relativeBurn": 0.05,
+          "confidence": "medium",
+          "source": "https://learn.chatgpt.com/docs/pricing"
         }
       ],
       "communityMonthlyTokenRange": {
@@ -824,8 +810,8 @@
       "quotaConfidence": "medium",
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_plus_reddit_x",
-      "notes": "Primary mo 15.88亿 tokens (ACP Claude Code opus-4.8). Reddit: ~10–40 prompts/5h, Opus-hours/week much tighter than Sonnet-hours. Session % jumps can feel non-linear.",
+      "source": "awesome_coding_plan_2026_08_19",
+      "notes": "ACP HEAD 2026-08-19 (tokens unchanged since 2026-07-30): Claude Code opus-4.8 359/3966万 per 5h, 3590/3.97亿 per week, 14360/15.88亿 per month. Includes the 2026-05-06 5h double and +50% weekly promo through 2026-08-31. Not an official token cap.",
       "observedCodingPlanCapacityMTokens": 1588,
       "temporaryBoostedCapacityMTokens": 416,
       "temporaryBoostEndsAt": "2026-07-13",
@@ -847,7 +833,7 @@
       "estimatedWeeklyTokens": 397000000,
       "estimatedFiveHourWindowTokens": 39660000,
       "observedCodingPlanModel": "claude-opus-4.8",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "claude-opus-4.8",
       "modelUsage": [
         {
@@ -957,7 +943,7 @@
       "estimatedMonthlyTokens": 2460000000,
       "estimatedWeeklyTokens": 615000000,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "claude-opus-4.8",
       "modelUsage": [
         {
@@ -1073,7 +1059,7 @@
       "estimatedMonthlyTokens": 9840000000,
       "estimatedWeeklyTokens": 2460000000,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "claude-opus-4.8",
       "modelUsage": [
         {
@@ -1166,7 +1152,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Ultra higher access + Deep Think. ~5× Pro proxy when treating Pro as 900 MTokens.",
-      "estimatedMonthlyTokens": 4500000000
+      "estimatedMonthlyTokens": 4500000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "google_ai_ultra_20x_us",
@@ -1177,17 +1164,18 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Ultra 20x proxy from Pro baseline ×20.",
-      "estimatedMonthlyTokens": 18000000000
+      "estimatedMonthlyTokens": 18000000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "glm_coding_lite_cn",
-      "estimatedTextWorkloadCapacityMTokens": 128,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
-      "quotaConfidence": "medium",
+      "estimatedTextWorkloadCapacityMTokens": 90,
+      "quotaBasis": "official_points_to_mtok_proxy_glm53_95cache",
+      "quotaConfidence": "low",
       "capacityMultiplier": "1x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
+      "source": "bigmodel_coding_plan_2026_09",
+      "notes": "New-customer points: 2000/5h, 10000/week. Monthly ~90 MTok is a 95% cache GLM-5.3 proxy from official coefficients, not ACP V2 (glm-5.1 128 MTok). Low confidence.",
       "observedFiveHourWindowMTokens": 6,
       "observedWeeklyWindowMTokens": 32,
       "observedCodingPlanModel": "glm-5.1",
@@ -1198,11 +1186,11 @@
           "note": "Observed GLM Coding Plan token usage table."
         }
       ],
-      "estimatedMonthlyTokens": 128000000,
+      "estimatedMonthlyTokens": 90000000,
       "estimatedWeeklyTokens": 32000000,
       "estimatedFiveHourWindowTokens": 6000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "glm-5.1",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "glm-5.3",
       "modelUsage": [
         {
           "modelId": "glm-5.1",
@@ -1231,13 +1219,13 @@
     },
     {
       "planId": "glm_coding_pro_cn",
-      "estimatedTextWorkloadCapacityMTokens": 640,
-      "quotaBasis": "community_per_model_observed_tokens_v0.4.3",
-      "quotaConfidence": "medium",
+      "estimatedTextWorkloadCapacityMTokens": 550,
+      "quotaBasis": "official_points_to_mtok_proxy_glm53_95cache",
+      "quotaConfidence": "low",
       "capacityMultiplier": "5x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Per-model usage. Plan-level estimatedMonthlyTokens is for the PRIMARY observed model (or multiplier on it). Other models may burn much more/less per task — see modelUsage[].relativeBurn and taskBurnTokens. Source: mahonzhan/awesome-coding-plan (2026-07-30). Not official caps.",
+      "source": "bigmodel_coding_plan_2026_09",
+      "notes": "New-customer points: 12000/5h, 60000/week. Monthly ~550 MTok is a 95% cache GLM-5.3 proxy from official coefficients, not ACP V2 (glm-5.1 640 MTok). Low confidence.",
       "observedFiveHourWindowMTokens": 30,
       "observedWeeklyWindowMTokens": 160,
       "observedCodingPlanModel": "glm-5.1",
@@ -1248,11 +1236,11 @@
           "note": "Observed GLM Coding Plan token usage table."
         }
       ],
-      "estimatedMonthlyTokens": 640000000,
+      "estimatedMonthlyTokens": 550000000,
       "estimatedWeeklyTokens": 160000000,
       "estimatedFiveHourWindowTokens": 30000000,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "glm-5.1",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "glm-5.3",
       "modelUsage": [
         {
           "modelId": "glm-5.1",
@@ -1281,13 +1269,13 @@
     },
     {
       "planId": "glm_coding_max_cn",
-      "estimatedTextWorkloadCapacityMTokens": 2560,
-      "quotaBasis": "multiplier_on_lite_observation",
+      "estimatedTextWorkloadCapacityMTokens": 1280,
+      "quotaBasis": "official_points_to_mtok_proxy_glm53_95cache",
       "quotaConfidence": "low",
       "capacityMultiplier": "20x Lite",
       "cacheHitRateAssumption": 0.95,
-      "source": "awesome_coding_plan_2026_07_30",
-      "notes": "Max not in ACP table; ~20× Lite 1.28亿.",
+      "source": "bigmodel_coding_plan_2026_09",
+      "notes": "New-customer points: 28000/5h, 140000/week. Monthly ~1280 MTok is a 95% cache GLM-5.3 proxy from official coefficients, not ACP V2 (glm-5.1 2560 MTok). Low confidence.",
       "observedFiveHourWindowMTokens": 120,
       "observedWeeklyWindowMTokens": 640,
       "observedCodingPlanModel": "glm-5.1",
@@ -1298,8 +1286,8 @@
           "note": "Observed GLM Coding Plan token usage table."
         }
       ],
-      "estimatedMonthlyTokens": 2560000000,
-      "primaryModelId": "glm-5.1",
+      "estimatedMonthlyTokens": 1280000000,
+      "primaryModelId": "glm-5.3",
       "modelUsage": [
         {
           "modelId": "glm-5.1",
@@ -1321,7 +1309,7 @@
           "notes": "Very high task burn on sample"
         }
       ],
-      "lastCheckedAt": "2026-07-30"
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "opencode_go_regular",
@@ -1331,7 +1319,7 @@
       "capacityMultiplier": "$60 monthly usage value",
       "cacheHitRateAssumption": 0.95,
       "source": "official_opencode_go_docs_rechecked_2026_06_30",
-      "notes": "OpenCode Go limits are defined in dollar value: $12 per 5 hours, $30 weekly, $60 monthly. Actual workload capacity depends heavily on selected model price. Runtime should prefer modelSpecificUsageProfiles when model choice is known; 600 MTokens is a conservative quality-balanced default, not a fixed plan quota.",
+      "notes": "Official dollar-value limits $12/5h, $30/week, $60/month (ACP + opencode.ai/go, 2026-09-01). 600 MTok remains a conservative mixed-model default, not a published token cap. Lineup now includes Grok 4.6 and GLM-5.3-Flash.",
       "valueLimitsUsd": {
         "per5Hours": 12,
         "weekly": 30,
@@ -1494,7 +1482,8 @@
           "note": "Confirms OpenCode Go is a $60/month value-limited plan with about 6x value multiple; use modelSpecificUsageProfiles for workload capacity."
         }
       ],
-      "estimatedMonthlyTokens": 600000000
+      "estimatedMonthlyTokens": 600000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "ollama_free",
@@ -1503,8 +1492,9 @@
       "quotaConfidence": "not_applicable",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
-      "source": "manual_from_price_file",
-      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+      "source": "ollama_pricing_2026_09_02",
+      "notes": "Official cloud meter is monthly usage credits, not a token pool. Free has starter credits; extra credits unlock all cloud models. Local is unlimited. Kept null plan quota so Ollama does not fake a huge cloud token pool.",
+      "lastCheckedAt": "2026-09-02"
     },
     {
       "planId": "ollama_pro",
@@ -1513,8 +1503,9 @@
       "quotaConfidence": "not_applicable",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
-      "source": "manual_from_price_file",
-      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+      "source": "ollama_pricing_2026_09_02",
+      "notes": "Official Pro includes $60 cloud usage credits/month (2026-09-02). Credits burn at each model's listed $/1M rates. Local unlimited. Kept null plan quota.",
+      "lastCheckedAt": "2026-09-02"
     },
     {
       "planId": "ollama_max",
@@ -1523,8 +1514,9 @@
       "quotaConfidence": "not_applicable",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
-      "source": "manual_from_price_file",
-      "notes": "Local option not directly comparable to fixed cloud text workload capacity."
+      "source": "ollama_pricing_2026_09_02",
+      "notes": "Official Max includes $300 cloud usage credits/month (2026-09-02). 10 concurrent requests. Local unlimited. Kept null plan quota.",
+      "lastCheckedAt": "2026-09-02"
     },
     {
       "planId": "openrouter_api",
@@ -1534,7 +1526,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "deepseek_v4_flash_api_cn",
@@ -1544,7 +1537,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "deepseek_v4_pro_api_cn",
@@ -1554,7 +1548,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "deepseek_v4_flash_api_global",
@@ -1564,7 +1559,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "deepseek_v4_pro_api_global",
@@ -1574,7 +1570,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "glm_5_2_api_cn",
@@ -1584,7 +1581,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "glm_5_1_short_api_cn",
@@ -1594,7 +1592,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "glm_5_1_long_api_cn",
@@ -1604,7 +1603,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "minimax_api_cn",
@@ -1614,7 +1614,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "minimax_api_global",
@@ -1624,7 +1625,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "kimi_api_cn",
@@ -1634,7 +1636,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "kimi_k27_code_api_cn",
@@ -1644,29 +1647,32 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": null,
       "source": "manual_from_price_file",
-      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price."
+      "notes": "No fixed monthly quota. Estimate usable MTokens dynamically from assigned API budget and selected model price.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "chatgpt_free",
-      "estimatedTextWorkloadCapacityMTokens": 40,
-      "quotaBasis": "community_free_tier_conservative",
+      "estimatedTextWorkloadCapacityMTokens": 1200,
+      "quotaBasis": "official_unlimited_luna_text_with_tool_caps",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "community_estimate_v0.4.2",
-      "notes": "Free tier heavily rate-limited; token figure is conservative workload proxy only.",
-      "estimatedMonthlyTokens": 40000000
+      "source": "openai_help_gpt56_2026_08",
+      "notes": "Official (2026-08-06 / help): Free everyday Luna text is unlimited subject to abuse-prevention. Images, files, voice, data analysis still capped. 1200 MTok is a practical monthly proxy for text, not an official cap. Codex is Terra-only and still small.",
+      "estimatedMonthlyTokens": 1200000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "chatgpt_go_us",
-      "estimatedTextWorkloadCapacityMTokens": 200,
-      "quotaBasis": "community_fraction_of_plus_coding_plan",
+      "estimatedTextWorkloadCapacityMTokens": 3000,
+      "quotaBasis": "official_unlimited_luna_text_plus_go_tools",
       "quotaConfidence": "low",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "community_estimate_v0.4.2",
-      "notes": "Go has lower limits than Plus; rough ~1/3 of Plus Codex community monthly tokens. No solid public token table — low confidence.",
-      "estimatedMonthlyTokens": 200000000
+      "source": "openai_help_go_2026_08",
+      "notes": "Official: Go has unlimited everyday Luna text and higher tool limits than Free. Codex uses Terra. 3000 MTok is a practical text+light-Codex proxy, not an official cap.",
+      "estimatedMonthlyTokens": 3000000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "claude_free",
@@ -1677,7 +1683,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Free Claude highly restricted; token proxy only.",
-      "estimatedMonthlyTokens": 60000000
+      "estimatedMonthlyTokens": 60000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "cursor_hobby",
@@ -1687,7 +1694,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.1.2",
-      "notes": "Free IDE usage estimate for occasional coding; not a fixed token quota."
+      "notes": "Free IDE usage estimate for occasional coding; not a fixed token quota.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "google_ai_plus_us",
@@ -1697,8 +1705,9 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
-      "notes": "Plus emphasizes Gemini 3.6 Flash volume. No public monthly token meter; estimate between free-heavy chat and Pro. Low confidence.",
-      "estimatedMonthlyTokens": 350000000
+      "notes": "Plus emphasizes Gemini 3.7 Flash volume. No public monthly token meter; estimate between free-heavy chat and Pro. Low confidence.",
+      "estimatedMonthlyTokens": 350000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "google_ai_pro_us",
@@ -1708,8 +1717,9 @@
       "capacityMultiplier": "1x Pro",
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
-      "notes": "Pro: 3.1 Pro + 3.6 Flash. Community treats as solid daily research/coding volume without published token pool. Proxy only.",
-      "estimatedMonthlyTokens": 900000000
+      "notes": "Pro: 3.1 Pro + 3.7 Flash. Community treats as solid daily research/coding volume without published token pool. Proxy only.",
+      "estimatedMonthlyTokens": 900000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "grok_free",
@@ -1720,7 +1730,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Free Grok rate-limited. Token figure is a rough monthly workload proxy from rate-limit reports, not official tokens.",
-      "estimatedMonthlyTokens": 25000000
+      "estimatedMonthlyTokens": 25000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "supergrok_lite",
@@ -1732,13 +1743,13 @@
       "source": "aa_grok_build_2026_07",
       "notes": "Lite SuperGrok + limited Grok Build headroom.",
       "estimatedMonthlyTokens": 150000000,
-      "primaryModelId": "grok-4.5",
+      "primaryModelId": "grok-4.6",
       "codingHarness": "Grok Build",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "modelUsage": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 (Grok Build limited)",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 (Grok Build limited)",
           "harness": "Grok Build",
           "aaCodingAgentIndex": 76,
           "avgTokensPerCodingAgentTask": 1900000,
@@ -1756,8 +1767,8 @@
       "quotaConfidence": "medium",
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
-      "source": "aa_grok_build_2026_07",
-      "notes": "SuperGrok coding path = Grok Build + Grok 4.5. Monthly token proxy raised vs earlier guess because Build is efficient (more tasks per token) but still rate-window limited. Not official monthly token cap.",
+      "source": "aa_grok_4_6_2026_08",
+      "notes": "SuperGrok coding path = Grok Build + Grok 4.6. Monthly token proxy unchanged (rate-window limited, not an official cap).",
       "estimatedMonthlyTokens": 400000000,
       "additionalSources": [
         {
@@ -1768,12 +1779,12 @@
       ],
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
-      "primaryModelId": "grok-4.5",
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "grok-4.6",
       "modelUsage": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 (Grok Build)",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 (Grok Build)",
           "harness": "Grok Build",
           "aaCodingAgentIndex": 76,
           "avgTokensPerCodingAgentTask": 1900000,
@@ -1817,13 +1828,13 @@
       "source": "aa_grok_build_2026_07",
       "notes": "SuperGrok Heavy: fuller Grok Build multi-agent. Monthly token proxy ~5× SuperGrok practical estimate.",
       "estimatedMonthlyTokens": 2000000000,
-      "primaryModelId": "grok-4.5",
+      "primaryModelId": "grok-4.6",
       "codingHarness": "Grok Build",
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "modelUsage": [
         {
-          "modelId": "grok-4.5",
-          "label": "Grok 4.5 / Heavy multi-agent (Grok Build)",
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 / Heavy multi-agent (Grok Build)",
           "harness": "Grok Build",
           "aaCodingAgentIndex": 76,
           "avgTokensPerCodingAgentTask": 1900000,
@@ -1843,7 +1854,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Free weekly search caps. Token proxy only.",
-      "estimatedMonthlyTokens": 30000000
+      "estimatedMonthlyTokens": 30000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "perplexity_pro",
@@ -1886,7 +1898,7 @@
           "metric": null
         }
       ],
-      "lastCheckedAt": "2026-07-30"
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "perplexity_max",
@@ -1897,7 +1909,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Max / Computer: community and marketing as much higher / unlimited-style vs Pro. Token proxy ~5× Pro practical estimate. Low confidence.",
-      "estimatedMonthlyTokens": 1400000000
+      "estimatedMonthlyTokens": 1400000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "google_ai_pro_jp",
@@ -1908,7 +1921,8 @@
       "cacheHitRateAssumption": 0.95,
       "source": "community_estimate_v0.4.2",
       "notes": "Same model access as US Pro; JP App Store price only.",
-      "estimatedMonthlyTokens": 900000000
+      "estimatedMonthlyTokens": 900000000,
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "kimi_moderato_global",
@@ -1922,7 +1936,7 @@
       "estimatedMonthlyTokens": 336000000,
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -1985,7 +1999,7 @@
       "estimatedMonthlyTokens": 1428000000,
       "estimatedWeeklyTokens": 357000000,
       "estimatedFiveHourWindowTokens": 65000000,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -2068,7 +2082,7 @@
       "estimatedMonthlyTokens": 4284000000,
       "estimatedWeeklyTokens": null,
       "estimatedFiveHourWindowTokens": null,
-      "lastCheckedAt": "2026-07-30",
+      "lastCheckedAt": "2026-09-01",
       "primaryModelId": "kimi-k3",
       "modelUsage": [
         {
@@ -2180,7 +2194,7 @@
         "measuredMonthlyTokens": 6000000000,
         "source": "https://github.com/mahonzhan/awesome-coding-plan"
       },
-      "lastCheckedAt": "2026-07-30"
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "openai_gpt56_sol_api",
@@ -2190,7 +2204,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "openai_gpt56_terra_api",
@@ -2200,7 +2215,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "openai_gpt56_luna_api",
@@ -2210,7 +2226,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "claude_opus_5_api",
@@ -2220,7 +2237,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "claude_opus_48_api",
@@ -2230,7 +2248,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "claude_sonnet_5_api",
@@ -2240,7 +2259,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "kimi_k3_api_global",
@@ -2250,7 +2270,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "kimi_k3_api_cn",
@@ -2260,7 +2281,8 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.0",
-      "notes": "Metered API; capacity derived from remaining API budget at runtime."
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
     },
     {
       "planId": "claude_fable_5_api",
@@ -2270,7 +2292,119 @@
       "capacityMultiplier": null,
       "cacheHitRateAssumption": 0.95,
       "source": "manual_estimate_v0.3.2",
-      "notes": "Metered API."
+      "notes": "Metered API.",
+      "lastCheckedAt": "2026-09-01"
+    },
+    {
+      "planId": "grok_46_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "official_list_price_2026-08-12",
+      "notes": "Metered API; capacity derived from remaining API budget at runtime.",
+      "lastCheckedAt": "2026-09-01"
+    },
+    {
+      "planId": "gemini_37_flash_api",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api",
+      "quotaConfidence": "high",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "official_list_price_2026-08-13",
+      "notes": "Metered API; introductory price through 2026-12-31.",
+      "lastCheckedAt": "2026-09-01"
+    },
+    {
+      "planId": "glm_5_3_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api",
+      "quotaConfidence": "medium",
+      "capacityMultiplier": null,
+      "cacheHitRateAssumption": 0.95,
+      "source": "tracks_glm_5_2_cny_card",
+      "notes": "Metered API. CNY card tracks GLM-5.2 until a separate 5.3 sheet is published.",
+      "lastCheckedAt": "2026-09-01"
+    },
+    {
+      "planId": "aliyun_coding_pro_cn",
+      "estimatedTextWorkloadCapacityMTokens": 3000,
+      "quotaBasis": "official_90k_requests_times_acp_lite_tok_per_req",
+      "quotaConfidence": "low",
+      "cacheHitRateAssumption": 0.95,
+      "source": "aliyun_official_2026_09_plus_acp_lite_ratio",
+      "notes": "Official meter is requests (6k/5h, 45k/week, 90k/mo), not tokens. ACP Lite (offline) was ~6亿 tokens / 17684 req ≈ 34k tok/req. 90k × 34k ≈ 30亿 = 3000 MTok proxy. Simple tasks burn ~5–10 requests; complex 10–30+.",
+      "estimatedMonthlyTokens": 3000000000,
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "qwen3.7-plus",
+      "modelUsage": [
+        {
+          "modelId": "qwen3.7-plus",
+          "label": "Qwen3.7 Plus",
+          "estimatedMonthlyTokens": 3000000000,
+          "estimatedMonthlyMTokens": 3000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://help.aliyun.com/zh/model-studio/coding-plan"
+        }
+      ]
+    },
+    {
+      "planId": "aliyun_coding_pro_global",
+      "estimatedTextWorkloadCapacityMTokens": 3000,
+      "quotaBasis": "official_90k_requests_times_acp_lite_tok_per_req",
+      "quotaConfidence": "low",
+      "cacheHitRateAssumption": 0.95,
+      "source": "aliyun_official_2026_09_plus_acp_lite_ratio",
+      "notes": "Official meter is requests (6k/5h, 45k/week, 90k/mo), not tokens. ACP Lite (offline) was ~6亿 tokens / 17684 req ≈ 34k tok/req. 90k × 34k ≈ 30亿 = 3000 MTok proxy. Simple tasks burn ~5–10 requests; complex 10–30+.",
+      "estimatedMonthlyTokens": 3000000000,
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "qwen3.7-plus",
+      "modelUsage": [
+        {
+          "modelId": "qwen3.7-plus",
+          "label": "Qwen3.7 Plus",
+          "estimatedMonthlyTokens": 3000000000,
+          "estimatedMonthlyMTokens": 3000,
+          "relativeBurn": 1,
+          "confidence": "low",
+          "source": "https://help.aliyun.com/zh/model-studio/coding-plan"
+        }
+      ]
+    },
+    {
+      "planId": "supergrok_plus",
+      "estimatedTextWorkloadCapacityMTokens": 1000,
+      "quotaBasis": "official_higher_usage_than_supergrok_no_token_cap",
+      "quotaConfidence": "low",
+      "cacheHitRateAssumption": 0.95,
+      "source": "xai_pricing_card_2026_09",
+      "notes": "Official $100 card says higher usage / 1080p / peak priority. No public token cap. 1000 MTok is a conservative proxy between SuperGrok 400 and Heavy 2000.",
+      "estimatedMonthlyTokens": 1000000000,
+      "lastCheckedAt": "2026-09-01",
+      "primaryModelId": "grok-4.6",
+      "modelUsage": [
+        {
+          "modelId": "grok-4.6",
+          "label": "Grok 4.6 (Grok Build)",
+          "estimatedMonthlyTokens": 1000000000,
+          "estimatedMonthlyMTokens": 1000,
+          "relativeBurn": 1,
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "planId": "glm_5_3_flash_api_cn",
+      "estimatedTextWorkloadCapacityMTokens": null,
+      "quotaBasis": "metered_api",
+      "quotaConfidence": "medium",
+      "cacheHitRateAssumption": 0.95,
+      "source": "open_bigmodel_pricing_2026_09",
+      "notes": "Metered API. Use list ¥0.8/¥2.8, not the two-week promo.",
+      "lastCheckedAt": "2026-09-01"
     }
   ],
   "unit": {

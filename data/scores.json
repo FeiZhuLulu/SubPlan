@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.4.9",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.11",
+  "lastUpdatedAt": "2026-09-01",
   "capabilityKeys": [
     "frontend",
     "backend",
@@ -16,11 +16,11 @@
     "ecosystem"
   ],
   "notes": [
-    "v0.4.9: 修复模型归属误继承——andante 主用 K2.7 Code（几乎无 K3），不再按 K3 给分。",
+    "v0.4.11: added Alibaba Coding Plan Pro (qwen3.7-plus workhorse, not inherited from K3/GLM-5.3). OpenCode notes refreshed for 2026-09 lineup.",
+    "v0.4.10: 2026-09-01 modest deltas after Grok 4.6 / Gemini 3.7 Flash / GLM-5.3. Absolute scale still v0.4.1.",
     "规则：订阅分按该套餐实际主用模型定基准，禁止按产品族继承旗舰模型分。",
-    "v0.4.8: frontend = Frontend Code Arena absolute Elo + relative field win rates (user charts).",
-    "K3 1679/76% vs Fable 1631/63%: Elo gap 48 only (~57% H2H); plan scores 96 vs 94 — close.",
-    "Raw: data/arena-webdev-scores.json"
+    "v0.4.9: 修复模型归属误继承——andante 主用 K2.7 Code（几乎无 K3），不再按 K3 给分。",
+    "v0.4.8: frontend = Frontend Code Arena absolute Elo + relative field win rates (user charts)."
   ],
   "planCapabilityScores": [
     {
@@ -31,37 +31,37 @@
         "agentCoding": 47,
         "debugging": 58,
         "codeReview": 55,
-        "chineseWriting": 72,
-        "englishWriting": 76,
-        "research": 71,
-        "chat": 83,
+        "chineseWriting": 75,
+        "englishWriting": 80,
+        "research": 74,
+        "chat": 89,
         "imageGeneration": 65,
         "multimodal": 65,
         "ecosystem": 75
       },
       "scoreConfidence": "low",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Light refresh; free tier still limited."
+      "notes": "2026-08-06: unlimited everyday Luna text. Tools still capped; coding still weak (no Sol)."
     },
     {
       "planId": "chatgpt_go_us",
       "scores": {
         "frontend": 68,
         "backend": 77,
-        "agentCoding": 64,
+        "agentCoding": 67,
         "debugging": 74,
         "codeReview": 72,
         "chineseWriting": 78,
-        "englishWriting": 82,
-        "research": 83,
-        "chat": 88,
+        "englishWriting": 85,
+        "research": 85,
+        "chat": 92,
         "imageGeneration": 78,
         "multimodal": 78,
         "ecosystem": 84
       },
       "scoreConfidence": "low",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Light refresh on HEAD Go scores."
+      "notes": "Unlimited Luna text + Codex Terra. Still no Sol."
     },
     {
       "planId": "chatgpt_plus",
@@ -74,14 +74,14 @@
         "chineseWriting": 86,
         "englishWriting": 90,
         "research": 93,
-        "chat": 95,
+        "chat": 96,
         "imageGeneration": 94,
         "multimodal": 95,
         "ecosystem": 94
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
-      "notes": "Frontend Code Arena Elo 1618 / field-WR 58% (gpt-5.6-sol) → frontend 93. K3–Fable only +48 Elo (~57% H2H). was 92."
+      "notes": "Sol remains the coding/reasoning score. Volume/chat now reflects official Luna 20x credit path on the same Plus pool."
     },
     {
       "planId": "chatgpt_pro_5x",
@@ -207,10 +207,10 @@
       "planId": "google_ai_plus_us",
       "scores": {
         "frontend": 84,
-        "backend": 73,
-        "agentCoding": 66,
-        "debugging": 71,
-        "codeReview": 66,
+        "backend": 75,
+        "agentCoding": 70,
+        "debugging": 73,
+        "codeReview": 68,
         "chineseWriting": 75,
         "englishWriting": 80,
         "research": 84,
@@ -221,15 +221,15 @@
       },
       "scoreConfidence": "low",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Arena WebDev Elo 1528 (gemini-3.6-flash) → frontend 84 [scraped arena.ai 2026-07-30]. was 68."
+      "notes": "Workhorse moved to Gemini 3.7 Flash (AA ~56). Not a new Pro flagship."
     },
     {
       "planId": "google_ai_pro_us",
       "scores": {
         "frontend": 79,
         "backend": 85,
-        "agentCoding": 82,
-        "debugging": 83,
+        "agentCoding": 83,
+        "debugging": 84,
         "codeReview": 79,
         "chineseWriting": 80,
         "englishWriting": 86,
@@ -241,15 +241,15 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Arena WebDev Elo 1447 (gemini-3.1-pro) → frontend 79 [scraped arena.ai 2026-07-30]. was 81."
+      "notes": "Flagship still Gemini 3.1 Pro; 3.7 Flash replaces 3.6 Flash as volume workhorse."
     },
     {
       "planId": "google_ai_ultra_5x_us",
       "scores": {
         "frontend": 82,
         "backend": 89,
-        "agentCoding": 87,
-        "debugging": 87,
+        "agentCoding": 88,
+        "debugging": 88,
         "codeReview": 83,
         "chineseWriting": 82,
         "englishWriting": 88,
@@ -261,15 +261,15 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD + Deep Think / highest Pro + 3.6 Flash."
+      "notes": "3.1 Pro / Deep Think + 3.7 Flash volume."
     },
     {
       "planId": "google_ai_ultra_20x_us",
       "scores": {
         "frontend": 82,
         "backend": 89,
-        "agentCoding": 87,
-        "debugging": 87,
+        "agentCoding": 88,
+        "debugging": 88,
         "codeReview": 83,
         "chineseWriting": 82,
         "englishWriting": 88,
@@ -281,15 +281,15 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "HEAD Ultra base + model refresh."
+      "notes": "3.1 Pro / Deep Think + 3.7 Flash volume."
     },
     {
       "planId": "google_ai_pro_jp",
       "scores": {
         "frontend": 79,
         "backend": 88,
-        "agentCoding": 86,
-        "debugging": 86,
+        "agentCoding": 87,
+        "debugging": 87,
         "codeReview": 82,
         "chineseWriting": 80,
         "englishWriting": 86,
@@ -301,7 +301,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Arena WebDev Elo 1447 (gemini-3.1-pro) → frontend 79 [scraped arena.ai 2026-07-30]. was 84."
+      "notes": "Same mix as US Pro with 3.7 Flash workhorse."
     },
     {
       "planId": "cursor_hobby",
@@ -327,61 +327,61 @@
       "planId": "cursor_pro",
       "scores": {
         "frontend": 92,
-        "backend": 86,
+        "backend": 88,
         "agentCoding": 94,
         "debugging": 90,
         "codeReview": 86,
         "chineseWriting": 45,
         "englishWriting": 60,
-        "research": 45,
-        "chat": 55,
+        "research": 52,
+        "chat": 59,
         "imageGeneration": 0,
-        "multimodal": 35,
+        "multimodal": 39,
         "ecosystem": 92
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "Included pool is now Grok 4.6 (AA 61), not a thin GPT/Opus credit slice + Composer. Research/chat still IDE-secondary."
     },
     {
       "planId": "cursor_pro_plus",
       "scores": {
         "frontend": 93,
-        "backend": 87,
+        "backend": 89,
         "agentCoding": 95,
         "debugging": 91,
         "codeReview": 87,
         "chineseWriting": 45,
         "englishWriting": 60,
-        "research": 45,
-        "chat": 55,
+        "research": 52,
+        "chat": 59,
         "imageGeneration": 0,
-        "multimodal": 35,
+        "multimodal": 39,
         "ecosystem": 93
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "Same Grok 4.6 included pool as Pro, larger Other Models dollar cap."
     },
     {
       "planId": "cursor_ultra",
       "scores": {
         "frontend": 93,
-        "backend": 87,
+        "backend": 89,
         "agentCoding": 95,
         "debugging": 91,
         "codeReview": 87,
         "chineseWriting": 45,
         "englishWriting": 60,
-        "research": 45,
-        "chat": 55,
+        "research": 52,
+        "chat": 59,
         "imageGeneration": 0,
-        "multimodal": 35,
+        "multimodal": 39,
         "ecosystem": 93
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "Same Grok 4.6 included pool as Pro, much larger Other Models dollar cap."
     },
     {
       "planId": "opencode_go_regular",
@@ -401,7 +401,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "2026-09-01 lineup adds Grok 4.6 (scarce) and GLM-5.3-Flash volume. Dollar cap still $60/mo so everyday work is the cheaper open models, not a full SuperGrok/Claude substitute."
     },
     {
       "planId": "kimi_adagio_cn",
@@ -627,13 +627,13 @@
       "planId": "glm_coding_lite_cn",
       "scores": {
         "frontend": 90,
-        "backend": 88,
-        "agentCoding": 88,
-        "debugging": 86,
-        "codeReview": 82,
+        "backend": 90,
+        "agentCoding": 91,
+        "debugging": 89,
+        "codeReview": 85,
         "chineseWriting": 84,
         "englishWriting": 72,
-        "research": 75,
+        "research": 80,
         "chat": 78,
         "imageGeneration": 0,
         "multimodal": 35,
@@ -641,19 +641,19 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Preserved from dataset HEAD scale (v0.4.1 align)."
+      "notes": "GLM-5.3 AA 60 (K3 class) is now on Coding Plan. Frontend still 5.2 Arena Elo until a 5.3 board is published."
     },
     {
       "planId": "glm_coding_pro_cn",
       "scores": {
         "frontend": 92,
-        "backend": 88,
-        "agentCoding": 88,
-        "debugging": 86,
-        "codeReview": 82,
+        "backend": 90,
+        "agentCoding": 91,
+        "debugging": 89,
+        "codeReview": 85,
         "chineseWriting": 84,
         "englishWriting": 72,
-        "research": 75,
+        "research": 80,
         "chat": 78,
         "imageGeneration": 0,
         "multimodal": 35,
@@ -661,19 +661,19 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena Elo 1587 / field-WR 55% (glm-5.2) → frontend 92. K3–Fable only +48 Elo (~57% H2H). was 89."
+      "notes": "GLM-5.3 AA 60 (K3 class) is now on Coding Plan. Frontend still 5.2 Arena Elo until a 5.3 board is published."
     },
     {
       "planId": "glm_coding_max_cn",
       "scores": {
         "frontend": 92,
-        "backend": 88,
-        "agentCoding": 88,
-        "debugging": 86,
-        "codeReview": 82,
+        "backend": 90,
+        "agentCoding": 91,
+        "debugging": 89,
+        "codeReview": 85,
         "chineseWriting": 84,
         "englishWriting": 72,
-        "research": 75,
+        "research": 80,
         "chat": 78,
         "imageGeneration": 0,
         "multimodal": 35,
@@ -681,7 +681,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena Elo 1587 / field-WR 55% (glm-5.2) → frontend 92. K3–Fable only +48 Elo (~57% H2H). was 89."
+      "notes": "GLM-5.3 AA 60 (K3 class) is now on Coding Plan. Frontend still 5.2 Arena Elo until a 5.3 board is published."
     },
     {
       "planId": "ollama_free",
@@ -767,10 +767,10 @@
       "planId": "supergrok_lite",
       "scores": {
         "frontend": 90,
-        "backend": 81,
-        "agentCoding": 72,
-        "debugging": 78,
-        "codeReview": 72,
+        "backend": 83,
+        "agentCoding": 76,
+        "debugging": 80,
+        "codeReview": 74,
         "chineseWriting": 74,
         "englishWriting": 82,
         "research": 89,
@@ -781,19 +781,19 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
+      "notes": "Lite now on Grok 4.6 with tighter windows."
     },
     {
       "planId": "supergrok",
       "scores": {
         "frontend": 90,
-        "backend": 89,
-        "agentCoding": 90,
-        "debugging": 88,
-        "codeReview": 86,
+        "backend": 91,
+        "agentCoding": 94,
+        "debugging": 91,
+        "codeReview": 89,
         "chineseWriting": 78,
         "englishWriting": 90,
-        "research": 95,
+        "research": 96,
         "chat": 94,
         "imageGeneration": 96,
         "multimodal": 95,
@@ -801,19 +801,19 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
+      "notes": "Grok 4.6 AA 61 (was 4.5 ~54–56). Coding/debug bumped toward Sol class. Frontend Arena still 4.5-era until a 4.6 Elo is published."
     },
     {
       "planId": "supergrok_heavy",
       "scores": {
         "frontend": 90,
-        "backend": 92,
-        "agentCoding": 92,
-        "debugging": 93,
-        "codeReview": 91,
+        "backend": 94,
+        "agentCoding": 96,
+        "debugging": 95,
+        "codeReview": 93,
         "chineseWriting": 80,
         "englishWriting": 94,
-        "research": 95,
+        "research": 96,
         "chat": 95,
         "imageGeneration": 96,
         "multimodal": 95,
@@ -821,7 +821,7 @@
       },
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1",
-      "notes": "Frontend Code Arena Elo 1558 / field-WR 53% (grok-4.5) → frontend 90. K3–Fable only +48 Elo (~57% H2H). was 86."
+      "notes": "Grok 4.6 Heavy / multi-agent. Same class as SuperGrok, larger quota."
     },
     {
       "planId": "perplexity_free",
@@ -1382,6 +1382,146 @@
       "scoreConfidence": "medium",
       "scoreBasis": "head_scale_aligned_v0.4.1+arena_frontend_v0.4.6",
       "notes": "Frontend Code Arena Elo 1631 / field-WR 63% (claude-fable-5) → frontend 94. K3–Fable only +48 Elo (~57% H2H). was 93."
+    },
+    {
+      "planId": "grok_46_api",
+      "scores": {
+        "frontend": 91,
+        "backend": 93,
+        "agentCoding": 94,
+        "debugging": 93,
+        "codeReview": 90,
+        "chineseWriting": 78,
+        "englishWriting": 92,
+        "research": 95,
+        "chat": 94,
+        "imageGeneration": 40,
+        "multimodal": 86,
+        "ecosystem": 82
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "aa_intel_61_official_evals_2026-08-12",
+      "notes": "Grok 4.6 API. AA 61 = Sol class. SWE-bench Verified (Vals) not yet in-matrix; coding uses official CursorBench/DeepSWE as secondary only."
+    },
+    {
+      "planId": "gemini_37_flash_api",
+      "scores": {
+        "frontend": 84,
+        "backend": 80,
+        "agentCoding": 78,
+        "debugging": 78,
+        "codeReview": 74,
+        "chineseWriting": 76,
+        "englishWriting": 84,
+        "research": 86,
+        "chat": 88,
+        "imageGeneration": 70,
+        "multimodal": 90,
+        "ecosystem": 88
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "google_official_2026-08-13_plus_aa_flash_band",
+      "notes": "Gemini 3.7 Flash workhorse. Strong speed/cost, not a 3.1 Pro replacement."
+    },
+    {
+      "planId": "glm_5_3_api_cn",
+      "scores": {
+        "frontend": 90,
+        "backend": 90,
+        "agentCoding": 91,
+        "debugging": 89,
+        "codeReview": 87,
+        "chineseWriting": 88,
+        "englishWriting": 78,
+        "research": 86,
+        "chat": 86,
+        "imageGeneration": 0,
+        "multimodal": 50,
+        "ecosystem": 80
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "aa_intel_60_2026-08",
+      "notes": "GLM-5.3 AA 60 matches Kimi K3 intelligence band. Coding Plan remains the easier quota path."
+    },
+    {
+      "planId": "aliyun_coding_pro_cn",
+      "scores": {
+        "frontend": 80,
+        "backend": 80,
+        "agentCoding": 82,
+        "debugging": 80,
+        "codeReview": 76,
+        "chineseWriting": 88,
+        "englishWriting": 70,
+        "research": 75,
+        "chat": 76,
+        "imageGeneration": 0,
+        "multimodal": 70,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "workhorse_qwen37_plus_not_flagship_inherit",
+      "notes": "Scored on official recommended qwen3.7-plus, not Qwen 3.8 Max / K3 / GLM-5.3. Coding Plan does not include those flagships."
+    },
+    {
+      "planId": "aliyun_coding_pro_global",
+      "scores": {
+        "frontend": 80,
+        "backend": 80,
+        "agentCoding": 82,
+        "debugging": 80,
+        "codeReview": 76,
+        "chineseWriting": 88,
+        "englishWriting": 70,
+        "research": 75,
+        "chat": 76,
+        "imageGeneration": 0,
+        "multimodal": 70,
+        "ecosystem": 72
+      },
+      "scoreConfidence": "low",
+      "scoreBasis": "workhorse_qwen37_plus_not_flagship_inherit",
+      "notes": "Same model list as CN Coding Plan Pro. International $50 SKU."
+    },
+    {
+      "planId": "supergrok_plus",
+      "scores": {
+        "frontend": 90,
+        "backend": 91,
+        "agentCoding": 94,
+        "debugging": 91,
+        "codeReview": 89,
+        "chineseWriting": 78,
+        "englishWriting": 90,
+        "research": 96,
+        "chat": 94,
+        "imageGeneration": 96,
+        "multimodal": 95,
+        "ecosystem": 86
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "same_grok46_as_supergrok",
+      "notes": "Same Grok 4.6 class as SuperGrok. Plus is a usage/priority SKU, not a smarter model."
+    },
+    {
+      "planId": "glm_5_3_flash_api_cn",
+      "scores": {
+        "frontend": 84,
+        "backend": 84,
+        "agentCoding": 84,
+        "debugging": 82,
+        "codeReview": 78,
+        "chineseWriting": 84,
+        "englishWriting": 74,
+        "research": 80,
+        "chat": 84,
+        "imageGeneration": 0,
+        "multimodal": 70,
+        "ecosystem": 78
+      },
+      "scoreConfidence": "medium",
+      "scoreBasis": "official_flash_sibling_of_glm53",
+      "notes": "GLM-5.3-Flash workhorse API. Do not inherit full 5.3 / K3 scores."
     }
   ]
 }

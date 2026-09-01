@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "0.3.0",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.3.2",
+  "lastUpdatedAt": "2026-09-01",
   "planRelations": [
     {
       "planA": "chatgpt_plus",
@@ -103,9 +103,9 @@
     {
       "planA": "supergrok",
       "planB": "cursor_pro",
-      "overlapScore": 35,
-      "complementScore": 85,
-      "explanation": "Grok 通用助手 + Cursor IDE 执行，互补性高。"
+      "overlapScore": 55,
+      "complementScore": 65,
+      "explanation": "Cursor Pro 自带额度池已是 Grok 4.6，与 SuperGrok 模型重叠上升；仍互补在 IDE 执行 vs Grok 聊天/Imagine/Build。"
     },
     {
       "planA": "perplexity_pro",
@@ -169,6 +169,104 @@
       "overlapScore": 35,
       "complementScore": 80,
       "explanation": "Cursor Pro 偏 IDE 内编程执行；Kimi 会员提供 K3 模型与额外编程/对话额度，可作为 Cursor 之外的模型补充，互补性高。"
+    },
+    {
+      "planA": "grok_46_api",
+      "planB": "openai_gpt56_sol_api",
+      "overlapScore": 75,
+      "complementScore": 35,
+      "explanation": "Grok 4.6 与 GPT-5.6 Sol 同属 AA 61 档；通常二选一作主力 API。"
+    },
+    {
+      "planA": "grok_46_api",
+      "planB": "claude_opus_5_api",
+      "overlapScore": 70,
+      "complementScore": 40,
+      "explanation": "Grok 4.6 接近 Opus 5 智能档但更便宜；重叠高，适合按价格分流。"
+    },
+    {
+      "planA": "glm_5_3_api_cn",
+      "planB": "glm_5_2_api_cn",
+      "overlapScore": 85,
+      "complementScore": 20,
+      "explanation": "同厂相邻代际，优先用 5.3；5.2 仅作价差/兼容补充。"
+    },
+    {
+      "planA": "gemini_37_flash_api",
+      "planB": "google_ai_pro_us",
+      "overlapScore": 60,
+      "complementScore": 45,
+      "explanation": "3.7 Flash API 与 Google AI Pro 工作马重叠；订阅还带 3.1 Pro、Spark、存储与 Workspace。"
+    },
+    {
+      "planA": "aliyun_coding_pro_cn",
+      "planB": "aliyun_coding_pro_global",
+      "overlapScore": 95,
+      "complementScore": 5,
+      "explanation": "同一 Coding Plan Pro，只是 CN ¥200 与国际 $50 结算不同，不要叠买。"
+    },
+    {
+      "planA": "aliyun_coding_pro_cn",
+      "planB": "chatgpt_plus",
+      "overlapScore": 40,
+      "complementScore": 70,
+      "explanation": "百炼 Coding Plan 偏国内编程请求包；ChatGPT Plus 偏通用对话与 Sol 高智能，互补大于重叠。"
+    },
+    {
+      "planA": "aliyun_coding_pro_cn",
+      "planB": "cursor_pro",
+      "overlapScore": 35,
+      "complementScore": 80,
+      "explanation": "Cursor 是 IDE 执行面；阿里云 Coding Plan 提供 Qwen/GLM/Kimi 请求包，适合国内工具链。"
+    },
+    {
+      "planA": "aliyun_coding_pro_cn",
+      "planB": "glm_coding_pro_cn",
+      "overlapScore": 70,
+      "complementScore": 30,
+      "explanation": "两者都是国内编程包月。Coding Plan 含旧版 glm-5，不是 GLM-5.3 专线，重叠高但仍弱于智谱自家 Coding Plan。"
+    },
+    {
+      "planA": "aliyun_coding_pro_cn",
+      "planB": "kimi_allegretto_cn",
+      "overlapScore": 65,
+      "complementScore": 40,
+      "explanation": "都能量国内编程。Kimi 会员是 K3/K2.7 Code 真身；百炼套餐钉死 kimi-k2.5，不要按 K3 理解。"
+    },
+    {
+      "planA": "aliyun_coding_pro_global",
+      "planB": "opencode_go_regular",
+      "overlapScore": 60,
+      "complementScore": 45,
+      "explanation": "都是低价开源/国产模型包。Go 按美元价值限额；阿里云按请求次数，模型钉死精确版本。"
+    },
+    {
+      "planA": "supergrok",
+      "planB": "supergrok_plus",
+      "overlapScore": 90,
+      "complementScore": 10,
+      "explanation": "同产品不同用量档，能力几乎完全重叠。"
+    },
+    {
+      "planA": "supergrok_plus",
+      "planB": "supergrok_heavy",
+      "overlapScore": 90,
+      "complementScore": 10,
+      "explanation": "同产品不同用量档，能力几乎完全重叠。"
+    },
+    {
+      "planA": "supergrok_plus",
+      "planB": "chatgpt_plus",
+      "overlapScore": 70,
+      "complementScore": 40,
+      "explanation": "都是通用前沿聊天订阅；Plus 偏 Grok 4.6 / Build / 视频，ChatGPT 偏 Sol/Luna 生态。"
+    },
+    {
+      "planA": "glm_5_3_flash_api_cn",
+      "planB": "glm_5_3_api_cn",
+      "overlapScore": 80,
+      "complementScore": 25,
+      "explanation": "同代 Flash vs 标准；Flash 跑量，5.3 扛高智能。"
     }
   ]
 }

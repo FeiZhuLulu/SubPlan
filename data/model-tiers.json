@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "0.4.1",
-  "lastUpdatedAt": "2026-07-30",
+  "schemaVersion": "0.4.2",
+  "lastUpdatedAt": "2026-09-01",
   "notes": [
     "S/A/B/C/D from aligned plan scores (S≥90, A≥80, B≥65, C≥45).",
-    "v0.4.1: resynced to original dataset score scale after unified-matrix remap was too compressed at 95–100."
+    "v0.4.2: SuperGrok / Cursor included pool moved to Grok 4.6 (S). GLM Coding Plan to GLM-5.3 (S coding)."
   ],
   "tiers": [
     {
@@ -190,36 +190,36 @@
       "planId": "cursor_pro",
       "tierByCapability": {
         "agentCoding": "S",
-        "backend": "A",
+        "backend": "S",
         "debugging": "S",
         "codeReview": "A",
-        "research": "C"
+        "research": "B"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "Included Grok 4.6 is S; Other Models still dollar-capped."
     },
     {
       "planId": "cursor_pro_plus",
       "tierByCapability": {
         "agentCoding": "S",
-        "backend": "A",
+        "backend": "S",
         "debugging": "S",
         "codeReview": "A",
-        "research": "C"
+        "research": "B"
       },
-      "evidenceLevel": "medium",
+      "evidenceLevel": "high",
       "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
       "planId": "cursor_ultra",
       "tierByCapability": {
         "agentCoding": "S",
-        "backend": "A",
+        "backend": "S",
         "debugging": "S",
         "codeReview": "A",
-        "research": "C"
+        "research": "B"
       },
-      "evidenceLevel": "medium",
+      "evidenceLevel": "high",
       "notes": "Aligned to HEAD score scale v0.4.1"
     },
     {
@@ -393,38 +393,38 @@
     {
       "planId": "glm_coding_lite_cn",
       "tierByCapability": {
-        "agentCoding": "A",
+        "agentCoding": "S",
         "backend": "A",
-        "debugging": "A",
+        "debugging": "S",
         "codeReview": "A",
-        "research": "B"
+        "research": "A"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "GLM-5.3 AA 60 on Coding Plan."
     },
     {
       "planId": "glm_coding_pro_cn",
       "tierByCapability": {
-        "agentCoding": "A",
+        "agentCoding": "S",
         "backend": "A",
-        "debugging": "A",
+        "debugging": "S",
         "codeReview": "A",
-        "research": "B"
+        "research": "A"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "GLM-5.3 AA 60 on Coding Plan."
     },
     {
       "planId": "glm_coding_max_cn",
       "tierByCapability": {
-        "agentCoding": "A",
+        "agentCoding": "S",
         "backend": "A",
-        "debugging": "A",
+        "debugging": "S",
         "codeReview": "A",
-        "research": "B"
+        "research": "A"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "GLM-5.3 AA 60 on Coding Plan."
     },
     {
       "planId": "ollama_free",
@@ -621,26 +621,26 @@
     {
       "planId": "supergrok_lite",
       "tierByCapability": {
-        "agentCoding": "B",
+        "agentCoding": "A",
         "backend": "A",
-        "debugging": "B",
+        "debugging": "A",
         "codeReview": "B",
         "research": "A"
       },
       "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "notes": "Same 4.6 class, Lite windows."
     },
     {
       "planId": "supergrok",
       "tierByCapability": {
         "agentCoding": "S",
-        "backend": "A",
-        "debugging": "A",
-        "codeReview": "A",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
         "research": "S"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "Grok 4.6 AA 61; included Grok Build path is now frontier-class."
     },
     {
       "planId": "supergrok_heavy",
@@ -651,8 +651,8 @@
         "codeReview": "S",
         "research": "S"
       },
-      "evidenceLevel": "medium",
-      "notes": "Aligned to HEAD score scale v0.4.1"
+      "evidenceLevel": "high",
+      "notes": "Grok 4.6 Heavy / multi-agent."
     },
     {
       "planId": "perplexity_free",
@@ -845,6 +845,87 @@
       },
       "evidenceLevel": "medium",
       "notes": "Aligned to HEAD score scale v0.4.1"
+    },
+    {
+      "planId": "grok_46_api",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "high"
+    },
+    {
+      "planId": "gemini_37_flash_api",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium"
+    },
+    {
+      "planId": "glm_5_3_api_cn",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "A",
+        "debugging": "S",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "high"
+    },
+    {
+      "planId": "aliyun_coding_pro_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "qwen3.7-plus workhorse. Not S — no Qwen 3.8 Max / GLM-5.3 / K3 on this SKU."
+    },
+    {
+      "planId": "aliyun_coding_pro_global",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "A",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Same as CN Coding Plan Pro."
+    },
+    {
+      "planId": "glm_5_3_flash_api_cn",
+      "tierByCapability": {
+        "agentCoding": "A",
+        "backend": "A",
+        "debugging": "A",
+        "codeReview": "B",
+        "research": "A"
+      },
+      "evidenceLevel": "medium",
+      "notes": "Flash sibling of GLM-5.3. Volume path, not S."
+    },
+    {
+      "planId": "supergrok_plus",
+      "tierByCapability": {
+        "agentCoding": "S",
+        "backend": "S",
+        "debugging": "S",
+        "codeReview": "S",
+        "research": "S"
+      },
+      "evidenceLevel": "high",
+      "notes": "Same Grok 4.6 S pool as SuperGrok."
     }
   ]
 }

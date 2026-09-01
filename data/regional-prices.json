@@ -6,7 +6,8 @@
     "Regional App Store IAP prices scraped from appstoreprice.org.",
     "These are Apple billing-region list prices (often higher than web/direct billing due to platform fee).",
     "Use for cross-region comparison and JP/US localization; official web prices remain the primary recommendation baseline in plans.json.",
-    "priceCny / priceUsd are values reported by appstoreprice.org at scrape time (their FX conversion)."
+    "priceCny / priceUsd are values reported by appstoreprice.org at scrape time (their FX conversion).",
+    "2026-09-01: IAP matrix not re-scraped. No confirmed App Store list-price change; web/direct prices remain the recommendation baseline."
   ],
   "apps": [
     {
