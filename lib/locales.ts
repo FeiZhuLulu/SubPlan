@@ -96,6 +96,11 @@ export const dict = {
     
     acceptApi: "接受 API 计费计价方式",
     foreignCard: "持有支持境外支付的外币卡",
+    avoidProviders: "有希望回避的订阅",
+    avoidProvidersHint: "开启后勾选不希望出现的提供商，它们不会出现在任何推荐组合中。",
+    avoidProvidersEmpty: "暂无可选提供商",
+    avoidConflictNote: "若同一提供商同时被选为已有订阅，回避规则仍然优先。",
+    avoidResultLabel: "回避提供商",
     
     existingSubs: "已有订阅",
     existingSubsHint: "选择你已经在付费或稳定使用的计划，推荐结果会标记“已拥有/建议新增”。",
@@ -221,6 +226,11 @@ export const dict = {
     
     acceptApi: "Accept API Billing Pricing",
     foreignCard: "Hold Foreign Currency Card (for international payment)",
+    avoidProviders: "Providers to Avoid",
+    avoidProvidersHint: "Enable this and pick providers you do not want; they will be excluded from all recommendations.",
+    avoidProvidersEmpty: "No providers available",
+    avoidConflictNote: "If a provider is also selected as an existing subscription, avoidance still wins.",
+    avoidResultLabel: "Avoided Providers",
     
     existingSubs: "Existing Subscriptions",
     existingSubsHint: "Select plans you are already paying for or using stably. Results will show 'Owned / Recommend New'.",

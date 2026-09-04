@@ -11,6 +11,7 @@ type RecommendRequest = {
   region?: UserInput["region"];
   acceptsApiBilling?: boolean;
   hasForeignCard?: boolean;
+  avoidedProviders?: string[];
   existingPlanIds?: string[];
   addOns?: string[];
   highIntelligenceRatioPreset?: string;
@@ -39,6 +40,9 @@ function normalizeRequest(body: RecommendRequest): UserInput {
     region: body.region || "CN",
     acceptsApiBilling: Boolean(body.acceptsApiBilling),
     hasForeignCard: Boolean(body.hasForeignCard),
+    avoidedProviders: Array.isArray(body.avoidedProviders)
+      ? body.avoidedProviders.map((provider) => String(provider).trim()).filter(Boolean)
+      : [],
     existingPlanIds: Array.isArray(body.existingPlanIds) ? body.existingPlanIds : [],
     addOns: Array.isArray(body.addOns) ? body.addOns : [],
     highIntelligenceRatioPreset: normalizeHighIntelligenceRatioPreset(

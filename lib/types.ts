@@ -187,6 +187,7 @@ export type UserInput = {
   existingPlanIds?: string[];
   addOns?: string[];
   highIntelligenceRatioPreset?: HighIntelligenceRatioPreset; // Added for v0.2
+  avoidedProviders?: string[]; // Added for v0.3
 };
 
 export type NeedWeights = Partial<Record<CapabilityKey, number>>;

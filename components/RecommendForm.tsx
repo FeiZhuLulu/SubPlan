@@ -25,6 +25,13 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
     .filter((plan) => plan.enabledForRecommendation && plan.recommendationRole === "primary_subscription")
     .slice()
     .sort((a, b) => `${a.provider} ${a.name}`.localeCompare(`${b.provider} ${b.name}`));
+  const providerOptions = Array.from(
+    new Set(
+      getAllPlans()
+        .filter((plan) => plan.enabledForRecommendation && plan.provider)
+        .map((plan) => plan.provider)
+    )
+  ).sort((a, b) => a.localeCompare(b));
 
   const [budget, setBudget] = useState<string>("200");
   const [budgetTolerance, setBudgetTolerance] = useState<string>("normal");
@@ -37,6 +44,8 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [existingPlanIds, setExistingPlanIds] = useState<string[]>([]);
   const [highIntelRatio, setHighIntelRatio] = useState<string>("medium");
+  const [avoidEnabled, setAvoidEnabled] = useState<boolean>(false);
+  const [avoidedProviders, setAvoidedProviders] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   // Estimator Modal State
@@ -91,6 +100,12 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
     );
   };
 
+  const toggleAvoidProvider = (provider: string) => {
+    setAvoidedProviders((prev) =>
+      prev.includes(provider) ? prev.filter((x) => x !== provider) : [...prev, provider]
+    );
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
@@ -110,6 +125,9 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
     }
     if (existingPlanIds.length > 0) {
       params.set("existing", existingPlanIds.join(","));
+    }
+    if (avoidEnabled && avoidedProviders.length > 0) {
+      params.set("avoid", avoidedProviders.join(","));
     }
     if (lang === "en") {
       params.set("lang", "en");
@@ -304,6 +322,49 @@ export default function RecommendForm({ lang = "zh" }: { lang?: Locale }) {
               />
               {t.foreignCard}
             </label>
+            <label className="flex items-center gap-2.5 text-sm font-medium text-stone-600 hover:text-neutral-900 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={avoidEnabled}
+                onChange={(e) => setAvoidEnabled(e.target.checked)}
+                className="h-4 w-4 rounded border-stone-300 accent-neutral-900 cursor-pointer"
+              />
+              {t.avoidProviders}
+            </label>
+            {avoidEnabled && (
+              <div className="space-y-2">
+                <p className="text-[11px] leading-relaxed text-stone-400">
+                  {t.avoidProvidersHint}
+                </p>
+                {providerOptions.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {providerOptions.map((provider) => {
+                      const active = avoidedProviders.includes(provider);
+                      return (
+                        <button
+                          key={provider}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => toggleAvoidProvider(provider)}
+                          className={`rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+                            active
+                              ? "border-neutral-900 bg-neutral-900 text-white"
+                              : "border-stone-200 bg-white text-stone-600 hover:border-stone-400 hover:bg-white"
+                          }`}
+                        >
+                          {provider}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-stone-400">{t.avoidProvidersEmpty}</p>
+                )}
+                <p className="text-[10px] leading-relaxed text-amber-700">
+                  {t.avoidConflictNote}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

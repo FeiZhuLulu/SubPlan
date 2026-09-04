@@ -23,6 +23,7 @@ type SearchParams = {
   region?: string;
   api?: string;
   card?: string;
+  avoid?: string;
   addons?: string;
   existing?: string;
   lang?: string;
@@ -55,6 +56,9 @@ function parseInput(params: SearchParams): UserInput {
     region: parseRegion(params.region),
     acceptsApiBilling: params.api === "1",
     hasForeignCard: params.card === "1",
+    avoidedProviders: params.avoid
+      ? params.avoid.split(",").map((s) => s.trim()).filter(Boolean)
+      : [],
     addOns: params.addons ? params.addons.split(",") : [],
     existingPlanIds: params.existing ? params.existing.split(",") : [],
   };
@@ -249,6 +253,24 @@ export default async function ResultPage({
                 })}
             </div>
           </div>
+
+          {(input.avoidedProviders?.length ?? 0) > 0 && (
+            <div className="mt-4 border-t border-neutral-800 pt-3">
+              <span className="block text-[10px] text-neutral-400 font-bold uppercase mb-1.5">
+                {t.avoidResultLabel}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {(input.avoidedProviders ?? []).map((provider) => (
+                  <span
+                    key={provider}
+                    className="inline-flex items-center rounded-lg bg-neutral-800 border border-neutral-700 px-2.5 py-1 text-xs font-semibold text-neutral-300"
+                  >
+                    {provider}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Results */}

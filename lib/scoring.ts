@@ -173,6 +173,8 @@ function isFreePrimarySubscription(plan: Plan): boolean {
 function planIsEligible(plan: Plan, input: UserInput): boolean {
   if (!plan.enabledForRecommendation) return false;
 
+  if (input.avoidedProviders?.includes(plan.provider)) return false;
+
   if (isExistingPlan(plan, input)) return true;
 
   if (isFreePrimarySubscription(plan)) return false;
